@@ -1,0 +1,52 @@
+<div class="card">
+  
+     <div class="card-header d-flex justify-content-between">
+        <h4>nhan vien</h4>
+        <a class="btn btn-outline-success" href="/admin/nhanvien/add" role="button">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add Hãng
+        </a>
+    </div>
+    {{#if this.empty}}
+    <div class="card-body">
+        <p class="card-text">Không có dữ liệu</p>
+    </div>
+    {{else}}
+ <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Ho ten</th>
+                <th scope="col">phai</th>
+                <th scope="col">ngay sinh </th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each this.nhanvien}}
+            <tr>
+
+                <th scope="row">{{id}}</th>
+                <td>{{hoten}}</td>
+                <td>{{phai}}</td>
+                <td>{{ngaysinh }}</td>
+                <td class="text-right">
+                     <a name="" id="" class="btn btn-primary btn-sm" href="/admin/nhanvien/edit/{{id}}" role="button" title="edit Category">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn-sm" href="/admin/nhanvien/del/{{id}}" role="button" title="delete nhan vien">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+               
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{/if}}
+    
+   
+    <div class="card-footer text-muted">
+        Footer
+    </div>
+</div>

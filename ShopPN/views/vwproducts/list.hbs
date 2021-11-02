@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Sản Phẩm</h4>
+        <a class="btn btn-outline-success" href="/admin/products/add" role="button">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add Sản Phẩm
+        </a>
+    </div>
+    {{#if this.empty}}
+    <div class="card-body">
+        <p class="card-text">Không có dữ liệu</p>
+    </div>
+    {{else}}
+ <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">IDđ</th>
+                <th scope="col">Ten San Pham</th>
+                <th scope="col">Price</th>
+                <th scope="col">description </th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each this.products}}
+            <tr>
+
+                <th scope="row">{{proID}}</th>
+                <td>{{proName}}</td>
+                <td>{{price}}</td>
+                <td>{{description }}</td>
+                <td class="text-right">
+                    <a name="" id="" class="btn btn-primary btn-sm" href="/admin/products/edit/{{proID}}" role="button" title="edit products">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn-sm" href="/admin/products/del/{{proID}}" role="button" title="edit products">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                    
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{/if}}
+    
+   
+    <div class="card-footer text-muted">
+        Footer
+    </div>
+</div>

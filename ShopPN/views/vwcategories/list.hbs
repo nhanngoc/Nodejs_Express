@@ -1,0 +1,49 @@
+
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <h4>Hãng điện thoại</h4>
+        <a class="btn btn-outline-success" href="/admin/categories/add" role="button">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add Hãng
+        </a>
+    </div>
+    {{#if this.empty}}
+    <div class="card-body">
+        <p class="card-text">Không có dữ liệu</p>
+    </div>
+    {{else}}
+    <table class="table table-hover">
+         <div class="form-group">
+                
+                <input type="text" class="form-control" id="txtCatID" name="CatID" readonly
+                    value="{{this.category.CatID}}">
+            </div>
+        <thead>
+            <tr>
+                <th scope="col">IDd</th>
+                <th scope="col">Hãng</th>
+                <th scope="col">&nbsp;</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each this.categories}}
+            <tr>
+
+                <th scope="row">{{CatID}}</th>
+                <td>{{CatName}}</td>
+                <td class="text-right">
+                    <a name="" id="" class="btn btn-primary btn-sm" href="/admin/categories/edit/{{CatID}}" role="button" title="edit Category">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{/if}}
+    <div class="card-footer text-muted">
+        Footer
+    </div>
+</div>

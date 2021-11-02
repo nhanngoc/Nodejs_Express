@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Sản Phẩm</h4>
+    </div>
+    {{#if this.empty}}
+    <div class="card-body">
+        <p class="card-text">Không có dữ liệu</p>
+    </div>
+    {{else}}
+    <div class="card-body">
+        <div class="row mt-5">
+            {{#each this.sanpham}}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <img src="/public/images/{{Anh}}" alt="{{TenSP}}" title="{{TenSP}}" :{{Gia}}
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title">{{TenSP}}</h4>
+                        <h4 class="card-title text-danger">{{format_number Gia}}</h4>
+                        <p class="card-text">{{MoTa}}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a class="btn btn-sm btn-outline-primary" href="#" role="button">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                            Details
+                        </a>
+                        <a class="btn btn-sm btn-outline-success" href="#" role="button">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            Add to cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item ">
+                    <a class="page-link" href="?page={{prev_value}}" aria-label="Previous">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                </li>
+                {{#each this.page_items}}
+                {{#if isActive}}
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">
+                        {{value}}
+                        <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+                {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{value}}">{{value}}</a>
+                </li>
+                {{/if}}
+                {{/each}}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{next_value}}" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    {{/if}}
+</div>

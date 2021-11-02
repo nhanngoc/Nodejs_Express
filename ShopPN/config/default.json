@@ -1,0 +1,12 @@
+{
+  "mysql": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "quanao",
+    "connectionLimit": 50
+  },
+  "pagination": {
+    "limit": 6
+  }
+}

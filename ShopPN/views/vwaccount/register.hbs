@@ -1,0 +1,108 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"
+  />
+</head>
+{{#section "js"}}
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
+  >
+  </script>
+  {{!  
+      $('#frmRegister').on('submit',function(e){
+           // alert('submit called');
+            e.preventDefault();
+            if(validate())
+            $('#frmRegister').off('submit').submit();
+            validate();
+        })
+        function validate(){
+            // ...cac lenh validate khac
+            const user=$('#txtUsername').val();
+            $.getJSON(`/account/is-available?user=${user}`, function(data){
+                if(data === true){
+                    $('#frmRegister').off('submit').submit();
+                }else{
+                    alert('not available';)
+                }
+            });
+           // return true;
+        }
+     }}
+{{/section}}
+<!--     $('#txtDob').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false,//ko can gio
+            mask:true,//hien thi ô gõ
+        })
+        
+    -->
+<div class="card">
+  <div class="card-header">
+    <h4>Register</h4>
+  </div>
+
+  <div class="card-body">
+    <form method="POST" action="">
+      <div class="form-group">
+        <label for="txtName">Tên đăng ký</label>
+        <input
+          type="text"
+          class="form-control"
+          id="txtName"
+          name="tenkh"
+          placeholder="Độ dài 6-50 kí tự *"
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtUsername">Tên đăng nhập</label>
+        <input
+          type="text"
+          class="form-control"
+          id="txtUsername"
+          name="username"
+          placeholder="Độ dài 6-50 kí tự *"
+          autofocus
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtPassword">Mật Khẩu</label>
+        <input
+          type="password"
+          class="form-control"
+          id="txtPassword"
+          name="password"
+          placeholder="Độ dài 8-20 kí tự *"
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtConfirm">Nhập lại mật khẩu</label>
+        <input
+          type="password"
+          class="form-control"
+          id="txtConfirm"
+          Confirm="confirm"
+          placeholder="Độ dài 8-20 kí tự *"
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtEmail">Email xác thực </label>
+        <input type="text" class="form-control" id="txtEmail" name="email" placeholder="VD: shoppn@gmai.com *"/>
+      </div>
+
+      {{!  <div class="form-group">
+                <label for="txtDob">Dob</label>
+                <input type="text" class="form-control" id="txtDob" name="dob">
+            </div> }}
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Register
+      </button>
+
+    </form>
+  </div>
+  <div class="card-footer text-muted">
+    Footer
+  </div>
+</div>
