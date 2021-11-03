@@ -1,186 +1,22 @@
-	<head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Product Grid Style : Demo 149</title>
-
+    
+    {{!-- css products --}}
+    <link rel="stylesheet" href="/public/stylesheets/style.products.css">
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
-
-<!-- <link rel="stylesheet" href="http://jrain.oscitas.netdna-cdn.com/tutorial/css/fontawesome-all.min.css"> -->
-<link rel="stylesheet" href="https://e6t7a8v2.stackpathcdn.com/tutorial/css/fontawesome-all.min.css">
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
-
+    <!-- <link rel="stylesheet" href="http://jrain.oscitas.netdna-cdn.com/tutorial/css/fontawesome-all.min.css"> -->
+    <link rel="stylesheet" href="https://e6t7a8v2.stackpathcdn.com/tutorial/css/fontawesome-all.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="../../css/bootstrap-grid.min.css">
-
-<link rel="stylesheet" href="../../css/common-1.css">
+    <link rel="stylesheet" href="../../css/common-1.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">
+    <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">
    
-    <style>
-        .product-grid{
-        font-family: 'Poppins', sans-serif;
-        text-align: center;
-        border-radius: 15px;
-        border: 1px solid #e7e7e7;
-        overflow: hidden;
-        transition: all 0.4s ease-out;
-        }
-        .product-grid:hover{ box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.1); }
-        .product-grid .product-image{ position: relative; }
-        .product-grid .product-image a.image{ display: block; }
-        .product-grid .product-image img{
-            width: 100%;
-            height: auto;
-        }
-        .product-grid .product-discount-label{
-            color: #fff;
-            background: #78a206;
-            font-size: 14px;
-            font-weight: 400;
-            text-transform: uppercase;
-            padding: 2px 8px;
-            border-radius: 5px;
-            position: absolute;
-            top: 12px;
-            left: 12px;
-        }
-        .product-grid .product-links{
-            width: 145px;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            opacity: 0;
-            transform: translateX(-50%) translateY(-50%);
-            position: absolute;
-            top: 65%;
-            left: 50%;
-            transition: all 0.4s ease 0s;
-        }
-        .product-grid:hover .product-links{
-            opacity: 1;
-            top: 50%;
-        }
-        .product-grid .product-links li{
-            display: inline-block;
-            margin: 0 2px;
-        }
-        .product-grid .product-links li a{
-            color: #2c2c2c;
-            background: #fff;
-            font-size: 16px;
-            line-height: 42px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50px;
-            display: block;
-            position: relative;
-            transition: all 0.4s ease-out 0s;
-        }
-        .product-grid .product-links li a:hover{
-            color: #fff;
-            background: #78a206;
-            box-shadow: 1px 1px 30px 0 rgba(0, 0, 0, 0.2);
-        }
-        .product-grid .product-links li a:before,
-        .product-grid .product-links li a:after{
-            content: attr(data-tip);
-            color: #fff;
-            background-color: #555;
-            font-size: 12px;
-            line-height: 18px;
-            padding: 5px 10px;
-            white-space: nowrap;
-            display: none;
-            transform: translateX(-50%);
-            position: absolute;
-            left: 50%;
-            top: -40px;
-            transition: all 0.3s ease 0s;
-        }
-        .product-grid .product-links li a:after{
-            content: '';
-            height: 10px;
-            width: 10px;
-            padding: 0;
-            transform: translateX(-50%) rotate(45deg);
-            top: -18px;
-            z-index: -1;
-        }
-        .product-grid .product-links li a:hover:before,
-        .product-grid .product-links li a:hover:after{
-            display: block;
-        }
-        .product-grid .product-content{
-            padding: 12px 12px 15px;
-            position: relative;
-        }
-        .product-grid .rating{
-            padding: 0;
-            margin: 0 0 8px;
-            list-style: none;
-        }
-        .product-grid .rating li{
-            color: #78a206;
-            font-size: 14px;
-        }
-        .product-grid .rating .far{ color: #808080; }
-        .product-grid .title{
-            font-size: 18px;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin: 0 0 15px;
-        }
-        .product-grid .title a{
-            color: #2c2c2c;
-            transition: all 0.3s ease 0s;
-        }
-        .product-grid .title a:hover{ color: #78a206; }
-        .product-grid .price{
-            color: #78a206;
-            font-size: 17px;
-            font-weight: 600;
-            display: block;
-            transition: all 0.4s ease-in-out;
-        }
-        .product-grid .price span{
-            color: #999;
-            font-weight: 500;
-            text-decoration: line-through;
-        }
-        .product-grid:hover .price{ opacity: 0; }
-        .product-grid .add-to-cart{
-            color: #fff;
-            background-color: #78a206;
-            font-size: 16px;
-            font-weight: 500;
-            text-transform: uppercase;
-            line-height: 40px;
-            width: 140px;
-            height: 40px;
-            border-radius: 50px;
-            opacity: 0;
-            transform: translateX(-50%);
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transition: all .4s ease-out;
-        }
-        .product-grid .add-to-cart:hover{ background-color: #2f2f2f; }
-        .product-grid:hover .add-to-cart{
-            opacity: 1;
-            bottom: 8px;
-        }
-        @media screen and (max-width:1200px){
-            .product-grid{ margin: 0 0 30px; }
-        }
-    </style>
 </head>
 
-
-
- 
  <div class="container">
       <div class="inner-container">
         <div class="row">
@@ -201,270 +37,67 @@
           </div>
         </div>
         <section class="main-bottom-vertical">
-          <div class="row">
-            <div class="col-xs-12 vertical-module">
-                <div class="module-cont module-row mod-small-header">
-                <div class="vm-product-module product-module mod-small-header">
-                  <div class="product-listing mode-grid equal-height">
-                    <div class="row row-condensed">
-                        
+       
 
-
-                        <div class="row">
-                            <div class="col-md-3 col-sm-6">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="#" class="image">
-                                        <img class="pic-1" src="/public/images/img-1.jpg">
-                                    </a>
-                                    <span class="product-discount-label">-33%</span>
-                                    <ul class="product-links">
-                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                        <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                        <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="rating">
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                    </ul>
-                                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                                    <div class="price"><span>$90.00</span> $66.00</div>
-                                    <a class="add-to-cart" href="#">add to cart</a>
-                                </div>
+                <div class="row ">
+                    {{#each this.sanpham}}
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product-grid">
+                            <div class="product-image">
+                                <a href="#" class="image">
+                                    <img class="pic-1" src="/public/images/{{Anh}}" alt="{{TenSP}}" title="{{TenSP}}" :{{Gia}} class="card-img-top">
+                                </a>
+                                <span class="product-discount-label">-33%</span>
+                                <ul class="product-links">
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                    <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
+                                    <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                                </ul>
                             </div>
+                            <div class="product-content">
+                                <ul class="rating">
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="far fa-star"></li>
+                                    <li class="far fa-star"></li>
+                                </ul>
+                                <h3 class="title"><a href="#">{{TenSP}}</a></h3>
+                                <div class="price"><span>$90.00</span> ${{format_number Gia}}</div>
+                                <a class="add-to-cart" href="#">add to cart</a>
                             </div>
-                            <div class="col-md-3 col-sm-6">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="#" class="image">
-                                        <img class="pic-1" src="/public/images/img-1.jpg">
-                                    </a>
-                                    <span class="product-discount-label">-33%</span>
-                                    <ul class="product-links">
-                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                        <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                        <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="rating">
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                    </ul>
-                                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                                    <div class="price"><span>$90.00</span> $66.00</div>
-                                    <a class="add-to-cart" href="#">add to cart</a>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="#" class="image">
-                                        <img class="pic-1" src="/public/images/img-1.jpg">
-                                    </a>
-                                    <span class="product-discount-label">-33%</span>
-                                    <ul class="product-links">
-                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                        <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                        <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="rating">
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                    </ul>
-                                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                                    <div class="price"><span>$90.00</span> $66.00</div>
-                                    <a class="add-to-cart" href="#">add to cart</a>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="#" class="image">
-                                        <img class="pic-1" src="/public/images/img-1.jpg">
-                                    </a>
-                                    <span class="product-discount-label">-33%</span>
-                                    <ul class="product-links">
-                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                        <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                        <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="rating">
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                    </ul>
-                                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                                    <div class="price"><span>$90.00</span> $66.00</div>
-                                    <a class="add-to-cart" href="#">add to cart</a>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="#" class="image">
-                                        <img class="pic-1" src="/public/images/img-2.jpg">
-                                    </a>
-                                    <ul class="product-links">
-                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                        <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                        <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="rating">
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                    </ul>
-                                    <h3 class="title"><a href="#">Women's Shirt</a></h3>
-                                    <div class="price">$79.90</div>
-                                    <a class="add-to-cart" href="#">add to cart</a>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="#" class="image">
-                                        <img class="pic-1" src="/public/images/img-1.jpg">
-                                    </a>
-                                    <span class="product-discount-label">-33%</span>
-                                    <ul class="product-links">
-                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                        <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                        <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="rating">
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                    </ul>
-                                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                                    <div class="price"><span>$90.00</span> $66.00</div>
-                                    <a class="add-to-cart" href="#">add to cart</a>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="#" class="image">
-                                        <img class="pic-1" src="public/images/img-1.jpg">
-                                    </a>
-                                    <span class="product-discount-label">-33%</span>
-                                    <ul class="product-links">
-                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                        <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                        <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="rating">
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                    </ul>
-                                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                                    <div class="price"><span>$90.00</span> $66.00</div>
-                                    <a class="add-to-cart" href="#">add to cart</a>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="#" class="image">
-                                        <img class="pic-1" src="/public/images/img-1.jpg">
-                                    </a>
-                                    <span class="product-discount-label">-33%</span>
-                                    <ul class="product-links">
-                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                        <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                        <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="rating">
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                    </ul>
-                                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
-                                    <div class="price"><span>$90.00</span> $66.00</div>
-                                    <a class="add-to-cart" href="#">add to cart</a>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="#" class="image">
-                                        <img class="pic-1" src="/public/images/img-2.jpg">
-                                    </a>
-                                    <ul class="product-links">
-                                        <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                        <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                        <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ul class="rating">
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="fas fa-star"></li>
-                                        <li class="far fa-star"></li>
-                                    </ul>
-                                    <h3 class="title"><a href="#">Women's Shirt</a></h3>
-                                    <div class="price">$79.90</div>
-                                    <a class="add-to-cart" href="#">add to cart</a>
-                                </div>
-                            </div>
-                            </div>
-                        </div> 
-  
-                      <div class="clearfix visible-lg"></div>
-                      <div class="clearfix visible-sm"></div>
-                      <div class="clearfix visible-xs"></div>
-                    
-                      
-
+                        </div>
                     </div>
-                  </div>
-                </div></div></div><div class="col-xs-12 vertical-module"><div
-                class="module-cont module-row mod-small-header" >
-          </div>
+                    {{/each}}
+                </div> 
+            <nav aria-label="...">
+            <ul class="pagination " >
+                <li class="page-item ">
+                    <a class="page-link" href="?page={{prev_value}}" aria-label="Previous">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                </li>
+                {{#each this.page_items}}
+                {{#if isActive}}
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">
+                        {{value}}
+                        <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+                {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{value}}">{{value}}</a>
+                </li>
+                {{/if}}
+                {{/each}}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{next_value}}" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
         </section>
       </div>
 </div>

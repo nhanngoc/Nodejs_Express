@@ -1,0 +1,43 @@
+
+/*////////////////TOP NAV BAR////////////////*/
+
+.top-bar {
+    background-color: black;
+    min-height: 40px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+.top-bar .nav-text {
+    color: #00BCD4;
+    display: block;
+    margin-top: 5px;
+}
+
+.top-bar .social {
+    color: #FFF;
+    display: inline-block;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.top-bar .tools {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.top-bar .tools li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+.top-bar .tools li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+/*////////////////end TOP NAV BAR//////////////////////////////////////*/
