@@ -26,31 +26,58 @@
                 </div>
                 <div class="col-sm-4 text-right hidden-xs">
                     <ul class="tools">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-globe"
-                                    aria-hidden="true"></i> Language<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Russian</a></li>
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">Mandarin</a></li>
-                                <li><a href="#">Italian</a></li>
-                                <li><a href="#">Gorgean</a></li>
-                            </ul>
-                        </li>
+                        
 
-                        <li class="dropdown">
-                            <a class="" href="#"><i class="fa fa-user" aria-hidden="true"></i> My Account</a>
-                        </li>
+                       
+                        <form id="frmLogout" action="/account/logout" method="POST"></form>
 
-                       <!-- <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-usd"
-                                    aria-hidden="true"></i> Currency<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">EUR</a></li>
-                                <li><a href="#">$</a></li>
-                            </ul>
-                        </li-->
+                        {{#if lcIsAuthenticated}}
+                            <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                WellCome,
+                                <b>{{lcAuthUser.tenkh}}</b>!
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/account/profile">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                Account profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a
+                                class="dropdown-item"
+                                href="javascript: $('#frmLogout').submit()"
+                                >
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                Logout</a>
+                            </div>
+                            </li>
+                        {{else}}
+                            <li class="dropdown">          
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"
+                                        aria-hidden="true"></i>  Tài khoản<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/account/login">
+                                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                        <li class="nav-item">
+                                        <a class="nav-link" href="/account/register">
+                                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {{/if}}               
                     </ul>
                 </div>
             </div>

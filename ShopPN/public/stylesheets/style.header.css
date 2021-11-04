@@ -1,3 +1,13 @@
+.dropdown-menu{
+    background-color: black;
+    text-align: center;
+}
+.dropdown-menu a:hover{
+    background-color: rgb(107, 11, 11);
+}
+.top-bar .tools li a{
+    color: #00BCD4;
+}
 
 /*////////////////TOP NAV BAR////////////////*/
 

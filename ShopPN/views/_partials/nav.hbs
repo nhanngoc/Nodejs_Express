@@ -1,15 +1,37 @@
 <html lang="en">
 
   <head>
-    <style>
+    {{! css menu }}
+    <link rel="stylesheet" href="/public/stylesheets/style.menu.css" />
 
-    </style>
+    {{! <style>
+      .dropdown{ position: relative; display: inline-block; } /*sub-menu*/
+      .dropdown-content{ display: none; position: absolute; background-color:
+      #ff0b0b; z-index: 1; list-style: none; } 
+      .dropdown:hover
+      .dropdown-content{ display: block; }
+      .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem ;
+    clear: both;
+    font-weight: 400;
+    color: #69bd1b;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+    </style> }}
+
   </head>
 
   <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow">
-      <a class="navbar-brand" href="http://localhost:3000/">ShopPN</a>
+<div class="container">
+      <div class="inner-container">
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+      <a class="navbar-brand" href="/">ShopPN</a>
+   
       <button
         class="navbar-toggler"
         type="button"
@@ -25,7 +47,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="http://localhost:3000/">
+            <a class="nav-link" href="/">
 
               <i class="fa fa-home" aria-hidden="true"></i>
 
@@ -35,29 +57,100 @@
             <a class="nav-link" href="#">Link</a>
           </li>
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+              >Bé Gái</a>
+
+              <div class="dropdown-content">
+                <a href="#">Áo</a>
+                <a href="#">Quần</a>
+                <a href="#">Đầm</a>
+              </div>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
+           <li class="nav-item dropdown">
+            <div class="dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+              >Bé Gái</a>
+
+              <div class="dropdown-content">
+                <a href="#">Áo</a>
+                <a href="#">Quần</a>
+                <a href="#">Đầm</a>
+              </div>
+            </div>
           </li>
+           <li class="nav-item dropdown">
+            <div class="dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+              >Bé Gái</a>
+
+              <div class="dropdown-content">
+                <a href="#">Áo</a>
+                <a href="#">Quần</a>
+                <a href="#">Đầm</a>
+              </div>
+            </div>
+          </li>
+           <li class="nav-item dropdown">
+            <div class="dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+              >Bé Gái</a>
+
+              <div class="dropdown-content">
+                <a href="#">Áo</a>
+                <a href="#">Quần</a>
+                <a href="#">Đầm</a>
+              </div>
+            </div>
+          </li>
+           <li class="nav-item dropdown">
+            <div class="dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+              >Bé Gái</a>
+
+              <div class="dropdown-content">
+                <a href="#">Áo</a>
+                <a href="#">Quần</a>
+                <a href="#">Đầm</a>
+              </div>
+            </div>
+          </li>
+           <li class="nav-item dropdown">
+            <div class="dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+              >Bé Gái</a>
+
+              <div class="dropdown-content">
+                <a href="#">Áo</a>
+                <a href="#">Quần</a>
+                <a href="#">Đầm</a>
+              </div>
+            </div>
+          </li>
+        
+        
+       
         </ul>
-        <form
+  <form
           class="form-inline my-2 my-lg-0 mr-auto"
           method="GET"
           action="/search"
@@ -73,56 +166,13 @@
             class="btn btn-outline-light my-2 my-sm-0"
             type="submit"
           >Search</button>
-        </form>
-        <form id="frmLogout" action="/account/logout" method="POST"></form>
-        <ul class="navbar-nav">
-          {{#if lcIsAuthenticated}}
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fa fa-user" aria-hidden="true"></i>
-                WellCome,
-                <b>{{lcAuthUser.tenkh}}</b>!
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/account/profile">
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                  Account profile
-                </a>
-                <div class="dropdown-divider"></div>
-                <a
-                  class="dropdown-item"
-                  href="javascript: $('#frmLogout').submit()"
-                >
-                  <i class="fa fa-sign-out" aria-hidden="true"></i>
-                  Logout</a>
-              </div>
-            </li>
-          {{else}}
-            <li class="nav-item">
-              <a class="nav-link" href="/account/login">
-                <i class="fa fa-sign-in" aria-hidden="true"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/account/register">
-                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                </a>
-            </li>
-          {{/if}}
-
-        </ul>
+        </form> 
+      
 
       </div>
     </nav>
-   
+</div>
+</div>
   </body>
 
 </html>
