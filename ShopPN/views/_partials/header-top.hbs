@@ -1,102 +1,236 @@
-<div class="vpf-wrapper">
+<!DOCTYPE html>
+<html lang="zxx">
 
-  <header id="vpf-header">
-    <div class="header-top">
-      <div class="container">
-        <div class="inner-container">
-          <div class="row">
-            <div class="col-md-3 vpf-logo align-left-lg align-center-md">
-              <a class="brand" href="/"><img
-                  class="site-logo logo-mobile visible-xs img-responsive"
-                  src="/public/image/logo.png"
-                  alt="Quần áo trẻ em xuất khẩu - Thời trang trẻ em bé sành điệu"
-                /></a>
-            </div>
-            <div class="col-md-6 header-add-margin">
-              <div class="product-search">
-                <form
-                  action="/component/virtuemart/search.html?Itemid=167"
-                  method="get"
-                >
-                  <div class="search-input-group"><div
-                      class="search-button-cont"
-                    ><button
-                        type="submit"
-                        class="btn btn-invert search-button"
-                        title="Tìm kiếm"
-                        onclick="this.form.keyword.focus();"
-                      ><i class="icon-search"></i><span class="sr-only">Tìm kiếm</span></button></div><label
-                      for="mod_virtuemart_search"
-                      class="sr-only"
-                    >Tìm kiếm</label><input
-                      type="text"
-                      name="keyword"
-                      id="mod_virtuemart_search"
-                      maxlength="20"
-                      class="form-control"
-                      size="20"
-                      value=""
-                      placeholder="Tìm kiếm sản phẩm ..."
-                    /></div>
-                  <input type="hidden" name="limitstart" value="0" />
-                  <input type="hidden" name="option" value="com_virtuemart" />
-                  <input type="hidden" name="view" value="category" />
-                  <input type="hidden" name="Itemid" value="167" />
-                </form>
-              </div>
-            </div>
-            <div class="col-md-3 last-group">
-              <div class="navbar navbar-offcanvas">
-                <a
-                  class="btn navbar-toggle vpf-offcanvas-toggle"
-                  href="#vpf-offcanvas"
-                >
-                  <span class="sr-only">Toggle menu</span>
-                  <i class="icon-menu7"></i>
-                </a>
-                <div
-                  class="navbar-offcanvas-modules align-right"
-                  data-align="check"
-                >
-                  <div class="mini-cart-mod inline-block header-add-margin">
-                    <div class="vp-minicart">
-                      <div class="vp-dropmod-container">
-                        <div class="vp-dropmod-anchor btn-jewel-group">
-                          <a class="btn btn-foricon empty"><i
-                              class="icon-cart6 icon-lg"
-                            ></i></a>
-                          <div class="jewel jewel-top jewel-invert hide">
-                            <span class="product-count">0</span>
-                          </div>
-                        </div>
-                        <div
-                          class="vp-dropmod-inner drop-right"
-                          style="min-width: 38px;"
-                        >
-                          <div class="vp-dropmod-contents">
-                            <div class="vp-dropmod-header empty">
-                              <div class="row row-mini">
-                                <div class="col-xs-12 align-center">
-                                  Không có sản phẩm nào trong giỏ hàng.
-                                </div>
-                              </div>
-                            </div>
-                            <div class="vp-dropmod-loader hide"><div
-                                class="inner"
-                              ></div></div>
-                          </div>
-                        </div>
-                        <div class="vp-dropmod-pointer"></div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<head>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- ccss Styles -->
+    <link rel="stylesheet" href="/public/ccss/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/ccss/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/ccss/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/public/ccss/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/public/ccss/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/ccss/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/ccss/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/ccss/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
     </div>
 
-  </header>
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a href="#"><img src="/public/image/logo.png" alt=""></a>
+        </div>
+        <div class="humberger__menu__cart">
+            <ul>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+            </ul>
+            <div class="header__cart__price">item: <span>$150.00</span></div>
+        </div>
+        
+        <div class="humberger__menu__widget">
+             <form id="frmLogout" action="/account/logout" method="POST"></form>
+            {{#if lcIsAuthenticated}}
+                <nav class="header_register">
+                    <ul>  
+                        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>                      
+                         <b>{{lcAuthUser.tenkh}}</b>!</a>
+                            <ul class="header__menu__dropdown">
+                                <li><a href="/account/profile"> <i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
+                                <li> <a href="javascript: $('#frmLogout').submit()"><i class="fa fa-sign-out" aria-hidden="true">Logout</i>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            {{else}}
+            <div class="header__top__right_htua">
+               <a href="/account/register"><i class="fa fa-user-plus"></i> Register</a>
+            </div>
+            <div class="header__top__right__auth">
+                <a href="/account/login"><i class="fa fa-user"></i> Login</a>
+            </div>
+            {{/if}}
+        </div>
+        
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                <li class="active"><a href="./index.html">Home</a></li>
+                <li><a href="./shop-grid.html">Shop</a></li>
+                <li><a href="#">Pages</a>
+                    <ul class="header__menu__dropdown">
+                        <li><a href="./shop-details.html">Shop Details</a></li>
+                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                        <li><a href="./checkout.html">Check Out</a></li>
+                        <li><a href="./blog-details.html">Blog Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="./blog.html">Blog</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="header__top__right__social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        </div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                <li>Free Shipping for all Order of $99</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Humberger End -->
+  
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> nnhann99@gmail.com</li>
+                                <li><i class="fa fa-phone"></i>+0337876016</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                       <div class="header__top__center">
+                            <div class="header__top__center__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <form id="frmLogout" action="/account/logout" method="POST"></form>
+                        {{#if lcIsAuthenticated}}
+                            <nav class="header_register">
+                                <ul>  
+                                    <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>                      
+                                    <b>{{lcAuthUser.tenkh}}</b>!</a>
+                                        <ul class="header__menu__dropdown">
+                                            <li><a href="/account/profile"> <i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
+                                            <li> <a href="javascript: $('#frmLogout').submit()"><i class="fa fa-sign-out" aria-hidden="true">Logout</i>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        {{else}}
+                           <div class="header__top__right">    
+                             <div class="header__top__right__auth">
+                                <a href="/account/register"><i class="fa fa-user-plus"></i> Register</a>
+                            </div>
+                            <div class="header__top__right__language">                  
+                                <div>
+                                </div>                               
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="/account/login"><i class="fa fa-user"></i> Login</a>
+                            </div>
+                        </div>
+                        {{/if}}   
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="/"><img src="/public/image/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="./shop-details.html">Shop Details</a></li>
+                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-2">
+                    <div class="header__cart">
+                        <ul>
+                            {{!-- <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li> --}}
+                           {{!--  <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li> --}}
+                        </ul>
+                        {{!-- <div class="header__cart__price">item: <span>1</span></div> --}}
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
 
-</div>
+ 
+    {{>seach}}
+
+
+    <!-- Categories Section Begin -->
+    
+    <!-- Categories Section End -->
+
+    <!-- Featured Section Begin -->
+   
+    <!-- Featured Section End -->
+
+    <!-- Banner Begin -->
+   
+    <!-- Banner End -->
+
+    <!-- Latest Product Section Begin -->
+   
+    <!-- Latest Product Section End -->
+
+    <!-- Blog Section Begin -->
+  
+    <!-- Blog Section End -->
+
+    <!-- Footer Section Begin -->
+   
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="/public/jjs/jquery-3.3.1.min.js"></script>
+    <script src="/public/jjs/bootstrap.min.js"></script>
+    <script src="/public/jjs/jquery.nice-select.min.js"></script>
+    <script src="/public/jjs/jquery-ui.min.js"></script>
+    <script src="/public/jjs/jquery.slicknav.js"></script>
+    <script src="/public/jjs/mixitup.min.js"></script>
+    <script src="/public/jjs/owl.carousel.min.js"></script>
+    <script src="/public/jjs/main.js"></script>
+
+
+
+</body>
+
+</html>
