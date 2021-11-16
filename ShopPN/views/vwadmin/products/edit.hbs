@@ -1,0 +1,80 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Edit Hãng</h4>
+    </div>
+
+    <div class="card-body">
+        <form method="POST">
+            <div class="form-group">
+                <label for="MaSP" class="col-md-3 control-label">Mã sản phẩm</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="MaSP" readonly 
+                    value="{{this.product.MaSP}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="TenSP" class="col-md-3 control-label">Tên sản phẩm</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="TenSP" autofocus 
+                    value="{{this.product.TenSP}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="SoLuong" class="col-md-3 control-label">Số Lượng</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="SoLuong" 
+                    value="{{this.product.SoLuong}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Gia" class="col-md-3 control-label">Giá</label>
+                <div class="col-md-9">
+                    <input type="number" class="form-control" name="Gia" 
+                    value="{{this.product.Gia}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Size" class="col-md-3 control-label">Size</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="Size" 
+                    value="{{this.product.Size}}">
+                </div>
+            </div>
+           {{!-- <div class="form-group">
+                <label for="uploaded_image" class="col-md-3 control-label">Hình ảnh</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="file" name="uploaded_image" accept=""
+                    value="{{this.product.Anh}}"/>
+                </div>
+            </div>   --}}                           
+            <div class="form-group">
+                <label for="MoTa" class="col-md-3 control-label">Mô Tả</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="MoTa"
+                    value="{{this.product.MoTa}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="NgayNhap" class="col-md-3 control-label">Ngày Nhập</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="NgayNhap" 
+                    value="{{this.product.NgayNhap}}">
+                </div>
+            </div>
+
+            <a class="btn btn-success" href="/admin/categories" role="button" title="Back to List">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+            </a>
+           
+            <button type="submit" class="btn btn-primary" title="save" formaction="/admin/products/update">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
+        </form>
+
+        
+    </div>
+    <div class="card-footer text-muted">
+        Footer
+    </div>
+</div>

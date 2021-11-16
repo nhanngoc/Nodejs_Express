@@ -1,0 +1,59 @@
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Loại sản phẩm</h4>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+{{#if this.empty}}
+<div class="row">
+    <div class="col-12">   
+        <div class="mt-5">
+            <h5 class="font-14">Chưa kết nối database</h5>
+            <p class="sub-header">
+                Không có loại nào
+            </p>
+        {{else}}
+            <table id="key-table" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Mã</th>
+                        <th>Tên</th>
+                        {{!-- <th>Tên đăng nhập</th>
+                        <th>pass</th> --}}
+                        <th>Email</th>
+                        <th>Giới Tính</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>Sửa</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                        {{#each this.khachhang}}
+                    <tr>
+                        <td>{{MaKH}}</td>
+                        <td>{{tenkh}}</td>
+                        {{!-- <td>{{username}}</td>
+                        <td>{{password}}</td> --}}
+                        <td>{{email}}</td>
+                        <td>{{gioitinh}}</td>
+                        <td>{{diachi}}</td>
+                        <td>{{sdt}}</td>
+                        <td class="text-right">
+                            <a name="" id="" class="btn btn-primary btn-sm" href="/admin/category/edit/{{MaKH}}" role="button" title="sửa loại">
+                                <i class="mdi mdi-border-color" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{/if}}
+        </div>
+        <!-- end -->
+    </div>
+</div>
+<!-- end row -->

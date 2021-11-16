@@ -7,13 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- ccss Styles -->
-    <link rel="stylesheet" href="/public/ccss/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/ccss/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/ccss/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="/public/ccss/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="/public/ccss/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/ccss/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/ccss/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/public/ccss/style.css" type="text/css">
 </head>
 
@@ -63,7 +63,7 @@
         
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="./shop-grid.html">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
@@ -156,11 +156,24 @@
                         <a href="/"><img src="/public/image/logo.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-10">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="/products/list">Sản phẩm</a></li>
+                             <li><a href="#">Category</a>
+                                <ul class="header__menu__dropdown">
+                                    {{#each lcCategories}}
+                                       <li><a href="/products/byCat/{{MaLoai}}"
+                                            class="{{#if isActive}}active{{/if}}">
+                                            {{TenLoai}}
+                                            {{#if num_of_products}}
+                                            <span class="badge badge-danger float-right">{{num_of_products}}</span>
+                                            {{/if}}
+                                        </a></li>
+                                    {{/each}}                                 
+                                </ul>
+                            </li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
@@ -174,15 +187,15 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-2">
+               {{!--  <div class="col-lg-2">
                     <div class="header__cart">
                         <ul>
-                            {{!-- <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li> --}}
-                           {{!--  <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li> --}}
+                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
-                        {{!-- <div class="header__cart__price">item: <span>1</span></div> --}}
+                        <div class="header__cart__price">item: <span>1</span></div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>
@@ -220,14 +233,14 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="/public/jjs/jquery-3.3.1.min.js"></script>
-    <script src="/public/jjs/bootstrap.min.js"></script>
-    <script src="/public/jjs/jquery.nice-select.min.js"></script>
-    <script src="/public/jjs/jquery-ui.min.js"></script>
-    <script src="/public/jjs/jquery.slicknav.js"></script>
-    <script src="/public/jjs/mixitup.min.js"></script>
-    <script src="/public/jjs/owl.carousel.min.js"></script>
-    <script src="/public/jjs/main.js"></script>
+    <script src="/public/js/jquery-3.3.1.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/jquery.nice-select.min.js"></script>
+    <script src="/public/js/jquery-ui.min.js"></script>
+    <script src="/public/js/jquery.slicknav.js"></script>
+    <script src="/public/js/mixitup.min.js"></script>
+    <script src="/public/js/owl.carousel.min.js"></script>
+    <script src="/public/js/main.js"></script>
 
 
 

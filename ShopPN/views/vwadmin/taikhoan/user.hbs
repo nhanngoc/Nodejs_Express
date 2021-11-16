@@ -1,0 +1,56 @@
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Tài khoản Admin</h4>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+{{#if this.empty}}
+<div class="row">
+    <div class="col-lg-6">   
+        <div class="mt-5">
+            <h5 class="font-14">Chưa kết nối database</h5>
+            <p class="sub-header">
+                Không có loại nào
+            </p>
+          <div class="table-responsive"> 
+        {{else}}
+            <table class="table table table-hover m-0">
+                <thead>
+                    <tr>
+                        
+                        <th>Tên NV</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Mã quyền</th>
+                        <th>Sửa</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                        {{#each this.tai_khoan}}
+                    <tr>
+                        {{!-- <th scope="row">{{}}</th> --}}
+                        <td>{{tennv}}</td>
+                        <td>{{username}}</td>
+                        <td>{{email}}</td>
+                        <td>{{MaQuyen}}</td>
+                       
+                        <td class="text-right">
+                            <a name="" id="" class="btn btn-primary btn-sm" href="/admin/category/edit/{{MaQuyen}}" role="button" title="sửa quyền">
+                                <i class="mdi mdi-border-color" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{/if}}
+            </div> 
+        </div>
+        <!-- end -->
+    </div>
+</div>
+<!-- end row -->

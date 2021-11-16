@@ -1,11 +1,15 @@
 const db = require("../utils/db");
 const tbl_products = "Sanpham";
 
+
 module.exports = {
   all: function () {
     return db.load(`select *from ${tbl_products}`);
   },
-
+    //detail
+  detail: function (MaSP) {
+    return db.load(`select *from ${tbl_products} where MaSP =${MaSP}`);
+  },
   allByCat: function (maloai) {
     return db.load(`select *from ${tbl_products} where maloai =${maloai}`);
   },
@@ -14,6 +18,10 @@ module.exports = {
     return db.load(
       `select *from ${tbl_products} where maloai =${MaLoai} limit ${limit} offset ${offset}`
     );
+  },
+  //sản phẩm mới
+  newProduct: function ( limit, offset) {
+    return db.load(`select *from ${tbl_products} order by MaSP DESC limit ${limit} offset ${offset}`);
   },
   //phan trang
   pageByHome: function (maloai, limit, offset) {

@@ -1,0 +1,28 @@
+﻿@font-face {
+  font-family: 'Hind';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Hind Medium'), local('Hind-Medium'), url(s/hind/v11/5aU19_a8oxmIfJpbERySiA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Hind';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Hind SemiBold'), local('Hind-SemiBold'), url(s/hind/v11/5aU19_a8oxmIfLZcERySiA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Noto Sans'), local('NotoSans'), url(s/notosans/v11/o-0IIpQlx3QUlC5A4PNr5TRF.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(s/notosans/v11/o-0NIpQlx3QUlC5A4PNjXhFVZNyE.ttf) format('truetype');
+}

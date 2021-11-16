@@ -1,14 +1,16 @@
 const express = require("express");
 const moment = require("moment");
+const Joi = require('joi');
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/user.model");
 const config = require("../config/default.json");
 //register
 //const {validationResult} = require('express-validator');
-const  { registerValidator } = require("../middlewares/validate.mdw");
+const {registerValidator}  = require("../middlewares/validate.mdw");
 //login//logout
 const restrict = require("../middlewares/auth.mdw");
 const router = express.Router();
+
 
 router.get("/login", async function (req, res) {
   res.render("vwaccount/login", { layout: false }); //tat layout trang chu
@@ -38,7 +40,7 @@ router.post("/login", async function (req, res) {
 });
 
 //logout
-router.post("/logout", restrict, function (req, res) {
+router.post("/logout", restrict.user, function (req, res) {
   req.session.isAuthenticated = false;
   req.session.authUser = null;
   res.redirect(req.headers.referer);
@@ -48,16 +50,22 @@ router.post("/logout", restrict, function (req, res) {
 router.get("/register", async function (req, res) {
   res.render("vwaccount/register");
 });
-//response request
-router.post("/register", async function (req, res) {
-  const { error } = registerValidator(req.body);
-
-  if (error) return res.status(422).send(error.details[0].message);
-
+//register, response request
+router.post("/register", async function (req, res, next) {
+  const { error, value } = registerValidator(req.body);
+   // validate
+  const user = await userModel.singleUserName(req.body.username);
+  if (user === +req.params.username) {
+    throw new 'Username "' + params.username + '" is already taken';
+  }
+  /* if (error){
+    throw res.status(422).send(error.details[0].message);
+  }  */
+    if (error) {
+      throw res.status(422).send(error.details[0].message);
+  } 
   //const checkEmailExist = await userModel.findOne({ email: req.body.email });
-
   //if (checkEmailExist) return res.status(422).send('Email is exist');
-
 
   const salt = bcrypt.genSaltSync(10);
   const password_hash = bcrypt.hashSync(req.body.password, salt);
@@ -67,11 +75,11 @@ router.post("/register", async function (req, res) {
     password: password_hash,
     email: req.body.email,
 // gioitinh: req.body.gioitinh,
-// diachi: req.body.diachi,
-// sdt: req.body.sdt,
+    diachi: req.body.diachi,
+    sdt: req.body.sdt,
   };
   try{
-    await userModel.add(entity); //đẩy database
+    await userModel.add_kh(entity); //đẩy database
     res.render("vwaccount/register");
   }catch(err){
     res.status(400).send(err);
@@ -79,8 +87,8 @@ router.post("/register", async function (req, res) {
  
 });
 
-//login
-router.get("/profile", restrict, async function (req, res) {
+//login profile
+router.get("/profile", restrict.user, async function (req, res) {
   console.log(req.session.authUser);
   res.render("vwaccount/profile");
 });

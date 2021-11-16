@@ -17,6 +17,7 @@ module.exports = function (app) {
         format_number: function (value) {
           return numeral(value).format("0,0");
         },
+       
       },
     })
   );

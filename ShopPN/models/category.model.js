@@ -10,4 +10,5 @@ module.exports = {
       "SELECT c.*,COUNT(p.MaSP)AS num_of_products FROM Loaisp c LEFT JOIN Sanpham p ON c.MaLoai=p.MaLoai GROUP BY c.MaLoai,c.TenLoai"
     );
   },
+  
 };

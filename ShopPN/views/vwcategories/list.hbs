@@ -47,3 +47,68 @@
         Footer
     </div>
 </div>
+
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <h4>Sản phẩm</h4>
+        <a class="btn btn-outline-success" href="/admin/products/add" role="button">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            sản phẩm
+        </a>
+    </div>
+    {{#if this.empty}}
+    <div class="card-body">
+        <p class="card-text">Không có dữ liệu</p>
+    </div>
+    {{else}}
+    <table class="table table-hover">
+         <div class="form-group">
+                
+                <input type="text" class="form-control" id="txtMaSP" name="MaSP" readonly
+                    value="{{this.sanpham.MaSP}}">
+            </div>
+        <thead>
+            <tr>
+                <th scope="col">Mã</th>
+                <th scope="col">Tên</th>
+                <th scope="col">ảnh</th>
+                <th scope="col">số lượng</th>
+                <th scope="col">số lượng bán</th>
+                <th scope="col">giá</th>
+                <th scope="col">size</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Tình trạng</th>
+                <th scope="col">Ngày nhập</th>
+                <th scope="col">&nbsp;</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each this.sanpham}}
+            <tr>
+
+                <th scope="row">{{MaSP}}</th>
+                <td>{{TenSP}}</td>
+                <td>{{Anh}}</td>
+                <td>{{SoLuong}}</td>
+                <td>{{SoLuongBan}}</td>
+                <td>{{Gia}}</td>
+                <td>{{Size}}</td>
+                <td>{{MoTa}}</td>
+                <td>{{TinhTrang}}</td>
+                <td>{{NgayNhap}}</td>
+                <td class="text-right">
+                    <a name="" id="" class="btn btn-primary btn-sm" href="/admin/categories/edit/{{MaSP}}" role="button" title="edit Category">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{/if}}
+    <div class="card-footer text-muted">
+        Footer
+    </div>
+</div>

@@ -8,11 +8,11 @@ module.exports = {
   all: function () {
     return db.load(`select *from ${tbl_Users}`);
   },
-  //them username
-  add: function (entity) {
-    return db.add_user(tbl_Users, entity);
+  //them username khách hàng
+  add_kh: function (entity) {
+    return db.insert_kh(tbl_Users, entity);
   },
-  //dung await phair dung async
+  //dung await phair dung async 
   singleUserName: async function (username) {
     const rows = await db.load(
       `select * from ${tbl_Users} where username = '${username}'`
@@ -26,18 +26,17 @@ module.exports = {
   single: function (MaKH) {
     return db.load(`select *from ${tbl_Users} where MaKH =${MaKH}`);
   },
-
   //capnhat
   patch: function (entity) {
     const condition = {
       MaKH: entity.MaKH,
     };
     delete entity.MaKH;
-    return db.patch(tbl_Users, entity, condition);
+    return db.update_kh(tbl_Users, entity, condition);
   },
   //xoa
   del: function (MaKH) {
     const condition = { MaKH };
-    return db.del(tbl_Users, condition);
+    return db.delete_kh(tbl_Users, condition);
   },
 };

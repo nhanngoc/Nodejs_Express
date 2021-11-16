@@ -1,0 +1,98 @@
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Thêm sản phẩm</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="text-center mb-4 mt-3">
+                    <a href="index.html">
+                        <span><img src="assets\images\logo-dark.png" alt="" height="30"></span>
+                    </a>
+                </div>
+               
+                
+                <form class="form-horizontal" role="form" method="post" action="/admin/products/add" enctype="multipart/form-data">
+                        {{!-- <% if (message.length > 0) { %>
+                            <div class="alert alert-success col-sm-12"><%= message %></div>
+                        <% } %>
+                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                            <p>Error:</p>
+                            <span></span>
+                        </div> --}}
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                <select class="custom-select mt-3"id="txtMaLoai" name="MaLoai">
+                                    <option selected="">Chọn loại sản phẩm</option>
+                                    {{#each this.loaisp}}
+                                    <option value="{{MaLoai}}">{{TenLoai}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="TenSP" class="col-md-3 control-label">Tên sản phẩm</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="TenSP" placeholder="Nhập tên">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="SoLuong" class="col-md-3 control-label">Số Lượng</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="SoLuong" placeholder="Nhập số lượng">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Gia" class="col-md-3 control-label">Giá</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="Gia" placeholder="Nhập giá">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Size" class="col-md-3 control-label">Size</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="Size" placeholder="Nhập size">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="uploaded_image" class="col-md-3 control-label">Hình ảnh</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="file" name="uploaded_image" accept=""/>
+                            </div>
+                        </div>                                
+                        <div class="form-group">
+                            <label for="MoTa" class="col-md-3 control-label">Mô Tả</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="MoTa" placeholder="Nhập mô tả">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="NgayNhap" class="col-md-3 control-label">Ngày Nhập</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="NgayNhap" placeholder="Ngày nhập">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Button -->                                       
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> Thêm mới </button>
+                            </div>
+                        </div>  
+                    </form>
+
+
+
+            </div>
+            <!-- end card-body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->

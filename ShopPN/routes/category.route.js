@@ -3,6 +3,7 @@ const categoryModel = require("../models/category.model");
 
 const router = express.Router();
 
+//list loại
 router.get("/", async function (req, res) {
   /* const list = [
       { CatID: 1, CatName: "LapTop" },

@@ -1,0 +1,110 @@
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="text-center mb-4 mt-3">
+                    <a href="index.html">
+                        <span><img src="assets\images\logo-dark.png" alt="" height="30"></span>
+                    </a>
+                </div>
+                 <form class="form-horizontal" role="form" method="post" action="/upanh" enctype="multipart/form-data">
+                        {{!-- <% if (message.length > 0) { %>
+                            <div class="alert alert-success col-sm-12"><%= message %></div>
+                        <% } %>
+                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                            <p>Error:</p>
+                            <span></span>
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="first_name" class="col-md-3 control-label">First Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="first_name" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name" class="col-md-3 control-label">Last Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+                            </div>
+                        </div>
+                                                                                        <div class="form-group">
+                            <label for="mob_no" class="col-md-3 control-label">Mobile Number</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="mob_no" placeholder="Mobile Number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mob_no" class="col-md-3 control-label">Profile Image</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="file" name="uploaded_image" accept=""/>
+                            </div>
+                        </div>                                
+                        <div class="form-group">
+                            <label for="user_name" class="col-md-3 control-label">User Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="user_name" placeholder="User Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-md-3 control-label">Password</label>
+                            <div class="col-md-9">
+                                <input type="password" class="form-control" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Button -->                                       
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> Register</button>
+                            </div>
+                        </div>  
+                    </form>
+ {{!-- <form method="POST" action="" {{!-- enctype="multipart/form-data" --}} class="p-2">
+                    <div class="form-group">
+                    <select class="custom-select mt-3"id="txtMaLoai" name="MaLoai">
+                        <option selected="">Chọn loại sản phẩm</option>
+                        {{#each this.loaisp}}
+                        <option value="{{MaLoai}}">{{TenLoai}}</option>
+                        {{/each}}
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtTenSP">Tên sp</label>
+                        <input class="form-control" type="text" id="txtTenSP" name="TenSP" required="" placeholder=" ">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSoLuong">SoLuong</label>
+                        <input class="form-control" type="number"value="1" id="txtSoLuong" name="SoLuong" step="2" min="1" max="100" required="" placeholder=" ">
+                    </div>
+                  
+                   
+                    <div class="form-group">
+                        <label for="txtGia">Gia</label>
+                        <input class="form-control" type="number"value="10" id="txtGia" name="Gia"  step="100" min="10"required="" placeholder=" ">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSize">Size</label>
+                        <input class="form-control" type="text" id="txtSize" name="Size" required="" placeholder=" ">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtMoTa">Mô tả</label>
+                        <input class="form-control" type="text" id="txtMoTa" name="MoTa" required="" placeholder=" ">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtAnh">Hình ảnh</label>
+                        <input class="filestyle" type="file"id="txtAnh" name="Anh" {{!-- accept="" --}} />
+                    </div>
+                   
+                    
+                    <div class="mb-3 text-center">
+                        <button class="btn btn-primary btn-block" type="submit"> Save</button>
+                    </div>
+                </form> --}}
+            </div>
+            <!-- end card-body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
