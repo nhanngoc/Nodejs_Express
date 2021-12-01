@@ -3,100 +3,21 @@
 
 <head>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-    <!-- ccss Styles -->
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/ccss/style.css" type="text/css">
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Humberger Begin -->
-    <div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
-        <div class="humberger__menu__logo">
-            <a href="#"><img src="/public/image/logo.png" alt=""></a>
-        </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
-        
-        <div class="humberger__menu__widget">
-             <form id="frmLogout" action="/account/logout" method="POST"></form>
-            {{#if lcIsAuthenticated}}
-                <nav class="header_register">
-                    <ul>  
-                        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>                      
-                         <b>{{lcAuthUser.tenkh}}</b>!</a>
-                            <ul class="header__menu__dropdown">
-                                <li><a href="/account/profile"> <i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
-                                <li> <a href="javascript: $('#frmLogout').submit()"><i class="fa fa-sign-out" aria-hidden="true">Logout</i>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            {{else}}
-            <div class="header__top__right_htua">
-               <a href="/account/register"><i class="fa fa-user-plus"></i> Register</a>
-            </div>
-            <div class="header__top__right__auth">
-                <a href="/account/login"><i class="fa fa-user"></i> Login</a>
-            </div>
-            {{/if}}
-        </div>
-        
-        <nav class="humberger__menu__nav mobile-menu">
-            <ul>
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        </div>
-        <div class="humberger__menu__contact">
-            <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
-            </ul>
-        </div>
-    </div>
-    <!-- Humberger End -->
+    {{!-- margin-bottom: 50px;
+    #f5447b
+        text-align: center;
+    border-radius: 15px;
+    border: 1px solid #e7e7e7;
+    overflow: hidden; --}}
+    {{>header-mobile}}
   
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
-            <div class="container">
+         
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
                         <div class="header__top__left">
@@ -107,8 +28,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
-                       <div class="header__top__center">
-                            <div class="header__top__center__social">
+                       <div class="header__top__right">
+                            <div class="header__top__right__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
@@ -122,10 +43,16 @@
                             <nav class="header_register">
                                 <ul>  
                                     <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>                      
-                                    <b>{{lcAuthUser.tenkh}}</b>!</a>
+                                        <b>{{lcAuthUser.tenkh}}</b>!</a>
                                         <ul class="header__menu__dropdown">
-                                            <li><a href="/account/profile"> <i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
-                                            <li> <a href="javascript: $('#frmLogout').submit()"><i class="fa fa-sign-out" aria-hidden="true">Logout</i>
+                                            <li><a href="/account/profile"> 
+                                                <i class="fa fa-user" aria-hidden="true">
+                                                </i>Trang cá nhân</a>
+                                            </li>
+                                            <li> <a href="javascript: $('#frmLogout').submit()">
+                                                <i class="fa fa-sign-out" aria-hidden="true">Đăng xuất
+                                                </i>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -133,14 +60,14 @@
                         {{else}}
                            <div class="header__top__right">    
                              <div class="header__top__right__auth">
-                                <a href="/account/register"><i class="fa fa-user-plus"></i> Register</a>
+                                <a href="/account/register"><i class="fa fa-user-plus"></i> Đăng ký</a>
                             </div>
                             <div class="header__top__right__language">                  
                                 <div>
                                 </div>                               
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="/account/login"><i class="fa fa-user"></i> Login</a>
+                                <a href="/account/login"><i class="fa fa-user"></i> Đăng nhập</a>
                             </div>
                         </div>
                         {{/if}}   
@@ -148,23 +75,23 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="row">
+      
+        
+            <div class="row" style="background: #f5447b; height: 50px; margin-bottom: 50px;">
                 <div class="col-lg-2">
-                    <div class="header__logo">
-                        <a href="/"><img src="/public/image/logo.png" alt=""></a>
+                     <div class="header__logo">
+                        <a href="/"><img src="/public/image/logo.png" alt="" style="height: 50px; "></a>
                     </div>
                 </div>
-                <div class="col-lg-10">
-                    <nav class="header__menu">
+                <div class="col-lg-6">
+                    <nav class=" header__menu">
                         <ul>
-                            <li class="active"><a href="/">Home</a></li>
+                            <li class="active"><a href="/">Trang chủ</a></li>
                             <li><a href="/products/list">Sản phẩm</a></li>
-                             <li><a href="#">Category</a>
+                             <li><a href="#">Bé Gái
                                 <ul class="header__menu__dropdown">
                                     {{#each lcCategories}}
-                                       <li><a href="/products/byCat/{{MaLoai}}"
+                                       <li><a href="/products/danhmuc0/{{MaLoai}}"{{!--/cart/{{sp_id}} --}}
                                             class="{{#if isActive}}active{{/if}}">
                                             {{TenLoai}}
                                             {{#if num_of_products}}
@@ -174,38 +101,73 @@
                                     {{/each}}                                 
                                 </ul>
                             </li>
-                            <li><a href="#">Pages</a>
+                             <li><a href="#">Bé Trai
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    {{#each lcCategories1}}
+                                       <li><a href="/products/danhmuc1/{{MaLoai}}"
+                                            class="{{#if isActive}}active{{/if}}">
+                                            {{TenLoai}}
+                                            {{#if num_of_products}}
+                                            <span class="badge badge-danger float-right">{{num_of_products}}</span>
+                                            {{/if}}
+                                        </a></li>
+                                    {{/each}}                                 
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+
+                             <li><a href="#">Phụ Kiện
+                                <ul class="header__menu__dropdown">
+                                    {{#each lcCategories2}}
+                                       <li><a href="/products/danhmuc2/{{MaLoai}}"
+                                            class="{{#if isActive}}active{{/if}}">
+                                            {{TenLoai}}
+                                            {{#if num_of_products}}
+                                            <span class="badge badge-danger float-right">{{num_of_products}}</span>
+                                            {{/if}}
+                                        </a></li>
+                                    {{/each}}                                 
+                                </ul>
+                            </li>
+                           
                         </ul>
                     </nav>
                 </div>
-               {{!--  <div class="col-lg-2">
+                <div class="col-lg-3" style="padding: 5px 0;">
+                    <form class="input-group" method="GET" action="/search" >
+                        <input class="form-control" name="TenSP" type="text" placeholder="Tìm kiếm sản phẩm...">
+                        <div class="input-group-append">
+                           <button class="btn btn-secondary" type="submit" style="background-color: #7fad39; border-color:#f26522 ">
+                           <i class="fa fa-search"></i>
+                           </button>
+                        </div>
+                     </form>
+
+                </div>
+                <div class="col-lg-1">
+                    
                     <div class="header__cart">
+                         <!-- Another variation with a button -->
+                     
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            {{!-- <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li> --}}
+                            
+                            <li><a href="/shop_cart"><i class="fa fa-shopping-cart"></i> <span>{{session.cart.totalItems}}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>1</span></div>
+                        
+                        {{!-- <div class="header__cart__price">item: <span>$150.00</span></div> --}}
                     </div>
-                </div> --}}
+                </div>
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>
             </div>
-        </div>
+        
+        
     </header>
     <!-- Header Section End -->
 
  
-    {{>seach}}
+    {{!-- {{>seach}} --}}
 
 
     <!-- Categories Section Begin -->
@@ -232,15 +194,6 @@
    
     <!-- Footer Section End -->
 
-    <!-- Js Plugins -->
-    <script src="/public/js/jquery-3.3.1.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="/public/js/jquery.nice-select.min.js"></script>
-    <script src="/public/js/jquery-ui.min.js"></script>
-    <script src="/public/js/jquery.slicknav.js"></script>
-    <script src="/public/js/mixitup.min.js"></script>
-    <script src="/public/js/owl.carousel.min.js"></script>
-    <script src="/public/js/main.js"></script>
 
 
 

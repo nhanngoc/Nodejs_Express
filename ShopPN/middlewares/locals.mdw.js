@@ -9,11 +9,26 @@ module.exports = function (app) {
     res.locals.lcAuthUser = req.session.authUser;
     next();
   });
-  //lấy ra loại sản phẩm
+  //lấy ra loại danh muc bé gái
   const categoryModel = require("../models/category.model");
   app.use(async function (req, res, next) {
-    const rows = await categoryModel.allDetails();
+    const rows = await categoryModel.danhmuc0();
     res.locals.lcCategories = rows;
     next();
   });
+  //lấy ra danh muc bé trai
+ 
+  app.use(async function (req, res, next) {
+    const rows = await categoryModel.danhmuc1();
+    res.locals.lcCategories1 = rows;
+    next();
+  });
+  //lây ra danh muc phụ kiện
+  app.use(async function (req, res, next) {
+    const rows = await categoryModel.danhmuc2();
+    res.locals.lcCategories2 = rows;
+    next();
+  });
+ //lấy ra color size
+
 };

@@ -35,8 +35,9 @@
         </div>
         <section class="main-bottom-vertical">
                 <div class="row ">
+                {{#if sanpham }}
                     {{#each this.sanpham}}
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6" style="margin-bottom: 50px;">
                         <div class="product-grid">
                             <div class="product-image">
                                 <a href="#" class="image">
@@ -59,38 +60,52 @@
                                 </ul>
                                 <h3 class="title"><a href="#">{{TenSP}}</a></h3>
                                 <div class="price"><span>{{Gia}}</span> ${{format_number Gia}}</div>
-                                <a class="add-to-cart" href="/products/detail/{{MaSP}}">add to cart</a>
+                                <a class="add-to-cart" href="/cart/{{MaSP}}" role="button">add to cart</a>
                             </div>
                         </div>
                     </div>
                     {{/each}}
+                {{else}}
+
+                 <div class="card-body">
+                <p class="card-text">Không có sản phẩm nào</p>
+                </div>
+                {{/if}}
                 </div> 
-            <nav aria-label="...">
+            <nav aria-label="..." style="display: flex;
+          align-items: center;
+          justify-content: center;">
             <ul class="pagination " >
-                <li class="page-item ">
-                    <a class="page-link" href="?page={{prev_value}}" aria-label="Previous">
+                <li class="page-link">
+                    {{!-- <a class="page-link" href="?page={{prev_value}}" aria-label="Previous">
                         <span aria-hidden="true">Previous</span>
-                    </a>
+                    </a> --}}
+                        <span aria-hidden="true">Trang: </span>
                 </li>
+                
                 {{#each this.page_items}}
                 {{#if isActive}}
                 <li class="page-item active" aria-current="page">
-                    <span class="page-link">
+                    <span class="page-link" style="    background-color: #ff004f;
+                        border-color: #c12e7f; color: rgb(0, 0, 0);border-radius: 100%;
+                        padding: 9px 16px;">
                         {{value}}
                         <span class="sr-only">(current)</span>
                     </span>
                 </li>
                 {{else}}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{value}}">{{value}}</a>
+                    <a class="page-link " style=" background-color: #f5447b;
+                    border-color: #c12e7f; color: #fff;border-radius: 100%;
+                    padding: 9px 16px;" href="?page={{value}}">{{value}}</a>
                 </li>
                 {{/if}}
                 {{/each}}
-                <li class="page-item">
+                {{!-- <li class="page-item">
                     <a class="page-link" href="?page={{next_value}}" aria-label="Next">
                         <span aria-hidden="true">Next</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         </section>

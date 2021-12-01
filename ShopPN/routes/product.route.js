@@ -39,9 +39,27 @@ router.get("/list", async function (req, res) {
   });
 });
 
+//detail
+router.get("/detail/:MaSP", async function (req, res) {
+  const id = req.params.MaSP;
+  const listct = await productModel.detail_ct(id);
+  const lists = await productModel.detail(id);
+  const color = await productModel.detail_color(id);
+  //hien thi san pham
+  res.render("vwproducts/detail", {
+    sanpham: lists,
+    empty: lists.length === 0,
+    sanphamct: listct,
+    emptyct: listct.length === 0,
+    color: color,
+    emptycl: color.length === 0,
+    
+  });
+});
+
 //xuat san pham loai
-router.get("/byCat/:MaLoai", async function (req, res) {
- /* 
+router.get("/danhmuc0/:MaLoai", async function (req, res) {
+  /* 
   const list = await productModel.allByCat(req.params.maLoai);
   //hien thi san pham
   res.render("vwproducts/byCat", {
@@ -65,7 +83,7 @@ router.get("/byCat/:MaLoai", async function (req, res) {
     offset
   );
 
-  const total = await productModel.countByCat();
+  const total = await productModel.countByLoai(req.params.MaLoai);
   const nPages = Math.ceil(total / config.pagination.limit);
   const page_items = [];
   for (let i = 1; i <= nPages; i++) {
@@ -82,23 +100,81 @@ router.get("/byCat/:MaLoai", async function (req, res) {
     page_items,
     prev_value: page - 1,
     next_value: page + 1,
-  }); 
-});
-
-//detail
-router.get("/detail/:MaSP", async function (req, res) {
-  const list = await productModel.detail(req.params.MaSP);
-  //hien thi san pham
-  res.render("vwproducts/detail", {
-    sanpham: list,
-    empty: list.length === 0,
   });
 });
+//xuat san pham loai
+router.get("/danhmuc1/:MaLoai", async function (req, res) {
+  for (const c of res.locals.lcCategories1) {
+    if (c.MaLoai === +req.params.MaLoai) {
+      c.isActive = true;
+    }
+  }
+  //phan trang
+  const page = +req.query.page || 1;
+  if (page < 0) page = 1;
+  const offset = (page - 1) * config.pagination.limit;
+  const list = await productModel.pageByCat(
+    req.params.MaLoai,
+    config.pagination.limit,
+    offset
+  );
 
+  const total = await productModel.countByLoai(req.params.MaLoai);
+  const nPages = Math.ceil(total / config.pagination.limit);
+  const page_items = [];
+  for (let i = 1; i <= nPages; i++) {
+    const item = {
+      value: i,
+      isActive: i === page,
+    };
+    page_items.push(item);
+  }
 
+  res.render("vwproducts/byCat", {
+    sanpham: list,
+    empty: list.length === 0,
+    page_items,
+    prev_value: page - 1,
+    next_value: page + 1,
+  });
+});
+//xuat san pham loai
+router.get("/danhmuc2/:MaLoai", async function (req, res) {
+  for (const c of res.locals.lcCategories2) {
+    if (c.MaLoai === +req.params.MaLoai) {
+      c.isActive = true;
+    }
+  }
+  //phan trang
+  const page = +req.query.page || 1;
 
+  if (page < 0) page = 1;
+  const offset = (page - 1) * config.pagination.limit;
+  const list = await productModel.pageByCat(
+    req.params.MaLoai,
+    config.pagination.limit,
+    offset
+  );
 
+  const total = await productModel.countByLoai(req.params.MaLoai);
+  const nPages = Math.ceil(total / config.pagination.limit);
+  const page_items = [];
+  for (let i = 1; i <= nPages; i++) {
+    const item = {
+      value: i,
+      isActive: i === page,
+    };
+    page_items.push(item);
+  }
 
+  res.render("vwproducts/byCat", {
+    sanpham: list,
+    empty: list.length === 0,
+    page_items,
+    prev_value: page - 1,
+    next_value: page + 1,
+  });
+});
 /* router.get("/edit/:id", async function (req, res) {
   const id = +req.params.id || -1;
   const rows = await productModel.single(id);
@@ -115,6 +191,5 @@ router.post("/update", async function (req, res) {
   await productModel.patch(req.body);
   res.redirect("/admin/products");
 }); */
-
 
 module.exports = router;

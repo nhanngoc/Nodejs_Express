@@ -1,85 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+    body {
+  padding: 50px;
+  font: 16px 'Lato', sans-serif;
+}
 
-<head>
-    {{!-- css header --}}
-    <link rel="stylesheet" href="/public/stylesheets/style.header.css">
- 
-</head>
+a {
+  color: #00B7FF;
+}
 
-<body>
-    <nav class="top-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4 hidden-xs">
-                    <span class="nav-text">
-                        <i class="fa fa-phone" aria-hidden="true"></i> +033 787 6016
-                        <i class="fa fa-envelope" aria-hidden="true"></i> nnhann99@gmail.com</span>
-                </div>
-                <div class="col-sm-4 text-center">
-                    <a href="#" class="social"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#" class="social"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#" class="social"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#" class="social"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                    <a href="#" class="social"><i class="fa fa-google" aria-hidden="true"></i></a>
-                    <a href="#" class="social"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                </div>
-                <div class="col-sm-4 text-right hidden-xs">
-                    <ul class="tools">
-                        <form id="frmLogout" action="/account/logout" method="POST"></form>
-                        {{#if lcIsAuthenticated}}
-                            <li class="nav-item dropdown">
-                            <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                id="navbarDropdown"
-                                role="button"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                                WellCome,
-                                <b>{{lcAuthUser.tenkh}}</b>!
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/account/profile">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                                Account profile
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a
-                                class="dropdown-item"
-                                href="javascript: $('#frmLogout').submit()"
-                                >
-                                <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                Logout</a>
-                            </div>
-                            </li>
-                        {{else}}
-                            <li class="dropdown">          
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"
-                                        aria-hidden="true"></i>  Tài khoản<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/account/login">
-                                            <i class="fa fa-sign-in" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                        <li class="nav-item">
-                                        <a class="nav-link" href="/account/register">
-                                            <i class="fa fa-user-plus" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        {{/if}}               
-                    </ul>
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}
+
+.dropdown-menu .cart {
+  min-width: 250px;
+  padding: 15px 25px 0;
+}
+
+.dropdown-menu .cart .row > div {
+  padding: 0 0 10px 0;
+}
+
+.dropdown-menu .cart .totalPrice{
+  font-size: 120%;
+  font-weight: bold;
+  padding: 15px 0;
+}
+
+.cart.page {
+  padding: 25px 0;
+}
+</style>
+<div class="row">
+    <div class="col-xs-4">
+        <div class="pull-left">
+        <a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        </div>
+    </div>
+    <div class="col-xs-8">
+        <div class="dropdown pull-right">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+                {{#if session.cart.totalItems }}
+                <span>({{session.cart.totalItems}})</span>
+                {{/if}}
+            </a>
+            {{#if session.cart.totalItems }}
+            <div class="dropdown-menu">
+                <div class="cart">
+                    {{#each session.cart.items }}
+                    <div class="row">
+                        <div class="col-xs-4">
+                            {{ this.item.TenSP }}
+                        </div>
+                        <div class="col-xs-4 text-right">
+                            <span class="badge">{{ this.quantity }}</span>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                            {{ this.Gia }} Tổng 
+                        </div>
+                    </div>
+                    {{/each}}
+                    <div class="row">
+                        <div class="text-right">
+                            <div class="totalPrice">Tổng cộng: {{ session.cart.totalPrice }} </div>
+                            <a href="/cart/" class="btn btn-success">Procceed</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {{/if}}
         </div>
-    </nav>
-    <!--TOP-NAVBAR-END-->
-</body>
+    </div>
+</div>
 
-</html>
+<h1>{{title}}</h1>
+{{!-- {{#if products }} --}}
+    <div class="cart page">
+        <ul class="list-group">
+            {{#each products }}
+            <li class="list-group-item clearfix">
+                <div class="col-xs-5">
+                    <strong>{{this.item.TenSP}}</strong><br/>
+                    <em>{{{this.item.MoTa}}}</em>
+                </div>
+                <div class="col-xs-2 text-right">
+                    <span class="badge">{{ this.quantity }} Số lượng</span>
+                </div>
+                <div class="col-xs-3 text-right">
+                    {{ this.Gia }} Tổng giá sp
+                </div>
+                <div class="col-xs-2 text-right">
+                    <a href="/remove/{{this.item.id}}" class="btn btn-default"></i> Remove</a>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="text-right">
+        <strong>Total: {{ toPri }} CHF</strong>
+    </div>
+    <hr>
+    <div class="text-right">
+        <a href="#" type="button" class="btn btn-success">Checkout</a>
+    </div>
+{{!-- {{ else }}
+    Your shopping cart is empty.
+{{/if}} --}}

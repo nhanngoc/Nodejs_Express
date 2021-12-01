@@ -8,6 +8,10 @@ module.exports = {
   all: function () {
     return db.load(`select *from ${tbl_Users}`);
   },
+  //
+  all_id: function (MaKH) {
+    return db.load(`select *from ${tbl_Users} where MaKH =${MaKH}`);
+  },
   //them username khách hàng
   add_kh: function (entity) {
     return db.insert_kh(tbl_Users, entity);

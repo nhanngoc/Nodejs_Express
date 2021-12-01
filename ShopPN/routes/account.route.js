@@ -1,16 +1,17 @@
 const express = require("express");
 const moment = require("moment");
-const Joi = require('joi');
+const Joi = require("joi");
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/user.model");
 const config = require("../config/default.json");
+const Order = require('../models/order.model');
+const Cart = require('../models/cart');
 //register
 //const {validationResult} = require('express-validator');
-const {registerValidator}  = require("../middlewares/validate.mdw");
+const { registerValidator } = require("../middlewares/validate.mdw");
 //login//logout
 const restrict = require("../middlewares/auth.mdw");
 const router = express.Router();
-
 
 router.get("/login", async function (req, res) {
   res.render("vwaccount/login", { layout: false }); //tat layout trang chu
@@ -34,7 +35,6 @@ router.post("/login", async function (req, res) {
   delete user.password;
   req.session.isAuthenticated = true;
   req.session.authUser = user;
-
   const url = req.query.retUrl || "/";
   res.redirect(url);
 });
@@ -53,17 +53,17 @@ router.get("/register", async function (req, res) {
 //register, response request
 router.post("/register", async function (req, res, next) {
   const { error, value } = registerValidator(req.body);
-   // validate
+  // validate
   const user = await userModel.singleUserName(req.body.username);
   if (user === +req.params.username) {
-    throw new 'Username "' + params.username + '" is already taken';
+    throw new 'Username "'() + params.username + '" is already taken';
   }
   /* if (error){
     throw res.status(422).send(error.details[0].message);
   }  */
-    if (error) {
-      throw res.status(422).send(error.details[0].message);
-  } 
+  if (error) {
+    throw res.status(422).send(error.details[0].message);
+  }
   //const checkEmailExist = await userModel.findOne({ email: req.body.email });
   //if (checkEmailExist) return res.status(422).send('Email is exist');
 
@@ -74,23 +74,39 @@ router.post("/register", async function (req, res, next) {
     username: req.body.username,
     password: password_hash,
     email: req.body.email,
-// gioitinh: req.body.gioitinh,
+    // gioitinh: req.body.gioitinh,
     diachi: req.body.diachi,
     sdt: req.body.sdt,
   };
-  try{
+  try {
     await userModel.add_kh(entity); //đẩy database
     res.render("vwaccount/register");
-  }catch(err){
+  } catch (err) {
     res.status(400).send(err);
   }
- 
 });
 
 //login profile
-router.get("/profile", restrict.user, async function (req, res) {
+/* router.get("/profile", restrict.user, async function (req, res) {
   console.log(req.session.authUser);
   res.render("vwaccount/profile");
+}); */
+
+//login profile
+router.get("/profile", restrict.user, async function (req, res) {
+  user=req.session.authUser;
+  res.render("vwaccount/profile",{user});
+  /* Order.all(console.log("aaaaaaaaaaa",{ user: req.session.authUser}), function (err, orders) {
+      if (err) {
+        return res.write("Error!");
+      } 
+      let cart;
+      orders.forEach(function (order) {
+        cart = new Cart(order.cart);
+        order.items = cart.getItems();
+      });
+      res.render("vwaccount/profile", { orders: orders });
+    }); */
 });
 
 /* router.get("/is-available", async function (req, res) {
@@ -100,6 +116,5 @@ router.get("/profile", restrict.user, async function (req, res) {
   }
   res.json(false);
 }); */
-
 
 module.exports = router;

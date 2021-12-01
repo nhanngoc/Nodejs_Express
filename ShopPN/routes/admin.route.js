@@ -43,7 +43,7 @@ router.post("/", async function (req, res) {
 router.post("/logoutadmin", restrict.admin, function (req, res) {
   req.session.isAuthenticated = false;
   req.session.authUser = null;
-  res.redirect(req.headers.referer);
+  res.redirect("/admin");
 });
 
 //
@@ -83,10 +83,11 @@ router.get("/products/edit/:id",restrict.admin, async function (req, res) {
   const rows = await Model.single(id);
   if (rows.length === 0) res.send("lõi la lõi");
   const product = rows[0];
-  res.render("vwadmin/products/edit", {layout: "admin", product });
+  if (!req.files)
+   return res.render("vwadmin/products/edit", {layout: "admin", product });
 });
 //cap nhat
-router.post("/products/update", async function (req, res) {
+router.post("/products/update",restrict.admin, async function (req, res) {
   await Model.patch(req.body);
   res.redirect("/admin/products/list");
 });

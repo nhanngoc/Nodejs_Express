@@ -3,18 +3,7 @@
 
 <head>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-    <!-- ccss Styles -->
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/public/ccss/style.css" type="text/css">
+    
 </head>
 
 <body>
@@ -22,94 +11,104 @@
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="shoping__product">Products</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="img/cart/cart-1.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $55.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
+            {{#if products }}
+            
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shoping__cart__table">
+                            <div class="section-title product__discount__title">
+                                <h2>Giỏ Hàng</h2>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="shoping__product">Tên sp</th>
+                                        <th>Giá</th>
+                                        <th>Số Lượng</th>
+                                        <th>Tổng giá</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each products }}
+                                    <tr>
+                                        <td class="shoping__cart__item">
+                                            <a href="products/detail/{{this.item.MaSP}}">
+                                            <img src="/public/images/{{this.item.Anh}}" alt="{{this.item.TenSP}}"
+                                            style=" max-width: 75px; height: auto;">
+                                            </a>
+                                            <h5>{{this.item.TenSP}}</h5>
+                                            <h6>{{this.item.sp_id}}</h6>
+                                        </td>
+                                        <td class="shoping__cart__price">
+                                            {{format_number Gia}} đ
+                                        </td>
+                                        <td class="shoping__cart__quantity">
+                                            <div class="quantity">
+                                                <div class="pro-qty">
+                                                    <input type="text" value="{{ this.quantity }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $110.00
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
-                             
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="shoping__continue">
-                        <div class="shoping__discount">
-                            <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
-                            </form>
+                                        </td>
+                                        <td class="shoping__cart__total">
+                                            {{format_number this.Gia }} đ
+                                        </td>
+                                        <td class="shoping__cart__item__close">
+                                        <div class="col-xs-2 text-right">
+                                                <a href="/remove/{{this.item.MaSP}}"> 
+                                                <i class="fas fa-times"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                    
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="shoping__checkout">
-                        <h5>Cart Total</h5>
-                        <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
-                        </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shoping__cart__btns">
+                            <a href="/" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
+                            <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                                Cập nhật giỏ hàng</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="shoping__continue">
+                            <div class="shoping__discount">
+                                <h5>Discount Codes</h5>
+                                <form action="#">
+                                    <input type="text" placeholder="Enter your coupon code">
+                                    <button type="submit" class="site-btn">APPLY COUPON</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="shoping__checkout">
+                            <h5>Cart Total</h5>
+                            <ul>
+                                {{!-- <li>Subtotal <span>$454.98</span></li> --}}
+                                <li>Total <span>{{format_number toPri }} đ</span></li>
+                            </ul>
+                            <a href="/checkout" class="primary-btn">Thanh toán</a>
+                        </div>
                     </div>
                 </div>
+            {{else}}
+            <div class="card-body">
+                <p class="card-text">Bạn chưa mua hàng</p>
             </div>
+            {{/if}}
         </div>
     </section>
     <!-- Shoping Cart Section End -->
 
   
-    <!-- Footer Section End -->
-    <script src="/public/js/jquery-3.3.1.min.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="/public/js/jquery.nice-select.min.js"></script>
-    <script src="/public/js/jquery-ui.min.js"></script>
-    <script src="/public/js/jquery.slicknav.js"></script>
-    <script src="/public/js/mixitup.min.js"></script>
-    <script src="/public/js/owl.carousel.min.js"></script>
-    <script src="/public/js/main.js"></script>
-    <!-- Js Plugins -->
+   
    
 
 

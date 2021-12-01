@@ -1,9 +1,54 @@
-<div class="card">
-    <div class="card-header">
-        <h4>profile</h4>
-    </div>
-    <div class="card-body">
-        <p>Sinh vien thucj hien</p>
 
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <h4>Profile</h4>
+        <a class="btn btn-outline-success" href="/admin/categories/add" role="button">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            
+        </a>
+    </div>
+    {{#if this.empty}}
+    <div class="card-body">
+        <p class="card-text">Không có dữ liệu</p>
+    </div>
+    {{else}}
+    <table class="table table-hover">
+         <div class="form-group">
+                
+                <input type="text" class="form-control" id="txtCatID" name="CatID" readonly
+                    value="{{this.user.MaKH}}">
+            </div>
+        <thead>
+            <tr>
+                <th scope="col">IDd</th>
+                <th scope="col">Ten</th>
+                <th scope="col">username</th>
+                <th scope="col">email</th>
+                <th scope="col">&nbsp;</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+
+                <th scope="row">{{this.user.MaKH}}</th>
+                <td>{{this.user.tenkh}}</td>
+                <td>{{this.user.username}}</td>
+                <td>{{this.user.email}}</td>
+                
+                <td class="text-right">
+                    <a name="" id="" class="btn btn-primary btn-sm" href="#" role="button" title="edit Category">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+  
+        </tbody>
+    </table>
+    {{/if}}
+    <div class="card-footer text-muted">
+        Footer
     </div>
 </div>

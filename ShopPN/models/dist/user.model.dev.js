@@ -10,11 +10,15 @@ module.exports = {
   all: function all() {
     return db.load("select *from ".concat(tbl_Users));
   },
-  //them username
-  add: function add(entity) {
-    return db.add_user(tbl_Users, entity);
+  //
+  all_id: function all_id(MaKH) {
+    return db.load("select *from ".concat(tbl_Users, " where MaKH =").concat(MaKH));
   },
-  //dung await phair dung async
+  //them username khách hàng
+  add_kh: function add_kh(entity) {
+    return db.insert_kh(tbl_Users, entity);
+  },
+  //dung await phair dung async 
   singleUserName: function singleUserName(username) {
     var rows;
     return regeneratorRuntime.async(function singleUserName$(_context) {
@@ -54,13 +58,13 @@ module.exports = {
       MaKH: entity.MaKH
     };
     delete entity.MaKH;
-    return db.patch(tbl_Users, entity, condition);
+    return db.update_kh(tbl_Users, entity, condition);
   },
   //xoa
   del: function del(MaKH) {
     var condition = {
       MaKH: MaKH
     };
-    return db.del(tbl_Users, condition);
+    return db.delete_kh(tbl_Users, condition);
   }
 };

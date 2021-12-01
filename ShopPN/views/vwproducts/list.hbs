@@ -4,14 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{!-- css products --}}
     <link rel="stylesheet" href="/public/stylesheets/style.products.css">
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
-    <!-- <link rel="stylesheet" href="http://jrain.oscitas.netdna-cdn.com/tutorial/css/fontawesome-all.min.css"> -->
     <link rel="stylesheet" href="https://e6t7a8v2.stackpathcdn.com/tutorial/css/fontawesome-all.min.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="../../css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="../../css/common-1.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+
     <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">
 </head>
 
@@ -39,7 +34,7 @@
         <section class="main-bottom-vertical">
                 <div class="row ">
                     {{#each this.sanpham}}
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6" style="margin-bottom: 50px;">
                         <div class="product-grid">
                             <div class="product-image">
                                 <a href="#" class="image">
@@ -53,17 +48,16 @@
                                 </ul>
                             </div>
                             <div class="product-content">
-                                <ul class="rating">
+                                {{!-- <ul class="rating">
                                     <li class="fas fa-star"></li>
                                     <li class="fas fa-star"></li>
                                     <li class="fas fa-star"></li>
                                     <li class="far fa-star"></li>
                                     <li class="far fa-star"></li>
-                                </ul>
+                                </ul> --}}
                                 <h3 class="title"><a href="#">{{TenSP}}</a></h3>
-                                <div class="price"><span>{{Gia}}</span> ${{format_number Gia}}</div>
-                                <a class="add-to-cart" href="/products/detail/{{MaSP}}">add to cart</a>
-                            </div>
+                                <div class="price"><span>{{Gia}} đ</span> {{format_number Gia}} đ</div>
+                                <a class="add-to-cart" href="/cart/{{MaSP}}" role="button">add to cart</a>                            </div>
                         </div>
                     </div>
                     {{/each}}

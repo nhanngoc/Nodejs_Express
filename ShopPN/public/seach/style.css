@@ -388,7 +388,7 @@ button {
 
 .main {
     flex: 1;
-    margin: 0px 30px;
+    margin: 0px 300px;
     display: inline-block;
     order: 2;
 }
@@ -419,6 +419,7 @@ button {
     display: flex;
     text-align: right;
     float: right;
+    
 }
 
 .login_menu ul {
@@ -443,8 +444,20 @@ button {
     color: #7fad39;
 }
 
-.padding_10 {
-    padding-left: 10px;
+.login_menu li a span {
+    font-size: 10px;
+    line-height: 13px;
+    text-align: center;
+    font-weight: 700;
+    display: inline-block;
+    height: 13px;
+    width: 13px;
+    background: #fa0404;
+    border-radius: 50%;
+    /* position: absolute; */
+  
+    top: 0;
+    z-index: 99999;
 }
 
 

@@ -9,7 +9,7 @@ module.exports = function (app) {
       resave: false,
       saveUninitialized: true,
       cookie: {
-        //secure: true
+        maxAge: 180 * 60 * 1000 //set thời gian
       },
     })
   );

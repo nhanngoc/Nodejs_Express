@@ -10,7 +10,7 @@ exports.index = async function(req, res){
       var ten= post.TenSP;
       var sl= post.SoLuong;
       var gia= post.Gia;
-      var size= post.Size;
+      /* var size= post.Size; */
       var mota= post.MoTa;
       var ngaynhap=post.NgayNhap
 	  if (!req.files)
@@ -21,16 +21,16 @@ exports.index = async function(req, res){
                file.mv('public/images/'+file.name, function(err) {
                   if (err)
                      return res.status(500).send(err);
-                        var sql = "INSERT INTO `sanpham`(`MaLoai`,`TenSP`,`Anh`,`SoLuong`,`Gia`,`Size`,`MoTa`,`NgayNhap`) VALUES ('" + maloai + "','" + ten + "','" + img_name + "','" + sl + "','" + gia + "','" + size + "','" + mota + "','" + ngaynhap + "')";
+                        var sql = "INSERT INTO `sanpham`(`MaLoai`,`TenSP`,`Anh`,`SoLuong`,`Gia`,`MoTa`,`NgayNhap`) VALUES ('" + maloai + "','" + ten + "','" + img_name + "','" + sl + "','" + gia + "','" + mota + "','" + ngaynhap + "')";
    
                         var query = db.query(sql, function(err, result) {
                            res.render("vwadmin/products/add",{layout: "admin"});
                         });
                      });
-            } else {
-               message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
-               res.render('vwadmin/products/add.hbs',{message: message});
-            }
+         } else {
+            message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
+            res.render('vwadmin/products/add.hbs',{message: message});
+         }
    } else {
       const list = await Model.all_category();
       res.render("vwadmin/products/add",{layout: "admin",loaisp: list,});

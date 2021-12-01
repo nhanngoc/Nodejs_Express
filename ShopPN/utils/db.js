@@ -6,8 +6,10 @@ const tbl_l = "loaisp";
 const tbl_tk = "tai_khoan";
 const tbl_nv = "nhanvien";
 const tbl_kh = "khachhang";
+const tbl_order = "hoadon";
+
 const pool = mysql.createPool(config.mysql);
-const connection = mysql.createConnection(config.mysql);
+
 module.exports = {
   load: function (sql) {
     return new Promise(function (resolve, reject) {
@@ -168,6 +170,18 @@ module.exports = {
     });
   },
 
+  //them order hoadon//////////////////////////
+  insert_order: function (table, entity) {
+    return new Promise(function (resolve, reject) {
+      const sql = `insert into ${tbl_order} set ?`;
+      pool.query(sql, entity, function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
+    });
+  },
 
    
 

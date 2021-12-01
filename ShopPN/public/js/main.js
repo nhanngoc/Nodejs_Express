@@ -66,7 +66,7 @@
     $(".categories__slider").owlCarousel({
         loop: true,
         margin: 0,
-        items: 4,
+        items: 1,
         dots: false,
         nav: true,
         navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
@@ -77,7 +77,7 @@
         autoplay: true,
         responsive: {
 
-            0: {
+          /*   0: {
                 items: 1,
             },
 
@@ -87,10 +87,10 @@
 
             768: {
                 items: 3,
-            },
+            }, */
 
             992: {
-                items: 4,
+                items: 1,
             }
         }
     });
@@ -121,14 +121,29 @@
     $(".product__discount__slider").owlCarousel({
         loop: true,
         margin: 0,
-        items: 3,
+        items: 4,
         dots: true,
         smartSpeed: 1200,
         autoHeight: false,
         autoplay: true,
         responsive: {
+            0: {
+                items: 1,
+            },
 
-            320: {
+            480: {
+                items: 2,
+            },
+
+            768: {
+                items: 3,
+            },
+
+            992: {
+                items: 4,
+            }
+
+           /*  320: {
                 items: 1,
             },
 
@@ -142,7 +157,7 @@
 
             992: {
                 items: 3,
-            }
+            } */
         }
     });
 

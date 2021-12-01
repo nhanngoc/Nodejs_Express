@@ -4,11 +4,17 @@ var express = require("express");
 
 var moment = require("moment");
 
+var Joi = require("joi");
+
 var bcrypt = require("bcryptjs");
 
 var userModel = require("../models/user.model");
 
-var config = require("../config/default.json"); //register
+var config = require("../config/default.json");
+
+var Order = require('../models/order.model');
+
+var Cart = require('../models/cart'); //register
 //const {validationResult} = require('express-validator');
 
 
@@ -85,7 +91,7 @@ router.post("/login", function _callee2(req, res) {
   });
 }); //logout
 
-router.post("/logout", restrict, function (req, res) {
+router.post("/logout", restrict.user, function (req, res) {
   req.session.isAuthenticated = false;
   req.session.authUser = null;
   res.redirect(req.headers.referer);
@@ -104,25 +110,39 @@ router.get("/register", function _callee3(req, res) {
       }
     }
   });
-}); //response request
+}); //register, response request
 
-router.post("/register", function _callee4(req, res) {
-  var _registerValidator, error, salt, password_hash, entity;
+router.post("/register", function _callee4(req, res, next) {
+  var _registerValidator, error, value, user, salt, password_hash, entity;
 
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          _registerValidator = registerValidator(req.body), error = _registerValidator.error;
+          _registerValidator = registerValidator(req.body), error = _registerValidator.error, value = _registerValidator.value; // validate
 
-          if (!error) {
-            _context4.next = 3;
+          _context4.next = 3;
+          return regeneratorRuntime.awrap(userModel.singleUserName(req.body.username));
+
+        case 3:
+          user = _context4.sent;
+
+          if (!(user === +req.params.username)) {
+            _context4.next = 6;
             break;
           }
 
-          return _context4.abrupt("return", res.status(422).send(error.details[0].message));
+          throw new 'Username "'() + params.username + '" is already taken';
 
-        case 3:
+        case 6:
+          if (!error) {
+            _context4.next = 8;
+            break;
+          }
+
+          throw res.status(422).send(error.details[0].message);
+
+        case 8:
           //const checkEmailExist = await userModel.findOne({ email: req.body.email });
           //if (checkEmailExist) return res.status(422).send('Email is exist');
           salt = bcrypt.genSaltSync(10);
@@ -131,41 +151,60 @@ router.post("/register", function _callee4(req, res) {
             tenkh: req.body.tenkh,
             username: req.body.username,
             password: password_hash,
-            email: req.body.email // gioitinh: req.body.gioitinh,
-            // diachi: req.body.diachi,
-            // sdt: req.body.sdt,
-
+            email: req.body.email,
+            // gioitinh: req.body.gioitinh,
+            diachi: req.body.diachi,
+            sdt: req.body.sdt
           };
-          _context4.prev = 6;
-          _context4.next = 9;
-          return regeneratorRuntime.awrap(userModel.add(entity));
+          _context4.prev = 11;
+          _context4.next = 14;
+          return regeneratorRuntime.awrap(userModel.add_kh(entity));
 
-        case 9:
+        case 14:
           //đẩy database
           res.render("vwaccount/register");
-          _context4.next = 15;
+          _context4.next = 20;
           break;
 
-        case 12:
-          _context4.prev = 12;
-          _context4.t0 = _context4["catch"](6);
+        case 17:
+          _context4.prev = 17;
+          _context4.t0 = _context4["catch"](11);
           res.status(400).send(_context4.t0);
 
-        case 15:
+        case 20:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[6, 12]]);
-}); //login
+  }, null, null, [[11, 17]]);
+}); //login profile
 
-router.get("/profile", restrict, function _callee5(req, res) {
+/* router.get("/profile", restrict.user, async function (req, res) {
+  console.log(req.session.authUser);
+  res.render("vwaccount/profile");
+}); */
+//login profile
+
+router.get("/profile", restrict.user, function _callee5(req, res) {
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          console.log(req.session.authUser);
-          res.render("vwaccount/profile");
+          user = req.session.authUser;
+          res.render("vwaccount/profile", {
+            user: user
+          });
+          /* Order.all(console.log("aaaaaaaaaaa",{ user: req.session.authUser}), function (err, orders) {
+              if (err) {
+                return res.write("Error!");
+              } 
+              let cart;
+              orders.forEach(function (order) {
+                cart = new Cart(order.cart);
+                order.items = cart.getItems();
+              });
+              res.render("vwaccount/profile", { orders: orders });
+            }); */
 
         case 2:
         case "end":

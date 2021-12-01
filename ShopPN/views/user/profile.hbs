@@ -1,0 +1,38 @@
+<div class="jumbotron">
+  <div class="header text-center">
+    <h1>User Profile</h1>
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 card">
+        <div class="text-center">
+          <h2>My Orders</h2>
+        </div>
+        {{#each orders }}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <ul class="list-group">
+                        {{#each this.items }}
+                            <li class="list-group-item order-items">
+                                <span class="badge">{{ this.Gia }}</span>
+                                {{ this.item.title }} | {{ this.quantity }} Units
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="panel-footer items-panel">
+                    <strong>Total Price: ${{ this.cart.totalPrice }}</strong>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+<script>
+    // Use as background image on main page
+  let showcase = document.querySelector('body');
+  showcase.style.background = "url(/images/background4.jpeg)";
+  showcase.style.backgroundSize = "cover";
+  showcase.style.backgroundPosition = "center";
+  showcase.style.backgroundRepeat = "repeat";
+  showcase.style.height = "100%";
+</script>
