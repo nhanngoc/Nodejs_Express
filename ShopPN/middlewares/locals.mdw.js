@@ -9,6 +9,7 @@ module.exports = function (app) {
     res.locals.lcAuthUser = req.session.authUser;
     next();
   });
+
   //lấy ra loại danh muc bé gái
   const categoryModel = require("../models/category.model");
   app.use(async function (req, res, next) {
@@ -17,7 +18,6 @@ module.exports = function (app) {
     next();
   });
   //lấy ra danh muc bé trai
- 
   app.use(async function (req, res, next) {
     const rows = await categoryModel.danhmuc1();
     res.locals.lcCategories1 = rows;
@@ -29,6 +29,12 @@ module.exports = function (app) {
     res.locals.lcCategories2 = rows;
     next();
   });
- //lấy ra color size
-
+  
+ //lấy ra size
+ const sizeModel = require("../models/product.model");
+ app.use(async function (req, res, next) {
+   const rows = await sizeModel.size();
+   res.locals.sizes = rows;
+   next();
+ });
 };

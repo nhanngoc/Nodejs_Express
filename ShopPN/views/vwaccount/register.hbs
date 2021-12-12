@@ -1,148 +1,97 @@
 <head>
- 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"
-  />
- 
-</head>
-{{#section "js"}}
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
-  >
-  </script>
 
-
-  {{!  
-      $('#frmRegister').on('submit',function(e){
-           // alert('submit called');
-            e.preventDefault();
-            if(validate())
-            $('#frmRegister').off('submit').submit();
-            validate();
-        })
-        function validate(){
-            // ...cac lenh validate khac
-            const user=$('#txtUsername').val();
-            $.getJSON(`/account/is-available?user=${user}`, function(data){
-                if(data === true){
-                    $('#frmRegister').off('submit').submit();
-                }else{
-                    alert('not available';)
-                }
-            });
-           // return true;
-        }
-     }}
-{{/section}}
-<!--     $('#txtDob').datetimepicker({
-            format: 'd/m/Y',
-            timepicker: false,//ko can gio
-            mask:true,//hien thi ô gõ
-        })
-        
-    -->
-<div class="card">
-  <div class="card-header">
-    <h4>Register</h4>
-  </div>
-  
-  <div class="card-body">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+ * {box-sizing: border-box}
+ body{
+   font-family: 'Noto Sans JP', sans-serif;
+ }
+ h1, label{
+   color:#444;
    
+ }
+ h2{
+   
+ }
+   input[type=text], input[type=password] {
+   width: 100%;
+   padding: 15px;
+   margin: 5px 0 22px 0;
+   display: inline-block;
+   border: none;
+   width:100%;
+   resize: vertical;
+   padding:15px;
+   border-radius:15px;
+   border:0;
+   box-shadow:4px 4px 10px rgba(0,0,0,0.2);
+ }
+input[type=text]:focus, input[type=password]:focus {
+   outline: none;
+ }
+hr {
+   border: 1px solid #f1f1f1;
+   margin-bottom: 25px;
+ }
+button {
+   background-color: #ff004f;
+   color: white;
+   padding: 14px 20px;
+   margin: 8px 0;
+   border: none;
+   cursor: pointer;
+   width: 100%;
+   opacity: 0.9;
+ }
+button:hover {
+   opacity:1;
+ }
+.cancelbtn {
+   padding: 14px 20px;
+   background-color: #f44336;
+ }
+.signupbtn {
+   float: left;
+   font-weight: 700;
+   font-size: 20px;
+   width: 100%;
+   border-radius:15px;
+   border:0;
+   box-shadow:4px 4px 10px rgba(0,0,0,0.2);
+ }
+.container {
+   padding: 16px;
+ }
+.clearfix::after {
+   content: "";
+   clear: both;
+   display: table;
+ }
+
+  </style>
+</head>
+
+<div class="container">
+<form action="" >
+
+   <div class="container">
+       <div class="section-title product__discount__title">
+          <h2>Đăng ký tài khoản</h2>
+        </div>
+
     
-    <form method="POST" action="">
-      <div class="form-group">
-        <label for="txtName">Tên đăng ký</label>
-        <input
-          type="text" class="form-control" id="txtName" name="tenkh" placeholder="VD: Nguyen Van A *"
-          required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$"title="Tên đăng ký không hợp lệ!"
-        />
-      </div>
-      <div class="form-group">
-        <label for="txtUsername">Tên đăng nhập</label>
-         <input type="text" class="form-control" id="txtUsername"  placeholder="VD: NguyenVanA *"
-          autofocus name="username"  pattern="^[A-Za-z0-9@._-]{6,20}$"	title="Tên đăng nhập không hợp lệ!"
-          />
-      </div>
-      <div class="form-group">
-        <label for="txtPassword">Mật Khẩu</label>
-        <input
-          type="password"
-          class="form-control"
-          id="txtPassword"
-          name="password" required pattern="^[A-Za-z0-9!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{8,}$"title="Mật khẩu phải viết liền không dấu"
-          placeholder="Độ dài ít nhất 8 kí tự *"
-        />
-      </div>
-      <div class="form-group">
-        <label for="txtConfirm">Nhập lại mật khẩu</label>
-        <input
-          type="password"
-          class="form-control"
-          id="txtConfirm"
-          Confirm="confirm"
-          placeholder="Độ dài ít nhất 8 kí tự *"
-        />
-      </div>
-       <div class="form-group">
-        <label for="txtSdt">Số Điện Thoại</label>
-        <input type="text" class="form-control" id="txtSdt" name="sdt" placeholder="VD: 0123456789 *"
-         pattern="^[0-9]{10}$"title="Số điện thoại không hợp lệ!"
-        />
-      </div> 
-      <div class="form-group">
-        <label for="txtEmail">Email xác thực </label>
-        <input type="text" class="form-control" id="txtEmail" name="email" placeholder="VD: shoppn@gmai.com *"
-         pattern="^[a-z0-9]+@[a-z0-9.]{6,20}$"title="Email không hợp lệ!"
-        />
-      </div>     
-       <button type="submit" class="btn btn-outline-info" onclick="kiemTraForm()">Đăng ký</button>
-    </form>
-  </div>
-  <div class="card-footer text-muted">
-    Footer
-  </div>
-</div>
-<script type="text/javascript">
-function kiemTraForm() {
-   var name = document.getElementById("txtName").value
-   var username = document.getElementById("txtUsername").value
-   var password = document.getElementById("txtPassword").value
-   var re_password = document.getElementById("txtConfirm").value
-    var sdt = document.getElementById("txtSdt").value
-    var email = document.getElementById("txtEmail").value
-   if(name==""){
-   alert("Chưa nhập Tên đăng kí, mời bạn nhập lại!")
-    return false
-    }
-   if(username==""){
-   alert("Chưa nhập Tên đăng nhập, mời bạn nhập lại!")
-    return false
-    }
-    if(password==""){
-    alert('Chưa nhập Mật khẩu, mời bạn nhập lại!')
-    return false
-    }
-   if(password!= re_password){
-      alert('Mật khẩu chưa khớp, mời bạn nhập lại!')
-      return false
-   }
-    if(sdt==""){
-      alert('Chưa nhập Số điện thoại, mời bạn nhập lại!')
-      return false
-   }
-    if(email==""){
-      alert('Chưa nhập Email, mời bạn nhập lại!')
-      return false
-   }
-   return true
-}
-</script>
-<script type="text/javascript">
-var input_username = document.getElementById("txtUsername")
-input_username.addEventListener('keyup',function() {
-   if(input_username.value.length>20){
-       alert("Tên đăng nhập quá dài, hơn 20 ký tự")
-    }
-});
-</script>
+    <label for="email"><b>Email</b></label>
+     <input type="text" placeholder="Nhập Email" name="email" required>
+    <label for="psw"><b>Mật Khẩu</b></label>
+     <input type="password" placeholder="Nhập Mật Khẩu" name="psw" required>
+    <label for="psw-repeat"><b>Nhập Lại Mật Khẩu</b></label>
+     <input type="password" placeholder="Nhập Lại Mật Khẩu" name="psw-repeat" required>
+    <label>
+       <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Nhớ Đăng Nhập
+     </label>
+    <div class="clearfix">
+       <button type="submit" class="signupbtn">Đăng ký</button>
+     </div>
+   </div>
+ </form>
+ </div>

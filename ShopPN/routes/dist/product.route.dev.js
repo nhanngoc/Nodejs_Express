@@ -107,7 +107,7 @@ router.get("/list", function _callee(req, res) {
 }); //detail
 
 router.get("/detail/:MaSP", function _callee2(req, res) {
-  var id, listct, lists, color;
+  var id, product, lists, color, size, distinct_size, detail_anh, page_items, i, cc, j, itemi;
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -117,28 +117,66 @@ router.get("/detail/:MaSP", function _callee2(req, res) {
           return regeneratorRuntime.awrap(productModel.detail_ct(id));
 
         case 3:
-          listct = _context2.sent;
+          product = _context2.sent;
           _context2.next = 6;
           return regeneratorRuntime.awrap(productModel.detail(id));
 
         case 6:
           lists = _context2.sent;
           _context2.next = 9;
-          return regeneratorRuntime.awrap(productModel.detail_color(id));
+          return regeneratorRuntime.awrap(productModel.distinct_color(id));
 
         case 9:
           color = _context2.sent;
-          //hien thi san pham
+          _context2.next = 12;
+          return regeneratorRuntime.awrap(productModel.detail_size(id));
+
+        case 12:
+          size = _context2.sent;
+          _context2.next = 15;
+          return regeneratorRuntime.awrap(productModel.distinct_size(id));
+
+        case 15:
+          distinct_size = _context2.sent;
+          _context2.next = 18;
+          return regeneratorRuntime.awrap(productModel.detail_anh(id));
+
+        case 18:
+          detail_anh = _context2.sent;
+          page_items = [];
+
+          for (i = 0; i < color.length; i++) {
+            if (color[i].color_id >= 0) {
+              cc = [];
+
+              for (j = 0; j < size.length; j++) {
+                if (color[i].color_id == size[j].color_id) {
+                  cc.push(size[j]);
+                }
+              }
+
+              itemi = {
+                code: color[i],
+
+                /* isActive: color[i].color_id===cc.color_id, */
+                items: cc
+              };
+              console.log("itemi", itemi);
+              page_items.push(itemi); // Thêm phần tử vào cuối mảng mới
+            }
+          }
+
+          console.log("iiiiiidetail2222", page_items);
           res.render("vwproducts/detail", {
+            layout: false,
+            detail_anh: detail_anh,
             sanpham: lists,
+            page_items: page_items,
             empty: lists.length === 0,
-            sanphamct: listct,
-            emptyct: listct.length === 0,
-            color: color,
-            emptycl: color.length === 0
+            sizes: distinct_size
           });
 
-        case 11:
+        case 23:
         case "end":
           return _context2.stop();
       }
@@ -153,13 +191,6 @@ router.get("/danhmuc0/:MaLoai", function _callee3(req, res) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          /* 
-          const list = await productModel.allByCat(req.params.maLoai);
-          //hien thi san pham
-          res.render("vwproducts/byCat", {
-            sanpham: list,
-            empty: list.length === 0,
-          }); */
           _iteratorNormalCompletion2 = true;
           _didIteratorError2 = false;
           _iteratorError2 = undefined;
@@ -437,21 +468,4 @@ router.get("/danhmuc2/:MaLoai", function _callee5(req, res) {
     }
   }, null, null, [[3, 7, 11, 19], [12,, 14, 18]]);
 });
-/* router.get("/edit/:id", async function (req, res) {
-  const id = +req.params.id || -1;
-  const rows = await productModel.single(id);
-  if (rows.length === 0) res.send("lõi la lõi");
-  const product = rows[0];
-  res.render("vwproducts/edit", { product });
-});
-
-router.post("/del", async function (req, res) {
-  await productModel.del(req.body.proID);
-  res.redirect("/admin/products");
-});
-router.post("/update", async function (req, res) {
-  await productModel.patch(req.body);
-  res.redirect("/admin/products");
-}); */
-
 module.exports = router;

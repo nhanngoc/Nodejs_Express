@@ -14,7 +14,7 @@ const restrict = require("../middlewares/auth.mdw");
 const router = express.Router();
 
 router.get("/login", async function (req, res) {
-  res.render("vwaccount/login", { layout: false }); //tat layout trang chu
+  res.render("vwaccount/login"/* , { layout: false } */); //tat layout trang chu
 });
 router.post("/login", async function (req, res) {
   const user = await userModel.singleUserName(req.body.username);
@@ -35,8 +35,8 @@ router.post("/login", async function (req, res) {
   delete user.password;
   req.session.isAuthenticated = true;
   req.session.authUser = user;
-  const url = req.query.retUrl || "/";
-  res.redirect(url);
+  //const url = req.query.retUrl || "/";
+  res.redirect(req.headers.referer);
 });
 
 //logout
@@ -74,12 +74,11 @@ router.post("/register", async function (req, res, next) {
     username: req.body.username,
     password: password_hash,
     email: req.body.email,
-    // gioitinh: req.body.gioitinh,
     diachi: req.body.diachi,
     sdt: req.body.sdt,
   };
   try {
-    await userModel.add_kh(entity); //đẩy database
+    await userModel.add_kh(entity); // luu database
     res.render("vwaccount/register");
   } catch (err) {
     res.status(400).send(err);

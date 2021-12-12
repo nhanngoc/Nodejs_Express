@@ -8,6 +8,7 @@ const tbl_nhanvien = "nhanvien";
 const data = [];
 
 module.exports = {
+  ////Start sản phẩm////
   // lấy danh sách sản phẩm
   all_products: function () {
     return db.load(`select *from ${tbl_sp}`);
@@ -39,29 +40,29 @@ module.exports = {
     };
     return db.delete_pro(tbl_sp, condition);
   },
+  ////End sản phẩm////
 
-
-  /////////////////////
-   //lấy danh sách loại
+  //// Start loại ////
+  //lấy danh sách loại
   all_category: function () {
     return db.load(`select *from ${tbl_loai}`);
   },
 
-  /////////////////////
-   // lấy danh sách khách hàng
-   all_kh: function () {
+  //// End loại ////
+
+  //// Start khách hàng ////
+  // lấy danh sách khách hàng
+  all_kh: function () {
     return db.load(`select *from ${tbl_khachhang}`);
   },
+  //// End khách hàng ////
 
-
-
-
-
-
-  //////////////////////////////////
+  //// Start Users////
   // lấy danh sách users từ table
   all_tk: function () {
-    return db.load(`SELECT nv.tennv, tk.username,tk.email,tk.MaQuyen FROM ${tbl_nhanvien} nv LEFT JOIN ${tbl_tk} tk ON nv.MaNV=tk.MaNV`);
+    return db.load(
+      `SELECT nv.tennv, tk.username,tk.email,tk.MaQuyen FROM ${tbl_nhanvien} nv LEFT JOIN ${tbl_tk} tk ON nv.MaNV=tk.MaNV`
+    );
   },
   //them username
   add_user: function (entity) {
@@ -77,6 +78,5 @@ module.exports = {
     }
     return rows[0];
   },
-  
-  
+  //// End Users////
 };

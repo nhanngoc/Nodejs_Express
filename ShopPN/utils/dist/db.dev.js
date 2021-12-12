@@ -10,7 +10,8 @@ var tbl_l = "loaisp";
 var tbl_tk = "tai_khoan";
 var tbl_nv = "nhanvien";
 var tbl_kh = "khachhang";
-var tbl_order = "hoadon";
+var tbl_hoadon = "hoadon";
+var tbl_chitiethd = "chitiethd";
 var pool = mysql.createPool(config.mysql);
 module.exports = {
   load: function load(sql) {
@@ -180,11 +181,24 @@ module.exports = {
       });
     });
   },
-  //them order hoadon//////////////////////////
-  insert_order: function insert_order(table, entity) {
+  //them hoadon  thông tin giao hàng//////////////////////////
+  insert_hoadon: function insert_hoadon(table, entity) {
     return new Promise(function (resolve, reject) {
-      var sql = "insert into ".concat(tbl_order, " set ?");
+      var sql = "insert into ".concat(tbl_hoadon, " set ?");
       pool.query(sql, entity, function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
+  //them chitiethd 
+  insert_chitiethd: function insert_chitiethd(entity) {
+    return new Promise(function (resolve, reject) {
+      var sql = "insert into ".concat(tbl_chitiethd, "(mahd, masp, tensp, gia, soluong) VALUES ?");
+      pool.query(sql, [entity], function (error, results) {
         if (error) {
           return reject(error);
         }

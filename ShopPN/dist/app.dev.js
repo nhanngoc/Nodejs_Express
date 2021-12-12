@@ -114,6 +114,9 @@ app.get("/bb", function (req, res) {
 app.get("/check", function (req, res) {
   res.sendFile(__dirname + "/checkout.html");
 });
+app.get("/nn", function (req, res) {
+  res.sendFile(__dirname + "/ax.html");
+});
 app.use(function (req, res) {
   res.render("404", {
     layout: false

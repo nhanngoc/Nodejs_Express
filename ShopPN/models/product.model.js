@@ -6,8 +6,13 @@ module.exports = {
     return db.load(`select *from ${tbl_products}`);
   },
   //cart//////////////
-  single_cart: function (id) {
-    return db.load(`select *from ${tbl_products} where MaSP =${id}`);
+  single_cart: function (id, cl, si) {
+    return db.load(`
+    SELECT sp.*,colors.*,ct.* ,sizes.* 
+    FROM ((sanphamct ct INNER JOIN sanpham sp ON ct.masp = sp.MaSP) 
+    INNER JOIN colors ON ct.color_id = colors.color_id 
+    INNER JOIN sizes ON ct.size_id=sizes.size_id ) 
+    WHERE sp.MaSP = ${id} AND ct.color_id=${cl} AND ct.size_id=${si}`);
   },
   //cart//////////////
   single_carts: function (id) {
@@ -15,33 +20,49 @@ module.exports = {
     FROM sanphamct ct INNER JOIN sanpham sp ON ct.masp=sp.MaSP
     WHERE ct.sp_id=${id} `);
   },
-  single_cc:function(id){
-    return db.load(` `);
 
-  },
-
-  //detail
+  //detail start///
   detail_ct: function (MaSP, color, size) {
     return db.load(`SELECT sanpham.*,colors.*,sanphamct.* ,sizes.* 
     FROM ((sanphamct INNER JOIN sanpham ON sanphamct.masp = sanpham.MaSP) 
     INNER JOIN colors ON sanphamct.color_id = colors.color_id 
     INNER JOIN sizes ON sanphamct.size_id=sizes.size_id ) 
-    WHERE sanphamct.masp=${MaSP} `);  
+    WHERE sanphamct.masp=${MaSP} `);
+  },
+  detail_anh: function (id) {
+    return db.load(`SELECT ct.*,sp.*
+    FROM sanpham sp JOIN anhct ct ON sp.MaSP=ct.MaSP
+    WHERE ct.MaSP=${id}`);
   },
   //lọc color
-  detail_color: function (id) {
+  distinct_color: function (id) {
     return db.load(`SELECT DISTINCT colors.color_id,colors.color
     FROM ((sanphamct INNER JOIN sanpham ON sanphamct.masp = sanpham.MaSP) 
     INNER JOIN colors ON sanphamct.color_id = colors.color_id ) 
-    WHERE sanphamct.masp=${id}`);
+    WHERE sanpham.MaSP=${id}`);
   },
   //lọc size
+  distinct_size: function (id) {
+    return db.load(`SELECT DISTINCT sizes.* 
+    FROM ((sanphamct INNER JOIN sanpham ON sanphamct.masp = sanpham.MaSP) 
+    INNER JOIN sizes ON sanphamct.size_id = sizes.size_id ) 
+    WHERE sanpham.MaSP=${id}`);
+  },
+  //size
   detail_size: function (id) {
-    return db.load(`select *from ${tbl_products} where MaSP =${id}`);
+    return db.load(`SELECT sizes.*,sanphamct.color_id
+    FROM ((sanphamct INNER JOIN sanpham ON sanphamct.masp = sanpham.MaSP) 
+    INNER JOIN sizes ON sanphamct.size_id = sizes.size_id ) 
+    WHERE sanpham.MaSP=${id}`);
   },
   detail: function (id) {
     return db.load(`select *from ${tbl_products} where MaSP =${id}`);
   },
+  size: function () {
+    return db.load(`select * from sizes`);
+  },
+  //detail end///
+
   /*  allByCat: function (maloai) {
     return db.load(`select *from ${tbl_products} where maloai =${maloai}`);
   }, */
@@ -57,8 +78,6 @@ module.exports = {
       `select *from ${tbl_products} order by MaSP DESC limit ${limit} offset ${offset}`
     );
   },
- 
-
   //phan trang
   pageByHome: function (maloai, limit, offset) {
     return db.load(
@@ -70,7 +89,9 @@ module.exports = {
     return rows[0].total;
   },
   countByLoai: async function (MaLoai) {
-    const rows = await db.load(`select count(*) as total from ${tbl_products} where maloai =${MaLoai}`);
+    const rows = await db.load(
+      `select count(*) as total from ${tbl_products} where maloai =${MaLoai}`
+    );
     return rows[0].total;
   },
 };

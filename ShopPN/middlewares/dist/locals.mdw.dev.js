@@ -80,5 +80,29 @@ module.exports = function (app) {
         }
       }
     });
-  }); //lấy ra color size
+  }); //lấy ra size
+
+  var sizeModel = require("../models/product.model");
+
+  app.use(function _callee4(req, res, next) {
+    var rows;
+    return regeneratorRuntime.async(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return regeneratorRuntime.awrap(sizeModel.size());
+
+          case 2:
+            rows = _context4.sent;
+            res.locals.sizes = rows;
+            next();
+
+          case 5:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    });
+  });
 };

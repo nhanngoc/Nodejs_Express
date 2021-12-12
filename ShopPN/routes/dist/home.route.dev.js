@@ -4,6 +4,8 @@ function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only")
 
 var express = require("express");
 
+var db = require("../utils/db");
+
 var productModel = require("../models/product.model");
 
 var config = require("../config/default.json");
@@ -19,14 +21,6 @@ router.get("/", function _callee(req, res) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          /* 
-          const list = await productModel.allByCat(req.params.maLoai);
-          //hien thi san pham
-          res.render("vwproducts/byCat", {
-            sanpham: list,
-            empty: list.length === 0,
-          }); */
-          // const list = await productModel.allByCat(req.params.catId);
           //phan trang
           page = +req.query.page || 1;
           if (page < 0) page = (_readOnlyError("page"), 1);
@@ -53,12 +47,12 @@ router.get("/", function _callee(req, res) {
           }
 
           res.render("home", {
-            sanphammmm: list,
+            sanpham: list,
             empty: list.length === 0,
             page_items: page_items,
             prev_value: page - 1,
             next_value: page + 1
-          }); //console.log('sannnnnnnnn',{sp: list})
+          });
 
         case 13:
         case "end":
@@ -69,7 +63,7 @@ router.get("/", function _callee(req, res) {
 }); //tim kiem
 
 router.get("/search", function _callee2(req, res) {
-  var product, TenSP, data;
+  var product, tenSP, data;
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -79,56 +73,56 @@ router.get("/search", function _callee2(req, res) {
 
         case 2:
           product = _context2.sent;
-          TenSP = req.query.TenSP;
+          tenSP = req.query.TenSP;
           data = product.filter(function (item) {
-            return item.TenSP.toLowerCase().indexOf(TenSP.toLowerCase()) !== -1;
+            return item.TenSP.toLowerCase().indexOf(tenSP.toLowerCase()) !== -1;
           });
-          res.render("home", {
-            sanphammmm: data,
+          res.render("vwproducts/list", {
+            sanpham: data,
             empty: data.length === 0
           });
+          console.log("aaaaaaaaaaaaaaaaaaaaaaaaa", data);
 
-        case 6:
+        case 7:
         case "end":
           return _context2.stop();
       }
     }
   });
-}); //shopping cart// id của sanphamct sp_id
+}); //shopping cart//
 
-/* router.get("/cart/:id", async function (req, res) {
-  const productId = req.params.id;
-  const rows = await productModel.single_cart(productId);
-  const cart = new Cart(req.session.cart ? req.session.cart : {});
-  console.log("ddddddddddd1");
-  cart.add(rows[0], productId);
-  req.session.cart = cart;
-  console.log(req.session.cart);
-  res.redirect("/");
-}); */
-//shopping cart// id của sanphamct sp_id
-
-router.get("/cart/:id", function _callee3(req, res) {
-  var productId, rows, cart;
+router.post("/cart/:id", function _callee3(req, res) {
+  var productId, cl, si, rows, spct, product, cart;
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           productId = req.params.id;
-          console.log("ddddddddddd1", productId);
-          _context3.next = 4;
-          return regeneratorRuntime.awrap(productModel.single_cart(productId));
+          cl = req.query.color;
+          si = req.query.size;
+          _context3.next = 5;
+          return regeneratorRuntime.awrap(productModel.single_cart(productId, cl, si));
 
-        case 4:
+        case 5:
           rows = _context3.sent;
+          spct = rows[0].sp_id;
+          product = {
+            masp: rows[0].MaSP,
+            tensp: rows[0].TenSP,
+            anh: rows[0].Anh,
+            size: rows[0].size,
+            color: rows[0].color,
+            gia: rows[0].Gia,
+            sp_id: rows[0].sp_id
+          };
+          console.log("new product: ", product);
           cart = new Cart(req.session.cart ? req.session.cart : {});
-          console.log("ddddddddddd1", rows);
-          cart.add(rows[0], productId);
+          cart.add(product, spct);
           req.session.cart = cart;
           console.log(req.session.cart);
           res.redirect("/shop_cart");
 
-        case 11:
+        case 14:
         case "end":
           return _context3.stop();
       }
@@ -143,15 +137,17 @@ router.get("/shop_cart", function (req, res, next) {
   }
 
   var cart = new Cart(req.session.cart);
-  console.log(cart, "dddddddddddcartt");
+  console.log("newcart", cart);
   res.render("vwcart/shopcart", {
     products: cart.getItems(),
+    totalItems: cart.totalItems,
     toPri: cart.totalPrice
   });
-  console.log({
+  console.log("dddddddddddcartt", {
     products: cart.getItems(),
+    totalItems: cart.totalItems,
     toPri: cart.totalPrice
-  }, "dddddddddddcartt");
+  });
 });
 router.get("/remove/:id", function (req, res, next) {
   var productId = req.params.id;
@@ -161,99 +157,101 @@ router.get("/remove/:id", function (req, res, next) {
   res.redirect("/shop_cart");
 }); //checkout
 
-router.get("/checkout",
-/* isLogIn, */
-function (req, res, next) {
+router.get("/checkout", isLogIn, function (req, res, next) {
   if (!req.session.cart) {
     return res.redirect("/shop_cart");
   }
 
   var cart = new Cart(req.session.cart);
+  console.log("checkout:", cart);
   var errMsg = req.flash("error")[0];
   res.render("vwcart/checkout", {
-    total: cart.totalPrice,
+    products: cart.getItems(),
+    //
+    toPri: cart.totalPrice,
+    //
     errMsg: errMsg,
     noError: !errMsg,
-    layout: false
+    layout: false //
+
   });
+  console.log({
+    products: cart.getItems(),
+    toPri: cart.totalPrice
+  }, "checkout2");
 });
-router.post("/checkout",
-/* isLogIn, */
-function (req, res, next) {
-  if (!req.session.cart) {
-    return res.redirect("/shop_cart");
-  }
+router.post("/checkout", function _callee4(req, res, next) {
+  var cart, user, quan, tinh, entity, idhd, new_sp, arrlist, i, mahd, masp, tensp, gia, soluong, arr;
+  return regeneratorRuntime.async(function _callee4$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          if (req.session.cart) {
+            _context4.next = 2;
+            break;
+          }
 
-  var cart = new Cart(req.session.cart);
+          return _context4.abrupt("return", res.redirect("/shop_cart"));
 
-  var stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+        case 2:
+          cart = new Cart(req.session.cart);
+          user = req.session.authUser;
+          quan = req.body.quanhuyen;
+          tinh = req.body.tinh; //user lưu maKH, ngayHD, tenNN, diachi, ngaynhan, soluong:cart.totalItems, tongtien:cart.totalPrice vào hoadon
 
-  stripe.charges.create({
-    amount: cart.totalPrice * 100,
-    currency: "usd",
-    source: "tok_mastercard",
-    // obtained with Stripe.js
-    description: "Test Charge"
-  }, function (err, charge) {
-    if (err) {
-      req.flash("error", err.message);
-      return res.redirect("/checkout");
-    }
+          entity = {
+            makh: user.MaKH,
+            tennn: req.body.tennn,
+            sdt: req.body.sdt,
+            diachi: req.body.diachi + "," + quan + "," + tinh,
+            soluong: cart.totalItems,
+            tongtien: cart.totalPrice,
+            ghichu: req.body.ghichu
+          };
+          _context4.next = 9;
+          return regeneratorRuntime.awrap(ModelOrder.add_order(entity));
 
-    var order = {
-      user: req.session.authUser,
-      cart: cart,
-      address: req.body.address,
-      name: req.body.name,
-      paymentId: charge.id
-    };
-    ModelOrder.add_order(order, function (err, result) {
-      if (err) {
-        req.flash("error", err.message);
-        return res.redirect("/checkout");
+        case 9:
+          _context4.next = 11;
+          return regeneratorRuntime.awrap(ModelOrder.id_order());
+
+        case 11:
+          idhd = _context4.sent;
+          new_sp = cart.getItems();
+          arrlist = [];
+
+          for (i = 0; i < new_sp.length; i++) {
+            mahd = idhd;
+            masp = new_sp[i].masp;
+            tensp = new_sp[i].tensp;
+            gia = new_sp[i].gia;
+            soluong = new_sp[i].quantity;
+            arr = [mahd, masp, tensp, gia, soluong];
+            arrlist.push(arr);
+          }
+
+          _context4.next = 17;
+          return regeneratorRuntime.awrap(db.insert_chitiethd(arrlist));
+
+        case 17:
+          console.log("arrlist:", arrlist);
+          console.log("cart:", cart);
+          /* if (err) {
+            req.flash("error", err.message);
+            return res.redirect("/checkout");
+          }
+          req.flash("Thành công", "Sản phẩm đã mua thành công!");*/
+
+          req.session.cart = null;
+          res.redirect("/");
+
+        case 21:
+        case "end":
+          return _context4.stop();
       }
-
-      req.flash("Thành công", "Sản phẩm đã mua thành công!");
-      req.session.cart = null;
-      res.redirect("/");
-    });
+    }
   });
 });
-/* router.get("/", async function (req, res) {
-  for (const c of res.locals.lcCategories) {
-    if (c.MaLoai === +req.params.MaLoai) {
-      c.isActive = true;
-    }
-  }
-  // const list = await productModel.allByCat(req.params.catId);
-  //phan trang
-  const page = +req.query.page || 1;
-  if (page < 0) page = 1;
-  const offset = (page - 1) * config.pagination.limit;
-  const list = await productModel.pageByHome(
-    req.params.MaLoai,
-    config.pagination.limit,
-    offset
-  );
-  const total = await productModel.countByCat();
-  const nPages = Math.ceil(total / config.pagination.limit);
-  const page_items = [];
-  for (let i = 1; i <= nPages; i++) {
-    const item = {
-      value: i,
-      isActive: i === page,
-    };
-    page_items.push(item);
-  }
-  res.render("home", {
-    sanpham: list,
-    empty: list.length === 0,
-    page_items,
-    prev_value: page - 1,
-    next_value: page + 1,
-  });
-}); */
-
 module.exports = router;
 
 function isLogIn(req, res, next) {

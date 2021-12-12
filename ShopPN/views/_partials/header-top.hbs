@@ -75,8 +75,6 @@
                     </div>
                 </div>
             </div>
-      
-        
             <div class="row" style="background: #f5447b; height: 50px; margin-bottom: 50px;">
                 <div class="col-lg-2">
                      <div class="header__logo">
@@ -88,12 +86,13 @@
                         <ul>
                             <li class="active"><a href="/">Trang chủ</a></li>
                             <li><a href="/products/list">Sản phẩm</a></li>
-                             <li><a href="#">Bé Gái
-                                <ul class="header__menu__dropdown">
+                             <li><a href="#">Bé Gái ▾
+                                <ul class="header__menu__dropdown ">
                                     {{#each lcCategories}}
                                        <li><a href="/products/danhmuc0/{{MaLoai}}"{{!--/cart/{{sp_id}} --}}
                                             class="{{#if isActive}}active{{/if}}">
                                             {{TenLoai}}
+                                            
                                             {{#if num_of_products}}
                                             <span class="badge badge-danger float-right">{{num_of_products}}</span>
                                             {{/if}}
@@ -101,7 +100,7 @@
                                     {{/each}}                                 
                                 </ul>
                             </li>
-                             <li><a href="#">Bé Trai
+                             <li><a href="#">Bé Trai ▾
                                 <ul class="header__menu__dropdown">
                                     {{#each lcCategories1}}
                                        <li><a href="/products/danhmuc1/{{MaLoai}}"
@@ -115,7 +114,7 @@
                                 </ul>
                             </li>
 
-                             <li><a href="#">Phụ Kiện
+                             <li><a href="#">Phụ Kiện ▾
                                 <ul class="header__menu__dropdown">
                                     {{#each lcCategories2}}
                                        <li><a href="/products/danhmuc2/{{MaLoai}}"
@@ -141,7 +140,6 @@
                            </button>
                         </div>
                      </form>
-
                 </div>
                 <div class="col-lg-1">
                     

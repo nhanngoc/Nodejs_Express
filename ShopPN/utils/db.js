@@ -6,7 +6,8 @@ const tbl_l = "loaisp";
 const tbl_tk = "tai_khoan";
 const tbl_nv = "nhanvien";
 const tbl_kh = "khachhang";
-const tbl_order = "hoadon";
+const tbl_hoadon = "hoadon";
+const tbl_chitiethd = "chitiethd";
 
 const pool = mysql.createPool(config.mysql);
 
@@ -38,7 +39,7 @@ module.exports = {
   update_pro: function (table, entity, condition) {
     return new Promise(function (resolve, reject) {
       const sql = `update ${tbl_sp} set ? where ?`;
-      pool.query(sql, [entity,condition], function (error, results) {
+      pool.query(sql, [entity, condition], function (error, results) {
         if (error) {
           return reject(error);
         }
@@ -48,7 +49,7 @@ module.exports = {
   },
   //delete products
   delete_pro: function (table, condition) {
-    return new Promise(function (resolve , reject) {
+    return new Promise(function (resolve, reject) {
       const sql = `delete from ${tbl_sp} where ?`;
       pool.query(sql, condition, function (error, results) {
         if (error) {
@@ -59,8 +60,7 @@ module.exports = {
     });
   },
 
-
- //them categories///////////////////////
+  //them categories///////////////////////
   insert_loai: function (table, entity) {
     return new Promise(function (resolve, reject) {
       const sql = `insert into ${tbl_l} set ?`;
@@ -76,7 +76,7 @@ module.exports = {
   update_loai: function (table, entity, condition) {
     return new Promise(function (resolve, reject) {
       const sql = `update ${tbl_l} set ? where ?`;
-      pool.query(sql, [entity,condition], function (error, results) {
+      pool.query(sql, [entity, condition], function (error, results) {
         if (error) {
           return reject(error);
         }
@@ -86,7 +86,7 @@ module.exports = {
   },
   //delete categories
   delete_loai: function (table, condition) {
-    return new Promise(function (resolve , reject) {
+    return new Promise(function (resolve, reject) {
       const sql = `delete from ${tbl_l} where ?`;
       pool.query(sql, condition, function (error, results) {
         if (error) {
@@ -96,9 +96,9 @@ module.exports = {
       });
     });
   },
-  
-   //them tai khoan///////////////////////////
-   insert_tk: function (table, entity) {
+
+  //them tai khoan///////////////////////////
+  insert_tk: function (table, entity) {
     return new Promise(function (resolve, reject) {
       const sql = `insert into ${tbl_tk} set ?`;
       pool.query(sql, entity, function (error, results) {
@@ -113,7 +113,7 @@ module.exports = {
   update_tk: function (table, entity, condition) {
     return new Promise(function (resolve, reject) {
       const sql = `update ${tbl_tk} set ? where ?`;
-      pool.query(sql, [entity,condition], function (error, results) {
+      pool.query(sql, [entity, condition], function (error, results) {
         if (error) {
           return reject(error);
         }
@@ -123,7 +123,7 @@ module.exports = {
   },
   //delete tai khoan
   delete_tk: function (table, condition) {
-    return new Promise(function (resolve , reject) {
+    return new Promise(function (resolve, reject) {
       const sql = `delete from ${tbl_tk} where ?`;
       pool.query(sql, condition, function (error, results) {
         if (error) {
@@ -149,7 +149,7 @@ module.exports = {
   update_kh: function (table, entity, condition) {
     return new Promise(function (resolve, reject) {
       const sql = `update ${tbl_kh} set ? where ?`;
-      pool.query(sql, [entity,condition], function (error, results) {
+      pool.query(sql, [entity, condition], function (error, results) {
         if (error) {
           return reject(error);
         }
@@ -159,7 +159,7 @@ module.exports = {
   },
   //delete khách hàng
   delete_kh: function (table, condition) {
-    return new Promise(function (resolve , reject) {
+    return new Promise(function (resolve, reject) {
       const sql = `delete from ${tbl_kh} where ?`;
       pool.query(sql, condition, function (error, results) {
         if (error) {
@@ -170,10 +170,10 @@ module.exports = {
     });
   },
 
-  //them order hoadon//////////////////////////
-  insert_order: function (table, entity) {
+  //them hoadon  thông tin giao hàng//////////////////////////
+  insert_hoadon: function (table, entity) {
     return new Promise(function (resolve, reject) {
-      const sql = `insert into ${tbl_order} set ?`;
+      const sql = `insert into ${tbl_hoadon} set ?`;
       pool.query(sql, entity, function (error, results) {
         if (error) {
           return reject(error);
@@ -183,6 +183,16 @@ module.exports = {
     });
   },
 
-   
-
-}
+  //them chitiethd 
+  insert_chitiethd: function (entity) {
+    return new Promise(function (resolve, reject) {
+      const sql = `insert into ${tbl_chitiethd}(mahd, masp, tensp, gia, soluong) VALUES ?`;
+      pool.query(sql, [entity], function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
+    });
+  },
+};

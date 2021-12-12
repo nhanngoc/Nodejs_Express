@@ -1,96 +1,129 @@
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{!-- css products --}}
-    <link rel="stylesheet" href="/public/stylesheets/style.products.css">
-    <link rel="stylesheet" href="https://e6t7a8v2.stackpathcdn.com/tutorial/css/fontawesome-all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {{! css products }}
+  <link rel="stylesheet" href="/public/stylesheets/style.products.css" />
+  <link
+    rel="stylesheet"
+    href="https://e6t7a8v2.stackpathcdn.com/tutorial/css/fontawesome-all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&amp;display=swap"
+    rel="stylesheet"
+  />
 
-    <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">
+  <link
+    type="text/css"
+    rel="stylesheet"
+    charset="UTF-8"
+    href="https://translate.googleapis.com/translate_static/css/translateelement.css"
+  />
 </head>
 
 <!-- san pham home, phan trang start-->
- <div class="container">
-      <div class="inner-container">
-        <div class="row">
-          <div id="content" class="col-xs-12 col-sm-12 col-md-12">
-            <main id="main" role="main">
-              <div id="system-message-container">
-              </div>
-              <div
-                class="item-page"
-                itemscope=""
-                itemtype="http://schema.org/Article"
-              >
-                <meta itemprop="inLanguage" content="vi-VN" />
-                <div itemprop="articleBody">
+<div class="container">
+  <div class="inner-container">
+    <div class="row">
+      <div id="content" class="col-xs-12 col-sm-12 col-md-12">
+        <main id="main" role="main">
+          <div id="system-message-container">
+          </div>
+          <div
+            class="item-page"
+            itemscope=""
+            itemtype="http://schema.org/Article"
+          >
+            <meta itemprop="inLanguage" content="vi-VN" />
+            <div itemprop="articleBody">
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <section class="main-bottom-vertical">
+      <div class="row">
+        {{#each this.sanpham}}
+            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+              <div class="featured__item">
+                <a href="/products/detail/{{MaSP}}" class="image">
+                  <img
+                    class="featured__item__pic set-bg"
+                    src="/public/images/{{Anh}}"
+                    alt="{{TenSP}}"
+                    title="{{TenSP}}"
+                    :
+                    {{Gia}}
+                    class="card-img-top"
+                  />
+                </a>
+                <span class="product-discount-label">{{MaSP}}</span>
+                <div class="featured__item__text">
+                  <h6><a href="/products/detail/{{MaSP}}">{{TenSP}}</a></h6>
+                  <h5>{{format_number Gia}} đ</h5>
                 </div>
               </div>
-            </main>
-          </div>
-        </div>
-         
-        <section class="main-bottom-vertical">
-                <div class="row ">
-                    {{#each this.sanpham}}
-                    <div class="col-md-3 col-sm-6" style="margin-bottom: 50px;">
-                        <div class="product-grid">
-                            <div class="product-image">
-                                <a href="#" class="image">
-                                    <img class="pic-1" src="/public/images/{{Anh}}" alt="{{TenSP}}" title="{{TenSP}}" :{{Gia}} class="card-img-top">
-                                </a>
-                                <span class="product-discount-label">-33%</span>
-                                <ul class="product-links">
-                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                    <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
-                                    <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product-content">
-                                {{!-- <ul class="rating">
-                                    <li class="fas fa-star"></li>
-                                    <li class="fas fa-star"></li>
-                                    <li class="fas fa-star"></li>
-                                    <li class="far fa-star"></li>
-                                    <li class="far fa-star"></li>
-                                </ul> --}}
-                                <h3 class="title"><a href="#">{{TenSP}}</a></h3>
-                                <div class="price"><span>{{Gia}} đ</span> {{format_number Gia}} đ</div>
-                                <a class="add-to-cart" href="/cart/{{MaSP}}" role="button">add to cart</a>                            </div>
-                        </div>
-                    </div>
-                    {{/each}}
-                </div> 
-            <nav aria-label="...">
-            <ul class="pagination " >
-                <li class="page-item ">
-                    <a class="page-link" href="?page={{prev_value}}" aria-label="Previous">
-                        <span aria-hidden="true">Previous</span>
-                    </a>
-                </li>
-                {{#each this.page_items}}
-                {{#if isActive}}
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link">
-                        {{value}}
-                        <span class="sr-only">(current)</span>
-                    </span>
-                </li>
-                {{else}}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{value}}">{{value}}</a>
-                </li>
-                {{/if}}
-                {{/each}}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{next_value}}" aria-label="Next">
-                        <span aria-hidden="true">Next</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        </section>
+            </div>
+          {{/each}}
       </div>
+      <nav
+        aria-label="..."
+        style="display: flex; align-items: center; justify-content: center;"
+      >
+        <ul class="pagination">
+          <li class="page-item">
+            <a
+              class="page-link"
+              style=" background-color: #f5447b;border-color: #c12e7f; color: #fff;border-radius: 100%;padding: 9px 16px;"
+              href="?page={{prev_value}}"
+              aria-label="Previous"
+            >
+              <span aria-hidden="true"><i
+                  class="fas fa-angle-double-left"
+                ></i></span>
+            </a>
+          </li>
+          {{#each this.page_items}}
+            {{#if isActive}}
+              <li class="page-item active" aria-current="page">
+                <span
+                  class="page-link"
+                  style=" background-color: #ff004f;
+                        border-color: #c12e7f; color: rgb(0, 0, 0);border-radius: 100%;
+                        padding: 9px 16px;"
+                >
+                  {{value}}
+                  <span class="sr-only">(current)</span>
+                </span>
+              </li>
+            {{else}}
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  style=" background-color: #f5447b;
+                    border-color: #c12e7f; color: #fff;border-radius: 100%;
+                    padding: 9px 16px;"
+                  href="?page={{value}}"
+                >{{value}}</a>
+              </li>
+            {{/if}}
+          {{/each}}
+          <li class="page-item">
+            <a
+              class="page-link"
+              style=" background-color: #f5447b;border-color: #c12e7f; color: #fff;border-radius: 100%;padding: 9px 16px;"
+              href="?page={{next_value}}"
+              aria-label="Next"
+            >
+              <span aria-hidden="true"><i
+                  class="fas fa-angle-double-right"
+                ></i></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+  </div>
 </div>
 <!-- san pham home,phan trang end-->

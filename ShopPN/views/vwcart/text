@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Select Multiple</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>Ví dụ được biên soạn tại freetuts.net</h2>
+        <h3>Chọn các chuyên mục từ danh sách dưới đây</h3>
+        
+        <select multiple onchange="validateSelectBox(this)">
+            <option value="1">Tin công nghệ</option>
+            <option value="2">Tin thời sự</option>
+            <option value="3">Tin quốc tế</option>
+            <option value="4">Tin thể thao</option>
+            <option value="5">Tin nông nghiệp</option>
+        </select>
+      <select class="form-control"
+                 onchange="singleSelectChangeValue(this)">
+           <option value="1">Hải Phòng</option>
+           <option value="2">Hậu Giang</option>
+           <option value="3"selected="selected">Hồ Chí
+             Minh</option>
+           <option value="4">Hòa Bình</option>
+
+          </select>
+        
+        <h3>Danh sách chuyên mục bạn đã chọn:</h3>
+        <div id="result">
+            Bạn chưa chọn chuyên mục nào
+        </div>
+        <label>
+          
+          <span class="text" id="gh">
+           Giao hàng đến <b style="color:#F5447B">Hồ Chí Minh</b> với phí 
+                          
+          </span>
+          <span style="color:#fddae5;font-weight:bold">18.000 đ</span>
+      	</label>
+     
+    
+        <script language="javascript">
+          function singleSelectChangeValue(obj){
+                var options = obj.children;
+                var html = '';
+                for (var i = 0; i < options.length; i++){
+                    if (options[i].selected){
+                        html += 'Giao hàng đến <b style="color:#F5447B">'+options[i].text+'</b> với phí';
+                    }
+                }
+                
+                document.getElementById('gh').innerHTML = html;
+            }
+            function validateSelectBox(obj){
+                var options = obj.children;
+                var html = '';
+                for (var i = 0; i < options.length; i++){
+                    if (options[i].selected){
+                        html += '<li>'+options[i].text+'</li>';
+                    }
+                }
+                
+                document.getElementById('result').innerHTML = html;
+            }
+        </script>
+    </body>
+</html>

@@ -1,4 +1,5 @@
 const express = require("express");
+const db = require("../utils/db");
 const productModel = require("../models/product.model");
 const config = require("../config/default.json");
 const Cart = require("../models/cart");
@@ -7,15 +8,6 @@ const ModelOrder = require("../models/order.model");
 const router = express.Router();
 
 router.get("/", async function (req, res) {
-  /* 
-  const list = await productModel.allByCat(req.params.maLoai);
-  //hien thi san pham
-  res.render("vwproducts/byCat", {
-    sanpham: list,
-    empty: list.length === 0,
-  }); */
-  // const list = await productModel.allByCat(req.params.catId);
-
   //phan trang
   const page = +req.query.page || 1;
   if (page < 0) page = 1;
@@ -32,68 +24,68 @@ router.get("/", async function (req, res) {
     page_items.push(item);
   }
   res.render("home", {
-    sanphammmm: list,
+    sanpham: list,
     empty: list.length === 0,
     page_items,
     prev_value: page - 1,
     next_value: page + 1,
   });
-  //console.log('sannnnnnnnn',{sp: list})
 });
 //tim kiem
 router.get("/search", async function (req, res) {
   const product = await productModel.all();
-  const TenSP = req.query.TenSP;
+  const tenSP = req.query.TenSP;
   const data = product.filter(function (item) {
-    return item.TenSP.toLowerCase().indexOf(TenSP.toLowerCase()) !== -1;
+    return item.TenSP.toLowerCase().indexOf(tenSP.toLowerCase()) !== -1;
   });
-  res.render("home", {
-    sanphammmm: data,
+  res.render("vwproducts/list", {
+    sanpham: data,
     empty: data.length === 0,
   });
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaaa", data);
 });
-//shopping cart// id của sanphamct sp_id
-/* router.get("/cart/:id", async function (req, res) {
+
+//shopping cart//
+router.post("/cart/:id", async function (req, res) {
   const productId = req.params.id;
-  const rows = await productModel.single_cart(productId);
+  const cl = req.query.color;
+  const si = req.query.size;
+  const rows = await productModel.single_cart(productId, cl, si);
+  const spct = rows[0].sp_id;
+  const product = {
+    masp: rows[0].MaSP,
+    tensp: rows[0].TenSP,
+    anh: rows[0].Anh,
+    size: rows[0].size,
+    color: rows[0].color,
+    gia: rows[0].Gia,
+    sp_id: rows[0].sp_id,
+  };
+  console.log("new product: ", product);
   const cart = new Cart(req.session.cart ? req.session.cart : {});
-  console.log("ddddddddddd1");
-  cart.add(rows[0], productId);
-  req.session.cart = cart;
-  console.log(req.session.cart);
-  res.redirect("/");
-}); */
-//shopping cart// id của sanphamct sp_id
-router.get("/cart/:id", async function (req, res) {
-  const productId = req.params.id;
-  console.log("ddddddddddd1", productId);
-  const rows = await productModel.single_cart(productId);
-  const cart = new Cart(req.session.cart ? req.session.cart : {});
-  console.log("ddddddddddd1", rows);
-  cart.add(rows[0], productId);
+  cart.add(product, spct);
   req.session.cart = cart;
   console.log(req.session.cart);
 
   res.redirect("/shop_cart");
 });
-
-
 router.get("/shop_cart", function (req, res, next) {
   if (!req.session.cart) {
     return res.render("vwcart/shopcart", { products: null });
   }
   let cart = new Cart(req.session.cart);
-  console.log(cart, "dddddddddddcartt");
+  console.log("newcart", cart);
   res.render("vwcart/shopcart", {
     products: cart.getItems(),
+    totalItems: cart.totalItems,
     toPri: cart.totalPrice,
   });
-  console.log(
-    { products: cart.getItems(), toPri: cart.totalPrice },
-    "dddddddddddcartt"
-  );
+  console.log("dddddddddddcartt", {
+    products: cart.getItems(),
+    totalItems: cart.totalItems,
+    toPri: cart.totalPrice,
+  });
 });
-
 router.get("/remove/:id", function (req, res, next) {
   const productId = req.params.id;
   const cart = new Cart(req.session.cart ? req.session.cart : {});
@@ -101,100 +93,74 @@ router.get("/remove/:id", function (req, res, next) {
   req.session.cart = cart;
   res.redirect("/shop_cart");
 });
+
 //checkout
 router.get(
   "/checkout",
-  /* isLogIn, */ function (req, res, next) {
+  isLogIn, function (req, res, next) {
     if (!req.session.cart) {
       return res.redirect("/shop_cart");
     }
     const cart = new Cart(req.session.cart);
+    console.log("checkout:", cart);
     const errMsg = req.flash("error")[0];
+
     res.render("vwcart/checkout", {
-      total: cart.totalPrice,
+      products: cart.getItems(), //
+      toPri: cart.totalPrice, //
       errMsg: errMsg,
       noError: !errMsg,
-      layout: false,
+      layout: false, //
     });
-  }
-);
-router.post(
-  "/checkout",
-  /* isLogIn, */ function (req, res, next) {
-    if (!req.session.cart) {
-      return res.redirect("/shop_cart");
-    }
-    const cart = new Cart(req.session.cart);
-
-    const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
-
-    stripe.charges.create(
-      {
-        amount: cart.totalPrice * 100,
-        currency: "usd",
-        source: "tok_mastercard", // obtained with Stripe.js
-        description: "Test Charge",
-      },
-      function (err, charge) {
-        if (err) {
-          req.flash("error", err.message);
-          return res.redirect("/checkout");
-        }
-        const order = {
-          user: req.session.authUser,
-          cart: cart,
-          address: req.body.address,
-          name: req.body.name,
-          paymentId: charge.id,
-        };
-        ModelOrder.add_order(order, function (err, result) {
-          if (err) {
-            req.flash("error", err.message);
-            return res.redirect("/checkout");
-          }
-          req.flash("Thành công", "Sản phẩm đã mua thành công!");
-          req.session.cart = null;
-          res.redirect("/");
-        });
-      }
+    console.log(
+      { products: cart.getItems(), toPri: cart.totalPrice },
+      "checkout2"
     );
   }
 );
-
-/* router.get("/", async function (req, res) {
-  for (const c of res.locals.lcCategories) {
-    if (c.MaLoai === +req.params.MaLoai) {
-      c.isActive = true;
-    }
+router.post("/checkout", async function (req, res, next) {
+  if (!req.session.cart) {
+    return res.redirect("/shop_cart");
   }
-  // const list = await productModel.allByCat(req.params.catId);
-  //phan trang
-  const page = +req.query.page || 1;
-  if (page < 0) page = 1;
-  const offset = (page - 1) * config.pagination.limit;
-  const list = await productModel.pageByHome(
-    req.params.MaLoai,
-    config.pagination.limit,
-    offset
-  );
-  const total = await productModel.countByCat();
-  const nPages = Math.ceil(total / config.pagination.limit);
-  const page_items = [];
-  for (let i = 1; i <= nPages; i++) {
-    const item = {
-      value: i,
-      isActive: i === page,
-    };
-    page_items.push(item);
+  const cart = new Cart(req.session.cart);
+  const user = req.session.authUser;
+  const quan = req.body.quanhuyen;
+  const tinh = req.body.tinh;
+  //user lưu maKH, ngayHD, tenNN, diachi, ngaynhan, soluong:cart.totalItems, tongtien:cart.totalPrice vào hoadon
+  const entity = {
+    makh: user.MaKH,
+    tennn: req.body.tennn,
+    sdt: req.body.sdt,
+    diachi: req.body.diachi+","+quan+","+tinh,
+    soluong: cart.totalItems,
+    tongtien: cart.totalPrice,
+    ghichu: req.body.ghichu,
+  };
+  await ModelOrder.add_order(entity);
+  //cart lưu mahd, MaSP:cart.getItems.item.masp, TenSP:cart.getItems. gia:cart.getItems.gia soluong:cart.getItems.quantity vào chitiethd
+  const idhd = await ModelOrder.id_order();
+  const new_sp = cart.getItems();
+  let arrlist = [];
+  for (let i = 0; i < new_sp.length; i++) {
+    const mahd = idhd;
+    const masp = new_sp[i].masp;
+    const tensp = new_sp[i].tensp;
+    const gia = new_sp[i].gia;
+    const soluong = new_sp[i].quantity;
+    let arr = [mahd, masp, tensp, gia, soluong];
+    arrlist.push(arr);
   }
-  res.render("home", {
-    sanpham: list,
-    empty: list.length === 0,
-    page_items,
-    prev_value: page - 1,
-    next_value: page + 1,
-  });
-}); */
+  await db.insert_chitiethd(arrlist);
+  console.log("arrlist:", arrlist);
+  console.log("cart:", cart);
+  /* if (err) {
+    req.flash("error", err.message);
+    return res.redirect("/checkout");
+  }
+  req.flash("Thành công", "Sản phẩm đã mua thành công!");*/
+  req.session.cart = null;
+  res.redirect("/");
+});
 
 module.exports = router;
 

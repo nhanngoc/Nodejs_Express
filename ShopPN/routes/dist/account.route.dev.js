@@ -30,9 +30,9 @@ router.get("/login", function _callee(req, res) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          res.render("vwaccount/login", {
-            layout: false
-          }); //tat layout trang chu
+          res.render("vwaccount/login"
+          /* , { layout: false } */
+          ); //tat layout trang chu
 
         case 1:
         case "end":
@@ -42,7 +42,7 @@ router.get("/login", function _callee(req, res) {
   });
 });
 router.post("/login", function _callee2(req, res) {
-  var user, rs, url;
+  var user, rs;
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -79,11 +79,11 @@ router.post("/login", function _callee2(req, res) {
         case 8:
           delete user.password;
           req.session.isAuthenticated = true;
-          req.session.authUser = user;
-          url = req.query.retUrl || "/";
-          res.redirect(url);
+          req.session.authUser = user; //const url = req.query.retUrl || "/";
 
-        case 13:
+          res.redirect(req.headers.referer);
+
+        case 12:
         case "end":
           return _context2.stop();
       }
@@ -152,7 +152,6 @@ router.post("/register", function _callee4(req, res, next) {
             username: req.body.username,
             password: password_hash,
             email: req.body.email,
-            // gioitinh: req.body.gioitinh,
             diachi: req.body.diachi,
             sdt: req.body.sdt
           };
@@ -161,7 +160,7 @@ router.post("/register", function _callee4(req, res, next) {
           return regeneratorRuntime.awrap(userModel.add_kh(entity));
 
         case 14:
-          //đẩy database
+          // luu database
           res.render("vwaccount/register");
           _context4.next = 20;
           break;

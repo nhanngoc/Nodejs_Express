@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
 
-    
 </head>
 
 <body>
-
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
         <div class="container">
             {{#if products }}
-            
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="shoping__cart__table">
@@ -22,10 +18,11 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th class="shoping__product">Tên sp</th>
-                                        <th>Giá</th>
-                                        <th>Số Lượng</th>
-                                        <th>Tổng giá</th>
+                                        <th class="shoping__product">Sản phẩm</th>
+                                        <th>Mã hàng</th>
+                                         <th>Đơn giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Tổng cộng</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -33,15 +30,18 @@
                                     {{#each products }}
                                     <tr>
                                         <td class="shoping__cart__item">
-                                            <a href="products/detail/{{this.item.MaSP}}">
-                                            <img src="/public/images/{{this.item.Anh}}" alt="{{this.item.TenSP}}"
+                                            <a href="products/detail/{{this.item.masp}}">
+                                            <img src="/public/images/{{this.item.anh}}" alt="{{this.item.tensp}}"
                                             style=" max-width: 75px; height: auto;">
                                             </a>
-                                            <h5>{{this.item.TenSP}}</h5>
-                                            <h6>{{this.item.sp_id}}</h6>
+                                            <h5>{{this.item.tensp}}</h5>
+                                            <h6>- {{this.item.color}}: {{this.item.size}}</h6>
                                         </td>
                                         <td class="shoping__cart__price">
-                                            {{format_number Gia}} đ
+                                            {{this.item.masp}}
+                                        </td>
+                                        <td class="shoping__cart__price">
+                                            {{format_number this.item.gia}} đ
                                         </td>
                                         <td class="shoping__cart__quantity">
                                             <div class="quantity">
@@ -51,18 +51,17 @@
                                             </div>
                                         </td>
                                         <td class="shoping__cart__total">
-                                            {{format_number this.Gia }} đ
+                                            {{format_number this.gia }} đ
                                         </td>
                                         <td class="shoping__cart__item__close">
                                         <div class="col-xs-2 text-right">
-                                                <a href="/remove/{{this.item.MaSP}}"> 
+                                                <a href="/remove/{{this.item.sp_id}}"> 
                                                 <i class="fas fa-times"></i>
                                                 </a>
                                             </div>
                                         </td>
                                     </tr>
-                                {{/each}}
-                                    
+                                {{/each}}  
                                 </tbody>
                             </table>
                         </div>
@@ -76,23 +75,14 @@
                                 Cập nhật giỏ hàng</a>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="shoping__continue">
-                            <div class="shoping__discount">
-                                <h5>Discount Codes</h5>
-                                <form action="#">
-                                    <input type="text" placeholder="Enter your coupon code">
-                                    <button type="submit" class="site-btn">APPLY COUPON</button>
-                                </form>
-                            </div>
-                        </div>
+                   <div class="col-lg-2">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="shoping__checkout">
-                            <h5>Cart Total</h5>
+                            <h5>Tổng giỏ hàng</h5>
                             <ul>
-                                {{!-- <li>Subtotal <span>$454.98</span></li> --}}
-                                <li>Total <span>{{format_number toPri }} đ</span></li>
+                                <li>Số lượng:<span>{{totalItems}}</span></li>
+                                <li>Tổng cộng: <span>{{format_number toPri }} đ</span></li>
                             </ul>
                             <a href="/checkout" class="primary-btn">Thanh toán</a>
                         </div>

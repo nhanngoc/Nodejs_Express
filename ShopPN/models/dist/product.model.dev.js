@@ -8,31 +8,39 @@ module.exports = {
     return db.load("select *from ".concat(tbl_products));
   },
   //cart//////////////
-  single_cart: function single_cart(id) {
-    return db.load("select *from ".concat(tbl_products, " where MaSP =").concat(id));
+  single_cart: function single_cart(id, cl, si) {
+    return db.load("\n    SELECT sp.*,colors.*,ct.* ,sizes.* \n    FROM ((sanphamct ct INNER JOIN sanpham sp ON ct.masp = sp.MaSP) \n    INNER JOIN colors ON ct.color_id = colors.color_id \n    INNER JOIN sizes ON ct.size_id=sizes.size_id ) \n    WHERE sp.MaSP = ".concat(id, " AND ct.color_id=").concat(cl, " AND ct.size_id=").concat(si));
   },
   //cart//////////////
   single_carts: function single_carts(id) {
     return db.load("SELECT ct.*,sp.*\n    FROM sanphamct ct INNER JOIN sanpham sp ON ct.masp=sp.MaSP\n    WHERE ct.sp_id=".concat(id, " "));
   },
-  single_cc: function single_cc(id) {
-    return db.load(" ");
-  },
-  //detail
+  //detail start///
   detail_ct: function detail_ct(MaSP, color, size) {
     return db.load("SELECT sanpham.*,colors.*,sanphamct.* ,sizes.* \n    FROM ((sanphamct INNER JOIN sanpham ON sanphamct.masp = sanpham.MaSP) \n    INNER JOIN colors ON sanphamct.color_id = colors.color_id \n    INNER JOIN sizes ON sanphamct.size_id=sizes.size_id ) \n    WHERE sanphamct.masp=".concat(MaSP, " "));
   },
+  detail_anh: function detail_anh(id) {
+    return db.load("SELECT ct.*,sp.*\n    FROM sanpham sp JOIN anhct ct ON sp.MaSP=ct.MaSP\n    WHERE ct.MaSP=".concat(id));
+  },
   //lọc color
-  detail_color: function detail_color(id) {
-    return db.load("SELECT DISTINCT colors.color_id,colors.color\n    FROM ((sanphamct INNER JOIN sanpham ON sanphamct.masp = sanpham.MaSP) \n    INNER JOIN colors ON sanphamct.color_id = colors.color_id ) \n    WHERE sanphamct.masp=".concat(id));
+  distinct_color: function distinct_color(id) {
+    return db.load("SELECT DISTINCT colors.color_id,colors.color\n    FROM ((sanphamct INNER JOIN sanpham ON sanphamct.masp = sanpham.MaSP) \n    INNER JOIN colors ON sanphamct.color_id = colors.color_id ) \n    WHERE sanpham.MaSP=".concat(id));
   },
   //lọc size
+  distinct_size: function distinct_size(id) {
+    return db.load("SELECT DISTINCT sizes.* \n    FROM ((sanphamct INNER JOIN sanpham ON sanphamct.masp = sanpham.MaSP) \n    INNER JOIN sizes ON sanphamct.size_id = sizes.size_id ) \n    WHERE sanpham.MaSP=".concat(id));
+  },
+  //size
   detail_size: function detail_size(id) {
-    return db.load("select *from ".concat(tbl_products, " where MaSP =").concat(id));
+    return db.load("SELECT sizes.*,sanphamct.color_id\n    FROM ((sanphamct INNER JOIN sanpham ON sanphamct.masp = sanpham.MaSP) \n    INNER JOIN sizes ON sanphamct.size_id = sizes.size_id ) \n    WHERE sanpham.MaSP=".concat(id));
   },
   detail: function detail(id) {
     return db.load("select *from ".concat(tbl_products, " where MaSP =").concat(id));
   },
+  size: function size() {
+    return db.load("select * from sizes");
+  },
+  //detail end///
 
   /*  allByCat: function (maloai) {
     return db.load(`select *from ${tbl_products} where maloai =${maloai}`);
