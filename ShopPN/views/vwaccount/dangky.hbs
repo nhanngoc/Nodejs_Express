@@ -1,148 +1,297 @@
-<head>
- 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"
-  />
- 
-</head>
-{{#section "js"}}
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
-  >
-  </script>
-
-
-  {{!  
-      $('#frmRegister').on('submit',function(e){
-           // alert('submit called');
-            e.preventDefault();
-            if(validate())
-            $('#frmRegister').off('submit').submit();
-            validate();
-        })
-        function validate(){
-            // ...cac lenh validate khac
-            const user=$('#txtUsername').val();
-            $.getJSON(`/account/is-available?user=${user}`, function(data){
-                if(data === true){
-                    $('#frmRegister').off('submit').submit();
-                }else{
-                    alert('not available';)
-                }
-            });
-           // return true;
-        }
-     }}
-{{/section}}
-<!--     $('#txtDob').datetimepicker({
-            format: 'd/m/Y',
-            timepicker: false,//ko can gio
-            mask:true,//hien thi ô gõ
-        })
-        
-    -->
-  <div class="container">
-<div class="card">
-  <div class="card-header">
-    <h4>Đăng ký tài khoản</h4>
-  </div>
-  
-  <div class="card-body">
-   
-    
-    <form method="POST" action="">
-      <div class="form-group">
-        <label for="txtName">Tên đăng ký</label>
-        <input
-          type="text" class="form-control" id="txtName" name="tenkh" placeholder="VD: Nguyen Van A *"
-          required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$"title="Tên đăng ký không hợp lệ!"
-        />
-      </div>
-      <div class="form-group">
-        <label for="txtUsername">Tên đăng nhập</label>
-         <input type="text" class="form-control" id="txtUsername"  placeholder="VD: NguyenVanA *"
-          autofocus name="username"  pattern="^[A-Za-z0-9@._-]{6,20}$"	title="Tên đăng nhập không hợp lệ!"
-          />
-      </div>
-      <div class="form-group">
-        <label for="txtPassword">Mật Khẩu</label>
-        <input
-          type="password"
-          class="form-control"
-          id="txtPassword"
-          name="password" required pattern="^[A-Za-z0-9!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{8,}$"title="Mật khẩu phải viết liền không dấu"
-          placeholder="Độ dài ít nhất 8 kí tự *"
-        />
-      </div>
-      <div class="form-group">
-        <label for="txtConfirm">Nhập lại mật khẩu</label>
-        <input
-          type="password"
-          class="form-control"
-          id="txtConfirm"
-          Confirm="confirm"
-          placeholder="Độ dài ít nhất 8 kí tự *"
-        />
-      </div>
-       <div class="form-group">
-        <label for="txtSdt">Số Điện Thoại</label>
-        <input type="text" class="form-control" id="txtSdt" name="sdt" placeholder="VD: 0123456789 *"
-         pattern="^[0-9]{10}$"title="Số điện thoại không hợp lệ!"
-        />
-      </div> 
-      <div class="form-group">
-        <label for="txtEmail">Email xác thực </label>
-        <input type="text" class="form-control" id="txtEmail" name="email" placeholder="VD: shoppn@gmai.com *"
-         pattern="^[a-z0-9]+@[a-z0-9.]{6,20}$"title="Email không hợp lệ!"
-        />
-      </div>     
-       <button type="submit" class="btn btn-outline-info" onclick="kiemTraForm()">Đăng ký</button>
-    </form>
-  </div>
-
-</div>
-</div>
-<script type="text/javascript">
-function kiemTraForm() {
-   var name = document.getElementById("txtName").value
-   var username = document.getElementById("txtUsername").value
-   var password = document.getElementById("txtPassword").value
-   var re_password = document.getElementById("txtConfirm").value
-    var sdt = document.getElementById("txtSdt").value
-    var email = document.getElementById("txtEmail").value
-   if(name==""){
-   alert("Chưa nhập Tên đăng kí, mời bạn nhập lại!")
-    return false
-    }
-   if(username==""){
-   alert("Chưa nhập Tên đăng nhập, mời bạn nhập lại!")
-    return false
-    }
-    if(password==""){
-    alert('Chưa nhập Mật khẩu, mời bạn nhập lại!')
-    return false
-    }
-   if(password!= re_password){
-      alert('Mật khẩu chưa khớp, mời bạn nhập lại!')
-      return false
-   }
-    if(sdt==""){
-      alert('Chưa nhập Số điện thoại, mời bạn nhập lại!')
-      return false
-   }
-    if(email==""){
-      alert('Chưa nhập Email, mời bạn nhập lại!')
-      return false
-   }
-   return true
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Đăng ký tài khoản mới</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          *{
+    padding: 0px;
+    margin: 0px;
+    font-family: sans-serif;
+    box-sizing: border-box;
 }
-</script>
-<script type="text/javascript">
-var input_username = document.getElementById("txtUsername")
-input_username.addEventListener('keyup',function() {
-   if(input_username.value.length>20){
-       alert("Tên đăng nhập quá dài, hơn 20 ký tự")
-    }
-});
-</script>
+.container{
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.col-6{
+    float: left;
+    width: 50%;
+}
+.margin_b{
+    margin-bottom: 7.5px;
+}
+.clear{
+    clear: both;
+}
+main{
+    background-color: #dddddd;
+    min-height: 300px;
+    padding: 7.5px 15px;
+}
+
+h1{
+    color: #009999;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.register-form{
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 15px;
+    border: 2px dotted #cccccc;
+    border-radius: 10px;
+}
+
+.input-box{
+    margin-bottom: 10px;
+}
+.input-box input[type='text'],
+.input-box input[type='password'],
+.input-box input[type='date']{
+    padding: 7.5px 15px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    outline: none;
+    font-size: 16px;
+    display: inline-block;
+    height: 40px;
+    color: #666666;
+}
+.input-box select{
+    padding: 7.5px 15px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    outline: none;
+    font-size: 16px;
+    display: inline-block;
+    height: 40px;
+    color: #666666;
+}
+.input-box option{
+    font-size: 16px;
+}
+.input-box input[type='checkbox']{
+    height: 1.5em;
+    width: 1.5em;
+    vertical-align: middle;
+    line-height: 2em;
+}
+.input-box textarea{
+    padding: 7.5px 15px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    outline: none;
+    font-size: 16px;
+    min-height: 120px;
+    color: #666666;
+}
+.btn-box{
+    text-align: right;
+    margin-top: 30px;
+}
+.btn-box button{
+    padding: 7.5px 15px;
+    border-radius: 2px;
+    background-color: #009999;
+    color: #ffffff;
+    border: none;
+    outline: none;
+}
+        </style>
+    </head>
+    <body>
+
+        <main>
+            <div class="container">
+                <div class="register-form">
+                    <form action="" method="post">
+                        <h1>Tạo tài khoản</h1>
+                        <div class="input-box">
+                            <label for="txtName">Tên bạn</label>
+                            <input type="text" id="txtName" name="tenkh" placeholder="VD: Nguyen Van A *"
+                            required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$"title="Tên đăng ký không hợp lệ!">
+                        </div>
+                        <div class="input-box">
+                            <label for="txtUsername">Tên tài khoản</label>
+                            <input type="text"  id="txtUsername"  placeholder="VD: NguyenVanA *"
+                             autofocus name="username"  pattern="^[A-Za-z0-9@._-]{6,20}$"	title="Tên đăng nhập không hợp lệ!">
+                        </div>
+                        
+                        <div class="input-box" style="display: none;">
+                           <select onchange="validateSelectBox(this)">
+                              {{#each khachhang}}
+                                <option value="{{username}}">{{username}}</option>
+                                 {{/each}}
+                            </select>
+                         
+                        </div>
+                        <div class="input-box">
+                            <label for="ngaysinh">Email</label>
+                            <input type="text" id="txtEmail" name="email" placeholder="VD: shoppn@gmai.com *"
+                            pattern="^[a-z0-9]+@[a-z0-9.]{6,20}$"title="Email không hợp lệ!">
+                        </div>
+                        <div class="input-box">
+                            <label for="ngaysinh">Mật khẩu</label>
+                            <input type="password" id="txtPassword" pattern="^[A-Za-z0-9!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{8,}$"
+                            name="password" required title="Mật khẩu phải viết liền không dấu" placeholder="Độ dài ít nhất 8 kí tự *">
+                        </div>
+                        <div class="input-box">
+                            <label for="ngaysinh">Nhập lại mật khẩu</label>
+                            <input type="password" id="txtConfirm" Confirm="confirm" 
+                            placeholder="Độ dài ít nhất 8 kí tự *">
+                        </div>
+                        <div class="input-box">
+                            <label for="txtSdt">Số điện thoại</label>
+                            <input type="text" id="txtSdt" name="sdt" placeholder="VD: 0123456789 *" 
+                            pattern="^[0-9]{10}$"title="Số điện thoại không hợp lệ!">
+                        </div>
+                        <div class="input-box">
+                            <label for="txtSdt">Phường/Xã</label>
+                            <input type="text" id="txtSdt" name="phuong/xa" placeholder="VD: 0123456789 *" 
+                            pattern="^[A-Za-z0-9]{2,20}$"title="Số điện thoại không hợp lệ!">
+                        </div>
+                        <div class="input-box">
+                            <label for="txtSdt">Quận/Huyện</label>
+                            <input type="text" id="txtSdt" name="quan/huyen" placeholder="VD: 0123456789 *" 
+                            pattern="^[A-Za-z0-9]{2,20}$"title="Số điện thoại không hợp lệ!">
+                        </div>
+                        <div class="input-box">
+                            <label for="txtSdt">Quận/Huyện</label>
+                            <select
+                              name="tinh"
+                              data-require="require"
+                              data-refresh="3"
+                              onchange="singleSelectChangeValue(this)"
+                            >
+                              <option value=""> --- Chọn --- </option>
+                              <option value="An Giang">An Giang</option>
+                              <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu</option>
+                              <option value="Bắc Giang">Bắc Giang</option>
+                              <option value="Bắc Kan">Bắc Kan</option>
+                              <option value="Bạc Liêu">Bạc Liêu</option>
+                              <option value="Bắc Ninh">Bắc Ninh</option>
+                              <option value="Bến Tre">Bến Tre</option>
+                              <option value="Bình Dương">Bình Dương</option>
+                              <option value="Bình Phước">Bình Phước</option>
+                              <option value="Bình Thuận">Bình Thuận</option>
+                              <option value="Bình Định">Bình Định</option>
+                              <option value="Cà Mau">Cà Mau</option>
+                              <option value="Cần Thơ">Cần Thơ</option>
+                              <option value="Cao Bằng">Cao Bằng</option>
+                              <option value="Dak Lak">Dak Lak</option>
+                              <option value="Dak Nông">Dak Nông</option>
+                              <option value="Gia Lai">Gia Lai</option>
+                              <option value="Hà Giang">Hà Giang</option>
+                              <option value="Hà Nam">Hà Nam</option>
+                              <option value="Hà Nội">Hà Nội</option>
+                              <option value="Hà Tây">Hà Tây</option>
+                              <option value="Hà Tĩnh">Hà Tĩnh</option>
+                              <option value="Hải Dương">Hải Dương</option>
+                              <option value="Hải Phòng">Hải Phòng</option>
+                              <option value="Hậu Giang">Hậu Giang</option>
+                              <option value="Hồ Chí Minh" selected="selected">Hồ Chí
+                                Minh</option>
+                              <option value="Hòa Bình">Hòa Bình</option>
+                              <option value="Huế">Huế</option>
+                              <option value="Hưng Yên">Hưng Yên</option>
+                              <option value="Khánh Hòa">Khánh Hòa</option>
+                              <option value="Kiên Giang">Kiên Giang</option>
+                              <option value="Kontum">Kontum</option>
+                              <option value="Lai Châu">Lai Châu</option>
+                              <option value="Lâm Đồng">Lâm Đồng</option>
+                              <option value="Lạng Sơn">Lạng Sơn</option>
+                              <option value="Lào Cai">Lào Cai</option>
+                              <option value="Long An">Long An</option>
+                              <option value="Nam Định">Nam Định</option>
+                              <option value="Nghệ An">Nghệ An</option>
+                              <option value="Ninh Bình">Ninh Bình</option>
+                              <option value="Ninh Thuận">Ninh Thuận</option>
+                              <option value="Phú Thọ">Phú Thọ</option>
+                              <option value="Phú yên">Phú yên</option>
+                              <option value="Quảng Bình">Quảng Bình</option>
+                              <option value="Quãng Nam">Quãng Nam</option>
+                              <option value="Quãng Ngãi">Quãng Ngãi</option>
+                              <option value="Quãng Ninh">Quãng Ninh</option>
+                              <option value="Quãng Trị">Quãng Trị</option>
+                              <option value="Sóc Trăng">Sóc Trăng</option>
+                              <option value="Sơn La">Sơn La</option>
+                              <option value="Tây Ninh">Tây Ninh</option>
+                              <option value="Thái Bình">Thái Bình</option>
+                              <option value="Thái Nguyên">Thái Nguyên</option>
+                              <option value="Thanh Hóa">Thanh Hóa</option>
+                              <option value="Tiền Giang">Tiền Giang</option>
+                              <option value="Trà Vinh">Trà Vinh</option>
+                              <option value="Tuyên Quang">Tuyên Quang</option>
+                              <option value="Vĩnh Long">Vĩnh Long</option>
+                              <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                              <option value="Yên Bái">Yên Bái</option>
+                              <option value="Đà Nẵng">Đà Nẵng</option>
+                              <option value="Điện Biên">Điện Biên</option>
+                              <option value="Đồng Nai">Đồng Nai</option>
+                              <option value="Đồng Tháp">Đồng Tháp</option>
+                            </select>
+                        </div>
+                        
+                         <div class="btn-box" style="text-align: center;">
+                            <button type="submit" onclick="kiemTraForm()">
+                                Đăng ký
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+       <script type="text/javascript">
+        function kiemTraForm() {
+          var name = document.getElementById("txtName").value
+          var username = document.getElementById("txtUsername").value
+          // var khachhang = document.getElementById("txtkh").value
+          var password = document.getElementById("txtPassword").value
+          var re_password = document.getElementById("txtConfirm").value
+            var sdt = document.getElementById("txtSdt").value
+            var email = document.getElementById("txtEmail").value
+            
+            if(name==""){
+                alert("Chưa nhập Tên đăng kí, mời bạn nhập lại!")
+                return false
+            }
+            if(username==""){
+                alert("Chưa nhập Tên đăng nhập, mời bạn nhập lại!")
+                return false
+            }
+            if(password==""){
+                alert('Chưa nhập Mật khẩu, mời bạn nhập lại!')
+                return false
+            }
+            if(password!= re_password){
+                alert('Mật khẩu chưa khớp, mời bạn nhập lại!')
+                return false
+            }
+            if(sdt==""){
+                alert('Chưa nhập Số điện thoại, mời bạn nhập lại!')
+                return false
+            }
+            if(email==""){
+                alert('Chưa nhập Email, mời bạn nhập lại!')
+                return false
+            }
+            return true
+        }
+        </script>
+        <script type="text/javascript">
+        var input_username = document.getElementById("txtUsername")
+        input_username.addEventListener('keyup',function() {
+          if(input_username.value.length>20){
+              alert("Tên đăng nhập quá dài, hơn 20 ký tự")
+            }
+        });
+        </script>
+    </body>
+</html>

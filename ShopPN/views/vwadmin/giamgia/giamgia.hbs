@@ -1,0 +1,72 @@
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Danh sách sản phẩm khuyến mãi</h4>
+        </div>
+        <div class="them" style="text-align: right;">
+            <a name="" id="" class="btn btn-primary btn-sm" style="text-align: right;" href="/admin/giamgia/add" role="button" title="Thêm mới">Thêm mới
+               {{!--  <i class="fa fa-trash" aria-hidden="true"></i> --}}
+            </a>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+{{#if this.empty}}
+<div class="row">
+    <div class="col-12">   
+        <div class="mt-5">
+            <h5 class="font-14">Chưa kết nối database</h5>
+            <p class="sub-header">
+                Không có dữ liệu
+            </p>
+            
+        {{else}}
+            <table id="key-table" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                    <tr>
+                        
+                        <th>Mã sản phẩm</th>
+                        <th>Ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá gốc</th>
+                        <th>Khuyến mãi</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {{#each this.giamgia}}
+                    <tr>
+                        <td>{{makm}}</td>
+                        <td>
+                            <a href="#" class="image">
+                                <img class="pic-1" src="/public/images/{{Anh}}" alt="{{TenSP}}" title="{{TenSP}}"
+                                style=" max-width: 75px; height: auto;">
+                            </a>
+                        </td>
+                        <td>{{TenSP}}</td>
+                        <td>{{format_number Gia}}đ</td>
+                        <td>{{format_number giakm}}đ</td>
+                        <td class="text-right">
+                            <a name="" id="" class="btn btn-primary btn-sm" href="/admin/giamgia/edit/{{makm}}" role="button" title="sửa khuyến mãi">
+                                <i class="mdi mdi-border-color" aria-hidden="true"></i>
+                            </a>
+                            <a name="" id="" class="btn btn-danger btn-sm" href="/admin/giamgia/remove/{{makm}}" role="button" title="xóa khuyến mãi">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                       {{!--  <td>
+                            <a href="/admin/hoadonct/{{mahd}}" title="xem chi tiết hóa đơn">
+                            {{mahd}}
+                            </a>
+                        </td> --}}
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+        </div>
+        <!-- end -->
+    </div>
+</div>
+<!-- end row -->

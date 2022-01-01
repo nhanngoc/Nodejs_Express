@@ -1,0 +1,153 @@
+<div id="container">
+
+    <div id="content" class="container"><div class="doublepad">
+      <div class="pagetitle marbot">Trang cá nhân</div>
+    
+      <form action="https://www.bexinhshop.vn/register" method="post" enctype="multipart/form-data">
+      <div class="row-fluid window">
+        <div class="span6">
+            <div class="subtitle">Thông tin cá nhân</div>
+          <table class="form">
+            <tbody><tr>
+              <td><span class="required"></span> Họ tên:</td>
+              <td><input type="text" name="firstname" value="{{this.user.tenkh}}">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required"></span> Tên đặt nhập:</td>
+              <td><input type="text" name="username" value="">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required"></span> Địa chỉ E-Mail:</td>
+              <td><input type="text" name="email" value="">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required"></span> Điện Thoại:</td>
+              <td><input type="text" name="sdt" value="">
+                </td>
+            </tr>
+            
+          </tbody></table>
+          
+          
+         {{!--  <div class="subtitle">Mật khẩu</div>
+          <table class="form">
+            <tbody><tr>
+              <td><span class="required">*</span> Mật Khẩu:</td>
+              <td><input type="password" name="password" value="">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required">*</span> Nhập lại Mật Khẩu:</td>
+              <td><input type="password" name="confirm" value="">
+                </td>
+            </tr>
+          </tbody>
+          </table> --}}
+    
+        </div>
+    
+        <div class="span6">
+            <div class="subtitle">Thông tin đơn hàng</div>
+          <table class="form">
+            <tbody><tr>
+              <td>Công ty:</td>
+              <td><input type="text" name="company" value=""></td>
+            </tr>        
+            <tr style="display: none;">
+              <td>entry_customer_group</td>
+              <td>                        <input type="radio" name="customer_group_id" value="1" id="customer_group_id1" checked="checked">
+                <label for="customer_group_id1">Default</label>
+                <br>
+                            </td>
+            </tr>      
+            <tr id="company-id-display">
+              <td><span id="company-id-required" class="required" style="display: none;">*</span> Trang Web:</td>
+              <td><input type="text" name="company_id" value="">
+                </td>
+            </tr>
+            <tr id="tax-id-display" style="display: none;">
+              <td><span id="tax-id-required" class="required">*</span> entry_tax_id</td>
+              <td><input type="text" name="tax_id" value="">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required">*</span> Địa chỉ dòng 1:</td>
+              <td><input type="text" name="address_1" value="">
+                </td>
+            </tr>
+            <tr>
+              <td>Địa chỉ dòng 2:</td>
+              <td><input type="text" name="address_2" value=""></td>
+            </tr>
+            <tr>
+              <td><span class="required">*</span> Thành phố / Huyện:</td>
+              <td><input type="text" name="city" value="">
+                </td>
+            </tr>
+            <tr>
+              <td><span id="postcode-required" class="required" style="display: none;">*</span> Mã Bưu Điện:</td>
+              <td><input type="text" name="postcode" value="">
+                </td>
+            </tr>
+            
+            <tr>
+              <td><span class="required">*</span> Tỉnh:</td>
+              <td><select name="zone_id"><option value=""> --- Chọn --- </option><option value="3751">An Giang</option><option value="3756">Bà Rịa - Vũng Tàu</option><option value="3752">Bắc Giang</option><option value="3753">Bắc Kan</option><option value="3754">Bạc Liêu</option><option value="3755">Bắc Ninh</option><option value="3757">Bến Tre</option><option value="3759">Bình Dương</option><option value="3760">Bình Phước</option><option value="3761">Bình Thuận</option><option value="3758">Bình Định</option><option value="3762">Cà Mau</option><option value="3763">Cần Thơ</option><option value="3764">Cao Bằng</option><option value="3765">Dak Lak</option><option value="3766">Dak Nông</option><option value="3771">Gia Lai</option><option value="3772">Hà Giang</option><option value="3775">Hà Nam</option><option value="3776">Hà Nội</option><option value="3777">Hà Tây</option><option value="3778">Hà Tĩnh</option><option value="3773">Hải Dương</option><option value="3774">Hải Phòng</option><option value="3781">Hậu Giang</option><option value="3780">Hồ Chí Minh</option><option value="4044">Hòa Bình</option><option value="3779">Hòa Bình</option><option value="4035">Huế</option><option value="3782">Hưng Yên</option><option value="4036">Khánh Hòa</option><option value="4064">Kiên Giang</option><option value="4034">Kontum</option><option value="4037">Lai Châu</option><option value="4038">Lâm Đồng</option><option value="4039">Lạng Sơn</option><option value="4040">Lào Cai</option><option value="4043">Long An</option><option value="4041">Nam Định</option><option value="4042">Nghệ An</option><option value="4045">Ninh Bình</option><option value="4046">Ninh Thuận</option><option value="4065">Phú Thọ</option><option value="4033">Phú yên</option><option value="4047">Quảng Bình</option><option value="4048">Quãng Nam</option><option value="4049">Quãng Ngãi</option><option value="4050">Quãng Ninh</option><option value="4051">Quãng Trị</option><option value="4052">Sóc Trăng</option><option value="4053">Sơn La</option><option value="4054">Tây Ninh</option><option value="4055">Thái Bình</option><option value="4056">Thái Nguyên</option><option value="4057">Thanh Hóa</option><option value="4058">Tiền Giang</option><option value="4059">Trà Vinh</option><option value="4060">Tuyên Quang</option><option value="4061">Vĩnh Long</option><option value="4062">Vĩnh Phúc</option><option value="4063">Yên Bái</option><option value="3767">Đà Nẵng</option><option value="3768">Điện Biên</option><option value="3769">Đồng Nai</option><option value="3770">Đồng Tháp</option></select>
+                </td>
+            </tr>
+          </tbody></table>
+        </div>
+    
+        </div>
+        
+            
+          </form></div>
+    </div>
+    <script type="text/javascript"><!--
+    $('input[name=\'customer_group_id\']:checked').live('change', function() {
+        var customer_group = [];
+        
+        customer_group[1] = [];
+        customer_group[1]['company_id_display'] = '1';
+        customer_group[1]['company_id_required'] = '0';
+        customer_group[1]['tax_id_display'] = '0';
+        customer_group[1]['tax_id_required'] = '1';
+        
+    
+        if (customer_group[this.value]) {
+            if (customer_group[this.value]['company_id_display'] == '1') {
+                $('#company-id-display').show();
+            } else {
+                $('#company-id-display').hide();
+            }
+            
+            if (customer_group[this.value]['company_id_required'] == '1') {
+                $('#company-id-required').show();
+            } else {
+                $('#company-id-required').hide();
+            }
+            
+            if (customer_group[this.value]['tax_id_display'] == '1') {
+                $('#tax-id-display').show();
+            } else {
+                $('#tax-id-display').hide();
+            }
+            
+            if (customer_group[this.value]['tax_id_required'] == '1') {
+                $('#tax-id-required').show();
+            } else {
+                $('#tax-id-required').hide();
+            }	
+        }
+    });
+    
+    $('input[name=\'customer_group_id\']:checked').trigger('change');
+    //--></script> 
+    
+    
+      
+    
+    </div>

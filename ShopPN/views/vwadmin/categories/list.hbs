@@ -16,7 +16,7 @@
                 Không có loại nào
             </p>
         {{else}}
-            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+            <table {{!-- id="datatable-buttons" --}} class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                 <thead>
                     <tr>
                         <th>Mã</th>
@@ -32,11 +32,11 @@
                         <td>{{MaLoai}}</td>
                         <td>{{MaDM}}</td>
                         <td>{{TenLoai}}</td>
-                        <td class="text-right">
+                       {{!--  <td class="text-right">
                             <a name="" id="" class="btn btn-primary btn-sm" href="/admin/category/edit/{{MaLoai}}" role="button" title="sửa loại">
                                 <i class="mdi mdi-border-color" aria-hidden="true"></i>
                             </a>
-                        </td>
+                        </td> --}}
                     </tr>
                     {{/each}}
                 </tbody>

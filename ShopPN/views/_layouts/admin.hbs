@@ -3,17 +3,18 @@
 
     <head>
         <meta charset="utf-8">
-        <title>ShopPN | Admin</title>
+        <title>BeXinhShop | Admin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Admin" name="description">
         <meta content="Coderthemes" name="author">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- App favicon -->
-        <link rel="shortcut icon" href="\public\admin\images\favicon.ico">
+        <link rel="shortcut icon" href="/public/favicon.ico">
+
         <!-- App css -->
-        <link href="\public\admin\css\bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
-        <link href="\public\admin\css\icons.min.css" rel="stylesheet" type="text/css">
-        <link href="\public\admin\css\app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet">
+        <link href="/public/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
+        <link href="/public/admin/css/icons.min.css" rel="stylesheet" type="text/css">
+        <link href="/public/admin/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet">
 
     </head>
 
@@ -21,46 +22,16 @@
 
         <!-- Begin page -->
         <div id="wrapper">
-
-            
             <!-- Topbar Start -->
             <div class="navbar-custom">
                 <ul class="list-unstyled topnav-menu float-right mb-0">
-
-                    <li class="dropdown d-none d-lg-block">
-                        <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="\public\admin\images\flags\us.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">English <i class="mdi mdi-chevron-down"></i> </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                             <!-- item-->
-                             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="\public\admin\images\flags\spain.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Spanish</span>
-                             </a>
-
-                             <!-- item-->
-                             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="\public\admin\images\flags\italy.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Italian</span>
-                             </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src="\public\admin\images\flags\french.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">French</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src="\public\admin\images\flags\russia.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Russian</span>
-                            </a>
-                        </div>
-                    </li>
-
-                    <li class="dropdown notification-list">
+                 
+                   {{!--  <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="mdi mdi-bell noti-icon"></i>
                             <span class="badge badge-danger rounded-circle noti-icon-badge">4</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="font-16 m-0">
@@ -71,33 +42,27 @@
                                     </span>Notification
                                 </h5>
                             </div>
-
                             <div class="slimscroll noti-scroll">
-
                                  <!-- item-->
                                  <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-success"><i class="mdi mdi-comment-account-outline"></i></div>
                                         <p class="notify-details">Caleb Flakelar commented on Admin<small class="text-muted">1 min ago</small></p>
                                     </a>
-
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-info"><i class="mdi mdi-account-plus"></i></div>
                                         <p class="notify-details">New user registered.<small class="text-muted">5 hours ago</small></p>
                                     </a>
-
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-danger"><i class="mdi mdi-heart"></i></div>
                                         <p class="notify-details">Carlos Crouch liked <b>Admin</b><small class="text-muted">3 days ago</small></p>
                                     </a>
-
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-warning"><i class="mdi mdi-comment-account-outline"></i></div>
                                         <p class="notify-details">Caleb Flakelar commented on Admin<small class="text-muted">4 days ago</small></p>
                                     </a>
-
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <div class="notify-icon bg-primary">
@@ -108,7 +73,6 @@
                                         </p>
                                     </a>
                             </div>
-
                             <!-- All-->
                             <a href="javascript:void(0);" class="dropdown-item text-primary text-center notify-item notify-all ">
                                 View all
@@ -116,13 +80,15 @@
                             </a>
 
                         </div>
-                    </li>
+                    </li> --}}
 
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="\public\admin\images\users\avatar-1.jpg" alt="user-image" class="rounded-circle">
+                            <img src="/public/admin/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">
-                                    Maxine K  <i class="mdi mdi-chevron-down"></i> 
+                                {{#if lcIsAuthenticated}}
+                                    {{lcAuthUser.username}}<i class="mdi mdi-chevron-down"></i> 
+                                {{/if}}
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -130,53 +96,44 @@
                              {{#if lcIsAuthenticated}}
                             <!-- item-->
                             <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome!</h6>
+                                <h6 class="text-overflow m-0">{{lcAuthUser.username}}</h6>
                             </div>
                             <!-- item-->
                             <a href="#{{!-- /admin/profile --}}" class="dropdown-item notify-item">
                                 <i class="mdi mdi-account-outline"></i>
-                                <span>Profile</span>
+                                <span>Trang cá nhân</span>
                             </a>
                             <div class="dropdown-divider"></div>
                             <!-- item-->
                             <a href="javascript: $('#frmLogout').submit()" class="dropdown-item notify-item">
                                 <i class="mdi mdi-logout-variant"></i>
-                                <span>Logout</span>
+                                <span>Đăng xuất</span>
                             </a>
                             {{/if}}  
                         </div>
                     </li>
-
-                    <li class="dropdown notification-list">
-                        <a href="javascript:void(0);" class="nav-link right-bar-toggle">
-                            <i class="mdi mdi-settings-outline noti-icon"></i>
-                        </a>
-                    </li>
-
-
                 </ul>
 
                 <!-- LOGO -->
                 <div class="logo-box">
-                    <a href="index.html" class="logo text-center logo-dark">
+                    <a href="/admin/home" class="logo text-center logo-dark">
                         <span class="logo-lg">
-                            <img src="\public\admin\images\logo-dark.png" alt="" height="26">
+                            <img src="/public/admin/images/icon-logo.png" alt="" height="26">
                             <!-- <span class="logo-lg-text-dark">Simple</span> -->
                         </span>
                         <span class="logo-sm">
                             <!-- <span class="logo-lg-text-dark">S</span> -->
-                            <img src="\public\admin\images\logo-sm.png" alt="" height="22">
+                            <img src="/public/admin/images/logo-sm.png" alt="" height="22">
                         </span>
                     </a>
-
-                    <a href="index.html" class="logo text-center logo-light">
+                    <a href="/admin/home" class="logo text-center logo-light">
                         <span class="logo-lg">
-                            <img src="\public\admin\images\logo-light.png" alt="" height="26">
+                            <img src="/public/admin/images/logo-light.png" alt="" height="26">
                             <!-- <span class="logo-lg-text-light">Simple</span> -->
                         </span>
                         <span class="logo-sm">
                             <!-- <span class="logo-lg-text-light">S</span> -->
-                            <img src="\public\admin\images\logo-sm.png" alt="" height="22">
+                            <img src="/public/admin/images/logo-sm.png" alt="" height="22">
                         </span>
                     </a>
                 </div>
@@ -187,81 +144,33 @@
                             <i class="mdi mdi-menu"></i>
                         </button>
                     </li>
-        
-                    <li class="d-none d-sm-block">
-                        <form class="app-search">
-                            <div class="app-search-box">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <div class="input-group-append">
-                                        <button class="btn" type="submit">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </li>
+                   
                 </ul>
             </div>
             <!-- end Topbar --> <!-- ========== Left Sidebar Start ========== -->
-<div class="left-side-menu">
-
-
+        <div class="left-side-menu">
+            {{#if lcIsAuthenticated}}
                 <div class="user-box">
                         <div class="float-left">
-                            <img src="\public\admin\images\users\avatar-1.jpg" alt="" class="avatar-md rounded-circle">
+                            <img src="/public/admin/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle">
                         </div>
                         <div class="user-info">
-                            <a href="#">Stanley Jones</a>
-                            <p class="text-muted m-0">Administrator</p>
+                            <a href="#">{{lcAuthUser.username}}</a>
+                            <p class="text-muted m-0">Người quản trị</p>
                         </div>
                     </div>
-    
+            {{/if}}
             <!--- Sidemenu -->
             <div id="sidebar-menu">
     
                 <ul class="metismenu" id="side-menu">
-    
-                    <li class="menu-title">Navigation</li>
-    
-                    <li>
+                    {{!-- <li>
                         <a href="index.html">
                             <i class="ti-home"></i>
                             <span> Dashboard </span>
                         </a>
-                    </li>
-    
-                    <li>
-                        <a href="ui-elements.html">
-                            <i class="ti-paint-bucket"></i>
-                            <span> UI Elements </span>
-                            <span class="badge badge-primary float-right">11</span>
-                        </a>
-                    </li>
-    
-                    <li>
-                        <a href="javascript: void(0);">
-                            <i class="ti-light-bulb"></i>
-                            <span> Components </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="components-range-slider.html">Range Slider</a></li>
-                            <li><a href="components-alerts.html">Alerts</a></li>
-                            <li><a href="components-icons.html">Icons</a></li>
-                            <li><a href="components-widgets.html">Widgets</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="typography.html">
-                            <i class="ti-spray"></i>
-                            <span> Typography </span>
-                        </a>
-                    </li>
-    
-                    <li>
+                    </li> --}}
+                    {{!-- <li>
                         <a href="javascript: void(0);">
                             <i class="ti-pencil-alt"></i>
                             <span>  Forms  </span>
@@ -270,6 +179,33 @@
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="forms-general.html">General Elements</a></li>
                             <li><a href="forms-advanced.html">Advanced Form</a></li>
+                        </ul>
+                    </li> --}}
+                    {{!-- Hóa đơn --}}
+                     <li>
+                        <a href="javascript: void(0);">
+                            <i class="ti-menu-alt"></i>
+                            <span>  Đơn hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="/admin/hoadon/choxacnhan">Chờ xác nhận</a></li>
+                            <li><a href="/admin/hoadon/daxacnhan">Đã xác nhận</a></li>
+                            <li><a href="/admin/hoadon/danggiao">Đang giao</a></li>
+                            <li><a href="/admin/hoadon/danhan">Đã nhận hàng</a></li>
+                            <li><a href="/admin/hoadon/dahuy">Đã hủy</a></li>
+                        </ul>
+                    </li>
+                     {{!-- Khách hàng --}}
+                     <li>
+                        <a href="javascript: void(0);">
+                            <i class="ti-menu-alt"></i>
+                            <span>  Khách hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="/admin/kh">Danh sách khách hàng</a></li>
+                            <li><a href="/admin/hoadon">Danh sách hóa đơn</a></li>
                         </ul>
                     </li>
                     {{!-- sản phẩm --}}
@@ -280,10 +216,13 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="/admin/products/list">Danh sách sản phẩm</a></li>
-                            <li><a href="/admin/products/add">Thêm Mới</a></li>
+                            <li><a href="/admin/products/add">Thêm mới</a></li>
+                            <li><a href="/admin/products/list">Sản phẩm</a></li>
+                            <li><a href="/admin/attribute/list">Sản phẩm thuộc tính</a></li>
                         </ul>
                     </li>
+                    {{!-- attribute --}}
+                     
                      {{!-- loại sản phẩm --}}
                      <li>
                         <a href="javascript: void(0);">
@@ -293,135 +232,34 @@
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="/admin/category/list">Danh sách loại</a></li>
-                            <li><a href="tables-advanced.html">Thêm Mới</a></li>
+                            {{!-- <li><a href="tables-advanced.html">Thêm Mới</a></li> --}}
                         </ul>
                     </li>
-                    {{!-- Khách hàng --}}
-                     <li>
-                        <a href="javascript: void(0);">
-                            <i class="ti-menu-alt"></i>
-                            <span>  Khách hàng </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="/admin/kh">Danh sách khách hàng</a></li>
-                            <li><a href="tables-advanced.html">Thêm Mới</a></li>
-                        </ul>
-                    </li>
+                   
                      {{!-- Tài khoản Admin --}}
                      <li>
                         <a href="javascript: void(0);">
                             <i class="ti-menu-alt"></i>
-                            <span> Tài khoản Admin </span>
+                            <span> Tài khoản </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="/admin/user">Danh sách</a></li>
-                            <li><a href="tables-advanced.html">Thêm Mới</a></li>
+                            {{!-- <li><a href="">Thêm Mới</a></li> --}}
                         </ul>
                     </li>
+                    {{!-- Giảm giá --}}
                     <li>
                         <a href="javascript: void(0);">
                             <i class="ti-menu-alt"></i>
-                            <span>  Tables </span>
+                            <span> Khuyến mãi </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="tables-basic.html">Basic Tables</a></li>
-                            <li><a href="tables-advanced.html">Advanced Tables</a></li>
+                            <li><a href="/admin/giamgia">Danh sách</a></li>
                         </ul>
                     </li>
-    
-                    <li>
-                        <a href="charts.html">
-                            <i class="ti-pie-chart"></i>
-                            <span>  Charts  </span>
-                            <span class="badge badge-primary float-right">5</span>
-                        </a>
-                    </li>
-    
-                    <li>
-                        <a href="maps.html">
-                            <i class="ti-location-pin"></i>
-                            <span> Maps </span>
-                        </a>
-                    </li>
-    
-                    <li>
-                        <a href="javascript: void(0);">
-                            <i class="ti-files"></i>
-                            <span> Pages </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="pages-login.html">Login</a></li>
-                            <li><a href="pages-register.html">Register</a></li>
-                            <li><a href="pages-forget-password.html">Forget Password</a></li>
-                            <li><a href="pages-lock-screen.html">Lock-screen</a></li>
-                            <li><a href="pages-blank.html">Blank page</a></li>
-                            <li><a href="pages-404.html">Error 404</a></li>
-                            <li><a href="pages-confirm-mail.html">Confirm Mail</a></li>
-                            <li><a href="pages-session-expired.html">Session Expired</a></li>
-                        </ul>
-                    </li>
-    
-                    <li>
-                        <a href="javascript: void(0);">
-                            <i class="ti-widget"></i>
-                            <span> Extra Pages </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="nav-second-level" aria-expanded="false">
-    
-                            <li><a href="extras-timeline.html">Timeline</a></li>
-                            <li><a href="extras-invoice.html">Invoice</a></li>
-                            <li><a href="extras-profile.html">Profile</a></li>
-                            <li><a href="extras-calendar.html">Calendar</a></li>
-                            <li><a href="extras-faqs.html">FAQs</a></li>
-                            <li><a href="extras-pricing.html">Pricing</a></li>
-                            <li><a href="extras-contacts.html">Contacts</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript: void(0);">
-                            <i class="ti-layout"></i>
-                            <span> Layouts </span>
-                            <span class="badge badge-danger badge-pill float-right">New</span>
-                        </a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="layouts-horizontal.html">Horizontal</a></li>
-                            <li><a href="layouts-dark-sidebar.html">Dark Sidebar</a></li>
-                            <li><a href="layouts-small-sidebar.html">Small Sidebar</a></li>
-                            <li><a href="layouts-sidebar-collapsed.html">Sidebar Collapsed</a></li>
-                        </ul>
-                    </li>
-    
-                    <li>
-                        <a href="javascript: void(0);">
-                            <i class="ti-share"></i>
-                            <span>  Multi Level  </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="nav-second-level nav" aria-expanded="false">
-                            <li>
-                                <a href="javascript: void(0);">Level 1.1</a>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);" aria-expanded="false">Level 1.2
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                <ul class="nav-third-level nav" aria-expanded="false">
-                                    <li>
-                                        <a href="javascript: void(0);">Level 2.1</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript: void(0);">Level 2.2</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                
                 </ul>
     
             </div>
@@ -449,15 +287,12 @@
 
                     </div>
                     <!-- end container-fluid -->
-
-                    
-
                     <!-- Footer Start -->
                     <footer class="footer">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                    2017 - 2020 &copy; Simple theme by <a href="">Coderthemes</a>
+                                    10 / 2021 &copy; Shop  <a href="#">bé xinh</a>
                                 </div>
                             </div>
                         </div>
@@ -473,7 +308,6 @@
         </div>
         <!-- END wrapper -->
 
-        
         <!-- Right Sidebar -->
         <div class="right-bar">
             <div class="rightbar-title">
@@ -489,7 +323,7 @@
                         <strong>Customize </strong> the overall color scheme, layout, etc.
                     </div>
                     <div class="mb-2">
-                        <img src="\public\admin\images\layouts\light.png" class="img-fluid img-thumbnail" alt="">
+                        <img src="/public/admin/images/layouts/light.png" class="img-fluid img-thumbnail" alt="">
                     </div>
                     <div class="custom-control custom-switch mb-3">
                         <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked="">
@@ -497,18 +331,18 @@
                     </div>
             
                     <div class="mb-2">
-                        <img src="\public\admin\images\layouts\dark.png" class="img-fluid img-thumbnail" alt="">
+                        <img src="/public/admin/images/layouts/dark.png" class="img-fluid img-thumbnail" alt="">
                     </div>
                     <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsstyle="\public\admin/css/bootstrap-dark.min.css" data-appstyle="\public\admin/css/app-dark.min.css">
+                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsstyle="/public/admin/css/bootstrap-dark.min.css" data-appstyle="/public/admin/css/app-dark.min.css">
                         <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
                     </div>
             
                     <div class="mb-2">
-                        <img src="\public\admin\images\layouts\rtl.png" class="img-fluid img-thumbnail" alt="">
+                        <img src="/public/admin/images/layouts/rtl.png" class="img-fluid img-thumbnail" alt="">
                     </div>
                     <div class="custom-control custom-switch mb-5">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appstyle="\public\admin/css/app-rtl.min.css">
+                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appstyle="/public/admin/css/app-rtl.min.css">
                         <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
                     </div>
 
@@ -526,36 +360,36 @@
         </a> --}}
 
         <!-- Vendor js -->
-        <script src="\public\admin\js\vendor.min.js"></script>
+        <script src="/public/admin/js/vendor.min.js"></script>
 
-        <script src="\public\admin\libs\morris-js\morris.min.js"></script>
-        <script src="\public\admin\libs\raphael\raphael.min.js"></script>
+        <script src="/public/admin/libs/morris-js/morris.min.js"></script>
+        <script src="/public/admin/libs/raphael/raphael.min.js"></script>
 
-        <script src="\public\admin\js\pages\dashboard.init.js"></script>
+        <script src="/public/admin/js/pages/dashboard.init.js"></script>
 
         <!-- Required datatable js -->
-        <script src="\public\admin\libs\datatables\jquery.dataTables.min.js"></script>
-        <script src="\public\admin\libs\datatables\dataTables.bootstrap4.min.js"></script>
+        <script src="/public/admin/libs/datatables/jquery.dataTables.min.js"></script>
+        <script src="/public/admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
         <!-- Buttons examples -->
-        <script src="\public\admin\libs\datatables\dataTables.buttons.min.js"></script>
-        <script src="\public\admin\libs\datatables\buttons.bootstrap4.min.js"></script>
-        <script src="\public\admin\libs\datatables\dataTables.keyTable.min.js"></script>
-        <script src="\public\admin\libs\datatables\dataTables.select.min.js"></script>
-        <script src="\public\admin\libs\jszip\jszip.min.js"></script>
-        <script src="\public\admin\libs\pdfmake\pdfmake.min.js"></script>
-        <script src="\public\admin\libs\pdfmake\vfs_fonts.js"></script>
-        <script src="\public\admin\libs\datatables\buttons.html5.min.js"></script>
-        <script src="\public\admin\libs\datatables\buttons.print.min.js"></script>
+        <script src="/public/admin/libs/datatables/dataTables.buttons.min.js"></script>
+        <script src="/public/admin/libs/datatables/buttons.bootstrap4.min.js"></script>
+        <script src="/public/admin/libs/datatables/dataTables.keyTable.min.js"></script>
+        <script src="/public/admin/libs/datatables/dataTables.select.min.js"></script>
+        <script src="/public/admin/libs/jszip/jszip.min.js"></script>
+        <script src="/public/admin/libs/pdfmake/pdfmake.min.js"></script>
+        <script src="/public/admin/libs/pdfmake/vfs_fonts.js"></script>
+        <script src="/public/admin/libs/datatables/buttons.html5.min.js"></script>
+        <script src="/public/admin/libs/datatables/buttons.print.min.js"></script>
 
         <!-- Responsive examples -->
-        <script src="\public\admin\libs\datatables\dataTables.responsive.min.js"></script>
-        <script src="\public\admin\libs\datatables\responsive.bootstrap4.min.js"></script>
+        <script src="/public/admin/libs/datatables/dataTables.responsive.min.js"></script>
+        <script src="/public/admin/libs/datatables/responsive.bootstrap4.min.js"></script>
 
         <!-- Datatables init -->
-        <script src="\public\admin\js\pages\datatables.init.js"></script>
+        <script src="/public/admin/js/pages/datatables.init.js"></script>
 
         <!-- App js -->
-        <script src="\public\admin\js\app.min.js"></script>
+        <script src="/public/admin/js/app.min.js"></script>
 
     </body>
 

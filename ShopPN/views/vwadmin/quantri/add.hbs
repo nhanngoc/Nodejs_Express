@@ -1,0 +1,90 @@
+ <!-- Start container-fluid -->
+                    <div class="container-fluid">
+
+                        <!-- start  -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <h4 class="header-title mb-3">Thêm mới tài khoản</h4>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form class="form-horizontal" method="POST" action="">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Họ Tên:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="tennv">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Giới tính:</label>
+                                        <div class="col-md-9">
+                                            <input type="radio" id="nam" name="gioitinh" value="Nam">
+                                            <label for="nam">Nam</label>
+                                            <input type="radio" id="nu" name="gioitinh" value="Nữ">
+                                            <label for="nu">Nữ</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label" for="txtemail">Email:</label>
+                                        <div class="col-md-9">
+                                            <input type="email" id="txtemail" name="email" class="form-control" placeholder="Nhập Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label" for="txtsdt">Số điện thoại:</label>
+                                        <div class="col-md-9">
+                                            <input type="number" id="txtsdt" name="sdt" class="form-control" placeholder="Nhập số điện thoại">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label" for="txtusername">Tên đăng nhập:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="txtusername" name="username" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label" for="txtPassword">Mật khẩu:</label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" name="password" id="txtPassword">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label" for="txtConfirm">Nhập lại mật khẩu:</label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" id="txtConfirm" Confirm="confirm">
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Ngày sinh:</label>
+                                        <div class="col-md-9">
+                                            <input type="date" id="ngaysinh" name="ngaysinh"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Quyền:</label>
+                                        <div class="col-md-9">
+                                            <input type="radio" id="admin" name="quyen" value="admin">
+                                            <label for="admin">Admin</label>
+                                            <input type="radio" id="nv" name="quyen" value="nhanvien">
+                                            <label for="nv">Nhân viên</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                        Thêm mới
+                                    </button>
+                                </form>
+                            </div>
+                            <!-- end -->
+
+                            
+
+                        </div>
+                        <!-- end row -->

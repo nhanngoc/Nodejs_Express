@@ -16,16 +16,10 @@
                         <span><img src="assets\images\logo-dark.png" alt="" height="30"></span>
                     </a>
                 </div>
-               
-                
-                <form class="form-horizontal" role="form" method="post" action="/admin/products/add" enctype="multipart/form-data">
-                        {{!-- <% if (message.length > 0) { %>
-                            <div class="alert alert-success col-sm-12"><%= message %></div>
-                        <% } %>
-                        <div id="signupalert" style="display:none" class="alert alert-danger">
-                            <p>Error:</p>
-                            <span></span>
-                        </div> --}}
+                <form class="form-horizontal" role="form" method="post" action="" enctype="multipart/form-data">
+                        {{#if message}}
+                            <div class="alert alert-success col-sm-12">{{message}}</div>
+                        {{/if}}
                         <div class="form-group">
                             <div class="col-md-9">
                                 <select class="custom-select mt-3"id="txtMaLoai" name="MaLoai">
@@ -43,29 +37,28 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="SoLuong" class="col-md-3 control-label">Số Lượng</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="SoLuong" placeholder="Nhập số lượng">
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="Gia" class="col-md-3 control-label">Giá</label>
                             <div class="col-md-9">
                                 <input type="number" class="form-control" name="Gia" placeholder="Nhập giá">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Size" class="col-md-3 control-label">Size</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="Size" placeholder="Nhập size">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="uploaded_image" class="col-md-3 control-label">Hình ảnh</label>
+                            <label for="uploaded_image" class="col-md-3 control-label">Hình đại diện</label>
                             <div class="col-sm-9">
                                 <input class="form-control" type="file" name="uploaded_image" accept=""/>
                             </div>
-                        </div>                                
+                        </div>  
+                        <div class="form-group">
+                            <label for="many_files" class="col-md-3 control-label">Hình chi tiết</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="file"id="file" multiple name="many_files" accept=""/>
+                            </div>
+                        </div>    
+                        {{!-- <div class="form-group">
+                             <label for="uploaded_image" class="col-md-3 control-label">Hình chi tiết</label>
+                            <input type="file" name="many_files" id="file" multiple class="form-control-file border">
+                        </div> --}}
+                                                    
                         <div class="form-group">
                             <label for="MoTa" class="col-md-3 control-label">Mô Tả</label>
                             <div class="col-md-9">
@@ -73,9 +66,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="NgayNhap" class="col-md-3 control-label">Ngày Nhập</label>
+                            <label for="MoTa" class="col-md-3 control-label">Chất liệu</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="NgayNhap" placeholder="Ngày nhập">
+                                <input type="text" class="form-control" name="chatlieu" placeholder="Nhập chất liệu">
                             </div>
                         </div>
                         <div class="form-group">
@@ -85,9 +78,6 @@
                             </div>
                         </div>  
                     </form>
-
-
-
             </div>
             <!-- end card-body -->
         </div>
@@ -96,3 +86,25 @@
     <!-- end col -->
 </div>
 <!-- end row -->
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Multiple images preview in browser - trungquandev.com
+            let imagesPreview = function(input, placeToInsertImagePreview) {
+                if (input.files) {
+                    let filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        let reader = new FileReader();
+                        reader.onload = function(event) {
+                            $($.parseHTML("<img>")).attr("src", event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+
+            $("#input-many-files").on("change", function() {
+                imagesPreview(this, "div.preview-images");
+            });
+        });
+    </script>

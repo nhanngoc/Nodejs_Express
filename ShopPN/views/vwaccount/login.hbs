@@ -1,216 +1,136 @@
-
-
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-
-  <title>ShopPN</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- {{!-- css header --}}
-<link rel="stylesheet" href="/public/stylesheets/style.login.css">
-  
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-  
-  <script>
-  window.console = window.console || function(t) {};
-</script>
-  <script>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
-  }
-</script>
-</head>
-
-<body translate="no" id="particles-js">
-  
-<div class="animated bounceInDown">
-  <div class="container">
-    {{#if err}}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span class="error animated tada" id="msg"></span>
-            </button>
-            {{err}}
-         </div>
-     {{/if}}
-    <form method="POST" name="form1" class="box" onsubmit="return checkStuff()">
-      <h4>Đăng nhập vào tài khoản của bạn</h4>
-      <br>
-      <br>
-        <input type="text" name="username" placeholder="username" autocomplete="off">
-        <i class="typcn typcn-eye" id="eye"></i>
-        <input type="password" name="password" placeholder="Passsword" id="pwd" autocomplete="off">
-
-        <a href="#" class="forgetpass">Bạn quên mật khẩu?</a>
-         <button type="submit" class="btn1">
-                Đăng nhập
-        </button>
-        
-      </form>
-        <a href="/account/register" class="dnthave">Bạn chưa có tài khoản? Đăng ký ngay</a>
-  </div> 
-</div>
-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
-
-  <script src="https://cldup.com/S6Ptkwu_qA.js"></script>
-<script id="rendered-js">
-var pwd = document.getElementById('pwd');
-var eye = document.getElementById('eye');
-
-eye.addEventListener('click', togglePass);
-
-function togglePass() {
-
-  eye.classList.toggle('active');
-
-  pwd.type == 'password' ? pwd.type = 'text' : pwd.type = 'password';
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Đăng ký tài khoản mới</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          *{
+    padding: 0px;
+    margin: 0px;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+.container{
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.col-6{
+    float: left;
+    width: 50%;
+}
+.margin_b{
+    margin-bottom: 7.5px;
+}
+.clear{
+    clear: both;
+}
+main{
+    background-color: #dddddd;
+    min-height: 300px;
+    padding: 7.5px 15px;
 }
 
-// Form Validation
-
-function checkStuff() {
-  var email = document.form1.email;
-  var password = document.form1.password;
-  var msg = document.getElementById('msg');
-
-  if (email.value == "") {
-    msg.style.display = 'block';
-    msg.innerHTML = "Please enter your email";
-    email.focus();
-    return false;
-  } else {
-    msg.innerHTML = "";
-  }
-
-  if (password.value == "") {
-    msg.innerHTML = "Please enter your password";
-    password.focus();
-    return false;
-  } else {
-    msg.innerHTML = "";
-  }
-  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (!re.test(email.value)) {
-    msg.innerHTML = "Please enter a valid email";
-    email.focus();
-    return false;
-  } else {
-    msg.innerHTML = "";
-  }
+h1{
+    color: #009999;
+    font-size: 20px;
+    margin-bottom: 30px;
 }
 
-// ParticlesJS
+.register-form{
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 15px;
+    border: 2px dotted #cccccc;
+    border-radius: 10px;
+}
 
-// ParticlesJS Config.
-particlesJS("particles-js", {
-  "particles": {
-    "number": {
-      "value": 60,
-      "density": {
-        "enable": true,
-        "value_area": 800 } },
+.input-box{
+    margin-bottom: 10px;
+}
+.input-box input[type='text'],
+.input-box input[type='password'],
+.input-box input[type='date']{
+    padding: 7.5px 15px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    outline: none;
+    font-size: 16px;
+    display: inline-block;
+    height: 40px;
+    color: #666666;
+}
+.input-box select{
+    padding: 7.5px 15px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    outline: none;
+    font-size: 16px;
+    display: inline-block;
+    height: 40px;
+    color: #666666;
+}
+.input-box option{
+    font-size: 16px;
+}
+.input-box input[type='checkbox']{
+    height: 1.5em;
+    width: 1.5em;
+    vertical-align: middle;
+    line-height: 2em;
+}
+.input-box textarea{
+    padding: 7.5px 15px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    outline: none;
+    font-size: 16px;
+    min-height: 120px;
+    color: #666666;
+}
+.btn-box{
+    text-align: right;
+    margin-top: 30px;
+}
+.btn-box button{
+    padding: 7.5px 15px;
+    border-radius: 2px;
+    background-color: #009999;
+    color: #ffffff;
+    border: none;
+    outline: none;
+}
+        </style>
+    </head>
+    <body>
 
-
-    "color": {
-      "value": "#ffffff" },
-
-    "shape": {
-      "type": "circle",
-      "stroke": {
-        "width": 0,
-        "color": "#000000" },
-
-      "polygon": {
-        "nb_sides": 5 },
-
-      "image": {
-        "src": "img/github.svg",
-        "width": 100,
-        "height": 100 } },
-
-
-    "opacity": {
-      "value": 0.1,
-      "random": false,
-      "anim": {
-        "enable": false,
-        "speed": 1,
-        "opacity_min": 0.1,
-        "sync": false } },
-
-
-    "size": {
-      "value": 6,
-      "random": false,
-      "anim": {
-        "enable": false,
-        "speed": 40,
-        "size_min": 0.1,
-        "sync": false } },
-
-
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#ffffff",
-      "opacity": 0.1,
-      "width": 2 },
-
-    "move": {
-      "enable": true,
-      "speed": 1.5,
-      "direction": "top",
-      "random": false,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false,
-      "attract": {
-        "enable": false,
-        "rotateX": 600,
-        "rotateY": 1200 } } },
-
-
-
-  "interactivity": {
-    
-    "events": {
-      "onhover": {
-        "enable": false,
-        "mode": "repulse" },
-
-      "onclick": {
-        "enable": false,
-        "mode": "push" },
-
-      "resize": true },
-
-    "modes": {
-      "grab": {
-        "distance": 400,
-        "line_linked": {
-          "opacity": 1 } },
-
-
-      "bubble": {
-        "distance": 400,
-        "size": 40,
-        "duration": 2,
-        "opacity": 8,
-        "speed": 3 },
-
-      "repulse": {
-        "distance": 200,
-        "duration": 0.4 },
-
-      "push": {
-        "particles_nb": 4 },
-
-      "remove": {
-        "particles_nb": 2 } } },
-
-  "retina_detect": true });
-    </script>
- 
-</body></html>
+        <main>
+            <div class="container">
+                <div class="register-form">
+                    <form method="POST" name="form1" class="box" onsubmit="return checkStuff()">
+                        <h1>Đăng nhập tài khoản</h1>
+                        <div class="input-box">
+                            <input type="text" name="username" placeholder="Nhập tên tài khoản" id="usn" autocomplete="off">
+                        </div>
+                        <div class="input-box">
+                            <i class="typcn typcn-eye" id="eye"></i>
+                            <input type="password" name="password" placeholder="Nhập mật khẩu" id="pwd" autocomplete="off">
+                        </div>
+                        <div class="btn-box" style="text-align: center;">
+                            <button type="submit">
+                                Đăng nhập
+                            </button>
+                        </div>
+                    </form>
+                    <a href="/account/register" class="dnthave">Bạn chưa có tài khoản? Đăng ký ngay</a>
+                </div>
+            </div>
+        </main>
+       
+       
+    </body>
+</html>

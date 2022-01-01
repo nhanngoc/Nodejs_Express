@@ -4,8 +4,8 @@ const Joi = require("joi");
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/user.model");
 const config = require("../config/default.json");
-const Order = require('../models/order.model');
-const Cart = require('../models/cart');
+const orderModel = require("../models/order.model");
+const Cart = require("../models/cart");
 //register
 //const {validationResult} = require('express-validator');
 const { registerValidator } = require("../middlewares/validate.mdw");
@@ -14,7 +14,7 @@ const restrict = require("../middlewares/auth.mdw");
 const router = express.Router();
 
 router.get("/login", async function (req, res) {
-  res.render("vwaccount/login"/* , { layout: false } */); //tat layout trang chu
+  res.render("vwaccount/login"); //tat layout trang chu
 });
 router.post("/login", async function (req, res) {
   const user = await userModel.singleUserName(req.body.username);
@@ -35,8 +35,9 @@ router.post("/login", async function (req, res) {
   delete user.password;
   req.session.isAuthenticated = true;
   req.session.authUser = user;
-  //const url = req.query.retUrl || "/";
-  res.redirect(req.headers.referer);
+  const url = req.query.retUrl || "/";
+  //res.redirect(req.headers.referer);
+  res.redirect(url);
 });
 
 //logout
@@ -56,17 +57,10 @@ router.post("/register", async function (req, res, next) {
   // validate
   const user = await userModel.singleUserName(req.body.username);
   if (user === +req.params.username) {
-    throw new 'Username "'() + params.username + '" is already taken';
+    const ero = "Tên tài khoản đã tồn tại";
+    return res.redirect("/account/register", { ero });
+    /* throw new 'Username "'() + params.username + '" is already taken'; */
   }
-  /* if (error){
-    throw res.status(422).send(error.details[0].message);
-  }  */
-  if (error) {
-    throw res.status(422).send(error.details[0].message);
-  }
-  //const checkEmailExist = await userModel.findOne({ email: req.body.email });
-  //if (checkEmailExist) return res.status(422).send('Email is exist');
-
   const salt = bcrypt.genSaltSync(10);
   const password_hash = bcrypt.hashSync(req.body.password, salt);
   const entity = {
@@ -74,15 +68,14 @@ router.post("/register", async function (req, res, next) {
     username: req.body.username,
     password: password_hash,
     email: req.body.email,
-    diachi: req.body.diachi,
     sdt: req.body.sdt,
+    phuong_xa: req.body.phuong_xa,
+    quan_huyen: req.body.quan_huyen,
+    tinh: req.body.tinh,
+    diachi: req.body.diachi,
   };
-  try {
-    await userModel.add_kh(entity); // luu database
-    res.render("vwaccount/register");
-  } catch (err) {
-    res.status(400).send(err);
-  }
+  await userModel.add_kh(entity); // luu database
+  res.render("vwaccount/register");
 });
 
 //login profile
@@ -93,8 +86,22 @@ router.post("/register", async function (req, res, next) {
 
 //login profile
 router.get("/profile", restrict.user, async function (req, res) {
-  user=req.session.authUser;
-  res.render("vwaccount/profile",{user});
+  user = req.session.authUser;
+  const makh = user.MaKH;
+  const total1 = await orderModel.total_choxacnhan(makh);
+  const total2 = await orderModel.total_daxacnhan(makh);
+  const total3 = await orderModel.total_danggiao(makh);
+  const total4 = await orderModel.total_danhanhang(makh);
+  const total5 = await orderModel.total_dahuy(makh);
+
+  res.render("vwaccount/profile", {
+    user,
+    total1: total1,
+    total2: total2,
+    total3: total3,
+    total4: total4,
+    total5: total5,
+  });
   /* Order.all(console.log("aaaaaaaaaaa",{ user: req.session.authUser}), function (err, orders) {
       if (err) {
         return res.write("Error!");
@@ -107,7 +114,6 @@ router.get("/profile", restrict.user, async function (req, res) {
       res.render("vwaccount/profile", { orders: orders });
     }); */
 });
-
 /* router.get("/is-available", async function (req, res) {
  const user = await userModel.singleUserName(req.query.user);
   if(!user){
@@ -115,5 +121,92 @@ router.get("/profile", restrict.user, async function (req, res) {
   }
   res.json(false);
 }); */
+//xem danh sách đơn đặt hàng
+router.get("/profile/order", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  console.log("khachhang", user);
+  const makh = user.MaKH;
+  const order = await orderModel.all_order_makh(makh);
+  console.log("order", order);
+  res.render("vwaccount/order", { order: order });
+});
+//xem danh sách chi tiết đơn đặt hàng
+router.get("/profile/order/:id", restrict.user, async function (req, res) {
+  const mahd = req.params.id;
+  const user = req.session.authUser;
+  const order_mahd = await orderModel.all_order_mahd(mahd);
+  const order_detail = await orderModel.all_order_ct(mahd);
+  console.log("order_detail", order_detail);
+  res.render("vwaccount/order_detail", {
+    order_detail: order_detail,
+    order_mahd: order_mahd,
+  });
+});
+//1xem danh sách choxacnhan đơn đặt hàng
+router.get("/profile/choxacnhan", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const order = await orderModel.all_order_choxacnhan(makh);
+  var total = 0;
+  for (let i = 0; i < order.length; i++) {
+    total++;
+  }
+  res.render("vwaccount/order_huy", { order: order, total: total });
+});
+//huydon tu khach hang
+router.get("/profile/dahuy/:mahd", restrict.user, async function (req, res) {
+  const mahd = req.params.mahd;
+  const entity = {
+    mahd: mahd,
+    trangthai: "Đã hủy",
+  };
+  console.log("entity", entity);
+  await orderModel.update_hd(entity);
+  res.redirect("/account/profile/choxacnhan");
+});
+//2xem danh sách daxacnhan đơn đặt hàng
+router.get("/profile/daxacnhan", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const order = await orderModel.all_order_daxacnhan(makh);
+  var total = 0;
+  for (let i = 0; i < order.length; i++) {
+    total++;
+  }
+  res.render("vwaccount/order_tt", { order: order, total: total });
+});
+//3xem danh sách danggiao đơn đặt hàng
+router.get("/profile/danggiao", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const order = await orderModel.all_order_danggiao(makh);
+  var total = 0;
+  for (let i = 0; i < order.length; i++) {
+    total++;
+  }
+  res.render("vwaccount/order_tt", { order: order, total: total });
+});
+//4xem danh sách danhanhang đơn đặt hàng
+router.get("/profile/danhan", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const order = await orderModel.all_order_danhanhang(makh);
+  var total = 0;
+  for (let i = 0; i < order.length; i++) {
+    total++;
+  }
+  res.render("vwaccount/order_tt", { order: order, total: total });
+});
+//5xem danh sách dahuy đơn đặt hàng
+router.get("/profile/dahuy", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const order = await orderModel.all_order_dahuy(makh);
+  var total = 0;
+  for (let i = 0; i < order.length; i++) {
+    total++;
+  }
+  res.render("vwaccount/order_tt", { order: order, total: total });
+});
 
 module.exports = router;

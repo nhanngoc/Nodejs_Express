@@ -1,0 +1,71 @@
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Danh sách tài khoản</h4>
+        </div>
+        <div class="them" style="text-align: right;">
+            <a name="" id="" class="btn btn-primary btn-sm" style="text-align: right;" href="/admin/user/add" role="button" title="Thêm mới">Thêm mới
+               {{!--  <i class="fa fa-trash" aria-hidden="true"></i> --}}
+            </a>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+{{#if this.empty}}
+<div class="row">
+    <div class="col-12">   
+        <div class="mt-5">
+            <h5 class="font-14">Chưa kết nối database</h5>
+            <p class="sub-header">
+                Không có dữ liệu
+            </p>
+            
+        {{else}}
+            <table id="key-table" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                    <tr>
+                        
+                        <th>Mã</th>
+                        <th>Tên</th>
+                        <th>Giới tính</th>
+                        <th>Ngày sinh</th>
+                        <th>Email</th>
+                        <th>SDT</th>
+                        <th>Quyền</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {{#each this.quantri}}
+                    <tr>
+                        <td>{{manv}}</td>
+                        <td>{{tennv}}</td>
+                        <td>{{gioitinh}}</td>
+                        <td>{{ngaysinh}}</td>
+                        <td>{{email}}</td>
+                        <td>{{sdt}}</td>
+                        <td>{{quyen}}</td>
+                        <td class="text-right">
+                            <a name="" id="" class="btn btn-primary btn-sm" href="/admin/user/edit/{{manv}}" role="button" title="sửa tài khoản">
+                                <i class="mdi mdi-border-color" aria-hidden="true"></i>
+                            </a>
+                            <a name="" id="" class="btn btn-danger btn-sm" href="/admin/user/remove/{{manv}}" role="button" title="xóa tài khoản">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                       {{!--  <td>
+                            <a href="/admin/hoadonct/{{mahd}}" title="xem chi tiết hóa đơn">
+                            {{mahd}}
+                            </a>
+                        </td> --}}
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+        </div>
+        <!-- end -->
+    </div>
+</div>
+<!-- end row -->

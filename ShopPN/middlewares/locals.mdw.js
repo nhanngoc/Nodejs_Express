@@ -1,4 +1,6 @@
 const categoryModel = require("../models/category.model");
+const khModel = require("../models/order.model");
+const Cart = require("../models/cart");
 module.exports = function (app) {
   //login
   app.use(function (req, res, next) {
@@ -7,6 +9,12 @@ module.exports = function (app) {
     }
     res.locals.lcIsAuthenticated = req.session.isAuthenticated;
     res.locals.lcAuthUser = req.session.authUser;
+    next();
+  });
+  //lấy ra danh sách tài khoản khách hàng
+  app.use(async function (req, res, next) {
+    const rows = await khModel.all_khanhhang();
+    res.locals.khachhang = rows;
     next();
   });
 

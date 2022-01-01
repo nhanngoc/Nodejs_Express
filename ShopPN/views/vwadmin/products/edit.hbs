@@ -1,8 +1,7 @@
 <div class="card">
     <div class="card-header">
-        <h4>Edit Hãng</h4>
+        <h4>Sửa sản phẩm</h4>
     </div>
-
     <div class="card-body">
         <form method="POST">
             <div class="form-group">
@@ -20,13 +19,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="SoLuong" class="col-md-3 control-label">Số Lượng</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" name="SoLuong" 
-                    value="{{this.product.SoLuong}}">
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="Gia" class="col-md-3 control-label">Giá</label>
                 <div class="col-md-9">
                     <input type="number" class="form-control" name="Gia" 
@@ -40,11 +32,11 @@
                 </a>
             </td>
            {{!-- <div class="form-group">
-                <label for="Anh" class="col-md-3 control-label">Hình ảnh</label>
+                <label for="uploaded_image" class="col-md-3 control-label">Hình đại diện</label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="file" name="Anh" accept=""/>
+                    <input class="form-control" type="file" name="uploaded_image" value="{{this.product.Anh}}" accept=""/>
                 </div>
-            </div> --}}                           
+            </div> --}}                          
             <div class="form-group">
                 <label for="MoTa" class="col-md-3 control-label">Mô Tả</label>
                 <div class="col-md-9">
@@ -53,26 +45,33 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="chatlieu" class="col-md-3 control-label">Chất liệu</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="chatlieu"
+                    value="{{this.product.chatlieu}}">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="NgayNhap" class="col-md-3 control-label">Ngày Nhập</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" name="NgayNhap" 
+                    <input type="text" class="form-control" name="NgayNhap" readonly
                     value="{{this.product.NgayNhap}}">
                 </div>
             </div>
 
-            <a class="btn btn-success" href="/admin/categories" role="button" title="Back to List">
+            {{!-- <a class="btn btn-success" href="/admin/categories" role="button" title="Back to List">
                 <i class="fa fa-backward" aria-hidden="true"></i>
-            </a>
+            </a> --}}
            
             <button type="submit" class="btn btn-primary" title="save" formaction="/admin/products/update">
                 <i class="fa fa-check" aria-hidden="true"></i>
-                Save
+                Cập nhật
             </button>
         </form>
 
         
     </div>
     <div class="card-footer text-muted">
-        Footer
+        
     </div>
 </div>

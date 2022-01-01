@@ -7,7 +7,8 @@
 <meta http-equiv="content-language" content="vi">
 <link rel="alternate" href="#" hreflang="vi">
 <title>Thanh Toán</title>
-
+<!-- App favicon -->
+        <link rel="shortcut icon" href="\public\favicon.ico">
 
 <link href="#" rel="icon">
 <link rel="stylesheet" type="text/css" href="https://www.bexinhshop.vn/catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen">
@@ -139,18 +140,18 @@
                               type="text"
                               name="tennn"
                               id=""
-                              value=""
+                              value="{{this.user.tenkh}}"
                             />
                           </div>
                         
-                          {{!-- <div
+                          <div
                             id="email_input"
                             class="text-input sort-item"
                             data-sort="3"
                           >
                             <label for="payment_address_email">
-                              <span class="required hide">*</span>
-                              <span class="text">E-Mailll:</span>
+                              <span class="required">*</span>
+                              <span class="text">E-Mail:</span>
                             </label>
                             <input
                               type="text"
@@ -158,9 +159,9 @@
                               id="payment_address_email"
                               data-require=""
                               data-refresh="0"
-                              value=""
+                              value="{{this.user.email}}"
                             />
-                          </div> --}}
+                          </div>
 
                           <div
                             id="telephone_input"
@@ -177,7 +178,7 @@
                               id=""
                               data-require="require"
                               data-refresh="0"
-                              value=""
+                              value="{{this.user.sdt}}"
                             />
                           </div>
                           <div class="clear"></div>
@@ -208,7 +209,25 @@
                               id=""
                               data-require=""
                               data-refresh="0"
-                              value=""
+                              value="{{this.user.diachi}}"
+                            />
+                          </div>
+                          <div
+                            id="address_1_input"
+                            class="text-input sort-item"
+                            data-sort="13"
+                          >
+                            <label for="payment_address_address_1">
+                            <span class="required">*</span>
+                              <span class="text">Phường / Xã:</span>
+                            </label>
+                            <input
+                              type="text"
+                              name="phuong_xa"
+                              id=""
+                              data-require=""
+                              data-refresh="0"
+                              value="{{this.user.phuong_xa}}"
                             />
                           </div>
                           <div
@@ -218,15 +237,15 @@
                           >
                             <label for="payment_address_city">
                               <span class="required">*</span>
-                              <span class="text">Quận / Huyệnnn:</span>
+                              <span class="text">Quận / Huyện:</span>
                             </label>
                             <input
                               type="text"
-                              name="quanhuyen"
+                              name="quan_huyen"
                               id="payment_address_city"
                               data-require=""
                               data-refresh="0"
-                              value=""
+                              value="{{this.user.quan_huyen}}"
                             />
                           </div>
                           <div
@@ -243,8 +262,9 @@
                               data-require="require"
                               data-refresh="3"
                               onchange="singleSelectChangeValue(this)"
-                            >
-                              <option value=""> --- Chọn --- </option>
+                            >{{!-- <option value="Hồ Chí Minh" selected="selected">Hồ Chí
+                                Minh</option> --}}
+                              <option value="{{this.user.tinh}}">{{this.user.tinh}}</option>
                               <option value="An Giang">An Giang</option>
                               <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu</option>
                               <option value="Bắc Giang">Bắc Giang</option>
@@ -270,8 +290,7 @@
                               <option value="Hải Dương">Hải Dương</option>
                               <option value="Hải Phòng">Hải Phòng</option>
                               <option value="Hậu Giang">Hậu Giang</option>
-                              <option value="Hồ Chí Minh" selected="selected">Hồ Chí
-                                Minh</option>
+                              <option value="Hồ Chí Minh">Hồ Chí Minh</option>
                               <option value="Hòa Bình">Hòa Bình</option>
                               <option value="Huế">Huế</option>
                               <option value="Hưng Yên">Hưng Yên</option>
@@ -322,7 +341,7 @@
                   <!--End Thông tin giao hàng-->
                 </div>
                 <!--Start Thông tin vận chuyển-->
-                <div
+               {{!--  <div
                   id="step_4"
                   data-sort="4"
                   data-row="1"
@@ -336,7 +355,7 @@
                       <div class="box-heading"><i
                           class="icon-shipping-method"
                         ></i>
-                        <span>vận chuyểnn</span></div>
+                        <span>vận chuyển</span></div>
                       <div class="box-content">
                         <div class="">
                           <div class="title hide">X-Shipping</div>
@@ -372,7 +391,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> --}}
                 <!--End Thông tin vận chuyển-->
               </div>
               <div
@@ -499,20 +518,20 @@
                                   <td class="name">
                                     <img
                                       src="/public/images/{{this.item.anh}}"
-                                      style="float: left;width:30%"
+                                      style="float: left;width:18%"
                                     />
-                                    <div style="float:right; width:70px;">
+                                    <div style="float:right; width:100px; padding: 13px 10px;">
                                       <small> - {{this.item.color}}: {{this.item.size}}</small>
                                       <br />
                                     </div>
                                     <br clear="all" />
                                   </td>
                                   <td class="model hide">KTB196500</td>
-                                  <td class="quantity">
+                                  <td class="quantity" style="padding: 13px 10px;">
                                     {{ this.quantity }}
                                   </td>
-                                  <td class="price "   >{{format_number this.item.gia}} đ</td>
-                                  <td class="total">{{format_number this.gia }} đ</td>
+                                  <td class="price" style="padding: 13px 10px;">{{format_number this.item.gia}}đ</td>
+                                  <td class="total" style="padding: 13px 10px;">{{format_number this.gia }}đ</td>
                                 </tr>
                                 {{/each}}  
                               </tbody>
@@ -537,12 +556,12 @@
                                 </tr> --}}
                                 <tr>
                                   <td class="text">Thành tiền:</td>
-                                  <td class="total">{{format_number toPri }} đ</td>
+                                  <td class="total">{{format_number toPri }}đ</td>
                                 </tr>
-                                <tr>
+                                {{!-- <tr>
                                   <td class="text">Phí vận chuyển:</td>
                                   <td class="total">18.000 đ</td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                   <td
                                     class="text"
@@ -551,7 +570,7 @@
                                   <td
                                     class="total"
                                     style="font-size:15px; background-color: #f0f0f0;font-weight:bold"
-                                  >{{format_number toPri }} đ</td>
+                                  >{{format_number toPri }}đ</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -589,7 +608,7 @@
                                   >
                                     <label for="confirm_comment">
                                       <span class="required hide">*</span>
-                                      <span class="text" style="color:#000000">Ghi Chú Đơn Hàng:(HoaDon)</span>
+                                      <span class="text" style="color:#000000">Ghi Chú Đơn Hàng:</span>
                                     </label>
                                     <textarea
                                       name="ghichu"

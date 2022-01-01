@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-12">
         <div>
-            <h4 class="header-title mb-3">Loại sản phẩm</h4>
+            <h4 class="header-title mb-3">Danh sách khách hàng</h4>
         </div>
     </div>
 </div>
@@ -24,13 +24,11 @@
                         {{!-- <th>Tên đăng nhập</th>
                         <th>pass</th> --}}
                         <th>Email</th>
-                        <th>Giới Tính</th>
-                        <th>Địa chỉ</th>
+                       
+                        {{!-- <th>Địa chỉ</th> --}}
                         <th>Số điện thoại</th>
-                        <th>Sửa</th>
                     </tr>
                 </thead>
-
                 <tbody>
                         {{#each this.khachhang}}
                     <tr>
@@ -39,19 +37,14 @@
                         {{!-- <td>{{username}}</td>
                         <td>{{password}}</td> --}}
                         <td>{{email}}</td>
-                        <td>{{gioitinh}}</td>
-                        <td>{{diachi}}</td>
+                      
+                        {{!-- <td>{{diachi}}</td> --}}
                         <td>{{sdt}}</td>
-                        <td class="text-right">
-                            <a name="" id="" class="btn btn-primary btn-sm" href="/admin/category/edit/{{MaKH}}" role="button" title="sửa loại">
-                                <i class="mdi mdi-border-color" aria-hidden="true"></i>
-                            </a>
-                        </td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
-            {{/if}}
+        {{/if}}
         </div>
         <!-- end -->
     </div>

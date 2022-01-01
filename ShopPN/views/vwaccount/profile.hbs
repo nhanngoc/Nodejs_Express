@@ -1,54 +1,121 @@
+<div id="container">
 
-
-<div class="card">
-    <div class="card-header d-flex justify-content-between">
-        <h4>Profile</h4>
-        <a class="btn btn-outline-success" href="/admin/categories/add" role="button">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            
-        </a>
-    </div>
-    {{#if this.empty}}
-    <div class="card-body">
-        <p class="card-text">Không có dữ liệu</p>
-    </div>
-    {{else}}
-    <table class="table table-hover">
-         <div class="form-group">
-                
-                <input type="text" class="form-control" id="txtCatID" name="CatID" readonly
-                    value="{{this.user.MaKH}}">
-            </div>
-        <thead>
-            <tr>
-                <th scope="col">IDd</th>
-                <th scope="col">Ten</th>
-                <th scope="col">username</th>
-                <th scope="col">email</th>
-                <th scope="col">&nbsp;</th>
-
-            </tr>
-        </thead>
-        <tbody>
-
-            <tr>
-
-                <th scope="row">{{this.user.MaKH}}</th>
-                <td>{{this.user.tenkh}}</td>
-                <td>{{this.user.username}}</td>
-                <td>{{this.user.email}}</td>
-                
-                <td class="text-right">
-                    <a name="" id="" class="btn btn-primary btn-sm" href="#" role="button" title="edit Category">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </a>
+    <div id="content" class="container"><div class="doublepad">
+      <div class="pagetitle marbot">Trang cá nhân</div>
+    
+      <form action="" method="post">
+      <div class="row-fluid window">
+        <div class="span6">
+            <div class="subtitle">Thông tin cá nhân</div>
+          <table class="form">
+            <tbody><tr>
+              <td><span class="required"></span> Họ tên:</td>
+              <td><input type="text" name="tenkh" value="{{this.user.tenkh}}">
                 </td>
             </tr>
-  
-        </tbody>
-    </table>
-    {{/if}}
-    <div class="card-footer text-muted">
-        Footer
+            <tr>
+              <td><span class="required"></span> Tên đặt nhập:</td>
+              <td><input type="text" name="username" value="{{this.user.username}}">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required"></span> Địa chỉ E-Mail:</td>
+              <td><input type="text" name="email" value="{{this.user.email}}">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required"></span> Điện Thoại:</td>
+              <td><input type="text" name="sdt" value="{{this.user.sdt}}">
+                </td>
+            </tr>
+            
+            {{!-- <tr>
+              <td><span class="required"></span> Đổi mật khẩu:</td>
+              <td><input  id="idcheckbox" type="checkbox" name="size_id" value=""></td>
+            </tr> --}}
+              <div id="btn2">
+              <tr>
+                <td><span class="required"></span> Đổi mk:</td>
+                <td><input type="password" name="password" value="{{this.user.password}}">
+                  </td>
+              </tr>
+              </div>
+              <div id="contentt">
+                <tr>
+                  <td><span class="required"></span> Nhập lại:</td>
+                  <td><input type="password" name="password">
+                    </td>
+                </tr>
+              </div>
+             
+            
+          </tbody></table>
+          
+          <script language="javascript">
+                document.getElementById("contentt").style.display = 'none';
+            document.getElementById("btn2").onclick = function () {
+                document.getElementById("contentt").style.display = 'block';
+            };
+        </script>
+          {{!-- <div class="subtitle">Mật khẩu</div>
+          <table class="form">
+            <tbody><tr>
+              <td><span class="required">*</span> Mật Khẩu:</td>
+              <td><input type="password" name="password" value="">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required">*</span> Nhập lại:</td>
+              <td><input type="password" name="confirm" value="">
+                </td>
+            </tr>
+          </tbody>
+          </table> --}}
+    
+        </div>
+    
+        <div class="span6">
+            <div class="subtitle">Thông tin đơn hàng</div>
+          <table class="form">
+            <tbody>
+              <div style="margin: 15px 0 15px 0; height: auto; overflow: auto; float: left;width: 100%">
+                <a title="xem giỏ hàng" class="i_view_cart" href="/account/profile/order"><i class="icon-view-shopping-cart"></i> Xem lịch sử đơn hàng</a>
+                <a title="Chờ xác nhận" class="i_view_cart" href="/account/profile/choxacnhan"><i class="icon-view-shopping-cart"></i> Chờ xác nhận({{this.total1}})</a>
+                <a title="Đã xác nhận" class="i_view_cart" href="/account/profile/daxacnhan"><i class="icon-view-shopping-cart"></i> Đã xác nhận({{this.total2}})</a>
+                <a title="Đang giao" class="i_view_cart" href="/account/profile/danggiao"><i class="icon-view-shopping-cart"></i> Đang giao({{this.total3}})</a>
+                <a title="Đã nhận hàng" class="i_view_cart" href="/account/profile/danhan"><i class="icon-view-shopping-cart"></i> Đã nhận hàng({{this.total4}})</a>
+                <a title="Đã hủy" class="i_view_cart" href="/account/profile/dahuy"><i class="icon-view-shopping-cart"></i> Đã hủy({{this.total5}})</a>
+              </div>
+            <tr>
+              <td>Mã hàng:</td>
+              <td>abcd</td>
+            </tr>   
+            <tr>
+              <td>Tên hàng:</td>
+              <td>abcd</td>
+            </tr> 
+            <tr>
+              <td>Số lượng:</td>
+              <td>abcd</td>
+            </tr> 
+            <tr>
+              <td>Đơn giá:</td>
+              <td>Tổng tiền:</td>
+            </tr>      
+            
+            
+            
+           
+          </tbody></table>
+        </div>
+    
+        </div>
+        
+            
+          </form></div>
     </div>
-</div>
+
+    </div>
+
+    
+        

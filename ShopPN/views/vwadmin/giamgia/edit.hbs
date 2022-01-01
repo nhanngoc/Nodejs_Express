@@ -1,0 +1,65 @@
+
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Sửa khuyến mãi</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="text-center mb-4 mt-3">
+                    <a href="index.html">
+                        <span><img src="assets\images\logo-dark.png" alt="" height="30"></span>
+                    </a>
+                </div>
+                 
+                 <form method="POST">
+                 {{#giamgia}}
+                        <div class="form-group">
+                            <label for="makm" class="col-md-3 control-label">Mã sản phẩm</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="makm" 
+                                placeholder="" value="{{this.makm}}" readonly>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="ten" class="col-md-3 control-label">Tên sản phẩm</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="" 
+                                placeholder="" value="{{this.TenSP}}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="TenSP" class="col-md-3 control-label">Giá gốc</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="" 
+                                placeholder="Nhập giá giảm" value="{{format_number this.Gia}}đ" readonly>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="giakm" class="col-md-3 control-label">Giá khuyến mãi</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="giakm" 
+                                placeholder="Nhập giá giảm" value="{{giakm}}" autofocus>
+                            </div>
+                        </div>
+                    <button type="submit" class="btn btn-primary" title="save" formaction="/admin/giamgia/update">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        Cập nhật
+                    </button>
+                    {{/giamgia}}
+                </form>
+                       
+            </div>
+            <!-- end card-body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->

@@ -1,0 +1,207 @@
+<div id="container">
+
+    <div id="content" class="container"><div class="doublepad window">  <div class="pagetitle marbot">Thông tin đơn hàng</div>
+      <table class="orders table">
+        <thead>
+          <tr>
+            <td class="left" colspan="2"><b>Chi tiết đơn hàng</b></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="numtrodd">
+            <td class="left" style="width: 50%;">          <b>Mã đơn hàng:</b> #201203<br>
+              <b>Ngày tạo:</b> 30/12/2021</td>
+            <td class="left" style="width: 50%;">          <b>Phương thức thanh toán:</b> Thu tiền khi giao hàng<br>
+                       </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table orders">
+        <thead>
+          <tr>
+            <td class="left"><b>Địa chỉ nhận hàng</b></td>
+                  </tr>
+        </thead>
+        <tbody>
+          <tr class="numtrodd">
+            <td class="left">abc dep - 0147852369<br>abcd, dcba<br>tp cần thơ<br>Cần Thơ<br>Viet Nam</td>
+                  </tr>
+        </tbody>
+      </table>
+      <table class="table orders">
+        <thead>
+          <tr>
+    
+            <td class="left">Tên sản phẩm</td>
+            <td class="model">Mã hàng</td>
+            <td class="alcent">Số lượng</td>
+            <td class="price">Đơn Giá</td>
+            <td class="right" colspan="2" style="text-align: right;">Tổng Cộng</td>
+            
+          </tr>
+        </thead>
+        <tbody>
+                <tr class="numtreven">
+            <td class="left">
+              <img src="https://www.bexinhshop.vn/image/data/28-12-2021/botuihopnothingtrangi.jpg" class="orders_info_image" align="left">
+              &nbsp;[SIZE CỒ] Bộ túi hộp Nothing dễ thương cho bé trai BTB25660                    <br>
+              &nbsp;<small> - Màu Xanh chuối: 18</small>
+              </td>
+            <td class="model">BTB25660</td>
+            <td class="alcent">1</td>
+            <td class="price">180.000 đ</td>
+            <td class="right" colspan="2" style="text-align: right;">180.000 đ</td>
+           
+          </tr>
+                <tr class="numtrodd">
+            <td class="left">
+              <img src="https://www.bexinhshop.vn/image/data/28-12-2021/setchudo.jpg" class="orders_info_image" align="left">
+              &nbsp;[SIZE CỒ] Bộ thun chữ dễ thương cho bé trai BTB25673                    <br>
+              &nbsp;<small> - Màu Trắng: 18</small>
+              </td>
+            <td class="model">BTB25673</td>
+            <td class="alcent">2</td>
+            <td class="price">181.000 đ</td>
+            <td class="right" colspan="2" style="text-align: right;">362.000 đ</td>
+           
+          </tr>
+                    </tbody>
+        <tfoot>
+                <tr>
+    
+            <td class="alright" colspan="3"><b>Thành tiền:</b></td>
+            <td class="right" colspan="2" style="text-align: right;">542.000 đ</td>
+           
+          </tr>
+                <tr>
+    
+            <td class="alright" colspan="3"><b>Phí vận chuyển:</b></td>
+            <td class="right" colspan="2" style="text-align: right;">0 đ</td>
+           
+          </tr>
+                <tr>
+    
+            <td class="alright" colspan="3"><b>Tổng cộng: </b></td>
+            <td class="right" colspan="2" style="text-align: right;">542.000 đ</td>
+           
+          </tr>
+              </tfoot>
+      </table>
+          <h2>Lịch sử đơn hàng</h2>
+      <table class="table orders">
+        <thead>
+          <tr>
+            <td class="left">Ngày tạo</td>
+            <td class="left">Tình trạng</td>
+            <td class="left">Ghi chú</td>
+          </tr>
+        </thead>
+        <tbody>
+                <tr>
+            <td class="left">30/12/2021</td>
+            <td class="left">Pending</td>
+            <td class="left"></td>
+          </tr>
+              </tbody>
+      </table>
+        <div class="buttons">
+        <div class="alcent"><a href="https://www.bexinhshop.vn/index.php?route=account/order" class="button">Tiếp tục</a></div>
+      </div>
+      </div></div>
+            
+    
+    
+    
+    <!--
+    <div class="item w4" style="height:auto;z-index:;width:99%">
+                <div class="tag"> 
+                    
+                </div>
+            </div>-->
+        
+    
+    
+            
+        
+            
+    
+    
+    
+     <div class="social-share-inner">
+        
+        
+            
+        
+    
+            
+      </div>
+      
+            
+     
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+                
+            $().UItoTop({ easingType: 'easeOutQuart'});
+                
+            function setCookie(name, value, lifetime_days) {
+                var exp = new Date();
+                exp.setDate(new Date().getDate() + lifetime_days);
+                document.cookie = name + '=' + value + ';expires=' + exp.toUTCString() + ';path=/';
+            }
+            
+            function getCookie(name) {
+                if(document.cookie) {
+                    var regex = new RegExp(escape(name) + '=([^;]*)', 'gm'),
+                    matches = regex.exec(document.cookie);
+                    if(matches) {
+                        return matches[1];
+                    }
+                }
+            }
+            
+            
+                
+        });
+    
+        $.ajax({
+            url: 'https://www.bexinhshop.vn/index.php?route=module/cart',
+            type: 'get',
+            success: function(data) {
+                $("#header").html(data);
+            }
+        });
+        
+        $.ajax({
+            url: 'https://www.bexinhshop.vn/index.php?route=common/header/getCustomer',
+            type: 'get',
+            success: function(data) {
+                $("#welcome").html(data);
+                    
+            }
+        });
+    
+                $.ajax({
+                url: 'https://www.bexinhshop.vn/index.php?route=module/viewed/getViewed',
+                type: 'get',
+                success: function(data) {
+                    if(data != ''){
+                        $('#box_viewed_product').html(data);
+                    }
+                    
+                }
+            });
+        
+            $('.zoomhover').hover(function() {
+                $(this).addClass('transition');
+            }, function() {
+                $(this).removeClass('transition');
+            });
+    
+            $('#breadcrumbs').xBreadcrumbs();
+        
+            
+        
+        
+    </script>
+    </div>

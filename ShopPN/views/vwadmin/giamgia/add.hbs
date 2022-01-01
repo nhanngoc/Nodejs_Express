@@ -1,0 +1,53 @@
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Thêm sản phẩm khuyến mãi</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="text-center mb-4 mt-3">
+                    <a href="index.html">
+                        <span><img src="assets\images\logo-dark.png" alt="" height="30"></span>
+                    </a>
+                </div>
+                 <form method="POST" action="">
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                <select class="custom-select mt-3"id="txtmakm" name="makm">
+                                    <option selected="">Chọn sản phẩm</option>
+                                    {{#each this.sanpham}}
+                                    <option value="{{MaSP}}">{{MaSP}}-{{TenSP}} - Giá:{{format_number Gia}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="giakm" class="col-md-3 control-label">Giá khuyến mãi</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="giakm" placeholder="Nhập giá giảm" autofocus>
+                            </div>
+                        </div>
+
+                   {{!--  <a class="btn btn-success" href="/admin/categories" role="button" title="Back to List">
+                        <i class="fa fa-backward" aria-hidden="true"></i>
+                    </a> --}}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        Thêm mới
+                    </button>
+                </form>
+                       
+            </div>
+            <!-- end card-body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->

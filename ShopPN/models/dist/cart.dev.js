@@ -1,12 +1,12 @@
 "use strict";
 
 module.exports = function Cart(cart) {
-  this.items = cart.items || {};
-  this.totalItems = cart.totalItems || 0; //toongr soluong
+  this.items = cart.items || {}; //lưu vào items
+
+  this.totalItems = cart.totalItems || 0; //toong soluong
 
   this.totalPrice = cart.totalPrice || 0; // tong gia
-
-  console.log("dongph3-2", this.items);
+  //console.log("dongph3-2", this.items);
 
   this.add = function (item, id) {
     var cartItem = this.items[id];
@@ -16,15 +16,46 @@ module.exports = function Cart(cart) {
         item: item,
         masp: item.masp,
         tensp: item.color + "-" + item.size,
+        dongia: item.gia,
         quantity: 0,
         gia: 0
       };
     }
 
-    cartItem.quantity++;
+    this.totalPrice -= cartItem.gia;
+    cartItem.quantity += item.quantitys;
     cartItem.gia = cartItem.item.gia * cartItem.quantity;
-    this.totalItems++;
-    this.totalPrice += cartItem.item.gia;
+    this.totalItems += item.quantitys;
+    this.totalPrice += cartItem.gia;
+  };
+
+  this.update = function (item, id) {
+    var cartItem = this.items[id];
+
+    if (!cartItem) {
+      cartItem = this.items[id] = {
+        item: item,
+        masp: item.masp,
+        tensp: item.color + "-" + item.size,
+        dongia: item.gia,
+        quantity: 0,
+        gia: 0
+      };
+    }
+
+    this.totalPrice -= cartItem.gia;
+    this.totalItems -= cartItem.quantity;
+    cartItem.item.quantitys = item.quantitys;
+    cartItem.quantity = item.quantitys;
+    cartItem.gia = cartItem.item.gia * cartItem.quantity;
+    this.totalItems += item.quantitys;
+    this.totalPrice += cartItem.gia;
+  };
+
+  this.remove = function (id) {
+    this.totalItems -= this.items[id].quantity;
+    this.totalPrice -= this.items[id].gia;
+    delete this.items[id];
   };
 
   this.reduceByOne = function (id) {
@@ -36,12 +67,6 @@ module.exports = function Cart(cart) {
     if (this.items[id].quantity <= 0) {
       delete this.items[id];
     }
-  };
-
-  this.remove = function (id) {
-    this.totalItems -= this.items[id].quantity;
-    this.totalPrice -= this.items[id].gia;
-    delete this.items[id];
   };
 
   this.getItems = function () {

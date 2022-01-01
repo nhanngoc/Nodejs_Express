@@ -4,7 +4,8 @@ var express = require("express");
 
 var categoryModel = require("../models/category.model");
 
-var router = express.Router();
+var router = express.Router(); //list loại
+
 router.get("/", function _callee(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee$(_context) {

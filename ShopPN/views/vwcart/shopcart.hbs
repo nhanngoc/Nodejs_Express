@@ -1,108 +1,204 @@
 <!DOCTYPE html>
-<html lang="zxx">
-<head>
+<html dir="ltr" lang="vi" class=" js csstransitions"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 
-</head>
+<meta http-equiv="content-language" content="vi">
+<link rel="alternate" href="https://www.bexinhshop.vn/index.php?route=checkout/cart" hreflang="vi">
+<title>Giỏ Hàng</title>
 
-<body>
-    <!-- Shoping Cart Section Begin -->
-    <section class="shoping-cart spad">
-        <div class="container">
-            {{#if products }}
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="shoping__cart__table">
-                            <div class="section-title product__discount__title">
-                                <h2>Giỏ Hàng</h2>
-                            </div>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th class="shoping__product">Sản phẩm</th>
-                                        <th>Mã hàng</th>
-                                         <th>Đơn giá</th>
-                                        <th>Số lượng</th>
-                                        <th>Tổng cộng</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each products }}
-                                    <tr>
-                                        <td class="shoping__cart__item">
-                                            <a href="products/detail/{{this.item.masp}}">
-                                            <img src="/public/images/{{this.item.anh}}" alt="{{this.item.tensp}}"
-                                            style=" max-width: 75px; height: auto;">
-                                            </a>
-                                            <h5>{{this.item.tensp}}</h5>
-                                            <h6>- {{this.item.color}}: {{this.item.size}}</h6>
-                                        </td>
-                                        <td class="shoping__cart__price">
-                                            {{this.item.masp}}
-                                        </td>
-                                        <td class="shoping__cart__price">
-                                            {{format_number this.item.gia}} đ
-                                        </td>
-                                        <td class="shoping__cart__quantity">
-                                            <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="{{ this.quantity }}">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="shoping__cart__total">
-                                            {{format_number this.gia }} đ
-                                        </td>
-                                        <td class="shoping__cart__item__close">
-                                        <div class="col-xs-2 text-right">
-                                                <a href="/remove/{{this.item.sp_id}}"> 
-                                                <i class="fas fa-times"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                {{/each}}  
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="shoping__cart__btns">
-                            <a href="/" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
-                            <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                                Cập nhật giỏ hàng</a>
-                        </div>
-                    </div>
-                   <div class="col-lg-2">
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="shoping__checkout">
-                            <h5>Tổng giỏ hàng</h5>
-                            <ul>
-                                <li>Số lượng:<span>{{totalItems}}</span></li>
-                                <li>Tổng cộng: <span>{{format_number toPri }} đ</span></li>
-                            </ul>
-                            <a href="/checkout" class="primary-btn">Thanh toán</a>
-                        </div>
-                    </div>
-                </div>
-            {{else}}
-            <div class="card-body">
-                <p class="card-text">Bạn chưa mua hàng</p>
-            </div>
-            {{/if}}
-        </div>
-    </section>
-    <!-- Shoping Cart Section End -->
 
+<meta property="fb:app_id" content="1689049434695065">
+<meta property="og:site_name" content="bexinhshop.vn">
+<meta property="og:url" content="https://www.bexinhshop.vn">
+<meta property="og:type" content="website">
+<meta name="distribution" content="Global">
+<meta name="revisit" content="1 days">
+<meta name="geo.placename" content="Vietnamese">
+<meta name="geo.region" content="VN">
+<meta name="dc.creator" content="bexinhshop">
+<meta name="generator" content="bexinhshop.vn">
+<link rel="dns-prefetch" href="https://www.bexinhshop.vn/">
+
+<link href="https://www.bexinhshop.vn/image/data/cart.png" rel="icon">
+
+<link rel="stylesheet" type="text/css" href="./Giỏ Hàng_files/colorbox.css" media="screen">
+
+<link rel="stylesheet" type="text/css" href="./Giỏ Hàng_files/global_bx.css">
+
+
+<link rel="stylesheet" type="text/css" href="./Giỏ Hàng_files/font-awesome.css">
+
+<!-- Twitter bootstrap 2.1.0 -->
+<script type="text/javascript" async="" src="./Giỏ Hàng_files/ecommerce.js.download"></script><script src="./Giỏ Hàng_files/328591041988090" async=""></script><script src="./Giỏ Hàng_files/328084215374698" async=""></script><script async="" src="./Giỏ Hàng_files/fbevents.js.download"></script><script async="" src="./Giỏ Hàng_files/analytics.js.download"></script><script type="text/javascript" src="./Giỏ Hàng_files/global_bx.js.download"></script>
+
+
+
+<style>
+
+  input[type="button"].addtocart {
+  background: url("https://www.bexinhshop.vn/catalog/view/theme/pinshop/stylesheet/cart.png")  no-repeat;
+  border: 1px #c70410 solid;
+  border-radius: 3px;
+  padding: 13px 10px 10px 35px;
+  font-size: 16px;
+  color: #FFF;
+  font-weight: bold;
+  margin-right: 10px;
+  display: inline-block;
+  background-color: #e5101d;
+  position: relative;
+  background-size: 30px 30px;
+  background-position: 2px 5px;
+  margin-top:5px
+}
+
+.footer_cart{
+  background: url("https://www.bexinhshop.vn/catalog/view/theme/pinshop/stylesheet/imgres.jpg")  no-repeat;
+  background-size: 60px 60px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  left: 21%;
   
-   
-   
+}
 
+
+@media (max-width: 710px) {
+  .call_now{
+    background: url('https://www.bexinhshop.vn/catalog/view/theme/pinshop/stylesheet/phone.jpg') no-repeat; 
+    background-size: 15%;
+    background-position: 5px 5px;
+  }
+}  
+
+@media (max-width: 470px){
+  input[type="button"].m_pdetails_addtocart{
+    width: 62%;
+    float: right;
+    border-radius: 0px;
+    background-image: none;
+  }
+}
+
+</style>
+</head>
+<body>
+{{#if products }}
+    <div id="container">
+        <div class="container">
+            <div class="doublepad">
+                <div class="cart-info">
+                    <div class="pagetitle_1" style="text-align: left;">GIỎ HÀNG</div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td class="image" colspan="2">Sản phẩm</td>
+                            <td class="model" style="width: 70px;">Mã hàng</td>
+                            <td class="quantity">
+                            Số lượng				
+                            </td>
+                            <td class="price" width="80">Đơn Giá</td>
+                            <td class="total" width="65">Tổng cộng</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {{#each products }}
+                        <tr>
+                            <td class="image" width="50">                      
+                            <a href="products/detail/{{this.item.masp}}">
+                            <img src="/public/images/{{this.item.anh}}" alt="{{this.item.tensp}}" title="{{this.item.tensp}}"></a>
+                            </td>
+                            <td class="name"><a href="products/detail/{{this.item.masp}}" alt="{{this.item.tensp}}" title="{{this.item.tensp}}">{{this.item.tensp}}</a>
+                                <div>
+                                    - <small>{{this.item.color}}: {{this.item.size}}</small><br>
+                                </div>
+                                <div id="resultss">
+                                </div>
+                            </td>
+                            <td class="model">{{this.item.masp}}-{{this.item.soluong}}</td>
+                            
+                            <form method="POST" {{!-- action="/update/{{this.item.sp_id}}" --}}>
+                                <td class="quantity" >
+                                    <div id="results">
+                                        <input type="text" class="smallinput" name="quantity" style="width: min-content;"
+                                        id="mes" {{!-- onkeyup="xemKetQua()" --}} value="{{this.quantity}}" min="1" max="{{this.item.soluong}}" size="1">
+                                    </div>
+                                    &nbsp;
+                                    <span class="inline">
+                                        <button type="submit" formaction="/update/{{this.item.sp_id}}">
+                                        <i class="icon-refresh icon-large"></i>
+                                        </button>
+                                        &nbsp;
+                                        <a href="/remove/{{this.item.sp_id}}" title="Không mua sản phẩm này" alt="Không mua sản phẩm này"><i class="icon-trash icon-large"></i></a>
+                                    </span>
+                                </td>
+                            </form>
+                            <td class="price">{{format_number this.item.gia}} đ</td>
+                            <td class="total">{{format_number this.gia }}đ</td>
+                        </tr>
+                            {{/each}} 
+                        </tbody>
+                    </table>
+                    </div>
+            <span class="prodwarning colorfront"></span>
+            <div class="cart-total pull-right">
+            <div class="pagetitle_1" style="text-align: left; ">ĐƠN HÀNG</div>
+            <br>
+                <div class="total_ck">
+                <table id="total">
+                            <tbody><tr>
+                    <td class="alright padright"><b>Số lượng:</b></td>
+                    <td class="alleft ">{{totalItems}} sản phẩm</td>
+                </tr>
+                            <tr>
+                    <td class="alright padright"><b>Tổng cộng: </b></td>
+                    <td class="alleft ">{{format_number toPri }} đ</td>
+                </tr>
+                        </tbody></table>
+                </div>
+                <div class="clearfix"></div>
+            <div class="buttons" style="text-align: center">
+                <a href="/checkout" class="cart_btn_ck"><i class="icon-share-alt "></i>&nbsp;&nbsp;Đặt hàng</a>
+            </div>
+                </div>
+            <div class="clearfix"></div>    
+        </div>
+        </div>
+    </div>
+    <div id="chosseShipping" style="display:none"></div>
+    <div class="window" style="text-align:center">
+        <div class="footer_cart">
+        </div>
+        - Bạn có thắc mắc về đơn hàng? 
+        - Bạn có thắc mắc về cách mua hàng?
+        <p>Hãy liên hệ với chúng tôi: <span style="color:#ff8400;font-size:18px;font-weight:bold">0337876016</span> - Bộ phận CSKH sẽ hỗ trợ bạn!</p>
+    </div>
+{{else}}
+<div class="card-body">
+    <p class="card-text">Bạn chưa mua hàng</p>
+</div>
+{{/if}}
+<script type="text/javascript">
+              function xemKetQua() {
+                 var input_text = document.getElementById("mes")
+                 var result = document.getElementById("results")
+                 var max =Number($("input.smallinput").attr("max"));
+                 var html = '';
+                 var text = input_text.value
+                 if(text > max){
+                 html +='<input type="text" class="smallinput" name="quantity" style="width: min-content;" id="mes" onkeyup="xemKetQua()" value="'+max+'" min="1" max="'+max+'" size="1">'
+                 }else{
+            	html +='<input type="text" class="smallinput" name="quantity" style="width: min-content;" id="mes" onkeyup="xemKetQua()" value="'+text+'" min="1" max="'+max+'" size="1">'
+               } 
+                 result.innerHTML = html;
+              }
+              
+</script>
+
+    <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1031; top: 0px; left: 0px; display: none;"></ul>
+    <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; top: 0px; left: 0px; display: none;"></ul>
 
 </body>
-
-
 </html>

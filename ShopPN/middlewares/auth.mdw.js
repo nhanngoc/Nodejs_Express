@@ -29,7 +29,16 @@ module.exports = {
   },
 
   admin: async function (req, res, next) {
+    const user = await Model.singleUserName_ad(req.body.username);
+    console.log("user",user)
+    if (!req.session.isAuthenticated && user != +req.params.username) {
+      return res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
+    }
+    next();
+  },
+  admin_nhanvien: async function (req, res, next) {
     const user = await Model.singleUserName(req.body.username);
+    console.log("user_nv",user)
     if (!req.session.isAuthenticated && user != +req.params.username) {
       return res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
     }

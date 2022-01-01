@@ -1,140 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  {{! css products }}
-  <link rel="stylesheet" href="/public/stylesheets/style.products.css" />
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
-  <!-- <link rel="stylesheet" href="http://jrain.oscitas.netdna-cdn.com/tutorial/css/fontawesome-all.min.css"> -->
-  <link
-    rel="stylesheet"
-    href="https://e6t7a8v2.stackpathcdn.com/tutorial/css/fontawesome-all.min.css"
-  />
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <link rel="stylesheet" href="../../css/bootstrap-grid.min.css" />
-  <link rel="stylesheet" href="../../css/common-1.css" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&amp;display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="css/style.css" />
-  <link
-    type="text/css"
-    rel="stylesheet"
-    charset="UTF-8"
-    href="https://translate.googleapis.com/translate_static/css/translateelement.css"
-  />
+
+<style>
+
+  a.Chk{
+    display: inline;
+    padding: 5px 25px 1px 18px !important;
+    color: #333 !important;
+    background: url("https://www.bexinhshop.vn/catalog/view/theme/pinshop/stylesheet/check_ico.1.0.png") 0 5px no-repeat;
+    font-weight: normal
+  }
+
+  a.activeChk{
+    display: inline;
+    padding: 5px 25px 1px 18px !important;
+    color: #333 !important;
+    background: url("https://www.bexinhshop.vn/catalog/view/theme/pinshop/stylesheet/check_ico.1.0.png") 0 -18px no-repeat;
+    font-size: 14px;
+    font-weight: bold
+  }
+
+</style>
 </head>
-<!-- san pham home, phan trang start-->
-<div class="container">
-  <div class="inner-container">
-    <div class="row">
-      <div id="content" class="col-xs-12 col-sm-12 col-md-12">
-        <main id="main" role="main">
-          <div id="system-message-container">
+
+<body> 
+<div id="container">
+<style>
+.autoHeight{
+	min-height: 320px;
+}
+
+.links b{background: #F5447B !important; color: #FFF !important}
+div.subcat{
+		border-top: 1px solid #f4f4f4;
+padding: 10px 0 10px 0px;
+background: #fafafa;
+-moz-border-radius: 0 0 3px 3px;
+-webkit-border-radius: 0 0 3px 3px;
+border-radius: 0 0 3px 3px;
+text-align:center
+	}
+	
+	div.subcat a{
+		margin-right: 3%
+	}
+	
+	.xbreadcrumbs LI {
+padding: 5px;
+ border-right: none !important;
+height: 16px;
+}
+</style>
+<style>
+.tooltips {
+  position: relative;
+  display: inline;
+}
+.tooltips span {
+	position: absolute;
+  width:250px;
+  color: #FFFFFF;
+  background: #FF0066;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+ 
+  border-radius: 6px;
+  opacity: 0.8;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -38px;
+  z-index: 999;
+  display: none;
+}
+.tooltips span:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -75px;
+  width: 0; height: 0;
+  border-top: 8px solid #FF0066;
+  border-right: 8px solid transparent;
+  #border-left: 8px solid transparent;
+}
+</style>
+<div class="container container2">	
+	<div class="breadcrumb">
+			<ul class="xbreadcrumbs" id="breadcrumbs">
+		</ul>
+	<br style="clear:both;">
+	</div>
+    {{!-- <div class="m_subcatogories m_carousel">
+    	<div class="wrap_carousel">
+	    	<div class="box_child">
+	    	<a class="m_item" style="background-color: rgb(131, 203, 199)" href="https://www.bexinhshop.vn/do-bo-cho-be-gai" title="Đồ bộ bé gái">
+			  <img class="item-img lazyloaded" src="./Váy, Đầm Bé Gái - Đầm Xinh Cho Công Chúa Nhỏ _ Bé xinh shop_files/bobegaidepc2-50x50.jpg">
+	    		<span class="item-title truncate-small-2">ĐĐồ bộ bé gái</span></a>
+	    	</div>
+	    	 							
+	    	<div class="box_child">
+	    	<a class="m_item" style="background-color:#a7c784" href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai" title="Váy đầm bé gái">
+			<img class="item-img lazyloaded" src="./Váy, Đầm Bé Gái - Đầm Xinh Cho Công Chúa Nhỏ _ Bé xinh shop_files/dambegaidepc3-50x50.jpg">
+	    		<span class="item-title truncate-small-2">Váy đầm bé gái</span></a>
+	    	</div>
+	    	 							
+	    	<div class="box_child">
+	    	<a class="m_item" style="background-color: #d7d38c" href="https://www.bexinhshop.vn/do-boi-be-gai" title="Đồ bơi bé gái">
+			<img class="item-img lazyloaded" src="./Váy, Đầm Bé Gái - Đầm Xinh Cho Công Chúa Nhỏ _ Bé xinh shop_files/doboihaimanhmickey-50x50.jpg">
+	    		<span class="item-title truncate-small-2">Đồ bơi bé gái</span></a>
+	    	</div>
+	    	 							
+	    	<div class="box_child">
+	    	<a class="m_item" style="background-color:#e8c87d" href="https://www.bexinhshop.vn/ao-cho-be-gai" title="Áo bé gái">
+			<img class="item-img lazyloaded" src="./Váy, Đầm Bé Gái - Đầm Xinh Cho Công Chúa Nhỏ _ Bé xinh shop_files/quan-ao-be-gai-50x50.jpg">
+	    		<span class="item-title truncate-small-2">Áo bé gái</span></a>
+	    	</div>
+	    	 							
+	    	<div class="box_child">
+	    	<a class="m_item" style="background-color:#e6b8a9" href="https://www.bexinhshop.vn/quan-cho-be-gai" title="Quần cho bé gái">
+			<img class="item-img lazyloaded" src="./Váy, Đầm Bé Gái - Đầm Xinh Cho Công Chúa Nhỏ _ Bé xinh shop_files/1262_simg_02d57e_250x250_maxbquanbegai-50x50.jpg">
+	    		<span class="item-title truncate-small-2">Quần cho bé gáii</span></a>
+	    	</div>
+	    	 
+    	</div>
+    </div> --}}
+
+  <div class="window box_shadow box_search_list " style="margin:0">			
+		{{#each this.maloai}}
+		<h1 style="text-align:left;margin:0;">{{TenLoai}}</h1>
+    {{/each}} 
+		<style>
+			ul.size_filter{border-bottom: 1px dotted #ccc; padding-bottom: 10px;}
+			ul.size_filter li{display:inline;margin-right:2%;}
+			ul.size_filter li a{color:#F5447B;padding:3px 5px}
+			ul.size_filter li a.active{background-color:#F5447B;color:white}
+		</style>
+		{{!-- <div class="box_filter_m" style="margin:0px; 0px 0px 0px ">
+			<ul class="size_filter" style="border-bottom:none;padding: 0px; margin: 0px">	
+				<li class="box_weight">Tìm theo cân nặng:</li>
+				<li class="tooltips">
+        <select id="orderby" onchange="window.location.href =  this.options[ this.selectedIndex ].value" style="width:80px;margin-left: 5px; margin-top:5px;height:25px">
+					<option value="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=p.date_added&amp;order=DESC&amp;size=0">Tất cả</option>
+					<option value="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=p.date_added&amp;order=DESC&amp;size=65">8 - 10kg</option>
+					<option value="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=p.date_added&amp;order=DESC&amp;size=66">10 - 12kg</option>
+				</select>
+				</li>
+				
+				 <li><a class="Chk choosePro" style="margin-left:10px" href="https://www.bexinhshop.vn/thoi-trang-tre-em.html?&amp;promotion=1">Khuyến mãi</a></li>
+					
+					<li class="choosePro"><a href="/products/category?&amp;category_id=0" class="activeChk" title="Quần áo bé gái"><h3>Quần áo bé gái</h3></a></li><li>
+					</li>
+					<li class="choosePro"><a href="/products/category?&amp;category_id=1" class="Chk" title="Quần áo bé trai"><h3>Quần áo bé trai</h3></a></li><li>
+					</li>
+      </ul>
+		</div> --}}
+    {{!-- <div class="cat_filter_weight">
+      <a href="javascript:void(0);" class="a_fiter">Lọc: <strong>Tất cả</strong> <i class="icon-sort-down icon-up"></i></a>
+      <ul class="weight_list">
+        <li><a href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=p.date_added&amp;order=DESC&amp;size=0"> Tất cả</a></li>
+        <li><a href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=p.date_added&amp;order=DESC&amp;size=65"> Từ 8 - 10kg</a></li>
+        <li><a href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=p.date_added&amp;order=DESC&amp;size=66">Từ 10 - 12kg</a></li>
+        <li><a href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=p.date_added&amp;order=DESC&amp;size=67">Từ 12 - 14kg</a></li>
+      </ul>
+    </div> --}}
+	</div>
+	
+	{{!-- <div class="m_navi_p_list">
+			    		<a class="m_sort_list" href="javascript:void(0)"><span>Mới nhất</span>  <i class="icon-sort-down icon-up" style="font-size: 12px"></i></a>
+    		<div class="m_sort_list_content" style="display: none;">
+    			<a class="slected" href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=p.date_added&amp;order=DESC">Mới nhất</a>
+    			<a class="" href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=total&amp;order=DESC">Bán chạy nhất</a>
+    			<a class="" href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=p.price&amp;order=ASC">Giá thấp nhất</a>
+    			<a class="" href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai?sort=special&amp;order=DESC">Khuyến mãi</a>
+    		</div>
+    </div> --}}	
+
+    <div id="pinboard">
+                  {{#each this.sanpham}}
+      <div class="item " style="height:auto;">
+          <div class="image"><a href="/products/detail/{{MaSP}}" title="{{TenSP}}">
+                          <img data-original="/public/images/{{Anh}}" src="/public/images/{{Anh}}" alt="{{TenSP}}"  title="{{TenSP}}" class="lazy zoomhover" style="display: inline;">
+                          </a>
           </div>
-          <div
-            class="item-page"
-            itemscope=""
-            itemtype="http://schema.org/Article"
-          >
-            <meta itemprop="inLanguage" content="vi-VN" />
-            <div itemprop="articleBody">
-            </div>
-          </div>
-        </main>
+              <div class="pindesc"></div>
+          <div class="product_name"><a href="/products/detail/{{MaSP}}" title="{{TenSP}}">
+                  <h3 style="line-height:20px;margin: 0px;color:#444">{{TenSP}}</h3></a></div>
+                  <div class="pull-left">
+              <div class="price">
+                      {{format_number Gia}} đ </div>
+          </div> 
+              <div style="clear:both"></div> 
       </div>
-    </div>
-    <section class="main-bottom-vertical">
-      <div class="row">
-        {{#if sanpham}}
-          {{#each this.sanpham}}
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-              <div class="featured__item">
-                <a href="/products/detail/{{MaSP}}" class="image">
-                  <img
-                    class="featured__item__pic set-bg"
-                    src="/public/images/{{Anh}}"
-                    alt="{{TenSP}}"
-                    title="{{TenSP}}"
-                    :
-                    {{Gia}}
-                    class="card-img-top"
-                  />
-                </a>
-                <span class="product-discount-label">{{MaSP}}</span>
-                <div class="featured__item__text">
-                  <h6><a href="/products/detail/{{MaSP}}">{{TenSP}}</a></h6>
-                  <h5>{{format_number Gia}} đ</h5>
-                </div>
-              </div>
-            </div>
           {{/each}}
-        {{else}}
-
-          <div class="card-body">
-            <p class="card-text">Không có sản phẩm nào</p>
-          </div>
-        {{/if}}
-      </div>
-      <nav
-        aria-label="..."
-        style="display: flex; align-items: center; justify-content: center;"
-      >
-        <ul class="pagination">
-          <li class="page-item">
-            <a
-              class="page-link"
-              style=" background-color: #f5447b;border-color: #c12e7f; color: #fff;border-radius: 100%;padding: 9px 16px;"
-              href="?page={{prev_value}}"
-              aria-label="Previous"
-            >
-              <span aria-hidden="true"><i
-                  class="fas fa-angle-double-left"
-                ></i></span>
-            </a>
-          </li>
-
-          {{#each this.page_items}}
-            {{#if isActive}}
-              <li class="page-item active" aria-current="page">
-                <span
-                  class="page-link"
-                  style=" background-color: #ff004f;
-                        border-color: #c12e7f; color: rgb(0, 0, 0);border-radius: 100%;
-                        padding: 9px 16px;"
-                >
-                  {{value}}
-                  <span class="sr-only">(current)</span>
-                </span>
-              </li>
+	  </div>
+		<div class="" style="clear:both;text-align: center;">
+		<div class="pagination" style="width:auto;margin-bottom:0;overflow:hidden;height:auto;margin-top:0px"> 
+			<div class="links" style="margin: 40px 0 20px 0"> TRANG:  
+       {{#each this.page_items}}
+          {{#if isActive}}
+              <b>{{value}}</b> 
             {{else}}
-              <li class="page-item">
-                <a
-                  class="page-link"
-                  style=" background-color: #f5447b;
-                    border-color: #c12e7f; color: #fff;border-radius: 100%;
-                    padding: 9px 16px;"
-                  href="?page={{value}}"
-                >{{value}}</a>
-              </li>
-            {{/if}}
-          {{/each}}
-          <li class="page-item">
-            <a
-              class="page-link"
-              style=" background-color: #f5447b;border-color: #c12e7f; color: #fff;border-radius: 100%;padding: 9px 16px;"
-              href="?page={{next_value}}"
-              aria-label="Next"
-            >
-              <span aria-hidden="true"><i
-                  class="fas fa-angle-double-right"
-                ></i></span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </section>
-  </div>
+              <a ref="nofollow" href="?page={{value}}">{{value}}</a>
+          {{/if}}
+      {{/each}}
+    	</div>
+		</div>
+		<div style="clear:both"></div>
+		
+	</div>
+		
+    </div>
 </div>
-<!-- san pham home,phan trang end-->
+ <script>
+$(document).ready(function () {
+    $('.a_fiter').click(function () {
+    	if($(this).hasClass("expand")){
+            $('.weight_list').hide(); 
+            $(this).removeClass("expand");
+        }else{
+        	$('.weight_list').show(); 
+            $(this).addClass("expand");
+        }
+    });  
+
+    $(".m_sort_list").click(function () {
+    	$(".m_sort_list_content").show();
+    	
+    });
+});     
+</script> 
+
+ <div class="social-share-inner">
+  </div>
+<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1031; top: 0px; left: 0px; display: none;"></ul>
+<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; top: 0px; left: 0px; display: none;"></ul>
+<a class="bigfooticon colorback" href="https://www.bexinhshop.vn/#" id="toTop" style="display: none;"><span id="toTopHover"></span><i class="icon-chevron-up icon-large"></i></a>
+</body>
+</html>

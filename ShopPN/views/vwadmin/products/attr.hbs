@@ -1,0 +1,62 @@
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Xem chi tiết thuộc tính</h4>
+        </div>
+        {{!-- <div class="them" style="text-align: right;">
+            <a name="" id="" class="btn btn-primary btn-sm" style="text-align: right;" href="/admin/attribute/add" role="button" title="Thêm thuộc tính">Thêm thuộc tính
+            </a>
+        </div> --}}
+    </div>
+</div>
+<!-- end row -->
+{{#if this.empty}}
+<div class="row">
+    <div class="col-12">   
+        <div class="mt-5">
+            <h5 class="font-14">Chưa thêm sản phẩm nào</h5>
+            <p class="sub-header">
+                Không có sản phẩm nào
+            </p>
+            {{else}}
+            <table {{!-- id="key-table" --}} class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">                          
+            {{!-- <table id="datatable-buttons" class="table table-hover" style="border-collapse: collapse; border-spacing: 0; width: 100%;"> --}}
+                <thead>
+                    <tr>
+                        <th>Mã</th>
+                        
+                        <th>Màu sắc</th>
+                        <th>Kích thước</th>
+                        <th>Cân nặng</th>
+                        <th>Số lượng</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {{#each this.sanpham}}
+                    <tr>
+                        {{!-- <td>{{sp_id}}</td> --}}
+                        <td>{{masp}}</td>
+                        <td>{{color}}</td>
+                        <td>{{size}}</td>
+                        <td>{{title}}</td>
+                        <td>{{soluong}}</td>
+                        <td class="text-right">
+                            <a name="" id="" class="btn btn-primary btn-sm" href="/admin/attr/edit/{{sp_id}}" role="button" title="sửa thuộc tính">
+                                <i class="mdi mdi-border-color" aria-hidden="true"></i>
+                            </a>
+                            <a name="" id="" class="btn btn-danger btn-sm" href="/admin/attr/remove/{{sp_id}}" role="button" title="xóa thuộc tính">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{/if}}
+        </div>
+        <!-- end -->
+    </div>
+</div>
+<!-- end row -->

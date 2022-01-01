@@ -2,6 +2,8 @@
 
 var express = require("express");
 
+var db = require("../utils/db");
+
 var moment = require("moment");
 
 var bcrypt = require("bcryptjs");
@@ -27,9 +29,9 @@ router.get("/", function _callee(req, res) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          res.render("vwadmin/login", {
-            layout: false
-          }); //tat layout trang chu
+          res.render("vwadmin/login"
+          /* , { layout: false } */
+          ); //tat layout trang chu
 
         case 1:
         case "end":
@@ -56,8 +58,7 @@ router.post("/", function _callee2(req, res) {
           }
 
           return _context2.abrupt("return", res.render("vwadmin/login", {
-            layout: false,
-            err: "Invalid username or password."
+            err: "Sai tên hoặc mật khẩu."
           }));
 
         case 5:
@@ -69,8 +70,7 @@ router.post("/", function _callee2(req, res) {
           }
 
           return _context2.abrupt("return", res.render("vwadmin/login", {
-            layout: false,
-            err: "Invalid username or password."
+            err: "Sai tên hoặc mật khẩu."
           }));
 
         case 8:
@@ -88,7 +88,9 @@ router.post("/", function _callee2(req, res) {
   });
 }); //logout
 
-router.post("/logoutadmin", restrict.admin, function (req, res) {
+router.post("/logoutadmin",
+/* restrict.admin, */
+function (req, res) {
   req.session.isAuthenticated = false;
   req.session.authUser = null;
   res.redirect("/admin");
@@ -96,7 +98,9 @@ router.post("/logoutadmin", restrict.admin, function (req, res) {
 //
 //home admin
 
-router.get("/home", restrict.admin, function _callee3(req, res) {
+router.get("/home",
+/* restrict.admin, */
+function _callee3(req, res) {
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -121,19 +125,355 @@ router.get("/home", restrict.admin, function _callee3(req, res) {
   res.json(false);
 }); */
 ////////////////products////////////////
-//list 
+//attribute_list san pham thuoc tinh
 
-router.get("/products/list", restrict.admin, function _callee4(req, res) {
-  var list;
+router.get("/attribute/list"
+/* , restrict.admin */
+, function _callee4(req, res) {
+  var list, colors, sizes, arrlist, i, cls, j, sizesl, k, sl, sp;
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.next = 2;
-          return regeneratorRuntime.awrap(Model.all_products());
+          return regeneratorRuntime.awrap(Model.attr_products());
 
         case 2:
           list = _context4.sent;
+          _context4.next = 5;
+          return regeneratorRuntime.awrap(Model.distinct_colors());
+
+        case 5:
+          colors = _context4.sent;
+          _context4.next = 8;
+          return regeneratorRuntime.awrap(Model.distinct_sizes());
+
+        case 8:
+          sizes = _context4.sent;
+          arrlist = [];
+
+          for (i = 0; i < list.length; i++) {
+            cls = []; //đỏ, xanh
+
+            for (j = 0; j < colors.length; j++) {
+              if (list[i].MaSP == colors[j].masp) {
+                //nếu 2 màu
+                sizesl = []; //nhiều size
+
+                for (k = 0; k < sizes.length; k++) {
+                  if (sizes[k].color_id == colors[j].color_id && sizes[k].masp == colors[j].masp) {
+                    sizesl.push(sizes[k]);
+                  }
+                }
+
+                sl = {
+                  code: colors[j],
+                  items: sizesl //1mau
+
+                };
+                console.log("sl", sl);
+                cls.push(sl);
+              }
+            }
+
+            sp = {
+              MaSP: list[i].MaSP,
+              TenSP: list[i].TenSP,
+              Anh: list[i].Anh,
+              SoLuongBan: list[i].SoLuongBan,
+              Gia: list[i].Gia,
+              MoTa: list[i].MoTa,
+              chatlieu: list[i].chatlieu,
+              TinhTrang: list[i].TinhTrang,
+              NgayNhap: list[i].NgayNhap,
+              thuoctinh: cls //thuoctinh:đỏ[size,soluong] color, size, soluong
+
+            };
+            console.log("spmoi", sp);
+            arrlist.push(sp); // Thêm phần tử vào cuối mảng mới
+          }
+
+          console.log("arrlist", arrlist);
+          res.render("vwadmin/products/attribute_list", {
+            layout: "admin",
+            sanpham: list,
+            arrlist: arrlist,
+            empty: list.length === 0
+          });
+
+        case 13:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  });
+}); //attribute_add
+
+router.get("/attribute/add",
+/* restrict.admin, */
+function _callee5(req, res) {
+  var sanp, attr_colors, attr_sizes, list, colors, sizes, arrlist, i, cls, j, sizesl, k, sl, sp;
+  return regeneratorRuntime.async(function _callee5$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return regeneratorRuntime.awrap(Model._products());
+
+        case 2:
+          sanp = _context5.sent;
+          _context5.next = 5;
+          return regeneratorRuntime.awrap(Model.attr_colors());
+
+        case 5:
+          attr_colors = _context5.sent;
+          _context5.next = 8;
+          return regeneratorRuntime.awrap(Model.attr_sizes());
+
+        case 8:
+          attr_sizes = _context5.sent;
+          _context5.next = 11;
+          return regeneratorRuntime.awrap(Model.attr_products());
+
+        case 11:
+          list = _context5.sent;
+          _context5.next = 14;
+          return regeneratorRuntime.awrap(Model.distinct_colors());
+
+        case 14:
+          colors = _context5.sent;
+          _context5.next = 17;
+          return regeneratorRuntime.awrap(Model.distinct_sizes());
+
+        case 17:
+          sizes = _context5.sent;
+          arrlist = [];
+
+          for (i = 0; i < list.length; i++) {
+            cls = []; //đỏ, xanh
+
+            for (j = 0; j < colors.length; j++) {
+              if (list[i].MaSP == colors[j].masp) {
+                //nếu 2 màu
+                sizesl = []; //nhiều size
+
+                for (k = 0; k < sizes.length; k++) {
+                  if (sizes[k].color_id == colors[j].color_id && sizes[k].masp == colors[j].masp) {
+                    sizesl.push(sizes[k]);
+                  }
+                }
+
+                sl = {
+                  code: colors[j],
+                  items: sizesl //1mau
+
+                };
+                cls.push(sl);
+              }
+            }
+
+            sp = {
+              MaSP: list[i].MaSP,
+              TenSP: list[i].TenSP,
+              SoLuong: list[i].SoLuong,
+              //Gia:list[i].Gia,
+              thuoctinh: cls //thuoctinh:đỏ[size,soluong] color, size, soluong
+
+            };
+            arrlist.push(sp); // Thêm phần tử vào cuối mảng mới
+          }
+
+          res.render("vwadmin/products/attribute_add", {
+            layout: "admin",
+            sanpham: sanp,
+            arrlist: arrlist,
+            colors: attr_colors,
+            sizes: attr_sizes,
+            empty: list.length === 0
+          });
+
+        case 21:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  });
+});
+router.post("/attribute/add",
+/* restrict.admin, */
+function _callee6(req, res) {
+  var size_ids, sl, entity, i, j, masp, color_id, size_id, soluong, arr;
+  return regeneratorRuntime.async(function _callee6$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          size_ids = req.body.size_id;
+          sl = req.body.soluong;
+          entity = [];
+
+          for (i = 0; i < size_ids.length; i++) {
+            for (j = 0; j < sl.length; j++) {
+              if (i == j) {
+                masp = req.body.MaSP;
+                color_id = req.body.color_id;
+                size_id = size_ids[i];
+                soluong = sl[j];
+                arr = [masp, color_id, size_id, soluong];
+                entity.push(arr);
+              }
+            }
+          }
+
+          console.log("attribute:", entity);
+          _context6.next = 7;
+          return regeneratorRuntime.awrap(db.insert_attr(entity));
+
+        case 7:
+          res.redirect("/admin/attribute/add");
+
+        case 8:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  });
+}); //xóa attribute sanpham co thuoc tinh
+
+router.get("/attribute/remove/:id", function _callee7(req, res) {
+  return regeneratorRuntime.async(function _callee7$(_context7) {
+    while (1) {
+      switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.next = 2;
+          return regeneratorRuntime.awrap(Model.remove_attr(req.params.id));
+
+        case 2:
+          res.redirect("/admin/attribute/list");
+
+        case 3:
+        case "end":
+          return _context7.stop();
+      }
+    }
+  });
+}); //list thuộc tính attribute detail
+
+router.get("/attribute/detail/:id",
+/* restrict.admin, */
+function _callee8(req, res) {
+  var id, rows_attr;
+  return regeneratorRuntime.async(function _callee8$(_context8) {
+    while (1) {
+      switch (_context8.prev = _context8.next) {
+        case 0:
+          id = +req.params.id || -1;
+          _context8.next = 3;
+          return regeneratorRuntime.awrap(Model.single_attr_ct(id));
+
+        case 3:
+          rows_attr = _context8.sent;
+          res.render("vwadmin/products/attr", {
+            layout: "admin",
+            sanpham: rows_attr,
+            empty: rows_attr.length === 0
+          });
+
+        case 5:
+        case "end":
+          return _context8.stop();
+      }
+    }
+  });
+}); //xóa attribute detail
+
+router.get("/attr/remove/:id", function _callee9(req, res) {
+  return regeneratorRuntime.async(function _callee9$(_context9) {
+    while (1) {
+      switch (_context9.prev = _context9.next) {
+        case 0:
+          _context9.next = 2;
+          return regeneratorRuntime.awrap(Model.remove_attr_detail(req.params.id));
+
+        case 2:
+          res.redirect("/admin/attribute/list");
+
+        case 3:
+        case "end":
+          return _context9.stop();
+      }
+    }
+  });
+}); //sua attribute detail
+
+router.get("/attr/edit/:id",
+/* restrict.admin, */
+function _callee10(req, res) {
+  var id, rows, sizes, product;
+  return regeneratorRuntime.async(function _callee10$(_context10) {
+    while (1) {
+      switch (_context10.prev = _context10.next) {
+        case 0:
+          id = +req.params.id || -1;
+          _context10.next = 3;
+          return regeneratorRuntime.awrap(Model.single_attr_detail(id));
+
+        case 3:
+          rows = _context10.sent;
+          _context10.next = 6;
+          return regeneratorRuntime.awrap(Model.sizes_list());
+
+        case 6:
+          sizes = _context10.sent;
+          if (rows.length === 0) res.send("lõi la lõi");
+          product = rows[0];
+          return _context10.abrupt("return", res.render("vwadmin/products/attr_edit", {
+            layout: "admin",
+            product: product,
+            sizes: sizes
+          }));
+
+        case 10:
+        case "end":
+          return _context10.stop();
+      }
+    }
+  });
+}); //cap nhat attribute detail
+
+router.post("/attr/update",
+/* restrict.admin, */
+function _callee11(req, res) {
+  return regeneratorRuntime.async(function _callee11$(_context11) {
+    while (1) {
+      switch (_context11.prev = _context11.next) {
+        case 0:
+          _context11.next = 2;
+          return regeneratorRuntime.awrap(Model.patch_attr_detail(req.body));
+
+        case 2:
+          res.redirect("/admin/attribute/list");
+
+        case 3:
+        case "end":
+          return _context11.stop();
+      }
+    }
+  });
+}); //list san pham
+
+router.get("/products/list",
+/* restrict.admin, */
+function _callee12(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee12$(_context12) {
+    while (1) {
+      switch (_context12.prev = _context12.next) {
+        case 0:
+          _context12.next = 2;
+          return regeneratorRuntime.awrap(Model._products());
+
+        case 2:
+          list = _context12.sent;
           res.render("vwadmin/products/list", {
             layout: "admin",
             sanpham: list,
@@ -142,96 +482,106 @@ router.get("/products/list", restrict.admin, function _callee4(req, res) {
 
         case 4:
         case "end":
-          return _context4.stop();
+          return _context12.stop();
       }
     }
   });
 }); //them upload_sp.route.js
-//xoa
+//xóa sanpham và anhct
 
-router.get("/products/remove/:id", function _callee5(req, res) {
-  return regeneratorRuntime.async(function _callee5$(_context5) {
+router.get("/products/remove/:id", function _callee13(req, res) {
+  return regeneratorRuntime.async(function _callee13$(_context13) {
     while (1) {
-      switch (_context5.prev = _context5.next) {
+      switch (_context13.prev = _context13.next) {
         case 0:
-          _context5.next = 2;
-          return regeneratorRuntime.awrap(Model.remove(req.params.id));
+          _context13.next = 2;
+          return regeneratorRuntime.awrap(Model.remove_anhct(req.params.id));
 
         case 2:
+          _context13.next = 4;
+          return regeneratorRuntime.awrap(Model.remove_pro(req.params.id));
+
+        case 4:
           res.redirect("/admin/products/list");
 
-        case 3:
+        case 5:
         case "end":
-          return _context5.stop();
+          return _context13.stop();
       }
     }
   });
 }); //sua
 
-router.get("/products/edit/:id", restrict.admin, function _callee6(req, res) {
+router.get("/products/edit/:id",
+/* restrict.admin, */
+function _callee14(req, res) {
   var id, rows, product;
-  return regeneratorRuntime.async(function _callee6$(_context6) {
+  return regeneratorRuntime.async(function _callee14$(_context14) {
     while (1) {
-      switch (_context6.prev = _context6.next) {
+      switch (_context14.prev = _context14.next) {
         case 0:
           id = +req.params.id || -1;
-          _context6.next = 3;
-          return regeneratorRuntime.awrap(Model.single(id));
+          _context14.next = 3;
+          return regeneratorRuntime.awrap(Model.single_pro(id));
 
         case 3:
-          rows = _context6.sent;
+          rows = _context14.sent;
           if (rows.length === 0) res.send("lõi la lõi");
           product = rows[0];
 
           if (req.files) {
-            _context6.next = 8;
+            _context14.next = 8;
             break;
           }
 
-          return _context6.abrupt("return", res.render("vwadmin/products/edit", {
+          return _context14.abrupt("return", res.render("vwadmin/products/edit", {
             layout: "admin",
             product: product
           }));
 
         case 8:
         case "end":
-          return _context6.stop();
+          return _context14.stop();
       }
     }
   });
 }); //cap nhat
 
-router.post("/products/update", restrict.admin, function _callee7(req, res) {
-  return regeneratorRuntime.async(function _callee7$(_context7) {
+router.post("/products/update",
+/* restrict.admin, */
+function _callee15(req, res) {
+  return regeneratorRuntime.async(function _callee15$(_context15) {
     while (1) {
-      switch (_context7.prev = _context7.next) {
+      switch (_context15.prev = _context15.next) {
         case 0:
-          _context7.next = 2;
-          return regeneratorRuntime.awrap(Model.patch(req.body));
+          _context15.next = 2;
+          return regeneratorRuntime.awrap(Model.patch_pro(req.body));
 
         case 2:
           res.redirect("/admin/products/list");
 
         case 3:
         case "end":
-          return _context7.stop();
+          return _context15.stop();
       }
     }
   });
 }); ////////////////category////////////////
-//list 
+//list
 
-router.get("/category/list", restrict.admin, function _callee8(req, res) {
+router.get("/category/list",
+/* restrict.admin, */
+function _callee16(req, res) {
   var list;
-  return regeneratorRuntime.async(function _callee8$(_context8) {
+  return regeneratorRuntime.async(function _callee16$(_context16) {
     while (1) {
-      switch (_context8.prev = _context8.next) {
+      switch (_context16.prev = _context16.next) {
         case 0:
-          _context8.next = 2;
+          _context16.next = 2;
           return regeneratorRuntime.awrap(Model.all_category());
 
         case 2:
-          list = _context8.sent;
+          list = _context16.sent;
           res.render("vwadmin/categories/list", {
             layout: "admin",
             loaisp: list,
@@ -240,24 +590,26 @@ router.get("/category/list", restrict.admin, function _callee8(req, res) {
 
         case 4:
         case "end":
-          return _context8.stop();
+          return _context16.stop();
       }
     }
   });
 }); ////////////////khách hàng////////////////
 //list kh
 
-router.get("/kh", restrict.admin, function _callee9(req, res) {
+router.get("/kh", restrict.admin_nhanvien,
+/* restrict.admin, */
+function _callee17(req, res) {
   var list;
-  return regeneratorRuntime.async(function _callee9$(_context9) {
+  return regeneratorRuntime.async(function _callee17$(_context17) {
     while (1) {
-      switch (_context9.prev = _context9.next) {
+      switch (_context17.prev = _context17.next) {
         case 0:
-          _context9.next = 2;
+          _context17.next = 2;
           return regeneratorRuntime.awrap(Model.all_kh());
 
         case 2:
-          list = _context9.sent;
+          list = _context17.sent;
           res.render("vwadmin/order/kh", {
             layout: "admin",
             khachhang: list,
@@ -266,35 +618,634 @@ router.get("/kh", restrict.admin, function _callee9(req, res) {
 
         case 4:
         case "end":
-          return _context9.stop();
+          return _context17.stop();
       }
     }
   });
-}); ////////////////tai khoan admin////////////////
-//list taikhoan
+}); //hoadon
 
-router.get("/user", restrict.admin, function _callee10(req, res) {
+router.get("/hoadon",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee18(req, res) {
   var list;
-  return regeneratorRuntime.async(function _callee10$(_context10) {
+  return regeneratorRuntime.async(function _callee18$(_context18) {
     while (1) {
-      switch (_context10.prev = _context10.next) {
+      switch (_context18.prev = _context18.next) {
         case 0:
-          _context10.next = 2;
-          return regeneratorRuntime.awrap(Model.all_tk());
+          _context18.next = 2;
+          return regeneratorRuntime.awrap(Model.all_hoadon());
 
         case 2:
-          list = _context10.sent;
-          res.render("vwadmin/taikhoan/user", {
+          list = _context18.sent;
+          res.render("vwadmin/order/hoadon", {
             layout: "admin",
-            tai_khoan: list,
+            hoadon: list,
             empty: list.length === 0
           });
 
         case 4:
         case "end":
-          return _context10.stop();
+          return _context18.stop();
       }
     }
   });
-});
+}); //hoadon chi tiet
+
+router.get("/hoadonct/:mahd",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee19(req, res) {
+  var mahd, list;
+  return regeneratorRuntime.async(function _callee19$(_context19) {
+    while (1) {
+      switch (_context19.prev = _context19.next) {
+        case 0:
+          mahd = req.params.mahd;
+          console.log("mahdd:", mahd);
+          _context19.next = 4;
+          return regeneratorRuntime.awrap(Model.all_hoadonct(mahd));
+
+        case 4:
+          list = _context19.sent;
+          console.log("dsct:", list);
+          res.render("vwadmin/order/hoadonct", {
+            layout: "admin",
+            hoadonct: list,
+            empty: list.length === 0
+          });
+
+        case 7:
+        case "end":
+          return _context19.stop();
+      }
+    }
+  });
+}); /////START XỬ LÝ TRẠNG THÁI HÓA ĐƠN////
+//hoadon cho_xac_nhan
+
+router.get("/hoadon/choxacnhan",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee20(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee20$(_context20) {
+    while (1) {
+      switch (_context20.prev = _context20.next) {
+        case 0:
+          _context20.next = 2;
+          return regeneratorRuntime.awrap(Model.single_choxacnhan());
+
+        case 2:
+          list = _context20.sent;
+          res.render("vwadmin/order/choxacnhan", {
+            layout: "admin",
+            hoadon: list,
+            empty: list.length === 0
+          });
+
+        case 4:
+        case "end":
+          return _context20.stop();
+      }
+    }
+  });
+}); //cap nhat hoadon cho_xac_nhan
+
+router.get("/hoadon/choxacnhan/:mahd",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee21(req, res) {
+  var mahd, entity;
+  return regeneratorRuntime.async(function _callee21$(_context21) {
+    while (1) {
+      switch (_context21.prev = _context21.next) {
+        case 0:
+          mahd = req.params.mahd;
+          entity = {
+            mahd: mahd,
+            trangthai: "Đã xác nhận"
+          };
+          console.log("entity", entity);
+          _context21.next = 5;
+          return regeneratorRuntime.awrap(Model.update_hd(entity));
+
+        case 5:
+          res.redirect("/admin/hoadon/choxacnhan");
+
+        case 6:
+        case "end":
+          return _context21.stop();
+      }
+    }
+  });
+}); //
+//hoadon da_xac_nhan
+
+router.get("/hoadon/daxacnhan",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee22(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee22$(_context22) {
+    while (1) {
+      switch (_context22.prev = _context22.next) {
+        case 0:
+          _context22.next = 2;
+          return regeneratorRuntime.awrap(Model.single_daxacnhan());
+
+        case 2:
+          list = _context22.sent;
+          res.render("vwadmin/order/daxacnhan", {
+            layout: "admin",
+            hoadon: list,
+            empty: list.length === 0
+          });
+
+        case 4:
+        case "end":
+          return _context22.stop();
+      }
+    }
+  });
+}); //cap nhat hoadon  da_xac_nhan
+
+router.get("/hoadon/daxacnhan/:mahd",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee23(req, res) {
+  var mahd, entity;
+  return regeneratorRuntime.async(function _callee23$(_context23) {
+    while (1) {
+      switch (_context23.prev = _context23.next) {
+        case 0:
+          mahd = req.params.mahd;
+          entity = {
+            mahd: mahd,
+            trangthai: "Đang giao"
+          };
+          console.log("entity", entity);
+          _context23.next = 5;
+          return regeneratorRuntime.awrap(Model.update_hd(entity));
+
+        case 5:
+          res.redirect("/admin/hoadon/daxacnhan");
+
+        case 6:
+        case "end":
+          return _context23.stop();
+      }
+    }
+  });
+}); //
+//hoadon dang_giao
+
+router.get("/hoadon/danggiao",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee24(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee24$(_context24) {
+    while (1) {
+      switch (_context24.prev = _context24.next) {
+        case 0:
+          _context24.next = 2;
+          return regeneratorRuntime.awrap(Model.single_danggiao());
+
+        case 2:
+          list = _context24.sent;
+          res.render("vwadmin/order/danggiao", {
+            layout: "admin",
+            hoadon: list,
+            empty: list.length === 0
+          });
+
+        case 4:
+        case "end":
+          return _context24.stop();
+      }
+    }
+  });
+}); //cap nhat hoadon  dang_giao
+
+router.get("/hoadon/danggiao/:mahd",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee25(req, res) {
+  var mahd, entity;
+  return regeneratorRuntime.async(function _callee25$(_context25) {
+    while (1) {
+      switch (_context25.prev = _context25.next) {
+        case 0:
+          mahd = req.params.mahd;
+          entity = {
+            mahd: mahd,
+            trangthai: "Đã nhận hàng"
+          };
+          console.log("entity", entity);
+          _context25.next = 5;
+          return regeneratorRuntime.awrap(Model.update_hd(entity));
+
+        case 5:
+          res.redirect("/admin/hoadon/danggiao");
+
+        case 6:
+        case "end":
+          return _context25.stop();
+      }
+    }
+  });
+}); //
+//hoadon da_nhan_hang
+
+router.get("/hoadon/danhan",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee26(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee26$(_context26) {
+    while (1) {
+      switch (_context26.prev = _context26.next) {
+        case 0:
+          _context26.next = 2;
+          return regeneratorRuntime.awrap(Model.single_danhan());
+
+        case 2:
+          list = _context26.sent;
+          res.render("vwadmin/order/danhan", {
+            layout: "admin",
+            hoadon: list,
+            empty: list.length === 0
+          });
+
+        case 4:
+        case "end":
+          return _context26.stop();
+      }
+    }
+  });
+}); //
+//hoadon da_huy
+
+router.get("/hoadon/dahuy",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee27(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee27$(_context27) {
+    while (1) {
+      switch (_context27.prev = _context27.next) {
+        case 0:
+          _context27.next = 2;
+          return regeneratorRuntime.awrap(Model.single_dahuy());
+
+        case 2:
+          list = _context27.sent;
+          res.render("vwadmin/order/dahuy", {
+            layout: "admin",
+            hoadon: list,
+            empty: list.length === 0
+          });
+
+        case 4:
+        case "end":
+          return _context27.stop();
+      }
+    }
+  });
+}); //cap nhat hoadon  da_huy
+
+router.get("/hoadon/dahuy/:mahd",
+/* restrict.admin_nhanvien, */
+
+/* restrict.admin, */
+function _callee28(req, res) {
+  var mahd, entity;
+  return regeneratorRuntime.async(function _callee28$(_context28) {
+    while (1) {
+      switch (_context28.prev = _context28.next) {
+        case 0:
+          mahd = req.params.mahd;
+          entity = {
+            mahd: mahd,
+            trangthai: "Đã hủy"
+          };
+          console.log("entity", entity);
+          _context28.next = 5;
+          return regeneratorRuntime.awrap(Model.update_hd(entity));
+
+        case 5:
+          res.redirect("/admin/hoadon/dahuy");
+
+        case 6:
+        case "end":
+          return _context28.stop();
+      }
+    }
+  });
+}); /////END XỬ LÝ TRẠNG THÁI HÓA ĐƠN////
+////////////////End khách hàng////////////////
+////////////////Start nhan vien ////////////////
+//list nhan vien
+
+router.get("/user", restrict.admin, function _callee29(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee29$(_context29) {
+    while (1) {
+      switch (_context29.prev = _context29.next) {
+        case 0:
+          _context29.next = 2;
+          return regeneratorRuntime.awrap(Model.all_nv());
+
+        case 2:
+          list = _context29.sent;
+          res.render("vwadmin/quantri/quantri", {
+            layout: "admin",
+            quantri: list,
+            empty: list.length === 0
+          });
+
+        case 4:
+        case "end":
+          return _context29.stop();
+      }
+    }
+  });
+}); //themn
+
+router.get("/user/add",
+/* restrict.admin, */
+function _callee30(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee30$(_context30) {
+    while (1) {
+      switch (_context30.prev = _context30.next) {
+        case 0:
+          _context30.next = 2;
+          return regeneratorRuntime.awrap(Model.all_nv());
+
+        case 2:
+          list = _context30.sent;
+          res.render("vwadmin/quantri/add", {
+            layout: "admin",
+            sanpham: list
+          });
+
+        case 4:
+        case "end":
+          return _context30.stop();
+      }
+    }
+  });
+}); //them
+
+router.post("/user/add",
+/* restrict.admin, */
+function _callee31(req, res) {
+  var salt, password_hash, entity;
+  return regeneratorRuntime.async(function _callee31$(_context31) {
+    while (1) {
+      switch (_context31.prev = _context31.next) {
+        case 0:
+          salt = bcrypt.genSaltSync(10);
+          password_hash = bcrypt.hashSync(req.body.password, salt);
+          entity = {
+            tennv: req.body.tennv,
+            gioitinh: req.body.gioitinh,
+            ngaysinh: req.body.ngaysinh,
+            email: req.body.email,
+            sdt: req.body.sdt,
+            username: req.body.username,
+            password: password_hash,
+            quyen: req.body.quyen
+          };
+          _context31.next = 5;
+          return regeneratorRuntime.awrap(Model.add_nv(entity));
+
+        case 5:
+          res.redirect("/admin/user/add");
+
+        case 6:
+        case "end":
+          return _context31.stop();
+      }
+    }
+  });
+}); //xoa
+
+router.get("/user/remove/:id",
+/* restrict.admin, */
+function _callee32(req, res) {
+  return regeneratorRuntime.async(function _callee32$(_context32) {
+    while (1) {
+      switch (_context32.prev = _context32.next) {
+        case 0:
+          _context32.next = 2;
+          return regeneratorRuntime.awrap(Model.remove_nv(req.params.id));
+
+        case 2:
+          res.redirect("/admin/user");
+
+        case 3:
+        case "end":
+          return _context32.stop();
+      }
+    }
+  });
+}); //sua
+
+router.get("/user/edit/:id",
+/* restrict.admin, */
+function _callee33(req, res) {
+  var id, rows, qt;
+  return regeneratorRuntime.async(function _callee33$(_context33) {
+    while (1) {
+      switch (_context33.prev = _context33.next) {
+        case 0:
+          id = req.params.id;
+          _context33.next = 3;
+          return regeneratorRuntime.awrap(Model.single_nv(id));
+
+        case 3:
+          rows = _context33.sent;
+          qt = rows[0];
+          res.render("vwadmin/quantri/edit", {
+            quantri: qt,
+            layout: "admin"
+          });
+
+        case 6:
+        case "end":
+          return _context33.stop();
+      }
+    }
+  });
+}); //cap nhat
+
+router.post("/user/update",
+/* restrict.admin, */
+function _callee34(req, res) {
+  return regeneratorRuntime.async(function _callee34$(_context34) {
+    while (1) {
+      switch (_context34.prev = _context34.next) {
+        case 0:
+          console.log("body", req.body);
+          _context34.next = 3;
+          return regeneratorRuntime.awrap(Model.update_nv(req.body));
+
+        case 3:
+          res.redirect("/admin/user");
+
+        case 4:
+        case "end":
+          return _context34.stop();
+      }
+    }
+  });
+}); ////////////////Giảm Giá////////////////
+//list giảm giá
+
+router.get("/giamgia", restrict.admin, function _callee35(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee35$(_context35) {
+    while (1) {
+      switch (_context35.prev = _context35.next) {
+        case 0:
+          _context35.next = 2;
+          return regeneratorRuntime.awrap(Model.all_gg());
+
+        case 2:
+          list = _context35.sent;
+          res.render("vwadmin/giamgia/giamgia", {
+            layout: "admin",
+            giamgia: list,
+            empty: list.length === 0
+          });
+
+        case 4:
+        case "end":
+          return _context35.stop();
+      }
+    }
+  });
+}); //themn
+
+router.get("/giamgia/add", restrict.admin, function _callee36(req, res) {
+  var list;
+  return regeneratorRuntime.async(function _callee36$(_context36) {
+    while (1) {
+      switch (_context36.prev = _context36.next) {
+        case 0:
+          _context36.next = 2;
+          return regeneratorRuntime.awrap(Model.all_sp_gg());
+
+        case 2:
+          list = _context36.sent;
+          res.render("vwadmin/giamgia/add", {
+            layout: "admin",
+            sanpham: list
+          });
+
+        case 4:
+        case "end":
+          return _context36.stop();
+      }
+    }
+  });
+}); //them
+
+router.post("/giamgia/add", restrict.admin, function _callee37(req, res) {
+  return regeneratorRuntime.async(function _callee37$(_context37) {
+    while (1) {
+      switch (_context37.prev = _context37.next) {
+        case 0:
+          _context37.next = 2;
+          return regeneratorRuntime.awrap(Model.add_gg(req.body));
+
+        case 2:
+          res.redirect("/admin/giamgia/add");
+
+        case 3:
+        case "end":
+          return _context37.stop();
+      }
+    }
+  });
+}); //xoa
+
+router.get("/giamgia/remove/:id", restrict.admin, function _callee38(req, res) {
+  return regeneratorRuntime.async(function _callee38$(_context38) {
+    while (1) {
+      switch (_context38.prev = _context38.next) {
+        case 0:
+          _context38.next = 2;
+          return regeneratorRuntime.awrap(Model.remove_gg(req.params.id));
+
+        case 2:
+          res.redirect("/admin/giamgia");
+
+        case 3:
+        case "end":
+          return _context38.stop();
+      }
+    }
+  });
+}); //sua
+
+router.get("/giamgia/edit/:id", restrict.admin, function _callee39(req, res) {
+  var id, rows, giamgia;
+  return regeneratorRuntime.async(function _callee39$(_context39) {
+    while (1) {
+      switch (_context39.prev = _context39.next) {
+        case 0:
+          id = req.params.id;
+          _context39.next = 3;
+          return regeneratorRuntime.awrap(Model.single_gg(id));
+
+        case 3:
+          rows = _context39.sent;
+          giamgia = rows[0];
+          console.log("giamgia", giamgia);
+          res.render("vwadmin/giamgia/edit", {
+            giamgia: giamgia,
+            layout: "admin"
+          });
+
+        case 7:
+        case "end":
+          return _context39.stop();
+      }
+    }
+  });
+}); //cap nhat
+
+router.post("/giamgia/update", restrict.admin, function _callee40(req, res) {
+  return regeneratorRuntime.async(function _callee40$(_context40) {
+    while (1) {
+      switch (_context40.prev = _context40.next) {
+        case 0:
+          _context40.next = 2;
+          return regeneratorRuntime.awrap(Model.update_gg(req.body));
+
+        case 2:
+          res.redirect("/admin/giamgia");
+
+        case 3:
+        case "end":
+          return _context40.stop();
+      }
+    }
+  });
+}); ////////////////End Giảm Giá////////////////
+
 module.exports = router;

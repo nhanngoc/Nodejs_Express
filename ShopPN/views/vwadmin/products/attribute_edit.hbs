@@ -1,0 +1,389 @@
+
+<head>
+    <link rel="import" href="https://rawgit.com/sitepoint-editors/multiselect-web-component/master/src/multiselect.html">
+    <style>
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+    color: #222;
+    margin: 0 0 20px;
+    }
+
+    p,
+    ul,
+    ol,
+    table,
+    pre,
+    dl {
+    margin: 0 0 20px;
+    }
+
+    h1,
+    h2,
+    h3 {
+    line-height: 1.1;
+    }
+
+    h1 {
+    font-size: 28px;
+    }
+
+    h2 {
+    color: #393939;
+    }
+
+    h3,
+    h4,
+    h5,
+    h6 {
+    color: #494949;
+    }
+
+    a {
+    color: #39c;
+    text-decoration: none;
+    }
+
+    a:hover {
+    color: #069;
+    }
+
+    a small {
+    font-size: 11px;
+    color: #777;
+    margin-top: -0.3em;
+    display: block;
+    }
+
+    a:hover small {
+    color: #777;
+    }
+
+    .wrapper {
+    width: 860px;
+    margin: 0 auto;
+    }
+
+    blockquote {
+    border-left: 1px solid #e5e5e5;
+    margin: 0;
+    padding: 0 0 0 20px;
+    font-style: italic;
+    }
+
+    code,
+    pre {
+    font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
+    color: #333;
+    font-size: 12px;
+    }
+
+    pre {
+    padding: 8px 15px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    overflow-x: auto;
+    }
+
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    }
+
+    th,
+    td {
+    text-align: left;
+    padding: 5px 10px;
+    border-bottom: 1px solid #e5e5e5;
+    }
+
+    dt {
+    color: #444;
+    font-weight: 700;
+    }
+
+    th {
+    color: #444;
+    }
+
+    img {
+    max-width: 100%;
+    }
+
+    header {
+    width: 270px;
+    float: left;
+    position: fixed;
+    -webkit-font-smoothing: subpixel-antialiased;
+    }
+
+    header ul {
+    list-style: none;
+    height: 40px;
+    padding: 0;
+    background: #f4f4f4;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    width: 270px;
+    }
+
+    header li {
+    width: 89px;
+    float: left;
+    border-right: 1px solid #e0e0e0;
+    height: 40px;
+    }
+
+    header li:first-child a {
+    border-radius: 5px 0 0 5px;
+    }
+
+    header li:last-child a {
+    border-radius: 0 5px 5px 0;
+    }
+
+    header ul a {
+    line-height: 1;
+    font-size: 11px;
+    color: #999;
+    display: block;
+    text-align: center;
+    padding-top: 6px;
+    height: 34px;
+    }
+
+    header ul a:hover {
+    color: #999;
+    }
+
+    header ul a:active {
+    background-color: #f0f0f0;
+    }
+
+    strong {
+    color: #222;
+    font-weight: 700;
+    }
+
+    header ul li + li + li {
+    border-right: none;
+    width: 89px;
+    }
+
+    header ul a strong {
+    font-size: 14px;
+    display: block;
+    color: #222;
+    }
+
+    section {
+    width: 500px;
+    float: right;
+    padding-bottom: 50px;
+    }
+
+    small {
+    font-size: 11px;
+    }
+
+    hr {
+    border: 0;
+    background: #e5e5e5;
+    height: 1px;
+    margin: 0 0 20px;
+    }
+
+    div.wrapper {
+    width: auto;
+    margin: 0;
+    }
+
+    header,
+    section,
+    footer {
+    float: none;
+    position: static;
+    width: auto;
+    }
+
+    header {
+    padding-right: 320px;
+    }
+
+    section {
+    border: 1px solid #e5e5e5;
+    border-width: 1px 0;
+    padding: 20px 0;
+    margin: 0 0 20px;
+    }
+
+    header a small {
+    display: inline;
+    }
+
+    header ul {
+    position: absolute;
+    right: 50px;
+    top: 52px;
+    }
+    ul {
+    list-style-position: outside;
+    }
+
+    .keys li {
+    padding: 0;
+    margin: 0 0 10px 0;
+    }
+
+    kbd {
+    padding: .1em .6em;
+    border: 1px solid rgba(63, 63, 63, 0.25);
+    -webkit-box-shadow: 0 1px 0 rgba(63, 63, 63, 0.25);
+    box-shadow: 0 1px 0 rgba(63, 63, 63, 0.25);
+    font-size: 0.9em;
+    font-family: sans-serif;
+    background-color: #fff;
+    color: #333;
+    border-radius: 3px;
+    display: inline-block;
+    margin: 0 .1em;
+    white-space: nowrap;
+    }
+    </style>
+   {{!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.22/webcomponents.js"></script> --}}
+    <script type="text/javascript" src="/public/detail/global_bx.js.download"></script>
+
+</head>
+<body>
+
+ <!-- start  -->    
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Sửa thuộc tính sản phẩm</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="">
+                     {{#arrlist}}
+                   <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                <label for="TenSP" class="col-md-3 control-label">Tên sản phẩm</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="TenSP" value="{{TenSP}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                <label for="Gia" class="col-md-3 control-label">Giá</label>
+                                <div class="col-md-9">
+                                    <input type="number" class="form-control" name="Gia" value="{{Gia}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                <label for="chatlieu" class="col-md-3 control-label">Chất liệu</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="chatlieu" value="{{chatlieu}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                <label for="MoTa" class="col-md-3 control-label">Mô tả</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="MoTa" value="{{MoTa}}">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                <label for="giakm" class="col-md-3 control-label">Tên sản phẩm</label>
+                                <div class="col-md-9">
+                                    <input type="number" class="form-control" name="giakm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                <label for="giakm" class="col-md-3 control-label">Tên sản phẩm</label>
+                                <div class="col-md-9">
+                                    <input type="number" class="form-control" name="giakm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-9">
+                                    <h6 class="font-14 mt-3">Chọn màu sắc:</h6>
+                                    <select class="custom-select mt-3"id="txtcolor_id" name="color_id">
+                                        {{!-- <option selected="">Chọn màu</option> --}}
+                                        {{#each this.colors}}
+                                        <option value="{{color_id}}">{{color}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <h6 class="font-14 mt-3">Chọn kích thước:</h6>
+                                {{#each this.sizes}}
+                                <div class="checkbox checkbox-pink form-check-inline">
+                                    <input  id="idcheckbox" type="checkbox" name="size_id" value="{{size_id}}">
+                                    <label for="inlineCheckbox3"> {{size}} </label>
+                                    <div class="form-group sl"  style="width: 145px;">
+                                        <input class="form-control" id="{{size_id}}" type="number"  name="soluong" placeholder="nhập số lượng" min="1" max="50" required>
+                                    </div>
+                                </div>
+                                {{/each}}
+                        </div>
+                        <!-- end col -->
+                    <!-- end row -->
+                    <div class="form-group">
+                        <!-- Button -->                                       
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> Thêm mới </button>
+                        </div>
+                    </div>  
+
+                    {{/arrlist}}
+                </form>
+            </div>
+            <!-- end card-body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+<script type="text/javascript">
+
+    $(".form-control[type='number']").attr('disabled', true);
+    $("#idcheckbox[type='checkbox']").change(function () {
+        var value = $(this).val();
+        if ($(this).is(":checked")) {
+            if(value==value){
+                //alert("true"+value);
+                $("#"+value+"[type='number']").attr('disabled', false);
+            }
+        }
+        else {
+           if(value==value){
+                //alert("false"+value);
+                $("#"+value+"[type='number']").attr('disabled', true);
+            }
+        }
+    });
+    
+</script>

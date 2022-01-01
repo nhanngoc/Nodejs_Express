@@ -4,8 +4,7 @@ var express = require("express");
 
 var config = require("./config/default.json");
 
-var mysql = require("mysql"); //const multer = require("multer");
-
+var mysql = require("mysql");
 
 var favicon = require('serve-favicon');
 
@@ -35,7 +34,8 @@ var connection = mysql.createConnection({
 connection.connect();
 global.db = connection; //
 
-var app = express();
+var app = express(); // Cho phép lý dữ liệu từ form method POST
+
 app.use(express.urlencoded({
   extended: true
 })); //
@@ -87,36 +87,12 @@ app.use("/admin", require("./routes/admin.route")); //địa chỉ admin
 
 app.use(fileUpload()); //upload_images
 
-app.get('/admin/products/add', routes.index); //call for main index page
+app.use("/admin", require("./routes/upload_sp.route")); //địa chỉ admin
 
-app.post('/admin/products/add', routes.index); //call for signup post 
-//app.get('/profile/:id',routes.profile);
-// cart html
-
-app.get('/carthtml', function (req, res) {
-  res.sendFile(__dirname + '/cart.html');
-}); // ROUTES
-
-app.get('/anhh', function (req, res) {
-  res.sendFile(__dirname + '/file.html');
-}); //nhanvien
-
-app.use("/admin/nhanvien", require("./routes/nhanvien.route"));
-app.get("/about", function (req, res) {
-  res.render("about");
-});
-app.get("/bs", function (req, res) {
+/* app.get("/bs", function (req, res) {
   res.sendFile(__dirname + "/bs.html");
-});
-app.get("/bb", function (req, res) {
-  res.sendFile(__dirname + "/bb.html");
-});
-app.get("/check", function (req, res) {
-  res.sendFile(__dirname + "/checkout.html");
-});
-app.get("/nn", function (req, res) {
-  res.sendFile(__dirname + "/ax.html");
-});
+}); */
+
 app.use(function (req, res) {
   res.render("404", {
     layout: false

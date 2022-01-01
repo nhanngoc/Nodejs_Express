@@ -1,0 +1,58 @@
+<div id="content" class="container">
+<div class="doublepad success_page">
+	<div class="checkout_step3"></div>
+  <div class="pagetitle marbot"><i class="icon-success"></i>ĐẶT HÀNG HOÀN TẤT</div>
+    <p>
+      <strong>BÉ XINH</strong> sẽ liên hệ bạn qua số điện thoại <span style="font-size: 16px;">0337876016</span> và email (nếu có) để xác nhận đơn hàng sớm nhất có thể.
+    <br>
+    </p><div style="background-color: #fff4e2; padding: 10px;">
+      <h4>Thông tin đơn hàng:</h4>
+      {{!-- 
+      <span style="text-decoration: underline;font-size: 12px">Mã Đơn hàng</span>: <a href="#" style="color: #4099da;text-decoration: underline; font-size: 16px; font-weight: 500">#mã</a>
+      <br>
+      <span style="text-decoration: underline;font-size: 12px">Mã Đơn hàng</span>: <a href="#" style="color: #4099da;text-decoration: underline; font-size: 16px; font-weight: 500">#mã</a>
+      <br>
+      <span style="text-decoration: underline;font-size: 12px">Link đơn hàng</span>: <a href="#" style="color: #4099da;text-decoration: underline; font-size: 13px;">https://www.bexinhshop.vn/index.php?route=account/order/info&amp;order_id=201201&amp;noId=7ddd65c395df38066999e9ee2cc51ba9</a><br><span style="font-style: italic;font-size: 11px;"></span>
+       --}}
+      
+
+      <table class="table cart">
+                              <thead>
+                                <tr>
+                                  <td class="price">Mã Đơn hàng</td>
+                                  <td class="price">Ngày tạo</td>
+                                  <td class="name">Tên người nhận</td>
+                                  <td class="price">Số điện thoại</td>
+                                  <td class="name">Địa chỉ</td>
+                                  <td class="price">Số lượng</td>
+                                  <td class="total">Tổng tiền</td>
+                                  
+                                </tr>
+                              </thead>
+                              <tbody>
+                                  {{#each this.order }}
+                                <tr>
+                                  <td class="price">{{mahd}}</td>
+                                  <td class="price">{{ngayhd}}</td>
+                                  <td class="name">{{tennn}}</td>
+                                  <td class="price">{{sdt}}</td>
+                                  <td class="name">{{diachi}}</td>
+                                  <td class="price" style="padding: 13px 10px;">{{soluong}}</td>
+                                  <td class="total" style="padding: 13px 10px;">{{format_number tongtien}} đ</td>
+                                </tr>
+                                {{/each}}
+                              </tbody>
+                            </table>
+    </div>
+    <br>
+      Nếu có bất kỳ thắc mắc gì, vui lòng liên hệ <span style="font-size: 16px;">0337876016</span> để được hỗ trợ.
+    <br><br>
+    Cám ơn Quý khách đã mua hàng tại bexinhshop!
+    <br><br>
+    <img alt="" src="https://www.bexinhshop.vn/image/data/be-xinh-shop/logobx1.png" style="width: 140px; height: 56px;">
+  <p></p>
+  <div class="buttons">
+    <div class="alcent"><a href="/" class="button_normal colorback">Tiếp tục mua hàng</a></div>
+  </div>
+  </div>
+</div>

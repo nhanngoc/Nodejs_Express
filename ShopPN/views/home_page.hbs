@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+<style>
+  a.Chk{
+  display: inline;
+  padding: 5px 25px 1px 18px !important;
+  color: #333 !important;
+  background: url("https://www.bexinhshop.vn/catalog/view/theme/pinshop/stylesheet/check_ico.1.0.png") 0 5px no-repeat;
+  font-weight: normal
+}
+.links b{background: #F5447B !important; color: #FFF !important}
+a.activeChk{
+  display: inline;
+  padding: 5px 25px 1px 18px !important;
+  color: #333 !important;
+  background: url("https://www.bexinhshop.vn/catalog/view/theme/pinshop/stylesheet/check_ico.1.0.png") 0 -18px no-repeat;
+  font-size: 14px;
+  font-weight: bold
+}
+</style>
+<style type="text/css">
+	a.activeChk{
+		padding-top: 2px !important;
+	}
+</style>
+</head>
+
+
+<body>
+<div class="afterheader"></div>
+
+							
+<div id="notification"></div>
+
+<div id="container">
+
+
+ <script>
+$(document).ready(function () {
+    $('.a_fiter').click(function () {
+    	if($(this).hasClass("expand")){
+            $('.weight_list').hide(); 
+            $(this).removeClass("expand");
+        }else{
+        	$('.weight_list').show(); 
+            $(this).addClass("expand");
+        }
+    	});  
+   }); 
+</script> 
+
+<div class="container container2">
+<div class="breadcrumb">
+		<ul class="xbreadcrumbs" id="breadcrumbs">
+      </ul>
+  <br style="clear:both;">
+  </div>
+        <div style="margin:0 auto;">
+	 <div class="window box_shadow box_search_list" style="margin:0">
+    <h1 style="text-align: left;margin: 0;">
+    	Thời trang trẻ em Mới về    </h1>
+		<style>
+			ul.size_filter{border-bottom: 1px dotted #ccc; padding-bottom: 10px;}
+			ul.size_filter li{display:inline;margin-right:2%;}
+			ul.size_filter li a{color:#F5447B;padding:3px 5px}
+			ul.size_filter li a.active{background-color:#F5447B;color:white}
+		</style>
+		<div class="" style="text-align: right; margin:0px; 0px 0px 0px ">
+			<ul class="size_filter" style="border-bottom:none;padding: 0px; margin: 0px">
+				{{!-- <li class="box_weight">Tìm đồ theo cân nặng:</li>
+				<li>
+                <select id="orderby" onchange="window.location.href =  this.options[ this.selectedIndex ].value" style="width:80px;margin-left: 10px; margin-top:5px">
+					<option value="thoi-trang-tre-em.html?&amp;size=0">Tất cả</option>
+					<option value="thoi-trang-tre-em.html?&amp;size=65">8 - 10kg</option>
+				</select>
+				</li> --}}
+				
+				 {{!-- <li><a class="Chk choosePro" style="margin-left:10px" href="https://www.bexinhshop.vn/thoi-trang-tre-em.html?&amp;promotion=1">Khuyến mãi</a></li> --}}
+				 			
+                <li class="choosePro"><a href="/products/category?category_id=0" class="Chk" title="Quần áo bé gái"><h3>Quần áo bé gái</h3></a></li><li>
+                </li>
+				<li class="choosePro"><a href="/products/category?category_id=1" class="Chk" title="Quần áo bé trai"><h3>Quần áo bé trai</h3></a></li><li>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<div class="ser_cat_filter">
+			<ul>
+				<li class=""><a href="https://www.bexinhshop.vn/thoi-trang-tre-em.html?&amp;category_id=59" class="Chk" title="Quần áo bé gái">Bé gái</a></li>
+				<li class=""><a href="https://www.bexinhshop.vn/thoi-trang-tre-em.html?&amp;category_id=62" class="Chk" title="Quần áo bé trai">Bé trai</a></li>
+			</ul>
+			</div>
+			{{!-- <div class="cat_filter_weight src_filter_weight">
+				<a href="javascript:void(0);" class="a_fiter">Lọc: <strong>Tất cả</strong> <i class="icon-sort-down icon-up"></i></a>
+				<ul class="weight_list">
+					<li><a href="https://www.bexinhshop.vn/thoi-trang-tre-em.html?&amp;size=0"> Tất cả</a></li>
+					<li><a href="https://www.bexinhshop.vn/thoi-trang-tre-em.html?&amp;size=65"> Từ 8 - 10kg</a></li>
+					<li><a href="https://www.bexinhshop.vn/thoi-trang-tre-em.html?&amp;size=66">Từ 10 - 12kg</a></li>
+				</ul>
+			</div> --}}
+		</div>
+	</div>
+    <div id="pinboard">
+                            {{#each this.sanpham}}
+                <div class="item " style="height:auto;">
+                    <div class="image"><a href="/products/detail/{{MaSP}}" title="{{TenSP}}">
+                                    <img data-original="/public/images/{{Anh}}" src="/public/images/{{Anh}}" alt="{{TenSP}}"  title="{{TenSP}}" class="lazy zoomhover" style="display: inline;">
+                                    </a>
+                    </div>
+                        <div class="pindesc"></div>
+                    <div class="product_name"><a href="/products/detail/{{MaSP}}" title="{{TenSP}}">
+                            <h3 style="line-height:20px;margin: 0px;color:#444">{{TenSP}}</h3></a></div>
+                            <div class="pull-left">
+                        <div class="price">
+                                {{format_number Gia}} đ </div>
+                    </div> 
+                        <div style="clear:both"></div> 
+                </div>
+                    {{/each}}
+	</div>
+    <!-- Phaan trang -->
+    <div class="" style="clear:both;text-align: center; ">
+		<div class="pagination" style="width:auto;margin-bottom:0;overflow:hidden;height:auto;margin-top:0px"> 
+			<div class="links" style="margin: 40px 0 20px 0"> TRANG:  
+                {{#each this.page_items}}
+                	{{#if isActive}}{{!-- gg --}}
+                    	<b>{{value}}</b> {{!-- gia moi --}}
+                    {{else}}{{!-- gia cu --}}
+                    	<a ref="nofollow" href="?page={{value}}">{{value}}</a>
+               		{{/if}}
+              {{/each}}
+             </div>	
+    	</div>
+		<div style="clear:both"></div>
+    </div>
+</div>
+  </div>
+</div>
+</body>
+</html>

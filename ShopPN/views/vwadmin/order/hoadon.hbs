@@ -1,0 +1,62 @@
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Danh sách hóa đơn</h4>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+{{#if this.empty}}
+<div class="row">
+    <div class="col-12">   
+        <div class="mt-5">
+            <h5 class="font-14">Chưa kết nối database</h5>
+            <p class="sub-header">
+                Chưa có dữ liệu
+            </p>
+        {{else}}
+            <table id="key-table" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Ngày hd</th>
+                        <th>Tên người nhận</th>
+                        <th>Sđt</th>
+                        <th>Địa chỉ</th>
+                        <th>Số lượng</th>
+                        <th>Tổng tiền</th>
+                        <th>Ghi chú</th>
+                        <th>Trạng thái</th>
+                        <th>Chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {{#each this.hoadon}}
+                    <tr>
+                        <td>{{ngayhd}}</td>
+                        <td>{{tennn}}</td>
+                        <td>{{sdt}}</td>
+                        <td>{{diachi}}</td>
+                        <td>{{soluong}}</td>
+                        <td>{{tongtien}}</td>
+                        <td>{{ghichu}}</td>
+                        <td class="text-right">
+                            <a name="" id="" class="btn btn-primary btn-sm" href="" role="button" title="sửa sản phẩm">
+                                {{trangthai}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/admin/hoadonct/{{mahd}}" title="xem chi tiết hóa đơn">
+                            {{mahd}}
+                            </a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+        </div>
+        <!-- end -->
+    </div>
+</div>
+<!-- end row -->

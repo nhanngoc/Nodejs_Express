@@ -1,0 +1,80 @@
+ <!-- start  -->
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h4 class="header-title mb-3">Sản phẩm thuộc tính</h4>
+        </div>
+        <div class="them" style="text-align: right;">
+            <a name="" id="" class="btn btn-primary btn-sm" style="text-align: right;" href="/admin/attribute/add" role="button" title="Thêm thuộc tính">Thêm thuộc tính
+               {{!--  <i class="fa fa-trash" aria-hidden="true"></i> --}}
+            </a>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">   
+        <div class="mt-5">
+            <table id="key-table" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">                       
+                 <thead>
+                    <tr>
+                        <th>Mã</th>
+                        <th>Tên</th>
+                        <th>Ảnh</th>
+                       
+                        <th>Giá</th>
+                        <th>Mô tả</th>
+                        <th>Chất liệu</th>
+                        {{!-- <th>Tình trạng</th> --}}
+                        <th>Thuộc tính</th>
+                        <th>Ngày nhập</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#arrlist}}
+                    <tr>
+                        <td>{{MaSP}}</td>
+                        <td>{{TenSP}}</td>
+                        <td>
+                            <a href="#" class="image">
+                                <img class="pic-1" src="/public/images/{{Anh}}" alt="{{TenSP}}" title="{{TenSP}}"
+                                style=" max-width: 50px; height: auto;">
+                            </a>
+                        </td>
+                       
+                        <td>{{Gia}}</td>
+                        <td>{{MoTa}}</td>
+                        <td>{{chatlieu}}</td>
+                        {{!-- <td>{{TinhTrang}}</td> --}}
+                        <td >
+                            {{#thuoctinh}}
+                            <div>
+                                {{#code}}{{color}}{{/code}}:
+                            </div>
+                                {{#items}}{{size}}: SL:{{soluong}}{{/items}}
+                            {{/thuoctinh}}
+                        </td>
+                        <td>{{NgayNhap}}</td>
+                        <td class="text-right" style="text-align: right;">
+                            <a name="" id="" class="btn btn-primary btn-sm" href="/admin/products/edit/{{MaSP}}" role="button" title="Sửa sản phẩm">
+                                <i class="mdi mdi-border-color" aria-hidden="true"></i>
+                            </a>
+                            <a name="" id="" class="btn btn-danger btn-sm" href="/admin/attribute/remove/{{MaSP}}" role="button" title="Xóa thuộc tính">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                            <a name="" id="" class="btn btn-primary btn-sm" href="/admin/attribute/detail/{{MaSP}}" role="button" title="Sửa thuộc tính">
+                                <i class="mdi mdi-border-color" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {{/arrlist}}
+                </tbody>
+            </table>
+            
+        </div>
+        <!-- end -->
+    </div>
+</div>
+<!-- end row -->

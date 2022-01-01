@@ -4,6 +4,11 @@
         <div>
             <h4 class="header-title mb-3">Sản phẩm</h4>
         </div>
+        <div class="them" style="text-align: right;">
+            <a name="" id="" class="btn btn-primary btn-sm" style="text-align: right;" href="/admin/attribute/add" role="button" title="Thêm thuộc tính">Thêm thuộc tính
+               {{!--  <i class="fa fa-trash" aria-hidden="true"></i> --}}
+            </a>
+        </div>
     </div>
 </div>
 <!-- end row -->
@@ -11,25 +16,22 @@
 <div class="row">
     <div class="col-12">   
         <div class="mt-5">
-            <h5 class="font-14">Chưa kết nối database</h5>
+            <h5 class="font-14">Chưa thêm sản phẩm nào</h5>
             <p class="sub-header">
                 Không có sản phẩm nào
             </p>
-        {{else}}
-            <table id="datatable-buttons" class="table table-hover" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+            {{else}}
+            <table id="key-table" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">                          
+            {{!-- <table id="datatable-buttons" class="table table-hover" style="border-collapse: collapse; border-spacing: 0; width: 100%;"> --}}
                 <thead>
                     <tr>
                         <th>Mã</th>
                         <th>Tên</th>
                         <th>ảnh</th>
-                        <th>số lượng</th>
-                        <th>số lượng bán</th>
                         <th>giá</th>
-                       
                         <th>Mô tả</th>
-                        <th>Tình trạng</th>
+                        <th>Chất liệu</th>
                         <th>Ngày nhập</th>
-                       
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -44,12 +46,9 @@
                                 style=" max-width: 75px; height: auto;">
                             </a>
                         </td>
-                        <td>{{SoLuong}}</td>
-                        <td>{{SoLuongBan}}</td>
                         <td>{{Gia}}</td>
-                       
                         <td>{{MoTa}}</td>
-                        <td>{{TinhTrang}}</td>
+                        <td>{{chatlieu}}</td>
                         <td>{{NgayNhap}}</td>
                         <td class="text-right">
                             <a name="" id="" class="btn btn-primary btn-sm" href="/admin/products/edit/{{MaSP}}" role="button" title="sửa sản phẩm">
@@ -59,7 +58,6 @@
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </td>
-                       
                     </tr>
                     {{/each}}
                 </tbody>

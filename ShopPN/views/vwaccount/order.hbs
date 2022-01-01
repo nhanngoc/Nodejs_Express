@@ -1,0 +1,39 @@
+<div id="container">
+
+    <div id="content" class="container">
+      <div class="doublepad window">
+          <div class="pagetitle marbot">Lịch Sử Đơn Hàng</div>
+    
+        <table class="table orders" style="margin-top: 20px">
+      <thead>
+            <tr><td>Mã đơn hàng</td>
+            <td>Tình trạng</td>
+            <td class="added">Ngày tạo</td>
+            <td class="products">Sản phẩm</td>
+            <td class="customer">Khách hàng</td>
+            <td>Tổng cộng</td>
+            <td></td>
+          </tr>
+      </thead>
+        <tbody>
+        {{#each this.order}}
+        <tr class="numtreven" onclick="javascript:location.href='/account/profile/order/{{mahd}}'">
+          <td>{{mahd}}</td>
+          <td>{{trangthai}}</td>
+          <td class="added">{{ngayhd}}</td>
+          <td class="products">{{soluong}}</td>
+          <td class="customer">{{tennn}}</td>
+          <td>{{format_number tongtien}} đ</td>
+          <td><div class="order-info"><a href="/account/profile/order/{{mahd}}" style="text-decoration: underline;">Xem thêm</a></div></td>
+      </tr>
+        {{/each}}
+        </tbody></table>
+      <br>
+      <div class="pagination"></div>
+        <div class="buttons">
+        <div class="right"><a href="/account/profile" class="button">Quay lại</a></div>
+      </div>
+      </div></div>
+            
+    
+    

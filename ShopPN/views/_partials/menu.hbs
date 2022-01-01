@@ -1,0 +1,463 @@
+
+<!-- menu - categories -->
+<div class="modal_shadow"></div>		
+ <div id="navigator">
+
+        <p class="menu-text">x</p>
+          <ul id="nav">
+          <a class="logo" href="/" title="Quần áo trẻ em - thời trang trẻ em" alt="Quần áo trẻ em - thời trang trẻ em"><img src="/public/main/blank_logo.png" width="139" height="35"></a>
+          <br><br>
+
+            <li class="nav_tab" style="background: url(https://www.bexinhshop.vn/catalog/view/theme/pinshop/images/icon_baby/icon1.png) 12px 13px  no-repeat; background-size: 20px"> <a href="/"><p>Trang chủ</p></a>
+             </li>
+             
+            <li class="nav_tab" style="background: url(https://www.bexinhshop.vn/catalog/view/theme/pinshop/images/icon_baby/icon_girl.png) 12px 15px  no-repeat; background-size: 20px">
+              <a href="javascript:void()"> <p>Quần áo bé gái</p> </a> <a href="javascript:void(0)" class="menucat expan_navi"><i class="icon-sort-down icon-up"></i></a>
+              <ul class="sub-navi">
+                {{#each lcCategories}}
+                <li><a href="/products/do-be-trai/{{MaLoai}}" title="{{TenLoai}}">{{TenLoai}}</a></li>
+                {{/each}}
+              </ul> 
+            </li>
+
+            <li class="nav_tab" style="background: url(https://www.bexinhshop.vn/catalog/view/theme/pinshop/images/icon_baby/icon_boy.png) 12px 15px  no-repeat; background-size: 20px"> 
+              <a href="javascript:void()"> <p>Quần áo bé trai</p> </a> <a href="javascript:void(0)" class="menucat expan_navi"><i class="icon-sort-down icon-up"></i></a>
+              <ul class="sub-navi"> 
+                {{#each lcCategories1}}
+                <li><a href="/products/do-be-trai/{{MaLoai}}" title="{{TenLoai}}">{{TenLoai}}</a></li>
+                {{/each}} 
+              </ul>
+            </li>
+
+
+           {{!--  <li class="nav_tab" style="background: url(https://www.bexinhshop.vn/catalog/view/theme/pinshop/images/icon_baby/icon_shoes.png) 12px 15px  no-repeat; background-size: 20px"> 
+              <a href="javascript:void()"> <p>Phụ kiện trẻ em</p> </a> <a href="javascript:void(0)" class="menucat expan_navi"><i class="icon-sort-down icon-up"></i></a> 
+              <ul class="sub-navi"> 
+                {{#each lcCategories2}}
+                <li><a href="/products/do-be-trai/{{MaLoai}}" title="{{TenLoai}}">{{TenLoai}}</a></li>
+                {{/each}} 
+              </ul> 
+            </li> --}}
+{{!-- 
+             <li class="nav_tab" style="background: url(https://www.bexinhshop.vn/catalog/view/theme/pinshop/images/icon_baby/icon_sale.png) 10px 12px  no-repeat; background-size: 27px"> <a href="https://www.bexinhshop.vn/khuyen-mai.html" 
+               onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Menu-left&#39;, &#39;clickSale&#39;, &#39;SaleAll&#39;);"><p>Hàng giảm giá</p> </a><a href="javascript:void(0)" class="menucat expan_navi"><i class="icon-sort-down icon-up"></i></a> 
+              <ul class="sub-navi"> 
+                <li><a href="https://www.bexinhshop.vn/thoi-trang-be-gai?promotion=1" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Menu-left&#39;, &#39;clickSale&#39;, &#39;Be-gai&#39;);" title="Quần áo bé gái giảm giá">Quần áo bé gái</a></li> 
+                <li><a href="https://www.bexinhshop.vn/thoi-trang-be-trai?promotion=1" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Menu-left&#39;, &#39;clickSale&#39;, &#39;Be-trai&#39;);" title="Quần áo bé trai giảm giá">Quần áo bé trai</a></li> 
+                <li><a href="https://www.bexinhshop.vn/phu-kien-thoi-trang-tre-em.html?promotion=1" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Menu-left&#39;, &#39;clickSale&#39;, &#39;phu-kien&#39;);" title="Giày, dép cho bé trai">Phụ kiện</a></li> 
+              </ul> 
+             </li> --}}
+
+              <li class="nav_tab white_nav" style="padding: 15px 0 10px 0; color: black"> <a href="tel:1900636100" style="background: url(https://www.bexinhshop.vn/catalog/view/theme/pinshop/images/icon_baby/phone-white.png) 14px 0px  no-repeat; background-size: 20px;display:block; padding-left: 40px;"><b>HOTLINE: 0337876016</b></a> 
+             </li>
+             <li class="nav_tab" style="border-bottom: none;"> <p style="text-align: center;margin-top: 10px;  ">
+              <a rel="nofollow" href="/account/login">Đăng Nhập</a> 
+              <a rel="nofollow" href="/account/register">Đăng Ký</a></p>
+             </li>
+             <div class="login_regis"></div>
+          </ul>
+ </div>
+<!-- end menu - categories -->
+
+<div class="navbar navbar-fixed-top topbar">
+		<div class="navbar-inner ">
+    <div class="container container2">
+			<h1 class="logotitle" style="float:left;width:156px">
+			<a class="logo" href="/" alt="Quần áo trẻ em - thời trang trẻ em" title="Quần áo trẻ em - thời trang trẻ em"><img title="Quần áo trẻ em - thời trang trẻ em" alt="Quần áo trẻ em - thời trang trẻ em" src="/public/main/blank_logo.png" width="139" height="35"></a>
+        </h1>
+    <script>
+      $(document).ready(function(){
+
+        $('.sub_navigation_main_cat li').hover(function() {
+          //alert('aa');
+            $(this).find('.child_cat_main').show();
+        }, function() {
+            $(this).find('.child_cat_main').hide();
+        });
+
+        $('input.form-search').click(function() {
+            $(".searc_sugget").show();
+        });
+         $('.searc_sugget').mouseleave(function() {
+            $(".searc_sugget").hide();
+        });
+
+          $('input.form-search').keydown(function() {
+            $(".searc_sugget").hide();
+        });
+
+          $('.icon-ellipsis').click(function() {
+            $(".searc_sugget").show();
+        });
+
+         $("img.lazy").lazyload({
+             threshold: 250
+         }); 
+    });
+  
+    </script>
+     <div id="search" class=" firstsearch">
+       <form class="input-group" method="GET" action="/search" >
+          <div class="input-prepend">
+            <span class="add-on handpoint">
+              <button  type="submit" style="height: 100%; 
+                position: absolute; border-radius: 6px; border: 1px solid #ccc;">
+              <i class="fa fa-search"></i>
+              </button>
+            </span>
+            <input type="text" class="form-search ui-autocomplete-input" name="name_search" placeholder="Tìm kiếm sản phẩm..." >
+            {{!-- <input name="name" type="text" placeholder="name"> --}}
+            
+            
+          </div>
+        </form>
+        {{!-- <form class="input-group" method="GET" action="/search" >
+          <div class="input-prepend">
+            <span class="add-on handpoint" id="buttn-search">
+              <i class="icon-search icon-large icon-top"></i>
+            </span>
+            <input type="text" class="form-search ui-autocomplete-input" name="TenSP" placeholder="Tìm kiếm sản phẩm..." value="Tìm kiếm" onclick="this.value = &#39;&#39;;" 
+            onkeydown="this.style.color = &#39;#000000&#39;;" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+            
+          </div>
+        </form> --}}
+         {{!-- <div class="searc_sugget">
+              <div class="sugget_title">Mọi người thường tìm kiếm</div>
+              <a href="https://www.bexinhshop.vn/quan-ao-dai-tay-cho-be.html">quần áo dài tay cho bé</a>
+              <a href="https://www.bexinhshop.vn/tag/%C4%91%E1%BB%93-%C4%91%C3%B4i-m%E1%BA%B9-v%C3%A0-b%C3%A9-g%C3%A1i.html">đồ đôi mẹ &amp; bé gái</a>
+              <a href="https://www.bexinhshop.vn/tag/qu%E1%BA%A7n-%C3%A1o-tr%E1%BA%BB-em-size-%C4%91%E1%BA%A1i.html">đồ trẻ em size lớn</a>
+              <a href="https://www.bexinhshop.vn/tag/%C4%91%E1%BB%93-b%C6%A1i-tr%E1%BA%BB-em.html">quần áo bơi cho bé</a>
+            <a href="https://www.bexinhshop.vn/tag/h%C3%A8.html">quần áo mùa hè cho bé</a>
+              <a href="https://www.bexinhshop.vn/dam-xinh-cho-be-gai">đầm bé gái đẹp</a>
+          </div> --}}
+         <div class="navigation_main_cat">
+            <ul class="sub_navigation_main_cat">
+              <li>
+                <a href="/products/do-be-gai">Bé gái</a>
+                <a href="javascript:void(0)" class=" "><i class="icon-sort-down icon-up"></i></a>
+                <div class="child_cat_main" style="display: none;">
+                    {{#each lcCategories}}
+                    <a href="/products/do-be-gai/{{MaLoai}}"
+                        class="{{#if isActive}}active{{/if}}">
+                        {{TenLoai}}
+                        {{#if num_of_products}}
+                        <span class="badge badge-danger float-right">{{num_of_products}}</span>
+                        {{/if}}
+                    </a>
+                    {{/each}} 
+                   <a class="viewall" href="/products/do-be-gai">Xem tất cả &gt;</a>
+                   <div class="cat_img"><img src="/public/main/dress_navi.png"></div>
+                </div>
+              </li>
+               <li>
+                  <a href="/products/do-be-trai">Bé trai</a>
+                  <a href="javascript:void(0)" class=" "><i class="icon-sort-down icon-up"></i></a>
+                   <div class="child_cat_main" style="display: none;">
+                       {{#each lcCategories1}}
+                            <a href="/products/do-be-trai/{{MaLoai}}"
+                                class="{{#if isActive}}active{{/if}}">
+                                {{TenLoai}}
+                                {{#if num_of_products}}
+                                <span class="badge badge-danger float-right">{{num_of_products}}</span>
+                                {{/if}}
+                            </a>
+                        {{/each}}   
+                    <a class="viewall" href="/products/do-be-trai">Xem tất cả &gt;</a>
+                   <div class="cat_img"><img src="/public/main/navi-boy.jpg"></div>
+                </div>
+              </li>
+              <li>
+                  <a href="/huongdan">Hướng dẫn</a>
+                   
+              </li>
+              {{!-- <li>
+                  <a href="https://www.bexinhshop.vn/phu-kien-thoi-trang-tre-em.html">Phụ kiện</a>
+                  <a href="javascript:void(0)" class=" "><i class="icon-sort-down icon-up"></i></a>
+                   <div class="child_cat_main" style="display: none;">
+                        {{#each lcCategories2}}
+                            <a href="/products/phu-kien/{{MaLoai}}"
+                                class="{{#if isActive}}active{{/if}}">
+                                {{TenLoai}}
+                                {{#if num_of_products}}
+                                <span class="badge badge-danger float-right">{{num_of_products}}</span>
+                                {{/if}}
+                            </a>
+                        {{/each}}   
+                   <a class="viewall" href="#">Xem tất cả &gt;</a>
+                   <div class="cat_img"><img src="/public/main/navi-aces.png"></div>
+                </div>
+              </li> --}}
+            </ul>
+        </div>
+    </div> 
+		<div class="pull-right colorback" id="headerunder"></div>
+<div class="pull-right topcart colorback m_topcart" id="header">
+  <div id="cart">
+    <div class="heading">
+      <a><i class="icon-shopping-cart colorback icon-large icon-top"></i><span id="cart-total" class="colorwhite">{{session.cart.totalItems}} 0  266.000 đ</span><i class="icon-sort-down colorback icon-large padleft flright carticon"></i></a>
+    </div>
+    <!-- Shoping Cart Section End -->
+    {{#if session.cart.totalItems }}
+    <div class="content colorback m_cart_content" id="topcart">
+      <div class="top_m_contet"><i class="icon-back-cart" onclick="hideCart();"></i> Giỏ hàng <i class="icon-close-cart" onclick="hideCart();"></i></div>
+      <div class="m_top_fix_cart"> </div>
+          <div class="mini-cart-info colorback m_colorback">
+      <div class="checkout m_checkout">
+          <div id="mini-closecart" onclick="hideCart();">
+              <i id="" class="icon-remove handpoint"></i>
+          </div>
+          <a href="/shop_cart" class="m_btn_viewcart"><span class="mybutton cart-button "><i class="icon-tags  padright"></i>Xem giỏ hàng</span></a>
+          <a href="/checkout" class="">
+              <span class="mybutton cart-button m_btn_checkout"><i class="icon-share-alt  padright"></i>Đặt hàng</span>
+          </a>
+      </div>
+      <br>
+        <table class="m_cart_details">
+          <tbody>
+            {{#each session.cart.items }}
+            <tr>
+              <td class="mini-cart-name colorwhite m_colorwhite"><a class="colorwhite" href="/products/detail/{{this.item.MaSP}}"><img src="/public/images/{{this.item.anh}}" style="float:left;margin-right:5px" width="47" height="47"></a>
+                  <span class="m_cart_p_name">{{this.item.tensp}}</span>
+                - <small>{{this.item.color}}: {{this.item.size}}</small><br>
+              </td>
+              <td class="mini-cart-quantity">x&nbsp;{{ this.quantity }}</td>
+              <td class="mini-cart-total">{{format_number this.item.gia}} đ</td>
+              <td class="mini-cart-remove">
+                <a href="/remove/{{this.item.sp_id}}" title="Không mua sản phẩm này" alt="Không mua sản phẩm này">
+                <i class="icon-trash padleft handpoint"></i>
+                </a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>  
+      <div class="m_foot_cart"></div>
+      <div class="mini-cart-summary m_mini-cart-summary">
+        <span class="text_fott">Tổng tiền</span>
+          <span class="totalsum">{{format_number session.cart.totalPrice}} đ</span>
+      </div>
+    </div>
+    {{else}}
+    <div class="content colorback m_cart_content" id="topcart" style="top: 0px;">
+      <div class="top_m_contet"><i class="icon-back-cart" onclick="hideCart();"></i> Giỏ hàng <i class="icon-close-cart" onclick="hideCart();"></i></div>
+      <div class="m_top_fix_cart"> </div>
+                  <div id="mini-closecart" onclick="hideCart();">
+                <i id="" class="icon-remove handpoint"></i>
+          </div>
+      <div class="empty ">&nbsp;&nbsp;&nbsp;Giỏ hàng đang trống!</div>
+    </div>
+    {{/if}}
+  </div>
+</div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+$(document).ready(function () {
+    $('.imenu').click(function () {
+      $('#navigator').animate({left: '0px'}, 350);
+      $('.menu-text').animate({top: '20px'}, 350).show();
+      $('.modal_shadow').show();
+    });
+
+    $('.menu-text').click(function () {
+            $('#navigator').animate({left: '-80%'}, 350); 
+            $(this).animate({top: '0px'}, 350).hide();
+            $('.modal_shadow').hide();
+         }); 
+
+
+    $('.menu-icon').click(function () {
+              $(this).toggleClass("on"); });
+
+    $('.expan_navi').click(function () { 
+        if($(this).hasClass("expan_navi_close")){
+          $('.sub-navi li').hide();
+          $(this).removeClass('expan_navi_close');
+        }else{
+          $(this).addClass('expan_navi_close');
+          $('.sub-navi li').hide();
+          //$( "p.white_nav" ).removeClass("white_nav");
+          $(this).parent().find( "li" ).show();
+          $(this).parent().find( "li" ).addClass("white_nav");
+        }
+    }); 
+});
+</script>
+
+<div class="navbar navbar-static-top menubar responsive-menu">
+  <div class="navbar-inner navbar-cat pdetail_navbar-cat">   
+        <div class="dropdown">
+            <a class="padright imenu" href="javascript:void(0)">Danh mục &nbsp;<i class="icon-sort-down icon-up"></i></a>
+            {{!-- <a href="https://www.bexinhshop.vn/index.php?route=account/wishlist" rel="nofollow" id="wishlist-total" class="padright">Yêu thích (0)</a> --}}
+            <a href="https://www.bexinhshop.vn/index.php?route=account/account" rel="nofollow">Tài khoản</a>
+        </div>    
+  </div>
+</div>
+<div class="navbar navbar-static-top menubar m_pdetail_navbar-cat">
+  <div class="navbar-inner">   
+    <div class="container container2">
+      
+      {{#if lcIsAuthenticated}}
+      <div id="welcome" class="pull-right">Xin chào! {{lcAuthUser.tenkh}} <a rel="nofollow" href="/account/profile">Trang cá nhân</a> 
+          hoặc <a rel="nofollow" href="javascript: $('#frmLogout').submit()">Đăng xuất</a></div>
+
+      {{else}}
+        <div id="welcome" class="pull-right">Xin chào! Bạn có thể <a rel="nofollow" href="/account/login">Đăng Nhập</a> 
+          hoặc <a rel="nofollow" href="/account/register">tạo Tài Khoản</a></div>
+      {{/if}}  
+         {{!-- <div class="pull-right" style="margin-top: 10px;">
+          <a href="https://www.bexinhshop.vn/index.php?route=account/wishlist" id="wishlist-total" class="padright wisl_deatails" rel="nofollow">Yêu thích ()</a>
+        </div> --}}
+
+        <div id="header">
+           
+  			<div style="padding:13px 0 0 38px; background: url(https://www.bexinhshop.vn/catalog/view/theme/pinshop/images/icon_baby/phone-black.png) 20px 15px  no-repeat; background-size: 15px; width: 100px; color: gray">
+  			 0337876016
+			</div>
+        </div>
+    </div>
+    <form id="frmLogout" action="/account/logout" method="POST"></form>
+  </div>
+</div>
+<div class="navbar navbar-static-top menubar responsive-search">
+  <div class="navbar-inner">   
+    <div class="container container2">
+        <div id="header" align="center">
+			
+			<div class="sub_mob_heade">
+			HOT:
+			<a href="https://www.bexinhshop.vn/tag/h%C3%A8.html" style="text-decoration:underline;" title="quần áo mùa hè">quần áo mùa hè</a>
+			, <a href="https://www.bexinhshop.vn/tag/%C4%91%E1%BB%93-b%C6%A1i.html" style="text-decoration:underline;" title="đồ bơi">đồ bơi</a>
+      , <a href="https://www.bexinhshop.vn/tag/%C4%91i-ch%C6%A1i.html" style="text-decoration:underline;" title="đồ đi chơi">đồ đi chơi</a>
+
+			</div>
+			
+            <div id="search" class="pull-left fullwidth nopad5" style="display:none">
+                <div class="input-prepend"><span class="add-on handpoint" id="buttn-search-res"><i class="icon-search icon-large icon-top"></i></span><input type="text" class="form-search ui-autocomplete-input" name="filter_name" value="Tìm kiếm" onclick="this.value = &#39;&#39;;" onkeydown="this.style.color = &#39;#000000&#39;;" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="afterheader"></div>
+
+								<!--
+				/**
+					*Ajax advanced search starts
+					*/
+				-->
+				<script type="text/javascript" language="javascript"><!--
+					// Ajax advanced search starts
+					$(document).ready(function(){
+						
+						$('input[name="filter_name"]').autocomplete({
+							delay: 500,
+							source: function(request, response) {
+								$.ajax({
+									url: 'index.php?route=common/header/ajaxLiveSearch&filter_name=' +  encodeURIComponent(request.term),
+									dataType: 'json',
+									success: function(json) {
+										response($.map(json, function(item) {
+											return {
+												label: item.name,
+												name: item.name1,
+												value: item.product_id,
+												model: item.model,
+												stock_status: item.stock_status,
+												image: item.image,
+												manufacturer: item.manufacturer,
+												price: item.price,
+												special: item.special,
+												category: item.category,
+												rating: item.rating,
+												reviews: item.reviews,
+											}
+										}));
+									}
+								});
+							}, 
+							select: function(event, ui) {
+								if(ui.item.value){
+									location = 'index.php?route=product/product/&product_id='+ui.item.value;
+								}else{
+									$('.button-search').trigger('click');
+								}
+								return false;
+							},
+							focus: function(event, ui) {
+								return false;
+							}
+						}).data("autocomplete")._renderItem = function(ul, item){
+								var html = '<div id="ajaxadvance">';
+									if(item.product_id!=0){
+										html += '<div class="image">';
+										if(item.image){
+										html += '<img title="'+item.name+'" src="'+item.image+'"/>';
+										}
+										html += '</div>';
+										html += '<div class="content">';
+										html += 	'<div class="name">'+item.label+'</div>';
+										if(item.model){
+										html += 	'<div class="model">';
+										html +=		'Model : '+ item.model;
+										html +=		'</div>';
+										}
+										if(item.manufacturer){
+										html += 	'<div class="manufacturer">';
+										html +=		'Manufacturer : '+ item.manufacturer;			
+										html +=		'</div>';		
+										}
+										if(item.price){
+										html += 	'<div class="price"> Giá: ';
+											if (!item.special) { 
+										html +=			'<span class="price-old">'+ item.price + '</span>';
+											} else {	
+										html +=			'<span class="price-old">'+ item.price +'</span> <span class="price-new">'+ item.special +'</span>';
+											}	
+										html +=		'</div>';
+										}
+										if(item.stock_status){
+										html += 	'<div class="stock_status">';
+										html +=		'Stock : '+ item.stock_status;			
+										html +=		'</div>';
+										}
+										if (item.rating) {
+										html +=		'<div class="rating"> Rating : <img src="catalog/view/theme/default/image/stars-'+ item.rating+ '.png" alt="'+ item. reviews +'" /></div>';
+										}
+										html +='</div>';
+									}
+								html += '</div>';
+								return $('<li></li>')
+									 .data('item.autocomplete', item)
+									 .append('<a>' + html + '</a>')
+									 .appendTo(ul);
+						};
+					});
+					//Ajax advanced search ends
+				//--></script>
+				<style>
+				.ui-menu {z-index: 666 !important; background: #fff; }
+				.ui-menu li:nth-child(even){background: #FFFFFF;  border: 1px solid #dbdee1;}
+				.ui-menu li:nth-child(odd){background: #E4EEF7;  border: 1px solid #fff;}
+				.ui-menu li, .ui-menu .ui-menu-item { margin-bottom: 10px;}
+				.ui-menu a {border-radius: 0 ;}
+				#ajaxadvance { display:inline-flex; }
+				#ajaxadvance .name { margin:0; }
+				#ajaxadvance .image { display:inline-block; float: left;	margin-right:10px; width: 50px;}
+				#ajaxadvance .content { display:inline-block; max-width: 300px;}
+				#ajaxadvance .content > div { margin-top:5px;	}
+				#ajaxadvance .price-old {color: #ff0000; text-decoration: line-through; }
+				#ajaxadvance .highlight {color: #38b0e3; }
+				</style>
+				<!--
+				/**
+					*Ajax advanced search ends
+					*/
+				-->
+							
+<div id="notification">
+
+</div>

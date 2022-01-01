@@ -1,0 +1,138 @@
+<div id="container">
+
+    <div id="content" class="container"><div class="doublepad">  <div class="pagetitle marbot">Thông Tin Tài Khoản</div>
+      <form class="window" action="https://www.bexinhshop.vn/index.php?route=account/edit" method="post" enctype="multipart/form-data">
+        <h2>Thông tin cá nhân</h2>
+        <div class="content">
+          <table class="form">
+            <tbody><tr>
+              <td><span class="required">*</span> Tên:</td>
+              <td><input type="text" name="firstname" value="abc">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required">*</span> Họ và tên lót:</td>
+              <td><input type="text" name="lastname" value="depp">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required">*</span> E-Mail:</td>
+              <td><input type="text" name="email" value="abcd1234@gmail.com">
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required">*</span> Điện thoại:</td>
+              <td><input type="text" name="telephone" value="0147852369">
+                </td>
+            </tr>
+            <tr>
+              <td>Số Fax:</td>
+              <td><input type="text" name="fax" value=""></td>
+            </tr>
+          </tbody></table>
+        </div>
+        <div class="buttons">
+          <div class="alleft butmodify"><a href="https://www.bexinhshop.vn/account" class="button_normal colorback">Quay lại</a></div>
+          <div class="alright">
+            <input type="submit" value="Tiếp tục" class="button_normal colorback">
+          </div>
+        </div>
+      </form>
+      </div></div>
+            
+    
+    
+    
+    <!--
+    <div class="item w4" style="height:auto;z-index:;width:99%">
+                <div class="tag"> 
+                    
+                </div>
+            </div>-->
+        
+    
+    
+            
+        
+            
+    
+    
+    
+     <div class="social-share-inner">
+        
+        
+            
+        
+    
+            
+      </div>
+      
+            
+     
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+                
+            $().UItoTop({ easingType: 'easeOutQuart'});
+                
+            function setCookie(name, value, lifetime_days) {
+                var exp = new Date();
+                exp.setDate(new Date().getDate() + lifetime_days);
+                document.cookie = name + '=' + value + ';expires=' + exp.toUTCString() + ';path=/';
+            }
+            
+            function getCookie(name) {
+                if(document.cookie) {
+                    var regex = new RegExp(escape(name) + '=([^;]*)', 'gm'),
+                    matches = regex.exec(document.cookie);
+                    if(matches) {
+                        return matches[1];
+                    }
+                }
+            }
+            
+            
+                
+        });
+    
+        $.ajax({
+            url: 'https://www.bexinhshop.vn/index.php?route=module/cart',
+            type: 'get',
+            success: function(data) {
+                $("#header").html(data);
+            }
+        });
+        
+        $.ajax({
+            url: 'https://www.bexinhshop.vn/index.php?route=common/header/getCustomer',
+            type: 'get',
+            success: function(data) {
+                $("#welcome").html(data);
+                    
+            }
+        });
+    
+                $.ajax({
+                url: 'https://www.bexinhshop.vn/index.php?route=module/viewed/getViewed',
+                type: 'get',
+                success: function(data) {
+                    if(data != ''){
+                        $('#box_viewed_product').html(data);
+                    }
+                    
+                }
+            });
+        
+            $('.zoomhover').hover(function() {
+                $(this).addClass('transition');
+            }, function() {
+                $(this).removeClass('transition');
+            });
+    
+            $('#breadcrumbs').xBreadcrumbs();
+        
+            
+        
+        
+    </script>
+    </div>

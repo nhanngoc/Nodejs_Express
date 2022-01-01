@@ -12,7 +12,11 @@
 {{!--  --}}<link rel="stylesheet" type="text/css" href="/public/detail/font-awesome.css">
 {{!--  --}}<script src="/public/detail/sdk.js.download" async="" crossorigin="anonymous"></script>
 {{!--  --}}<script type="text/javascript" src="/public/detail/global_bx.js.download"></script>
+<!-- Google Font -->
 
+   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 <style>
 
   .wisl_deatails{
@@ -183,23 +187,22 @@ input.form-search {
 </style>
 
 <div id="content" class="container m_pdetials_container">
-<div class="doublepad m_doublepad">
+  <div class="doublepad m_doublepad">
 
     <div class="pagetitle marbot p_detail">			
         
         <meta itemprop="name" content="{{#each this.sanpham}}{{TenSP}}{{/each}}">
         </span></span>
             
-			{{#each this.sanpham}}
-	    <h1><a href="{{MaSP}}" title="{{TenSP}}">{{TenSP}}</a></h1>
+      {{#each this.sanpham}}
+      <h1><a href="{{MaSP}}" title="{{TenSP}}">{{TenSP}}</a></h1>
       {{/each}}
     </div>
-  <div id="product-info" class="row-fluid">
+    <div id="product-info" class="row-fluid">
       <div class="span7 window image_tab ">     
         <div class="m_pdetail_img swiper-container">
           <div class="swiper-wrapper">
-            
-             {{#each this.detail_anh}}
+            {{#each this.detail_anh}}
                   <div class="swiper-slide">
               <div style="background:url(/public/images/detail/{{anh_ten}}) no-repeat 0 0; background-size: 100%; display: block;width: 100%; height: 100% ">
                 <img class="swiper-lazy galerry_thumb" data-src="/public/images/detail/{{anh_ten}}">
@@ -207,7 +210,6 @@ input.form-search {
                 <!--<div class="swiper-lazy-preloader"></div>-->
             </div>
             {{/each}}
-            
         </div>
           <!-- Add Pagination -->
           <div class="swiper-pagination"></div>
@@ -330,104 +332,108 @@ input.form-search {
         </script>
       
       </div>
-
-
       </div>
       <div class="span5 window20 m_pdetails_window20">
+       {{#if giamgia}}
+        <div class="prodprice m_pdetails_prodprice">
+            <div class="price-new">{{#each this.giamgia}}{{format_number giakm}}{{/each}} đ</div>
+            <div class="price-old colorfront">{{#each this.sanpham}}{{format_number Gia}}{{/each}} đ</div> 
+            <br>
+        </div>
+       {{else}}
         <div class="prodprice m_pdetails_prodprice">
             <div class="price-new">{{#each this.sanpham}}{{format_number Gia}}{{/each}} đ</div>
             <br>
         </div>
+        {{/if}}
         <div class="clearfix"></div>	 
         <div class="description m_pdetails_description">
-          <div class="prodinfo" style="margin-bottom:0px; ">
-          <!--		
-          <span>Mã sản phẩm:</span> KTB196500<br /> 
-                  <span>Tình trạng:</span> Còn hàng		<br/><br/>
-        -->
-    <div class="p_detail_attri">	
-      <div class="p_detail_attri_menu">
-        <a href="javascript:void(0)" class="p_detail_attri_menu_icon"><i class="icon-close"></i></a>
-      </div>
-      <div class="p_detail_attri_size">
-        <b style="font-size:12px;color: #000">CHỌN KÍCH CỠ{{session.cart.totalItems}}</b>
-      </div>
-      </div>
-          </div>
-              <div class="options box_att" id="box_att_product_details">
-                  <div class="box_att_wreapper" style="display: none;">
-                      {{#page_items}}
-                      <div id="option-64522" class="option">
-                          <b>{{#code}}{{this.color}}:{{/code}}</b>
-                          <select name="option[#]" rel="{{#code}}{{this.color}}{{/code}}">
-                              <option value=""> --- Chọn --- </option>
-                              {{#items}}
-                              <option rel="{{this.size_id}}" value="{{this.size_id}}">{{this.size}}(15kg - 17kg) </option>
-                              {{/items}}
-                          </select>
-                      </div>
-                      {{/page_items}}       
-                  </div> 
-                  <div class="att_product_chose">
-                      <div class="attr_color">
-                          <div class="title_attr" id="{{#each this.sanpham}}{{MaSP}}{{/each}}">Màu sắc</div>
-                          <div class="optio_attr">
-                              {{#page_items}}
-                              <label class="item_attr color " id="{{#code}}{{this.color_id}}{{/code}}" data="{{#items}}{{this.size_id}}@{{/items}}">{{#code}}{{this.color}}{{/code}}</label>
-                              {{/page_items}}
-                          </div>
-                      </div>
-                  <div class="attr_color"> 
-                  <div class="title_attr">Kích Thước <a id="innlineSize" class="chooseSize" href="javascript:void(0)" style="text-decoration:underline;font-size:12px;color: #807d7d;font-weight: 400;">
-                      ( Xem chi tiết kích cỡ ) <i class="icon-sort-down" style="font-size: 11px; vertical-align: text-bottom;text-decoration: unset;"></i></a>
+              <div class="prodinfo" style="margin-bottom:0px; ">
+                  <div id="soluongs">
+                    <span>Kho:</span><br/>
                   </div>
-              <p>chọn size</p>
-              <div class="optio_attr">
-                  {{#each this.sizes}}
-                  <label class="item_attr att_size " title="({{title}})" data="{{size_id}}">{{size}}</label>
-                  {{/each}}
-              </div>
-              </div>
-                <div class="box_att_message">Vui lòng chọn <strong>Màu sắc, kích thước</strong>
+                <div class="p_detail_attri">	
+                  <div class="p_detail_attri_menu">
+                    <a href="javascript:void(0)" class="p_detail_attri_menu_icon"><i class="icon-close"></i></a>
+                  </div>
+                  <div class="p_detail_attri_size">
+                    <b style="font-size:12px;color: #000">CHỌN KÍCH CỠ{{session.cart.totalItems}}</b>
+                  </div>
                 </div>
               </div>
+            {{!-- <form class="form-horizontal" role="form" method="post" id="form-login"action="/cart"> --}}
+              <div class="options box_att" id="box_att_product_details">
+                <div class="box_att_wreapper" style="display: none;">
+                    <div id="option-240299" class="option">
+                      {{#page_items}}
+                        <b>{{#code}}{{this.color}}:{{/code}}</b>
+                        <select name="option[#]" rel="{{#code}}{{this.color}}{{/code}}">
+                            <option value=""></option>
+                            {{#items}}
+                            <option rel="{{this.size_id}}" value="{{this.size_id}}">{{soluong}}</option>
+                            {{/items}}
+                        </select>
+                        {{/page_items}}
+                    </div>
+                </div> 
+                    {{!-- <div class="">
+                        <input type="text" class="form-control" name="MaSP" id="MaSP" value="{{#each this.sanpham}}{{MaSP}}{{/each}}">
+                    </div>
+                    <div class="chonmau">
+                    </div>
+                    <div class="chonsize">
+                    </div> --}}
+                <div class="att_product_chose">
+                  <div class="attr_color">
+                      <div class="title_attr" id="{{#each this.sanpham}}{{MaSP}}{{/each}}">Màu sắc</div>
+                      <div class="optio_attr">
+                          {{#page_items}}
+                          <label class="item_attr color " id="{{#code}}{{this.color_id}}{{/code}}" data="{{#items}}{{this.size_id}}@{{/items}}">{{#code}}{{this.color}}{{/code}}</label>
+                          {{/page_items}}
+                      </div>
+                  </div>
+                  <div class="attr_color"> 
+                    <div class="title_attr">Kích Thước <a id="innlineSize" class="chooseSize" href="javascript:void(0)" style="text-decoration:underline;font-size:12px;color: #807d7d;font-weight: 400;">
+                        ( Xem chi tiết kích cỡ ) <i class="icon-sort-down" style="font-size: 11px; vertical-align: text-bottom;text-decoration: unset;"></i></a>
+                    </div>
+                    <div class="optio_attr">
+                        {{#each this.sizes}}
+                        <label class="item_attr att_size " title="({{title}})" data="{{size_id}}">{{size}}</label>
+                        {{/each}}
+                    </div>
+                  </div>
+                  <div class="box_att_message">Vui lòng chọn <strong>Màu sắc, kích thước</strong>
+                  </div>
+                </div>
               </div>
-        <div class="wty_cart">
-          Số lượng:
-            <select id="quantity" name="quantity" style="width:80px;margin-left: 5px; margin-top:5px;height:25px">
-                <option value="1">1</option>
-                <option value="2">2</option>             
-            </select>
-        </div>
-        </div>
-        <div class="prodcart m_pdetails_procart">
-            <div class="m_pdetails_price_bar">
-              <div class="price-new">{{#each this.sanpham}}{{format_number Gia}}{{/each}} đ</div>
+              <div class="wty_cart">
+                Số lượng:
+                <div class="buttons_added">
+                  <input class="minus is-form" type="button" value="-">
+                  <input aria-label="quantity" class="input-qty" onkeypress="return isNumberKey(event)" oninput="maxLengthCheck(this)"
+                    {{!-- max="6" --}} min="1" maxlength = "3" name="quantity" type="number" value="1" style="text-align: center;">
+                  <input class="plus is-form" type="button" value="+">
+                </div>
+              </div>
+             {{!--  <input onclick="var result = document.getElementById(&#39;quantity&#39;); var qty = result.value; if( !isNaN(qty) &amp; qty &gt; 1 ) result.value--;return false;" type="button" value="-">
+<input id="quantity" name="quantity" type="text" value="1">
+<input onclick="var result = document.getElementById(&#39;quantity&#39;); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type="button" value="+">
+             --}}
+            <div class="prodcart m_pdetails_procart">
+                <div class="m_pdetails_price_bar">
+                  <div class="price-new">{{#each this.sanpham}}{{format_number Gia}}{{/each}} đ</div>
+                </div>
+                <input type="hidden" name="product_id" size="2" value="15645">
+                &nbsp;
+                <input type="button" value="MUA NGAY" id="button-cart" class="addtocart m_pdetails_addtocart" style="margin: 0px !important; ">
             </div>
-            <input type="hidden" name="product_id" size="2" value="15645">
-            &nbsp;
-            <input type="button" value="MUA NGAY" id="button-cart" class="addtocart m_pdetails_addtocart" style="margin: 0px !important; ">
-        </div>
-
-        <div class="box_attr">
-          <a class="call_now" href="tel:0337876016" onclick="trackCall();">Gọi đặt hàng</a>
-          <span class="iconsca"><a id="p_detail_wish" class="wisl_deatails">Yêu thích</a>&nbsp;&nbsp; 
-            </span>
-        </div>
-   
-    <!--<br clear="all"/>
-    <div class="note_checkout" style="color: red;font-size:15px">
-      <strong>THÔNG BÁO NGHỈ TẾT NGUYÊN ĐÁN 2021</strong>
-      <br>
-      <p>Bexinhshop.vn nghỉ lễ từ <b>10/02/2021</b> đến <b>25/02/2021</b></p>
-      <p>Mọi đơn hàng phát sinh trong thời gian này chúng tôi sẽ tiến hành xử lý từ ngày <b>26/02/2021</b></p>
-    </div>-->
+            
 
     <br clear="all">
       <div class="note_checkout" style="font-size:13px">
-      <!--<div style="font-weight: bold;">- <b style="color: red">TẶNG KHẨU TRANG 3 LỚP</b> đơn hàng từ <b>300.000đ</b> trên Toàn quốc. <a style="color: blue" href="https://www.bexinhshop.vn/hang-tang-khong-ban-khau-trang-3-lop-cho-be.html" target="_blank"> Xem Thêm >>> </a></div>
+      <!--<div style="font-weight: bold;">- <b style="color: red">TẶNG KHẨU TRANG 3 LỚP</b> đơn hàng từ <b>300.000đ</b> trên Toàn quốc. <a style="color: blue" href="#" target="_blank"> Xem Thêm >>> </a></div>
           <br clear="all"/> -->
-        <div>- <b style="color: green">MIỄN PHÍ VẬN CHUYỂN</b> đơn hàng từ <b>500.000đ</b> trên Toàn quốc. Riêng TPHCM, miễn phí đơn hàng từ <b>250.000đ</b>. </div>
+        {{!-- <div>- <b style="color: green">MIỄN PHÍ VẬN CHUYỂN</b> đơn hàng từ <b>500.000đ</b> trên Toàn quốc. Riêng TPHCM, miễn phí đơn hàng từ <b>250.000đ</b>. </div> --}}
         <div style="color: green; font-weight: 500; margin-top: 6px; padding-left: 5px; "> BÉ XINH CAM KẾT:</div>
         <div>- KHÔNG bán hàng kém chất lượng. </div> 
         <div>- Sản phẩm y như hình.</div>
@@ -446,23 +452,13 @@ input.form-search {
                   fbq('track', 'AddToWishlist');
               } 
           </script>
-          <select id="orderby" onchange="window.location.href =  this.options[ this.selectedIndex ].value" style="width:100%; margin-top:5px;display: block !important">
-            <option value="https://www.bexinhshop.vn/index.php?route=product/category&amp;path=&amp;size=0">Xem thêm Quần áo bé trai theo cân nặng: </option>
-                      <option value="#">Từ 15 - 17kg</option>
-                      <option value="#">Từ 15 - 17kg</option>
-                      <option value="#">Từ 15 - 17kg</option>
-                      <option value="#">Từ 15 - 17kg</option>
-            <option value="#">Từ 15 - 17kg</option>
-          </select>
-          <div class="prodshareicons">
-          </div>
-        <div class="tags" style="display:inline"><i>Từ khóa: </i><a href="https://www.bexinhshop.vn/tag/.html" style="color:#F5447B;"></a>
-          </div>
+          
+      </div>
       </div>
     </div>
-    </div>
-    </div>
+      
   </div>
+</div>
   
   <a id="innlinemodal" class="inline" href="https://www.bexinhshop.vn/#cart_modal" style="display:none">Inline HTML</a>
 	<div>
@@ -480,17 +476,18 @@ input.form-search {
   <div class="notification_add_cart" id="notification_cart">
   	<div class="cart_success"><i class="icon-success"></i>Đã thêm vào Giỏ hàng<i class="icon-remove" style="float: right; font-size: 30px; cursor: pointer;"></i></div>
     <div class="cart_success_content">
-        <img src="/public/detail/aokhoatloveisvang-500x500.jpg" style="width: 70px; height: 70px;float: right; margin-right: 5px;">
+      
+        <img src="/public/images/{{#each this.sanpham}}{{Anh}}{{/each}}" style="width: 70px; height: 70px;float: right; margin-right: 5px;">
         <div>
             <div>- {{#each this.sanpham}}{{TenSP}}{{/each}}</div>
             <div class="cart_success_content_size">{{!-- <strong>Màu đen:</strong> --}}</div> 
         </div>
     </div>
     <div class="cart_success_bot">
-        Hiện có <strong id="noti_total_cart_num" style="color: red">{{session.cart.totalItems}}</strong> trong giỏ hàng. <strong id="noti_total_cart_sum">{{!-- Tổng giỏ hàng 121.000 đ. --}}</strong>
+        {{!-- Hiện có <strong id="noti_total_cart_num" style="color: red">{{session.cart.totalItems}}</strong> trong giỏ hàng. <strong id="noti_total_cart_sum">Tổng giỏ hàng 121.000 đ.</strong> --}}
         <div style="margin: 15px 0 15px 0; height: auto; overflow: auto; float: left;width: 100%">
             <a title="xem giỏ hàng" class="i_view_cart" href="/shop_cart"><i class="icon-view-shopping-cart"></i> Xem giỏ hàng</a>
-            <a title="Thanh toán" class="i_go_cart" href="/checkout"><i class="icon-share-alt "></i>&nbsp;&nbsp;Thanh toán</a>
+            <a title="Đặt hàng" class="i_go_cart" href="/checkout"><i class="icon-share-alt "></i>&nbsp;&nbsp;Đặt hàng</a>
         </div>
     </div>
     <div class="cart_recommend">
@@ -518,7 +515,6 @@ input.form-search {
     </div>
   </div>
 
-
  <script type="text/javascript">
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -532,6 +528,22 @@ input.form-search {
     ga('set','dimension3', '133.000 đ' ); 
     ga('send', 'pageview');
 </script>
+
+{{!-- XỬ LÝ SỐ LƯỢNG --}}
+<script type="text/javascript">//<![CDATA[
+
+function isNumberKey(evt){// chỉ nhập số
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+function maxLengthCheck(object){
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+}
+
+//]]></script>
 
 {{!-- XỬ LÝ HÌNH ẢNH --}}
 <script type="text/javascript">
@@ -645,8 +657,8 @@ input.form-search {
 {{!-- XỬ LÝ KHI CLICK CHỌN MUA --}}
 <script type="text/javascript">
 
+   
   $('#button-cart').bind('click', function() {
-    
     var ma_attr = $( ".title_attr" ).attr("id");
     var color = $( ".color.checked" ).text();
     var size = $( ".att_size.checked" ).text();
@@ -678,12 +690,17 @@ input.form-search {
     }else{
       $(".m_pdetails_description").removeClass("m_pdetails_description_open");
     }
-
+    var sl = $("input[name='quantity']").val();
+   console.log("slll:",sl);
     $("#button-cart").attr("disabled", true);
-    
-    $.ajax({
-      url:"/cart/"+ma_attr+"?size="+ssize+"&color="+scolor, //'index.php?route=checkout/cart/add', gửi dữ liệu vao trang gio hang
-      type: 'post',
+    // Lấy tất cả dữ liệu trong form login
+    //var data = $('form#form-login').serialize();
+    var username = $('#txt_username').val();
+   $.ajax({
+      url:"/cart/"+ma_attr+"?size="+ssize+"&color="+scolor+"&quantity="+sl, //'index.php?route=checkout/cart/add', gửi dữ liệu vao trang gio hang
+      type: 'POST',
+      //dataType:'json',
+      //data: { MaSP: ma_attr, color: scolor, size: ssize, quantity: sl},
       success : function (result){
         //if (result['success']) {
          var str_att = "";
@@ -701,16 +718,27 @@ input.form-search {
         //}
         $("#button-cart").attr("disabled", false);			
       }
-	  });
+	  }); 
   });
 </script>
 
 
 {{!-- xử lý size & color --}}
 <script type="text/javascript">
+  $(".input-qty[type='text']").attr('disabled', true);
   function bindSelectAttr(){
+    var cl = $( ".color.checked" ).attr("id");
+    var si = $( ".att_size.checked" ).attr("data");
+    var chonmau = '<input type="text" class="form-control" name="color" id="color" value="'+cl+'">';
+    $(".chonmau").html(chonmau);//hiện ra trên trang
+    var chonsize = '<input type="text" class="form-control" name="size" id="size" value="'+si+'">';
+    $(".chonsize").html(chonsize);//hiện ra trên trang
+
+
     var color = $( ".color.checked" ).text();
     var size = $( ".att_size.checked" ).attr("data");
+    console.log("colordd"+color);
+    console.log("sizess"+size);
     $( ".box_att select" ).each(function( index ) {
       $(this).find("option").removeAttr('selected');
     });
@@ -720,12 +748,46 @@ input.form-search {
           $(this).find("option").each(function( index ) {
             if($(this).attr("rel") == size){
                 $(this).attr('selected','selected');
+                var sl= $('#option-240299 :selected').text();//xuất số lượng
+                var htmls = '<span>Kho: </span>'+sl+'<br/>';
+                $("#soluongs").html(htmls);//hiện ra trên trang
+                //XỬ LÝ RÀNG BUỘC NHẬP SỐ LƯỢNG
+                $(".input-qty[type='text']").attr('disabled', false);
+                $('input.input-qty').each(function() {
+                  var $this = $(this),
+                  qty = $this.parent().find('.is-form'),
+                  min = Number($this.attr('min')),
+                  max = Number(sl)//Number($this.attr('max'))
+                  console.log("max1:",max);
+                  if (min == 0) {
+                    var d = 0
+                  } else d = min
+                  console.log("DDDDD0:",d);
+                  console.log("Min:",min);
+                  $(qty).on('click', function() {
+                    if ($(this).hasClass('minus')) {//min
+                      if (d > min) 
+                        d += -1
+                      console.log("DDDDD1:",d);
+                    } else if ($(this).hasClass('plus')) {//max
+                      var x = Number($this.val()) + 1
+                      if (x <= max) d += 1
+                      console.log("max2:",max);
+                      console.log("DDDDD2:",d);
+                    }
+                    $this.attr('value', d).val(d)
+                    console.log("DDDDD3:",d);
+              
+                  })
+                  console.log("max3:",max);
+                })
             }
           });
         }
       });
     }
   }
+  //console.log("slllll:"+bindSelectAttr().cc);
   function att_color_choose(){
     $(".color").click(function(){
       $(".color").removeClass("checked");
@@ -749,6 +811,8 @@ input.form-search {
       }
       $( ".att_size.checked" ).each(function( index ) {
           $( this ).removeClass("checked").text("Size "+$(this).attr("data"));
+          
+          
       });
       $(this).addClass("checked").text("Size " + $(this).attr("data") + " " +$(this).attr("title"));
         

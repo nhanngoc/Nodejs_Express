@@ -62,24 +62,55 @@ module.exports = {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return regeneratorRuntime.awrap(Model.singleUserName(req.body.username));
+            return regeneratorRuntime.awrap(Model.singleUserName_ad(req.body.username));
 
           case 2:
             user = _context2.sent;
+            console.log("user", user);
 
             if (!(!req.session.isAuthenticated && user != +req.params.username)) {
-              _context2.next = 5;
+              _context2.next = 6;
               break;
             }
 
             return _context2.abrupt("return", res.redirect("/admin/login?retUrl=".concat(req.originalUrl)));
 
-          case 5:
+          case 6:
             next();
 
-          case 6:
+          case 7:
           case "end":
             return _context2.stop();
+        }
+      }
+    });
+  },
+  admin_nhanvien: function admin_nhanvien(req, res, next) {
+    var user;
+    return regeneratorRuntime.async(function admin_nhanvien$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return regeneratorRuntime.awrap(Model.singleUserName(req.body.username));
+
+          case 2:
+            user = _context3.sent;
+            console.log("user_nv", user);
+
+            if (!(!req.session.isAuthenticated && user != +req.params.username)) {
+              _context3.next = 6;
+              break;
+            }
+
+            return _context3.abrupt("return", res.redirect("/admin/login?retUrl=".concat(req.originalUrl)));
+
+          case 6:
+            next();
+
+          case 7:
+          case "end":
+            return _context3.stop();
         }
       }
     });

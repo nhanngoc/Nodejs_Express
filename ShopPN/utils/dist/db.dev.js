@@ -6,9 +6,9 @@ var config = require("../config/default.json"); //kết nối dữ liệu
 
 
 var tbl_sp = "sanpham";
+var tbl_spct = "sanphamct";
 var tbl_l = "loaisp";
-var tbl_tk = "tai_khoan";
-var tbl_nv = "nhanvien";
+var tbl_qt = "quantri";
 var tbl_kh = "khachhang";
 var tbl_hoadon = "hoadon";
 var tbl_chitiethd = "chitiethd";
@@ -17,6 +17,19 @@ module.exports = {
   load: function load(sql) {
     return new Promise(function (resolve, reject) {
       pool.query(sql, function (error, results, fields) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
+  //them attribute sanphamct/////////////////////
+  insert_attr: function insert_attr(entity) {
+    return new Promise(function (resolve, reject) {
+      var sql = "insert into ".concat(tbl_spct, "(masp, color_id, size_id,soluong) VALUES ?");
+      pool.query(sql, [entity], function (error, results) {
         if (error) {
           return reject(error);
         }
@@ -38,6 +51,19 @@ module.exports = {
       });
     });
   },
+  //them nhieu hinh anh anhct/////////////////////
+  insert_mutilfile: function insert_mutilfile(entity) {
+    return new Promise(function (resolve, reject) {
+      var sql = "insert into anhct(MaSP, anh_ten) VALUES ?";
+      pool.query(sql, [entity], function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
   //cap nhat products
   update_pro: function update_pro(table, entity, condition) {
     return new Promise(function (resolve, reject) {
@@ -51,10 +77,75 @@ module.exports = {
       });
     });
   },
+  //cap nhat products attribute
+  update_attr: function update_attr(table, entity, condition) {
+    return new Promise(function (resolve, reject) {
+      var sql = "update ".concat(tbl_sp, " set ? where ?");
+      pool.query(sql, [entity, condition], function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
+  //cap nhat products attribute
+  update_attr_detail: function update_attr_detail(table, entity, condition) {
+    return new Promise(function (resolve, reject) {
+      var sql = "update ".concat(tbl_spct, " set ? where ?");
+      pool.query(sql, [entity, condition], function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
   //delete products
   delete_pro: function delete_pro(table, condition) {
     return new Promise(function (resolve, reject) {
       var sql = "delete from ".concat(tbl_sp, " where ?");
+      pool.query(sql, condition, function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
+  //them giamgia /////////////////////
+  insert_gg: function insert_gg(table, entity) {
+    return new Promise(function (resolve, reject) {
+      var sql = "insert into giamgia set ?";
+      pool.query(sql, entity, function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
+  //cap nhat categories
+  patch_gg: function patch_gg(table, entity, condition) {
+    return new Promise(function (resolve, reject) {
+      var sql = "update giamgia set ? where ?";
+      pool.query(sql, [entity, condition], function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
+  //delete categories
+  del_gg: function del_gg(table, condition) {
+    return new Promise(function (resolve, reject) {
+      var sql = "delete from giamgia where ?";
       pool.query(sql, condition, function (error, results) {
         if (error) {
           return reject(error);
@@ -103,10 +194,10 @@ module.exports = {
       });
     });
   },
-  //them tai khoan///////////////////////////
+  //them nhân viên///////////////////////////
   insert_tk: function insert_tk(table, entity) {
     return new Promise(function (resolve, reject) {
-      var sql = "insert into ".concat(tbl_tk, " set ?");
+      var sql = "insert into ".concat(tbl_qt, " set ?");
       pool.query(sql, entity, function (error, results) {
         if (error) {
           return reject(error);
@@ -116,10 +207,10 @@ module.exports = {
       });
     });
   },
-  //cap nhat tai khoan
+  //cap nhat tai khoan nhan vien
   update_tk: function update_tk(table, entity, condition) {
     return new Promise(function (resolve, reject) {
-      var sql = "update ".concat(tbl_tk, " set ? where ?");
+      var sql = "update ".concat(tbl_qt, " set ? where ?");
       pool.query(sql, [entity, condition], function (error, results) {
         if (error) {
           return reject(error);
@@ -129,10 +220,23 @@ module.exports = {
       });
     });
   },
-  //delete tai khoan
+  //cap nhat trang thai hoadon
+  update_hoadon: function update_hoadon(table, entity, condition) {
+    return new Promise(function (resolve, reject) {
+      var sql = "update ".concat(tbl_hoadon, " set ? where ?");
+      pool.query(sql, [entity, condition], function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
+  //delete tai khoan nhan vien
   delete_tk: function delete_tk(table, condition) {
     return new Promise(function (resolve, reject) {
-      var sql = "delete from ".concat(tbl_tk, " where ?");
+      var sql = "delete from ".concat(tbl_qt, " where ?");
       pool.query(sql, condition, function (error, results) {
         if (error) {
           return reject(error);
@@ -197,7 +301,7 @@ module.exports = {
   //them chitiethd 
   insert_chitiethd: function insert_chitiethd(entity) {
     return new Promise(function (resolve, reject) {
-      var sql = "insert into ".concat(tbl_chitiethd, "(mahd, masp, tensp, gia, soluong) VALUES ?");
+      var sql = "insert into ".concat(tbl_chitiethd, "(mahd, masp, tensp, dongia, quantity, gia) VALUES ?");
       pool.query(sql, [entity], function (error, results) {
         if (error) {
           return reject(error);
