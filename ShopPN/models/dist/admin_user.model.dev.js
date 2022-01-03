@@ -277,34 +277,11 @@ module.exports = {
     });
   },
   //login admin
-  singleUserName_ad: function singleUserName_ad(username) {
-    var rows;
-    return regeneratorRuntime.async(function singleUserName_ad$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            _context3.next = 2;
-            return regeneratorRuntime.awrap(db.load("select * from ".concat(tbl_quantri, " where username = '").concat(username, "' AND quyen=\"admin\"")));
-
-          case 2:
-            rows = _context3.sent;
-
-            if (!(rows.length === 0)) {
-              _context3.next = 5;
-              break;
-            }
-
-            return _context3.abrupt("return", null);
-
-          case 5:
-            return _context3.abrupt("return", rows[0]);
-
-          case 6:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    });
+  singleUserName_ad: function singleUserName_ad() {
+    return db.load("select * from ".concat(tbl_quantri, " where quyen=\"admin\""));
+  },
+  singleUserName_all: function singleUserName_all() {
+    return db.load("select * from ".concat(tbl_quantri));
   } //// End Quản trị////
 
 };

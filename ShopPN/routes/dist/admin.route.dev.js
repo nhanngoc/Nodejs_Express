@@ -88,9 +88,7 @@ router.post("/", function _callee2(req, res) {
   });
 }); //logout
 
-router.post("/logoutadmin",
-/* restrict.admin, */
-function (req, res) {
+router.post("/logoutadmin", restrict.admin_nhanvien, function (req, res) {
   req.session.isAuthenticated = false;
   req.session.authUser = null;
   res.redirect("/admin");
@@ -98,9 +96,7 @@ function (req, res) {
 //
 //home admin
 
-router.get("/home",
-/* restrict.admin, */
-function _callee3(req, res) {
+router.get("/home", restrict.admin_nhanvien, function _callee3(req, res) {
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -127,9 +123,7 @@ function _callee3(req, res) {
 ////////////////products////////////////
 //attribute_list san pham thuoc tinh
 
-router.get("/attribute/list"
-/* , restrict.admin */
-, function _callee4(req, res) {
+router.get("/attribute/list", restrict.admin, function _callee4(req, res) {
   var list, colors, sizes, arrlist, i, cls, j, sizesl, k, sl, sp;
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
@@ -209,9 +203,7 @@ router.get("/attribute/list"
   });
 }); //attribute_add
 
-router.get("/attribute/add",
-/* restrict.admin, */
-function _callee5(req, res) {
+router.get("/attribute/add", restrict.admin, function _callee5(req, res) {
   var sanp, attr_colors, attr_sizes, list, colors, sizes, arrlist, i, cls, j, sizesl, k, sl, sp;
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
@@ -299,9 +291,7 @@ function _callee5(req, res) {
     }
   });
 });
-router.post("/attribute/add",
-/* restrict.admin, */
-function _callee6(req, res) {
+router.post("/attribute/add", restrict.admin, function _callee6(req, res) {
   var size_ids, sl, entity, i, j, masp, color_id, size_id, soluong, arr;
   return regeneratorRuntime.async(function _callee6$(_context6) {
     while (1) {
@@ -358,9 +348,7 @@ router.get("/attribute/remove/:id", function _callee7(req, res) {
   });
 }); //list thuộc tính attribute detail
 
-router.get("/attribute/detail/:id",
-/* restrict.admin, */
-function _callee8(req, res) {
+router.get("/attribute/detail/:id", restrict.admin, function _callee8(req, res) {
   var id, rows_attr;
   return regeneratorRuntime.async(function _callee8$(_context8) {
     while (1) {
@@ -405,9 +393,7 @@ router.get("/attr/remove/:id", function _callee9(req, res) {
   });
 }); //sua attribute detail
 
-router.get("/attr/edit/:id",
-/* restrict.admin, */
-function _callee10(req, res) {
+router.get("/attr/edit/:id", restrict.admin, function _callee10(req, res) {
   var id, rows, sizes, product;
   return regeneratorRuntime.async(function _callee10$(_context10) {
     while (1) {
@@ -440,9 +426,7 @@ function _callee10(req, res) {
   });
 }); //cap nhat attribute detail
 
-router.post("/attr/update",
-/* restrict.admin, */
-function _callee11(req, res) {
+router.post("/attr/update", restrict.admin, function _callee11(req, res) {
   return regeneratorRuntime.async(function _callee11$(_context11) {
     while (1) {
       switch (_context11.prev = _context11.next) {
@@ -461,9 +445,7 @@ function _callee11(req, res) {
   });
 }); //list san pham
 
-router.get("/products/list",
-/* restrict.admin, */
-function _callee12(req, res) {
+router.get("/products/list", restrict.admin, function _callee12(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee12$(_context12) {
     while (1) {
@@ -512,9 +494,7 @@ router.get("/products/remove/:id", function _callee13(req, res) {
   });
 }); //sua
 
-router.get("/products/edit/:id",
-/* restrict.admin, */
-function _callee14(req, res) {
+router.get("/products/edit/:id", restrict.admin, function _callee14(req, res) {
   var id, rows, product;
   return regeneratorRuntime.async(function _callee14$(_context14) {
     while (1) {
@@ -547,9 +527,7 @@ function _callee14(req, res) {
   });
 }); //cap nhat
 
-router.post("/products/update",
-/* restrict.admin, */
-function _callee15(req, res) {
+router.post("/products/update", restrict.admin, function _callee15(req, res) {
   return regeneratorRuntime.async(function _callee15$(_context15) {
     while (1) {
       switch (_context15.prev = _context15.next) {
@@ -569,9 +547,7 @@ function _callee15(req, res) {
 }); ////////////////category////////////////
 //list
 
-router.get("/category/list",
-/* restrict.admin, */
-function _callee16(req, res) {
+router.get("/category/list", restrict.admin, function _callee16(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee16$(_context16) {
     while (1) {
@@ -597,9 +573,7 @@ function _callee16(req, res) {
 }); ////////////////khách hàng////////////////
 //list kh
 
-router.get("/kh", restrict.admin_nhanvien,
-/* restrict.admin, */
-function _callee17(req, res) {
+router.get("/kh", restrict.admin_nhanvien, function _callee17(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee17$(_context17) {
     while (1) {
@@ -624,11 +598,7 @@ function _callee17(req, res) {
   });
 }); //hoadon
 
-router.get("/hoadon",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee18(req, res) {
+router.get("/hoadon", restrict.admin_nhanvien, function _callee18(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee18$(_context18) {
     while (1) {
@@ -653,11 +623,7 @@ function _callee18(req, res) {
   });
 }); //hoadon chi tiet
 
-router.get("/hoadonct/:mahd",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee19(req, res) {
+router.get("/hoadonct/:mahd", restrict.admin_nhanvien, function _callee19(req, res) {
   var mahd, list;
   return regeneratorRuntime.async(function _callee19$(_context19) {
     while (1) {
@@ -686,11 +652,7 @@ function _callee19(req, res) {
 }); /////START XỬ LÝ TRẠNG THÁI HÓA ĐƠN////
 //hoadon cho_xac_nhan
 
-router.get("/hoadon/choxacnhan",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee20(req, res) {
+router.get("/hoadon/choxacnhan", restrict.admin_nhanvien, function _callee20(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee20$(_context20) {
     while (1) {
@@ -715,11 +677,7 @@ function _callee20(req, res) {
   });
 }); //cap nhat hoadon cho_xac_nhan
 
-router.get("/hoadon/choxacnhan/:mahd",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee21(req, res) {
+router.get("/hoadon/choxacnhan/:mahd", restrict.admin_nhanvien, function _callee21(req, res) {
   var mahd, entity;
   return regeneratorRuntime.async(function _callee21$(_context21) {
     while (1) {
@@ -746,11 +704,7 @@ function _callee21(req, res) {
 }); //
 //hoadon da_xac_nhan
 
-router.get("/hoadon/daxacnhan",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee22(req, res) {
+router.get("/hoadon/daxacnhan", restrict.admin_nhanvien, function _callee22(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee22$(_context22) {
     while (1) {
@@ -775,11 +729,7 @@ function _callee22(req, res) {
   });
 }); //cap nhat hoadon  da_xac_nhan
 
-router.get("/hoadon/daxacnhan/:mahd",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee23(req, res) {
+router.get("/hoadon/daxacnhan/:mahd", restrict.admin_nhanvien, function _callee23(req, res) {
   var mahd, entity;
   return regeneratorRuntime.async(function _callee23$(_context23) {
     while (1) {
@@ -806,11 +756,7 @@ function _callee23(req, res) {
 }); //
 //hoadon dang_giao
 
-router.get("/hoadon/danggiao",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee24(req, res) {
+router.get("/hoadon/danggiao", restrict.admin_nhanvien, function _callee24(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee24$(_context24) {
     while (1) {
@@ -835,11 +781,7 @@ function _callee24(req, res) {
   });
 }); //cap nhat hoadon  dang_giao
 
-router.get("/hoadon/danggiao/:mahd",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee25(req, res) {
+router.get("/hoadon/danggiao/:mahd", restrict.admin_nhanvien, function _callee25(req, res) {
   var mahd, entity;
   return regeneratorRuntime.async(function _callee25$(_context25) {
     while (1) {
@@ -866,11 +808,7 @@ function _callee25(req, res) {
 }); //
 //hoadon da_nhan_hang
 
-router.get("/hoadon/danhan",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee26(req, res) {
+router.get("/hoadon/danhan", restrict.admin_nhanvien, function _callee26(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee26$(_context26) {
     while (1) {
@@ -896,11 +834,7 @@ function _callee26(req, res) {
 }); //
 //hoadon da_huy
 
-router.get("/hoadon/dahuy",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee27(req, res) {
+router.get("/hoadon/dahuy", restrict.admin_nhanvien, function _callee27(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee27$(_context27) {
     while (1) {
@@ -925,11 +859,7 @@ function _callee27(req, res) {
   });
 }); //cap nhat hoadon  da_huy
 
-router.get("/hoadon/dahuy/:mahd",
-/* restrict.admin_nhanvien, */
-
-/* restrict.admin, */
-function _callee28(req, res) {
+router.get("/hoadon/dahuy/:mahd", restrict.admin_nhanvien, function _callee28(req, res) {
   var mahd, entity;
   return regeneratorRuntime.async(function _callee28$(_context28) {
     while (1) {
@@ -983,9 +913,7 @@ router.get("/user", restrict.admin, function _callee29(req, res) {
   });
 }); //themn
 
-router.get("/user/add",
-/* restrict.admin, */
-function _callee30(req, res) {
+router.get("/user/add", restrict.admin, function _callee30(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee30$(_context30) {
     while (1) {
@@ -1009,9 +937,7 @@ function _callee30(req, res) {
   });
 }); //them
 
-router.post("/user/add",
-/* restrict.admin, */
-function _callee31(req, res) {
+router.post("/user/add", restrict.admin, function _callee31(req, res) {
   var salt, password_hash, entity;
   return regeneratorRuntime.async(function _callee31$(_context31) {
     while (1) {
@@ -1043,9 +969,7 @@ function _callee31(req, res) {
   });
 }); //xoa
 
-router.get("/user/remove/:id",
-/* restrict.admin, */
-function _callee32(req, res) {
+router.get("/user/remove/:id", restrict.admin, function _callee32(req, res) {
   return regeneratorRuntime.async(function _callee32$(_context32) {
     while (1) {
       switch (_context32.prev = _context32.next) {
@@ -1064,9 +988,7 @@ function _callee32(req, res) {
   });
 }); //sua
 
-router.get("/user/edit/:id",
-/* restrict.admin, */
-function _callee33(req, res) {
+router.get("/user/edit/:id", restrict.admin, function _callee33(req, res) {
   var id, rows, qt;
   return regeneratorRuntime.async(function _callee33$(_context33) {
     while (1) {
@@ -1092,9 +1014,7 @@ function _callee33(req, res) {
   });
 }); //cap nhat
 
-router.post("/user/update",
-/* restrict.admin, */
-function _callee34(req, res) {
+router.post("/user/update", restrict.admin, function _callee34(req, res) {
   return regeneratorRuntime.async(function _callee34$(_context34) {
     while (1) {
       switch (_context34.prev = _context34.next) {

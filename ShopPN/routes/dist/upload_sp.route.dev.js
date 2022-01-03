@@ -7,7 +7,10 @@ var express = require("express");
 var db = require("../utils/db");
 
 var router = express.Router();
-router.get("/products/add", function _callee(req, res) {
+
+var restrict = require("../middlewares/auth.mdw");
+
+router.get("/products/add", restrict.admin, function _callee(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {

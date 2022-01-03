@@ -146,7 +146,6 @@ module.exports = {
     return db.load(`select gg.*,sp.* from giamgia gg 
     INNER JOIN sanpham sp ON gg.makm=sp.MaSP where makm =${id}`);
   },
-  
   //capnhat
   update_gg: function (entity) {
     const condition = {
@@ -266,14 +265,16 @@ module.exports = {
     return rows[0];
   },
   //login admin
-   singleUserName_ad: async function (username) {
-    const rows = await db.load(
-      `select * from ${tbl_quantri} where username = '${username}' AND quyen="admin"`
+
+  singleUserName_ad: function () {
+    return db.load(
+      `select * from ${tbl_quantri} where quyen="admin"`
     );
-    if (rows.length === 0) {
-      return null;
-    }
-    return rows[0];
+  },
+  singleUserName_all: function () {
+    return db.load(
+      `select * from ${tbl_quantri}`
+    );
   },
   
   //// End Quản trị////

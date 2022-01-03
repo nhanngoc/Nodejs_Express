@@ -23,18 +23,19 @@ module.exports = {
 
           case 2:
             user = _context.sent;
+            console.log("userr", user);
 
             if (!(!req.session.isAuthenticated && user != +req.params.username)) {
-              _context.next = 5;
+              _context.next = 6;
               break;
             }
 
             return _context.abrupt("return", res.redirect("/account/login?retUrl=".concat(req.originalUrl)));
 
-          case 5:
+          case 6:
             next();
 
-          case 6:
+          case 7:
           case "end":
             return _context.stop();
         }
@@ -46,17 +47,17 @@ module.exports = {
       return next();
     }
 
-    res.redirect('/');
+    res.redirect("/");
   },
   notLoggedIn: function notLoggedIn(req, res, next) {
     if (!req.isAuthenticated()) {
       return next();
     }
 
-    res.redirect('/');
+    res.redirect("/");
   },
   admin: function admin(req, res, next) {
-    var user;
+    var user, i;
     return regeneratorRuntime.async(function admin$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -66,9 +67,9 @@ module.exports = {
 
           case 2:
             user = _context2.sent;
-            console.log("user", user);
+            console.log("useradmin", user);
 
-            if (!(!req.session.isAuthenticated && user != +req.params.username)) {
+            if (req.session.isAuthenticated) {
               _context2.next = 6;
               break;
             }
@@ -76,9 +77,32 @@ module.exports = {
             return _context2.abrupt("return", res.redirect("/admin/login?retUrl=".concat(req.originalUrl)));
 
           case 6:
-            next();
+            i = 0;
 
           case 7:
+            if (!(i < user.length)) {
+              _context2.next = 14;
+              break;
+            }
+
+            if (!(user[i].username === req.session.authUser.username)) {
+              _context2.next = 11;
+              break;
+            }
+
+            next();
+            return _context2.abrupt("return");
+
+          case 11:
+            i++;
+            _context2.next = 7;
+            break;
+
+          case 14:
+            console.log("req.session", req.session.isAuthenticated);
+            res.redirect("/admin/login?retUrl=".concat(req.originalUrl));
+
+          case 16:
           case "end":
             return _context2.stop();
         }
@@ -86,29 +110,50 @@ module.exports = {
     });
   },
   admin_nhanvien: function admin_nhanvien(req, res, next) {
-    var user;
+    var user, i;
     return regeneratorRuntime.async(function admin_nhanvien$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return regeneratorRuntime.awrap(Model.singleUserName(req.body.username));
+            return regeneratorRuntime.awrap(Model.singleUserName_all(req.body.username));
 
           case 2:
             user = _context3.sent;
-            console.log("user_nv", user);
 
-            if (!(!req.session.isAuthenticated && user != +req.params.username)) {
-              _context3.next = 6;
+            if (req.session.isAuthenticated) {
+              _context3.next = 5;
               break;
             }
 
             return _context3.abrupt("return", res.redirect("/admin/login?retUrl=".concat(req.originalUrl)));
 
-          case 6:
-            next();
+          case 5:
+            i = 0;
 
-          case 7:
+          case 6:
+            if (!(i < user.length)) {
+              _context3.next = 13;
+              break;
+            }
+
+            if (!(user[i].username === req.session.authUser.username)) {
+              _context3.next = 10;
+              break;
+            }
+
+            next();
+            return _context3.abrupt("return");
+
+          case 10:
+            i++;
+            _context3.next = 6;
+            break;
+
+          case 13:
+            res.redirect("/admin/login?retUrl=".concat(req.originalUrl));
+
+          case 14:
           case "end":
             return _context3.stop();
         }

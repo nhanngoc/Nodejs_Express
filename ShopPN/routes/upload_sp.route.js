@@ -2,10 +2,10 @@ const Model = require("../models/admin_user.model");
 const express = require("express");
 const db = require("../utils/db");
 const router = express.Router();
+const restrict = require("../middlewares/auth.mdw");
 
 
-
-router.get("/products/add",async function (req, res) {
+router.get("/products/add", restrict.admin, async function (req, res) {
   const list = await Model.all_category();
     res.render("vwadmin/products/add", { layout: "admin", loaisp: list });
 });

@@ -5,51 +5,32 @@
     
       <form action="" method="post">
       <div class="row-fluid window">
-        <div class="span6">
-            <div class="subtitle">Thông tin cá nhân</div>
+        {{#user}}
+        <div class="span4">
+            <div class="subtitle">Thông tin cá nhân <a title="Thay đổi thông tin" href="/account/profile/edit"><i class="icon-pencil icon-large"></i></a></div>
           <table class="form">
             <tbody><tr>
               <td><span class="required"></span> Họ tên:</td>
-              <td><input type="text" name="tenkh" value="{{this.user.tenkh}}">
+              <td> {{tenkh}}
                 </td>
             </tr>
             <tr>
-              <td><span class="required"></span> Tên đặt nhập:</td>
-              <td><input type="text" name="username" value="{{this.user.username}}">
+              <td><span class="required"></span> Tên tài khoản:&ensp;</td>
+              <td> {{username}}
                 </td>
             </tr>
             <tr>
               <td><span class="required"></span> Địa chỉ E-Mail:</td>
-              <td><input type="text" name="email" value="{{this.user.email}}">
+              <td> {{email}}
                 </td>
             </tr>
             <tr>
               <td><span class="required"></span> Điện Thoại:</td>
-              <td><input type="text" name="sdt" value="{{this.user.sdt}}">
+              <td> {{sdt}}
                 </td>
             </tr>
-            
-            {{!-- <tr>
-              <td><span class="required"></span> Đổi mật khẩu:</td>
-              <td><input  id="idcheckbox" type="checkbox" name="size_id" value=""></td>
-            </tr> --}}
-              <div id="btn2">
-              <tr>
-                <td><span class="required"></span> Đổi mk:</td>
-                <td><input type="password" name="password" value="{{this.user.password}}">
-                  </td>
-              </tr>
-              </div>
-              <div id="contentt">
-                <tr>
-                  <td><span class="required"></span> Nhập lại:</td>
-                  <td><input type="password" name="password">
-                    </td>
-                </tr>
-              </div>
-             
-            
           </tbody></table>
+           
           
           <script language="javascript">
                 document.getElementById("contentt").style.display = 'none';
@@ -57,60 +38,76 @@
                 document.getElementById("contentt").style.display = 'block';
             };
         </script>
-          {{!-- <div class="subtitle">Mật khẩu</div>
+           <div class="subtitle">Mật khẩu <a title="Thay đổi mật khẩu" href="/account/profile/password"><i class="icon-pencil icon-large"></i></a></div>
+          <table class="form">
+            <tbody>
+              
+          </tbody>
+          </table>
+        </div>
+    
+        <div class="span4">
+            <div class="subtitle">Thông địa chỉ <a title="Thay đổi địa chỉ" href="/account/profile/address"><i class="icon-pencil icon-large"></i></a></div>
           <table class="form">
             <tbody><tr>
-              <td><span class="required">*</span> Mật Khẩu:</td>
-              <td><input type="password" name="password" value="">
+              <td><span class="required"></span> Địa chỉ:</td>
+              <td> {{diachi}}
                 </td>
             </tr>
             <tr>
-              <td><span class="required">*</span> Nhập lại:</td>
-              <td><input type="password" name="confirm" value="">
+              <td><span class="required"></span> Phường/xã:</td>
+              <td> {{phuong_xa}}
                 </td>
             </tr>
-          </tbody>
-          </table> --}}
+            <tr>
+              <td><span class="required"></span> Quận/huyện:&ensp;</td>
+              <td> {{quan_huyen}}
+                </td>
+            </tr>
+            <tr>
+              <td><span class="required"></span> Tỉnh:</td>
+              <td> {{tinh}}
+                </td>
+            </tr>
+          </tbody></table>
     
         </div>
-    
-        <div class="span6">
+        {{/user}}
+
+        <div class="span4">
             <div class="subtitle">Thông tin đơn hàng</div>
           <table class="form">
             <tbody>
-              <div style="margin: 15px 0 15px 0; height: auto; overflow: auto; float: left;width: 100%">
+              <div class="content">
+        <ul>
+          <li><a title="Chờ xác nhận" class="i_view_cart" href="/account/profile/choxacnhan"><i class=""></i> Chờ xác nhận({{this.total1}})</a>
+          </li>
+          
+          <li><a title="Đã xác nhận" class="i_view_cart" href="/account/profile/daxacnhan"><i class=""></i> Đã xác nhận({{this.total2}})</a>
+          </li>
+          
+          <li><a title="Đang giao" class="i_view_cart" href="/account/profile/danggiao"><i class=""></i> Đang giao({{this.total3}})</a>
+          </li>
+          
+          <li><a title="Đã nhận hàng" class="i_view_cart" href="/account/profile/danhan"><i class=""></i> Đã nhận hàng({{this.total4}})</a>
+          </li>
+          
+          <li><a title="Đã hủy" class="i_view_cart" href="/account/profile/dahuy"><i class=""></i> Đã hủy({{this.total5}})</a>
+          </li>
+        </ul>
+      </div>
+              {{!-- <div style="margin: 15px 0 15px 0; height: auto; overflow: auto; float: left;width: 100%">
                 <a title="xem giỏ hàng" class="i_view_cart" href="/account/profile/order"><i class="icon-view-shopping-cart"></i> Xem lịch sử đơn hàng</a>
                 <a title="Chờ xác nhận" class="i_view_cart" href="/account/profile/choxacnhan"><i class="icon-view-shopping-cart"></i> Chờ xác nhận({{this.total1}})</a>
                 <a title="Đã xác nhận" class="i_view_cart" href="/account/profile/daxacnhan"><i class="icon-view-shopping-cart"></i> Đã xác nhận({{this.total2}})</a>
                 <a title="Đang giao" class="i_view_cart" href="/account/profile/danggiao"><i class="icon-view-shopping-cart"></i> Đang giao({{this.total3}})</a>
                 <a title="Đã nhận hàng" class="i_view_cart" href="/account/profile/danhan"><i class="icon-view-shopping-cart"></i> Đã nhận hàng({{this.total4}})</a>
                 <a title="Đã hủy" class="i_view_cart" href="/account/profile/dahuy"><i class="icon-view-shopping-cart"></i> Đã hủy({{this.total5}})</a>
-              </div>
-            <tr>
-              <td>Mã hàng:</td>
-              <td>abcd</td>
-            </tr>   
-            <tr>
-              <td>Tên hàng:</td>
-              <td>abcd</td>
-            </tr> 
-            <tr>
-              <td>Số lượng:</td>
-              <td>abcd</td>
-            </tr> 
-            <tr>
-              <td>Đơn giá:</td>
-              <td>Tổng tiền:</td>
-            </tr>      
-            
-            
-            
-           
+              </div> --}}
           </tbody></table>
         </div>
-    
-        </div>
         
+        </div>
             
           </form></div>
     </div>

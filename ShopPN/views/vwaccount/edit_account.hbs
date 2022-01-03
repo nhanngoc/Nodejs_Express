@@ -1,0 +1,86 @@
+<div id="container">
+
+<div id="content" class="container"><div class="doublepad">  <div class="pagetitle marbot">Thông Tin Tài Khoản</div>
+  <form class="window" action="" method="post">
+    <h2>Thông tin cá nhân</h2>
+    <div class="content">
+      <table class="form">
+        {{#edit}}
+        <tbody><tr>
+          <td><span class="required">*</span> Họ và tên bạn:</td>
+          <td>
+              <input type="text" name="tenkh" value="{{tenkh}}" id="txtName" placeholder="VD: Nguyen Van A"
+              required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$"title="Tên đăng ký không hợp lệ!">
+            </td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> Tên tài khoản:</td>
+           <td>
+              <input type="text" name="username" value="{{username}}" id="txtUsername"  placeholder="VD: NguyenVanA"
+                required pattern="^[A-Za-z0-9@._-]{6,20}$"	title="Tên đăng nhập không hợp lệ!">
+            </td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> E-Mail:</td>
+          <td>
+              <input type="text" id="txtEmail" name="email" value="{{email}}" placeholder="VD: shoppn@gmai.com"
+               required spattern="^[a-z0-9]+@[a-z0-9.]{6,20}$"title="Email không hợp lệ!">
+            </td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> Điện thoại:</td>
+          <td>
+              <input type="text" id="txtSdt" name="sdt" value="{{sdt}}" placeholder="VD: 0123456789" 
+               required  pattern="^[0-9]{10}$"title="Số điện thoại không hợp lệ!">
+            </td>
+        </tr>
+        {{/edit}}
+      </tbody>
+      </table>
+    </div>
+    <div class="buttons">
+      <div class="alleft butmodify"><a href="/account/profile" class="button_normal colorback">Quay lại</a></div>
+      <div class="alright">
+        <input type="submit" onclick="kiemTraForm()" value="Cập nhật" class="button_normal colorback">
+      </div>
+    </div>
+  </form>
+  </div></div>
+
+</div>
+<script type="text/javascript">
+        function kiemTraForm() {
+            var name = document.getElementById("txtName").value
+            var username = document.getElementById("txtUsername").value
+            var sdt = document.getElementById("txtSdt").value
+            var email = document.getElementById("txtEmail").value
+            
+            if(name==""){
+                alert("Chưa nhập Tên đăng kí, mời bạn nhập lại!")
+                return false
+            }
+            if(username==""){
+                alert("Chưa nhập Tên đăng nhập, mời bạn nhập lại!")
+                return false
+            }
+            
+            if(sdt==""){
+                alert('Chưa nhập Số điện thoại, mời bạn nhập lại!')
+                return false
+            }
+            if(email==""){
+                alert('Chưa nhập Email, mời bạn nhập lại!')
+                return false
+            }
+            alert('Cập nhật thành công!')
+            return true
+        }
+</script>
+<script type="text/javascript">
+var input_username = document.getElementById("txtUsername")
+input_username.addEventListener('keyup',function() {
+    if(input_username.value.length>20){
+        alert("Tên đăng nhập quá dài, hơn 20 ký tự")
+    }
+});
+</script>

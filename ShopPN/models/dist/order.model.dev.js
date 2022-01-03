@@ -4,6 +4,7 @@ var db = require("../utils/db");
 
 var tbl_hoadon = "hoadon";
 var tbl_chitiethd = "chitiethd";
+var tbl_kh = "khachhang";
 module.exports = {
   all: function all() {
     return db.load("select *from ".concat(tbl_hoadon));
@@ -15,6 +16,22 @@ module.exports = {
   //thông tin bảng khách hàng
   all_khanhhang: function all_khanhhang() {
     return db.load("select *from khachhang");
+  },
+  //thông tin bảng khách hàng
+  all_kh_makh: function all_kh_makh(makh) {
+    return db.load("select *from khachhang WHERE MaKH=".concat(makh));
+  },
+  //sua thông tin tài khoản
+  single_kh: function single_kh(makh) {
+    return db.load("SELECT * FROM khachhang WHERE MaKH=".concat(makh));
+  },
+  //capnhat thông tin tài khoản
+  update_khachhang: function update_khachhang(entity) {
+    var condition = {
+      MaKH: entity.MaKH
+    };
+    delete entity.MaKH;
+    return db.update_kh(tbl_kh, entity, condition);
   },
   //thông tin hóa đơn theo mã khách hàng
   all_order_makh: function all_order_makh(makh) {

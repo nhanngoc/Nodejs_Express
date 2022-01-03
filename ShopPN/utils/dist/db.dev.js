@@ -129,7 +129,7 @@ module.exports = {
       });
     });
   },
-  //cap nhat categories
+  //cap nhat giamgia
   patch_gg: function patch_gg(table, entity, condition) {
     return new Promise(function (resolve, reject) {
       var sql = "update giamgia set ? where ?";
@@ -142,7 +142,7 @@ module.exports = {
       });
     });
   },
-  //delete categories
+  //delete giamgia
   del_gg: function del_gg(table, condition) {
     return new Promise(function (resolve, reject) {
       var sql = "delete from giamgia where ?";

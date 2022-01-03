@@ -1,6 +1,7 @@
 const db = require("../utils/db");
 const tbl_hoadon = "hoadon";
 const tbl_chitiethd = "chitiethd";
+const tbl_kh ="khachhang"
 
 module.exports = {
   all: function () {
@@ -13,6 +14,22 @@ module.exports = {
   //thông tin bảng khách hàng
   all_khanhhang: function () {
     return db.load(`select *from khachhang`);
+  },
+  //thông tin bảng khách hàng
+  all_kh_makh: function (makh) {
+    return db.load(`select *from khachhang WHERE MaKH=${makh}`);
+  },
+   //sua thông tin tài khoản
+   single_kh: function (makh) {
+    return db.load(`SELECT * FROM khachhang WHERE MaKH=${makh}`);
+  },
+  //capnhat thông tin tài khoản
+  update_khachhang: function (entity) {
+    const condition = {
+      MaKH: entity.MaKH,
+    };
+    delete entity.MaKH;
+    return db.update_kh(tbl_kh, entity, condition);
   },
   //thông tin hóa đơn theo mã khách hàng
   all_order_makh: function (makh) {

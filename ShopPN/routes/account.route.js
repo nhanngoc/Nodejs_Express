@@ -20,23 +20,22 @@ router.post("/login", async function (req, res) {
   const user = await userModel.singleUserName(req.body.username);
   if (user === null) {
     return res.render("vwaccount/login", {
-      layout: false,
-      err: "Invalid username or password.",
+      //layout: false,
+      err: "Sai tên hoặc mật khẩu.",
     });
   }
   const rs = bcrypt.compareSync(req.body.password, user.password);
+  console.log("matkhau",rs)
   if (rs === false) {
     return res.render("vwaccount/login", {
-      layout: false,
-      err: "Invalid username or password.",
+      //layout: false,
+      err: "Sai tên hoặc mật khẩu.",
     });
   }
-
   delete user.password;
   req.session.isAuthenticated = true;
   req.session.authUser = user;
   const url = req.query.retUrl || "/";
-  //res.redirect(req.headers.referer);
   res.redirect(url);
 });
 
@@ -86,8 +85,9 @@ router.post("/register", async function (req, res, next) {
 
 //login profile
 router.get("/profile", restrict.user, async function (req, res) {
-  user = req.session.authUser;
-  const makh = user.MaKH;
+  const userr = req.session.authUser;
+  const makh = userr.MaKH;
+  const user = await orderModel.all_kh_makh(makh);
   const total1 = await orderModel.total_choxacnhan(makh);
   const total2 = await orderModel.total_daxacnhan(makh);
   const total3 = await orderModel.total_danggiao(makh);
@@ -95,7 +95,7 @@ router.get("/profile", restrict.user, async function (req, res) {
   const total5 = await orderModel.total_dahuy(makh);
 
   res.render("vwaccount/profile", {
-    user,
+    user:user,
     total1: total1,
     total2: total2,
     total3: total3,
@@ -207,6 +207,72 @@ router.get("/profile/dahuy", restrict.user, async function (req, res) {
     total++;
   }
   res.render("vwaccount/order_tt", { order: order, total: total });
+});
+//sua thông tin tài khoản khách hàng
+router.get("/profile/edit", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const rows = await orderModel.single_kh(makh);
+  const edit = rows[0];
+  console.log("edit",edit)
+  res.render("vwaccount/edit_account", { edit: edit });
+});
+//cập nhật thông tin tài khoản khách hàng
+router.post("/profile/edit", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const entity = {
+    MaKH: makh,
+    tenkh: req.body.tenkh,
+    username: req.body.username,
+    email: req.body.email,
+    sdt: req.body.sdt,
+  };
+  await orderModel.update_khachhang(entity);
+  res.redirect("/account/profile");
+});
+//sửa thông tin địa chỉ tài khoản khách hàng
+router.get("/profile/address", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const rows = await orderModel.single_kh(makh);
+  const edit = rows[0];
+  res.render("vwaccount/edit_address", { edit: edit });
+});
+//cập nhật đổi thông tin địa chỉ khách hàng
+router.post("/profile/address", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const entity = {
+    MaKH: makh,
+    diachi: req.body.diachi,
+    phuong_xa: req.body.phuong_xa,
+    quan_huyen: req.body.quan_huyen,
+    tinh: req.body.tinh,
+  };
+  await orderModel.update_khachhang(entity);
+  res.redirect("/account/profile");
+});
+//sua thông tin mật khẩu khách hàng
+router.get("/profile/password", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const rows = await orderModel.single_kh(makh);
+  const edit = rows[0];
+  res.render("vwaccount/edit_password", { edit: edit });
+});
+//cập nhật đổi mật khẩu khách hàng
+router.post("/profile/password", restrict.user, async function (req, res) {
+  const user = req.session.authUser;
+  const makh = user.MaKH;
+  const salt = bcrypt.genSaltSync(10);
+  const password_hash = bcrypt.hashSync(req.body.password, salt);
+  const entity = {
+    MaKH: makh,
+    password: password_hash,
+  };
+  await orderModel.update_khachhang(entity);
+  res.redirect("/account/profile");
 });
 
 module.exports = router;

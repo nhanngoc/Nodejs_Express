@@ -21,14 +21,12 @@ router.post("/", async function (req, res) {
   const user = await Model.singleUserName(req.body.username);
   if (user === null) {
     return res.render("vwadmin/login", {
-      
       err: "Sai tên hoặc mật khẩu.",
     });
   }
   const rs = bcrypt.compareSync(req.body.password, user.password);
   if (rs === false) {
     return res.render("vwadmin/login", {
-      
       err: "Sai tên hoặc mật khẩu.",
     });
   }
@@ -41,7 +39,7 @@ router.post("/", async function (req, res) {
 });
 
 //logout
-router.post("/logoutadmin", /* restrict.admin, */ function (req, res) {
+router.post("/logoutadmin", restrict.admin_nhanvien, function (req, res) {
   req.session.isAuthenticated = false;
   req.session.authUser = null;
   res.redirect("/admin");
@@ -50,7 +48,7 @@ router.post("/logoutadmin", /* restrict.admin, */ function (req, res) {
 //
 //
 //home admin
-router.get("/home", /* restrict.admin, */ async function (req, res) {
+router.get("/home", restrict.admin_nhanvien, async function (req, res) {
   console.log(req.session.authUser);
   res.render("_layouts/admin", { layout: false }); //tat layout trang chu
 });
@@ -64,7 +62,7 @@ router.get("/home", /* restrict.admin, */ async function (req, res) {
 
 ////////////////products////////////////
 //attribute_list san pham thuoc tinh
-router.get("/attribute/list"/* , restrict.admin */, async function (req, res) {
+router.get("/attribute/list", restrict.admin, async function (req, res) {
   const list = await Model.attr_products();
   const colors = await Model.distinct_colors();
   const sizes = await Model.distinct_sizes();
@@ -111,7 +109,7 @@ router.get("/attribute/list"/* , restrict.admin */, async function (req, res) {
   });
 });
 //attribute_add
-router.get("/attribute/add", /* restrict.admin, */ async function (req, res) {
+router.get("/attribute/add", restrict.admin, async function (req, res) {
   const sanp = await Model._products();
   const attr_colors = await Model.attr_colors();
   const attr_sizes = await Model.attr_sizes();
@@ -154,7 +152,7 @@ router.get("/attribute/add", /* restrict.admin, */ async function (req, res) {
     empty: list.length === 0,
   });
 });
-router.post("/attribute/add", /* restrict.admin, */ async function (req, res) {
+router.post("/attribute/add", restrict.admin, async function (req, res) {
   const size_ids= req.body.size_id;
   const sl=req.body.soluong;
   let entity = [];
@@ -180,7 +178,7 @@ router.get("/attribute/remove/:id", async function (req, res) {
   res.redirect("/admin/attribute/list");
 });
 //list thuộc tính attribute detail
-router.get("/attribute/detail/:id", /* restrict.admin, */ async function (req, res) {
+router.get("/attribute/detail/:id", restrict.admin, async function (req, res) {
   const id = +req.params.id || -1;
   const rows_attr = await Model.single_attr_ct(id);
   res.render("vwadmin/products/attr", {
@@ -195,7 +193,7 @@ router.get("/attr/remove/:id", async function (req, res) {
   res.redirect("/admin/attribute/list");
 });
 //sua attribute detail
-router.get("/attr/edit/:id", /* restrict.admin, */ async function (req, res) {
+router.get("/attr/edit/:id", restrict.admin, async function (req, res) {
   const id = +req.params.id || -1;
   const rows = await Model.single_attr_detail(id);
   const sizes = await Model.sizes_list();
@@ -206,13 +204,13 @@ router.get("/attr/edit/:id", /* restrict.admin, */ async function (req, res) {
     });
 });
 //cap nhat attribute detail
-router.post("/attr/update", /* restrict.admin, */ async function (req, res) {
+router.post("/attr/update", restrict.admin, async function (req, res) {
   await Model.patch_attr_detail(req.body);
   res.redirect("/admin/attribute/list");
 });
 
 //list san pham
-router.get("/products/list", /* restrict.admin, */ async function (req, res) {
+router.get("/products/list", restrict.admin, async function (req, res) {
   const list = await Model._products();
   res.render("vwadmin/products/list", {
     layout: "admin",
@@ -228,7 +226,7 @@ router.get("/products/remove/:id", async function (req, res) {
   res.redirect("/admin/products/list");
 });
 //sua
-router.get("/products/edit/:id", /* restrict.admin, */ async function (req, res) {
+router.get("/products/edit/:id", restrict.admin, async function (req, res) {
   const id = +req.params.id || -1;
   const rows = await Model.single_pro(id);
   if (rows.length === 0) res.send("lõi la lõi");
@@ -237,14 +235,14 @@ router.get("/products/edit/:id", /* restrict.admin, */ async function (req, res)
     return res.render("vwadmin/products/edit", { layout: "admin", product });
 });
 //cap nhat
-router.post("/products/update", /* restrict.admin, */ async function (req, res) {
+router.post("/products/update", restrict.admin, async function (req, res) {
   await Model.patch_pro(req.body);
   res.redirect("/admin/products/list");
 });
 
 ////////////////category////////////////
 //list
-router.get("/category/list", /* restrict.admin, */ async function (req, res) {
+router.get("/category/list", restrict.admin, async function (req, res) {
   const list = await Model.all_category();
   res.render("vwadmin/categories/list", {
     layout: "admin",
@@ -254,7 +252,7 @@ router.get("/category/list", /* restrict.admin, */ async function (req, res) {
 });
 ////////////////khách hàng////////////////
 //list kh
-router.get("/kh",restrict.admin_nhanvien, /* restrict.admin, */ async function (req, res) {
+router.get("/kh", restrict.admin_nhanvien, async function (req, res) {
   const list = await Model.all_kh();
   res.render("vwadmin/order/kh", {
     layout: "admin",
@@ -263,7 +261,7 @@ router.get("/kh",restrict.admin_nhanvien, /* restrict.admin, */ async function (
   });
 });
 //hoadon
-router.get("/hoadon",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadon", restrict.admin_nhanvien, async function (req, res) {
   const list = await Model.all_hoadon();
   res.render("vwadmin/order/hoadon", {
     layout: "admin",
@@ -272,7 +270,7 @@ router.get("/hoadon",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async 
   });
 });
 //hoadon chi tiet
-router.get("/hoadonct/:mahd",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadonct/:mahd", restrict.admin_nhanvien, async function (req, res) {
  const mahd=req.params.mahd
  console.log("mahdd:",mahd)
   const list = await Model.all_hoadonct(mahd);
@@ -285,7 +283,7 @@ router.get("/hoadonct/:mahd",/* restrict.admin_nhanvien, */ /* restrict.admin, *
 });
 /////START XỬ LÝ TRẠNG THÁI HÓA ĐƠN////
 //hoadon cho_xac_nhan
-router.get("/hoadon/choxacnhan",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadon/choxacnhan",restrict.admin_nhanvien, async function (req, res) {
   const list = await Model.single_choxacnhan();
   res.render("vwadmin/order/choxacnhan", {
     layout: "admin",
@@ -294,7 +292,7 @@ router.get("/hoadon/choxacnhan",/* restrict.admin_nhanvien, */ /* restrict.admin
   });
 });
 //cap nhat hoadon cho_xac_nhan
-router.get("/hoadon/choxacnhan/:mahd",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadon/choxacnhan/:mahd",restrict.admin_nhanvien, async function (req, res) {
   const mahd=req.params.mahd;
   const entity={
     mahd: mahd,
@@ -306,7 +304,7 @@ router.get("/hoadon/choxacnhan/:mahd",/* restrict.admin_nhanvien, */ /* restrict
  });
  //
  //hoadon da_xac_nhan
-router.get("/hoadon/daxacnhan",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadon/daxacnhan",restrict.admin_nhanvien, async function (req, res) {
   const list = await Model.single_daxacnhan();
   res.render("vwadmin/order/daxacnhan", {
     layout: "admin",
@@ -315,7 +313,7 @@ router.get("/hoadon/daxacnhan",/* restrict.admin_nhanvien, */ /* restrict.admin,
   });
 });
 //cap nhat hoadon  da_xac_nhan
-router.get("/hoadon/daxacnhan/:mahd",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadon/daxacnhan/:mahd",restrict.admin_nhanvien, async function (req, res) {
   const mahd=req.params.mahd;
   const entity={
     mahd: mahd,
@@ -327,7 +325,7 @@ router.get("/hoadon/daxacnhan/:mahd",/* restrict.admin_nhanvien, */ /* restrict.
  });
  //
 //hoadon dang_giao
-router.get("/hoadon/danggiao",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadon/danggiao",restrict.admin_nhanvien, async function (req, res) {
   const list = await Model.single_danggiao();
   res.render("vwadmin/order/danggiao", {
     layout: "admin",
@@ -336,7 +334,7 @@ router.get("/hoadon/danggiao",/* restrict.admin_nhanvien, */ /* restrict.admin, 
   });
 });
 //cap nhat hoadon  dang_giao
-router.get("/hoadon/danggiao/:mahd",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadon/danggiao/:mahd", restrict.admin_nhanvien, async function (req, res) {
   const mahd=req.params.mahd;
   const entity={
     mahd: mahd,
@@ -348,7 +346,7 @@ router.get("/hoadon/danggiao/:mahd",/* restrict.admin_nhanvien, */ /* restrict.a
  });
  //
  //hoadon da_nhan_hang
-router.get("/hoadon/danhan",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadon/danhan",restrict.admin_nhanvien, async function (req, res) {
   const list = await Model.single_danhan();
   res.render("vwadmin/order/danhan", {
     layout: "admin",
@@ -358,7 +356,7 @@ router.get("/hoadon/danhan",/* restrict.admin_nhanvien, */ /* restrict.admin, */
 });
 //
  //hoadon da_huy
- router.get("/hoadon/dahuy",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+ router.get("/hoadon/dahuy",restrict.admin_nhanvien, async function (req, res) {
   const list = await Model.single_dahuy();
   res.render("vwadmin/order/dahuy", {
     layout: "admin",
@@ -367,7 +365,7 @@ router.get("/hoadon/danhan",/* restrict.admin_nhanvien, */ /* restrict.admin, */
   });
 });
 //cap nhat hoadon  da_huy
-router.get("/hoadon/dahuy/:mahd",/* restrict.admin_nhanvien, */ /* restrict.admin, */ async function (req, res) {
+router.get("/hoadon/dahuy/:mahd",restrict.admin_nhanvien, async function (req, res) {
   const mahd=req.params.mahd;
   const entity={
     mahd: mahd,
@@ -391,7 +389,7 @@ router.get("/user", restrict.admin, async function (req, res) {
   });
 });
 //themn
-router.get("/user/add",/* restrict.admin, */async function (req, res) {
+router.get("/user/add",restrict.admin, async function (req, res) {
   const list= await Model.all_nv();
   res.render("vwadmin/quantri/add",{
     layout: "admin",
@@ -399,7 +397,7 @@ router.get("/user/add",/* restrict.admin, */async function (req, res) {
   });
 });
 //them
-router.post("/user/add",/* restrict.admin, */ async function (req, res) {
+router.post("/user/add",restrict.admin, async function (req, res) {
   const salt = bcrypt.genSaltSync(10);
   const password_hash = bcrypt.hashSync(req.body.password, salt);
   const entity = {
@@ -416,12 +414,12 @@ router.post("/user/add",/* restrict.admin, */ async function (req, res) {
   res.redirect("/admin/user/add");
 });
 //xoa
-router.get("/user/remove/:id",/* restrict.admin, */ async function (req, res) {
+router.get("/user/remove/:id",restrict.admin, async function (req, res) {
   await Model.remove_nv(req.params.id);
   res.redirect("/admin/user");
 });
 //sua
-router.get("/user/edit/:id",/* restrict.admin, */ async function (req, res) {
+router.get("/user/edit/:id",restrict.admin, async function (req, res) {
   const id = req.params.id;
   const rows = await Model.single_nv(id);
   const qt = rows[0];
@@ -431,7 +429,7 @@ router.get("/user/edit/:id",/* restrict.admin, */ async function (req, res) {
     });
 });
 //cap nhat
-router.post("/user/update",/* restrict.admin, */ async function (req, res) {
+router.post("/user/update",restrict.admin, async function (req, res) {
   console.log("body",req.body)
   await Model.update_nv(req.body);
   res.redirect("/admin/user");

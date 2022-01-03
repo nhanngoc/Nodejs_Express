@@ -57,32 +57,32 @@ router.post("/login", function _callee2(req, res) {
           }
 
           return _context2.abrupt("return", res.render("vwaccount/login", {
-            layout: false,
-            err: "Invalid username or password."
+            //layout: false,
+            err: "Sai tên hoặc mật khẩu."
           }));
 
         case 5:
           rs = bcrypt.compareSync(req.body.password, user.password);
+          console.log("matkhau", rs);
 
           if (!(rs === false)) {
-            _context2.next = 8;
+            _context2.next = 9;
             break;
           }
 
           return _context2.abrupt("return", res.render("vwaccount/login", {
-            layout: false,
-            err: "Invalid username or password."
+            //layout: false,
+            err: "Sai tên hoặc mật khẩu."
           }));
 
-        case 8:
+        case 9:
           delete user.password;
           req.session.isAuthenticated = true;
           req.session.authUser = user;
-          url = req.query.retUrl || "/"; //res.redirect(req.headers.referer);
-
+          url = req.query.retUrl || "/";
           res.redirect(url);
 
-        case 13:
+        case 14:
         case "end":
           return _context2.stop();
       }
@@ -172,37 +172,42 @@ router.post("/register", function _callee4(req, res, next) {
 //login profile
 
 router.get("/profile", restrict.user, function _callee5(req, res) {
-  var makh, total1, total2, total3, total4, total5;
+  var userr, makh, user, total1, total2, total3, total4, total5;
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          user = req.session.authUser;
-          makh = user.MaKH;
+          userr = req.session.authUser;
+          makh = userr.MaKH;
           _context5.next = 4;
-          return regeneratorRuntime.awrap(orderModel.total_choxacnhan(makh));
+          return regeneratorRuntime.awrap(orderModel.all_kh_makh(makh));
 
         case 4:
-          total1 = _context5.sent;
+          user = _context5.sent;
           _context5.next = 7;
-          return regeneratorRuntime.awrap(orderModel.total_daxacnhan(makh));
+          return regeneratorRuntime.awrap(orderModel.total_choxacnhan(makh));
 
         case 7:
-          total2 = _context5.sent;
+          total1 = _context5.sent;
           _context5.next = 10;
-          return regeneratorRuntime.awrap(orderModel.total_danggiao(makh));
+          return regeneratorRuntime.awrap(orderModel.total_daxacnhan(makh));
 
         case 10:
-          total3 = _context5.sent;
+          total2 = _context5.sent;
           _context5.next = 13;
-          return regeneratorRuntime.awrap(orderModel.total_danhanhang(makh));
+          return regeneratorRuntime.awrap(orderModel.total_danggiao(makh));
 
         case 13:
-          total4 = _context5.sent;
+          total3 = _context5.sent;
           _context5.next = 16;
-          return regeneratorRuntime.awrap(orderModel.total_dahuy(makh));
+          return regeneratorRuntime.awrap(orderModel.total_danhanhang(makh));
 
         case 16:
+          total4 = _context5.sent;
+          _context5.next = 19;
+          return regeneratorRuntime.awrap(orderModel.total_dahuy(makh));
+
+        case 19:
           total5 = _context5.sent;
           res.render("vwaccount/profile", {
             user: user,
@@ -224,7 +229,7 @@ router.get("/profile", restrict.user, function _callee5(req, res) {
               res.render("vwaccount/profile", { orders: orders });
             }); */
 
-        case 18:
+        case 21:
         case "end":
           return _context5.stop();
       }
@@ -480,6 +485,171 @@ router.get("/profile/dahuy", restrict.user, function _callee13(req, res) {
         case 8:
         case "end":
           return _context13.stop();
+      }
+    }
+  });
+}); //sua thông tin tài khoản khách hàng
+
+router.get("/profile/edit", restrict.user, function _callee14(req, res) {
+  var user, makh, rows, edit;
+  return regeneratorRuntime.async(function _callee14$(_context14) {
+    while (1) {
+      switch (_context14.prev = _context14.next) {
+        case 0:
+          user = req.session.authUser;
+          makh = user.MaKH;
+          _context14.next = 4;
+          return regeneratorRuntime.awrap(orderModel.single_kh(makh));
+
+        case 4:
+          rows = _context14.sent;
+          edit = rows[0];
+          console.log("edit", edit);
+          res.render("vwaccount/edit_account", {
+            edit: edit
+          });
+
+        case 8:
+        case "end":
+          return _context14.stop();
+      }
+    }
+  });
+}); //cập nhật thông tin tài khoản khách hàng
+
+router.post("/profile/edit", restrict.user, function _callee15(req, res) {
+  var user, makh, entity;
+  return regeneratorRuntime.async(function _callee15$(_context15) {
+    while (1) {
+      switch (_context15.prev = _context15.next) {
+        case 0:
+          user = req.session.authUser;
+          makh = user.MaKH;
+          entity = {
+            MaKH: makh,
+            tenkh: req.body.tenkh,
+            username: req.body.username,
+            email: req.body.email,
+            sdt: req.body.sdt
+          };
+          _context15.next = 5;
+          return regeneratorRuntime.awrap(orderModel.update_khachhang(entity));
+
+        case 5:
+          res.redirect("/account/profile");
+
+        case 6:
+        case "end":
+          return _context15.stop();
+      }
+    }
+  });
+}); //sửa thông tin địa chỉ tài khoản khách hàng
+
+router.get("/profile/address", restrict.user, function _callee16(req, res) {
+  var user, makh, rows, edit;
+  return regeneratorRuntime.async(function _callee16$(_context16) {
+    while (1) {
+      switch (_context16.prev = _context16.next) {
+        case 0:
+          user = req.session.authUser;
+          makh = user.MaKH;
+          _context16.next = 4;
+          return regeneratorRuntime.awrap(orderModel.single_kh(makh));
+
+        case 4:
+          rows = _context16.sent;
+          edit = rows[0];
+          res.render("vwaccount/edit_address", {
+            edit: edit
+          });
+
+        case 7:
+        case "end":
+          return _context16.stop();
+      }
+    }
+  });
+}); //cập nhật đổi thông tin địa chỉ khách hàng
+
+router.post("/profile/address", restrict.user, function _callee17(req, res) {
+  var user, makh, entity;
+  return regeneratorRuntime.async(function _callee17$(_context17) {
+    while (1) {
+      switch (_context17.prev = _context17.next) {
+        case 0:
+          user = req.session.authUser;
+          makh = user.MaKH;
+          entity = {
+            MaKH: makh,
+            diachi: req.body.diachi,
+            phuong_xa: req.body.phuong_xa,
+            quan_huyen: req.body.quan_huyen,
+            tinh: req.body.tinh
+          };
+          _context17.next = 5;
+          return regeneratorRuntime.awrap(orderModel.update_khachhang(entity));
+
+        case 5:
+          res.redirect("/account/profile");
+
+        case 6:
+        case "end":
+          return _context17.stop();
+      }
+    }
+  });
+}); //sua thông tin mật khẩu khách hàng
+
+router.get("/profile/password", restrict.user, function _callee18(req, res) {
+  var user, makh, rows, edit;
+  return regeneratorRuntime.async(function _callee18$(_context18) {
+    while (1) {
+      switch (_context18.prev = _context18.next) {
+        case 0:
+          user = req.session.authUser;
+          makh = user.MaKH;
+          _context18.next = 4;
+          return regeneratorRuntime.awrap(orderModel.single_kh(makh));
+
+        case 4:
+          rows = _context18.sent;
+          edit = rows[0];
+          res.render("vwaccount/edit_password", {
+            edit: edit
+          });
+
+        case 7:
+        case "end":
+          return _context18.stop();
+      }
+    }
+  });
+}); //cập nhật đổi mật khẩu khách hàng
+
+router.post("/profile/password", restrict.user, function _callee19(req, res) {
+  var user, makh, salt, password_hash, entity;
+  return regeneratorRuntime.async(function _callee19$(_context19) {
+    while (1) {
+      switch (_context19.prev = _context19.next) {
+        case 0:
+          user = req.session.authUser;
+          makh = user.MaKH;
+          salt = bcrypt.genSaltSync(10);
+          password_hash = bcrypt.hashSync(req.body.password, salt);
+          entity = {
+            MaKH: makh,
+            password: password_hash
+          };
+          _context19.next = 7;
+          return regeneratorRuntime.awrap(orderModel.update_khachhang(entity));
+
+        case 7:
+          res.redirect("/account/profile");
+
+        case 8:
+        case "end":
+          return _context19.stop();
       }
     }
   });

@@ -1,89 +1,39 @@
 <div id="container">
 
-<div id="content" class="container"><div class="doublepad">
-  <div class="pagetitle marbot">Đăng Ký Tài Khoản</div>
-  
-  <form action="" method="post">
-  <div class="row-fluid window">
-    <div class="span6">
-        <div class="subtitle">Thông tin cá nhân</div>
+<div id="content" class="container"><div class="doublepad">  <div class="pagetitle marbot">Địa Chỉ</div>
+  <form class="window" action="" method="post">
+    <h2>Thay đổi địa chỉ</h2>
+    <div class="content ">
       <table class="form">
+        {{#edit}}
         <tbody><tr>
-          <td><span class="required">*</span>Họ và tên bạn:</td>
-          <td>
-              <input type="text" name="tenkh" id="txtName" placeholder="VD: Nguyen Van A"
-              required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$"title="Tên đăng ký không hợp lệ!">
-            </td>
-        </tr>
-        
-        <tr>
-          <td><span class="required">*</span> Địa chỉ E-Mail:</td>
-          <td>
-              <input type="text" id="txtEmail" name="email" placeholder="VD: shoppn@gmai.com"
-               required spattern="^[a-z0-9]+@[a-z0-9.]{6,20}$"title="Email không hợp lệ!">
-            </td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> Điện Thoại:</td>
-          <td>
-              <input type="text" id="txtSdt" name="sdt" placeholder="VD: 0123456789" 
-               required  pattern="^[0-9]{10}$"title="Số điện thoại không hợp lệ!">
-            </td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> Tên tài khoản:</td>
-          <td>
-              <input type="text" name="username"  id="txtUsername"  placeholder="VD: NguyenVanA"
-                required pattern="^[A-Za-z0-9@._-]{6,20}$"	title="Tên đăng nhập không hợp lệ!">
-            </td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> Mật Khẩu:</td>
-          <td>
-             <input type="password" name="password" id="txtPassword"  placeholder="Độ dài ít nhất 8 kí tự" 
-                required pattern="^[A-Za-z0-9!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{8,}$"
-                  title="Mật khẩu phải viết liền không dấu">
-            </td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> Nhập lại mật khẩu:</td>
-          <td>
-               <input type="password" id="txtConfirm" Confirm="confirm" 
-                required title="Mật khẩu không hợp lệ" placeholder="Độ dài ít nhất 8 kí tự *">
-            </td>
-        </tr>
-      </tbody></table>
-    </div>
-    <div class="span6">
-        <div class="subtitle">Địa chỉ của bạn</div>
-      <table class="form">
-        <tbody>      
-          <tr>
           <td><span class="required">*</span> Địa chỉ:</td>
           <td>
-              <input type="text" id="txtdiachi" name="diachi" placeholder="VD: 180 Cao Lỗ" 
+              <input type="text" id="txtdiachi" name="diachi" value="{{diachi}}" placeholder="VD: 180 Cao Lỗ" 
                 required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$"title="Địa chỉ không hợp lệ!">
             </td>
         </tr>
         <tr>
           <td><span class="required">*</span> Phường / Xã:</td>
           <td>
-              <input type="text" id="txtphuong_xa" name="phuong_xa" placeholder="VD: phường 4" 
+              <input type="text" id="txtphuong_xa" name="phuong_xa" value="{{phuong_xa}}" placeholder="VD: phường 4" 
                 required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$"title="Địa chỉ không hợp lệ!">
             </td>
         </tr>
+       
         <tr>
           <td><span class="required">*</span> Quận / Huyện:</td>
           <td>
-              <input type="text" id="txtquan_huyen" name="quan_huyen" placeholder="VD: quận 8" 
+              <input type="text" id="txtquan_huyen" name="quan_huyen" value="{{quan_huyen}}" placeholder="VD: quận 8" 
                 required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$"title="Địa chỉ không hợp lệ!">
             </td>
         </tr>
-        <tr>
+        
+       <tr>
           <td><span class="required">*</span> Tỉnh / TP:</td>
           <td>
                 <select name="tinh" id="txtTinh" required>
-                    <option value=""> --- Chọn --- </option>
+                    <option value="{{tinh}}">{{tinh}}</option>
                     <option value="An Giang">An Giang</option>
                     <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu</option>
                     <option value="Bắc Giang">Bắc Giang</option>
@@ -151,61 +101,26 @@
                 </select>
             </td>
         </tr>
-      </tbody></table>
-        <br><br>
-      <table class="form">
-        <tbody>
-            <div class="subtitle">
-                <button type="submit" onclick="kiemTraForm()">
-                    Đăng ký
-                </button>
-            </div>
+       
       </tbody>
+      {{/edit}}
       </table>
     </div>
-    </div>
-      </form>
-</div>
-</div>
+    
+      <div class="alleft butmodify"><a href="/account/profile" class="button_normal colorback">Quay lại</a></div>
+      <div class="alright">
+        <input type="submit" onclick="kiemTraForm()" value="Cập nhật" class="button_normal colorback">
+      </div>
+    
+  </form>
+  </div></div>
 </div>
 <script type="text/javascript">
         function kiemTraForm() {
-            var name = document.getElementById("txtName").value
-            var username = document.getElementById("txtUsername").value
-            // var khachhang = document.getElementById("txtkh").value
-            var password = document.getElementById("txtPassword").value
-            var re_password = document.getElementById("txtConfirm").value
-            var sdt = document.getElementById("txtSdt").value
-            var email = document.getElementById("txtEmail").value
             var diachi = document.getElementById("txtdiachi").value
             var phuongxa = document.getElementById("txtphuong_xa").value
             var quanhuyen = document.getElementById("txtquan_huyen").value
             var tinh = document.getElementById("txtTinh").value
-            
-            if(name==""){
-                alert("Chưa nhập Tên đăng kí, mời bạn nhập lại!")
-                return false
-            }
-            if(username==""){
-                alert("Chưa nhập Tên đăng nhập, mời bạn nhập lại!")
-                return false
-            }
-            if(password==""){
-                alert('Chưa nhập Mật khẩu, mời bạn nhập lại!')
-                return false
-            }
-            if(password!= re_password){
-                alert('Mật khẩu chưa khớp, mời bạn nhập lại!')
-                return false
-            }
-            if(sdt==""){
-                alert('Chưa nhập Số điện thoại, mời bạn nhập lại!')
-                return false
-            }
-            if(email==""){
-                alert('Chưa nhập Email, mời bạn nhập lại!')
-                return false
-            }
             if(diachi==""){
                 alert('Chưa nhập địa chỉ, mời bạn nhập lại!')
                 return false
@@ -222,15 +137,7 @@
                 alert('Chưa chọn tỉnh, mời bạn chọn lại!')
                 return false
             }
-            alert('Đăng ký thành công!')
+            alert('Cập nhật thành công!')
             return true
         }
-</script>
-<script type="text/javascript">
-var input_username = document.getElementById("txtUsername")
-input_username.addEventListener('keyup',function() {
-    if(input_username.value.length>20){
-        alert("Tên đăng nhập quá dài, hơn 20 ký tự")
-    }
-});
 </script>

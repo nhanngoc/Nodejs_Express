@@ -115,9 +115,14 @@
     <div class="alcent"><a href="https://www.bexinhshop.vn/index.php?route=account/order" class="button">Tiếp tục</a></div>
   </div> --}}
       <div class="buttons">
-      <div class="right"><a href="/account/profile/order" class="button">Quay lại</a></div>
+      <div class="right"><a onclick="quay_lai_trang_truoc()" class="button">Quay lại</a></div>
+      {{!-- <button type="button" onclick="quay_lai_trng_truoc()">Quay lại trang</button> --}}
     </div>
-
   </div>
 </div>
 </div>
+<script>
+  function quay_lai_trang_truoc(){
+      history.back();
+  }
+</script>

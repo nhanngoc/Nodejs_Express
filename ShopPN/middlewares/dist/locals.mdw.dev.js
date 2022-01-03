@@ -14,7 +14,9 @@ module.exports = function (app) {
     }
 
     res.locals.lcIsAuthenticated = req.session.isAuthenticated;
+    console.log("lcIsAuthenticated", res.locals.lcIsAuthenticated);
     res.locals.lcAuthUser = req.session.authUser;
+    console.log("lcAuthUser", res.locals.lcAuthUser);
     next();
   }); //lấy ra danh sách tài khoản khách hàng
 

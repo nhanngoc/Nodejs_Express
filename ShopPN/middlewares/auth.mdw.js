@@ -9,6 +9,7 @@ const Model = require("../models/admin_user.model");
 module.exports = {
   user: async function (req, res, next) {
     const user = await userModel.singleUserName(req.body.username);
+    console.log("userr",user)
     if (!req.session.isAuthenticated && user != +req.params.username) {
       return res.redirect(`/account/login?retUrl=${req.originalUrl}`);
     }
@@ -18,30 +19,42 @@ module.exports = {
     if (req.isAuthenticated()) {
       return next();
     }
-    res.redirect('/');
+    res.redirect("/");
   },
 
   notLoggedIn: function (req, res, next) {
-      if (!req.isAuthenticated()) {
-          return next();
-      }
-      res.redirect('/');
+    if (!req.isAuthenticated()) {
+      return next();
+    }
+    res.redirect("/");
   },
 
   admin: async function (req, res, next) {
     const user = await Model.singleUserName_ad(req.body.username);
-    console.log("user",user)
-    if (!req.session.isAuthenticated && user != +req.params.username) {
+    console.log("useradmin", user);
+    if (!req.session.isAuthenticated) {
       return res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
     }
-    next();
+    for (let i = 0; i < user.length; i++) {
+      if (user[i].username === req.session.authUser.username) {
+        next();
+        return;
+      }
+    }
+    console.log("req.session", req.session.isAuthenticated);
+    res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
   },
   admin_nhanvien: async function (req, res, next) {
-    const user = await Model.singleUserName(req.body.username);
-    console.log("user_nv",user)
-    if (!req.session.isAuthenticated && user != +req.params.username) {
+    const user = await Model.singleUserName_all(req.body.username);
+    if (!req.session.isAuthenticated) {
       return res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
     }
-    next();
+    for (let i = 0; i < user.length; i++) {
+      if (user[i].username === req.session.authUser.username) {
+        next();
+        return;
+      }
+    }
+    res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
   },
 };
