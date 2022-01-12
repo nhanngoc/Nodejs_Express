@@ -22,8 +22,9 @@
                         <th>Mã hd</th>
                         <th>Mã sp</th>
                         <th>Tên sp</th>
-                        <th>Giá</th>
+                        <th>Đơn giá</th>
                         <th>Số lượng</th>
+                        <th>Tổng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,8 +33,9 @@
                         <td>{{mahd}}</td>
                         <td>{{masp}}</td>
                         <td>{{tensp}}</td>
-                        <td>{{gia}}</td>
-                        <td>{{soluong}}</td>
+                        <td>{{format_number dongia}}đ</td>
+                        <td>{{quantity}}</td>
+                        <td>{{format_number gia}}đ</td>
                     </tr>
                     {{/each}}
                 </tbody>

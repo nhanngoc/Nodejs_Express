@@ -4,6 +4,12 @@
         <div>
             <h4 class="header-title mb-3">Loại sản phẩm</h4>
         </div>
+        <div class="them" style="text-align: right;">
+            <a name="" id="" class="btn btn-primary btn-sm" style="text-align: right;" href="/admin/category/add" role="button" title="Thêm mới">Thêm mới
+               {{!--  <i class="fa fa-trash" aria-hidden="true"></i> --}}
+            </a>
+        </div>
+        <br>
     </div>
 </div>
 <!-- end row -->
@@ -19,10 +25,10 @@
             <table {{!-- id="datatable-buttons" --}} class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                 <thead>
                     <tr>
-                        <th>Mã</th>
-                        <th>Mã DM</th>
-                        <th>Tên</th>
-                        <th>Sửa</th>
+                        <th>Mã loại</th>
+                        <th>Mã danh mục</th>
+                        <th>Tên loại</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
 
@@ -32,11 +38,15 @@
                         <td>{{MaLoai}}</td>
                         <td>{{MaDM}}</td>
                         <td>{{TenLoai}}</td>
-                       {{!--  <td class="text-right">
+                        
+                        <td class="text-right">
                             <a name="" id="" class="btn btn-primary btn-sm" href="/admin/category/edit/{{MaLoai}}" role="button" title="sửa loại">
                                 <i class="mdi mdi-border-color" aria-hidden="true"></i>
                             </a>
-                        </td> --}}
+                            <a name="" id="" class="btn btn-danger btn-sm" href="/admin/category/remove/{{MaLoai}}" role="button" title="xóa loại">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
                     </tr>
                     {{/each}}
                 </tbody>

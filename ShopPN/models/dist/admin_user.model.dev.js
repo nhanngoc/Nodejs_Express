@@ -6,7 +6,7 @@ var db = require("../utils/db");
 var tbl_sp = "sanpham";
 var tbl_gg = "giamgia";
 var tbl_spct = "sanphamct";
-var tbl_loai = "Loaisp";
+var tbl_loai = "loaisp";
 var tbl_khachhang = "khachhang";
 var tbl_hoadon = "hoadon";
 var tbl_quantri = "quantri";
@@ -136,7 +136,11 @@ module.exports = {
   },
   //all sản phẩm chưa khuyến mãi
   all_sp_gg: function all_sp_gg() {
-    return db.load("SELECT sp.*, gg.*\n    FROM sanpham sp LEFT JOIN giamgia gg ON gg.makm=sp.MaSP\n    WHERE gg.makm IS NULL");
+    return db.load("SELECT sp.*\n    FROM sanpham sp LEFT JOIN giamgia gg ON gg.makm=sp.MaSP\n    WHERE gg.makm IS NULL\n    order by sp.MaSP DESC");
+  },
+  //all sản phẩm chưa khuyến mãi
+  id_sp_gg: function id_sp_gg(id) {
+    return db.load("SELECT * FROM sanpham WHERE MaSP=".concat(id));
   },
   //Thêm mới giảm giá
   add_gg: function add_gg(entity) {
@@ -162,7 +166,31 @@ module.exports = {
   //// Start loại ////
   //lấy danh sách loại
   all_category: function all_category() {
-    return db.load("SELECT * FROM loaisp WHERE loaisp.MaDM IN(0,1)");
+    return db.load("SELECT * FROM ".concat(tbl_loai, " WHERE loaisp.MaDM IN(0,1)"));
+  },
+  //lấy danh sách danh mục
+  all_dm: function all_dm() {
+    return db.load("SELECT * FROM danhmuc WHERE MaDM IN(0,1)");
+  },
+  //Thêm mới loại
+  add_loai: function add_loai(entity) {
+    return db.insert_loai(tbl_loai, entity);
+  },
+  //sua
+  single_loai: function single_loai(id) {
+    return db.load("SELECT * FROM ".concat(tbl_loai, " WHERE MaLoai=").concat(id));
+  },
+  //capnhat
+  update_loai: function update_loai(entity) {
+    var condition = {
+      MaLoai: entity.MaLoai
+    };
+    delete entity.MaLoai;
+    return db.update_loai(tbl_loai, entity, condition);
+  },
+  //xoa
+  remove_loai: function remove_loai(id) {
+    return db.load("delete from ".concat(tbl_loai, " where MaLoai=").concat(id));
   },
   //// End loại ////
   //// Start khách hàng ////
@@ -175,6 +203,10 @@ module.exports = {
   },
   all_hoadonct: function all_hoadonct(mahd) {
     return db.load("SELECT ct.*,hd.*\n    FROM chitiethd ct INNER JOIN hoadon hd ON ct.mahd=hd.mahd\n    WHERE hd.mahd=".concat(mahd));
+  },
+  //sua hoadon
+  single_hd: function single_hd(id) {
+    return db.load("select * from hoadon where mahd=".concat(id));
   },
   //
   //sua trang thai hoa don

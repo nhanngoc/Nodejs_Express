@@ -16,6 +16,7 @@
                         <span><img src="assets\images\logo-dark.png" alt="" height="30"></span>
                     </a>
                 </div>
+                
                 <form class="form-horizontal" role="form" method="post" action="" enctype="multipart/form-data">
                         {{#if message}}
                             <div class="alert alert-success col-sm-12">{{message}}</div>
@@ -33,27 +34,36 @@
                         <div class="form-group">
                             <label for="TenSP" class="col-md-3 control-label">Tên sản phẩm</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="TenSP" placeholder="Nhập tên">
+                                <input type="text" class="form-control" id="txtten" name="TenSP" placeholder="Nhập tên">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Gia" class="col-md-3 control-label">Giá</label>
                             <div class="col-md-9">
-                                <input type="number" class="form-control" name="Gia" placeholder="Nhập giá">
+                                <input type="number" class="form-control" id="txtgia" name="Gia" placeholder="Nhập giá">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="uploaded_image" class="col-md-3 control-label">Hình đại diện</label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="file" name="uploaded_image" accept=""/>
+                                <input class="form-control" type="file" id="image" name="uploaded_image" accept=""/>
                             </div>
                         </div>  
+                        
                         <div class="form-group">
                             <label for="many_files" class="col-md-3 control-label">Hình chi tiết</label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="file"id="file" multiple name="many_files" accept=""/>
+                                <input class="form-control" type="file" id="file" multiple name="many_files" accept=""/>
                             </div>
                         </div>    
+                        {{#if err}}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span class="error animated tada" id="msg"></span>
+                            </button>
+                            {{err}}
+                            </div>
+                        {{/if}}
                         {{!-- <div class="form-group">
                              <label for="uploaded_image" class="col-md-3 control-label">Hình chi tiết</label>
                             <input type="file" name="many_files" id="file" multiple class="form-control-file border">
@@ -62,19 +72,22 @@
                         <div class="form-group">
                             <label for="MoTa" class="col-md-3 control-label">Mô Tả</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="MoTa" placeholder="Nhập mô tả">
+                                <input type="text" class="form-control" id="txtmota" name="MoTa" placeholder="Nhập mô tả">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="MoTa" class="col-md-3 control-label">Chất liệu</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="chatlieu" placeholder="Nhập chất liệu">
+                                <input type="text" class="form-control" id="txtchatlieu" name="chatlieu" placeholder="Nhập chất liệu">
                             </div>
                         </div>
                         <div class="form-group">
                             <!-- Button -->                                       
                             <div class="col-md-offset-3 col-md-9">
-                                <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> Thêm mới </button>
+                                <button id="btn-signup" type="submit" class="btn btn-info" onclick="kiemTraForm()">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                     Thêm mới
+                                </button>
                             </div>
                         </div>  
                     </form>
@@ -108,3 +121,42 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        function kiemTraForm() {
+            var maloai = document.getElementById("txtMaLoai").value
+            var ten = document.getElementById("txtten").value 
+            var image = document.getElementById("image").value
+            var gia = document.getElementById("txtgia").value
+            var mota = document.getElementById("txtmota").value
+            var chatlieu = document.getElementById("txtchatlieu").value
+          
+            if(maloai==""){
+                alert("Chưa chọn loại, mời bạn chọn lại!")
+                return false
+            }
+            if(ten==""){
+                alert("Chưa nhập Tên, mời bạn nhập lại!")
+                return false
+            }
+            
+            if(gia==""){
+                alert("Chưa nhập giá, mời bạn nhập lại!")
+                return false
+            }
+            if(image==""){
+                alert("Chưa chọn file, mời bạn chọn lại!")
+                return false
+            }
+            if(mota==""){
+                alert("Chưa nhập mô tả, mời bạn nhập lại!")
+                return false
+            }
+            if(chatlieu==""){
+                alert("Chưa nhập chất liệu, mời bạn nhập lại!")
+                return false
+            }
+            
+            alert('Thêm thành công!')
+            return true
+        }
+</script>

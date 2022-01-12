@@ -25,11 +25,11 @@
                 <select class="form-control" data-toggle="select2" id="txtsize_id" name="size_id">
                         {{!-- <option selected="">Chọn sản phẩm</option> --}}
                         <optgroup label="Kích thước:">
-                        <option value="{{this.product.size_id}}">{{this.product.size}}-{{this.product.title}}</option>
+                        <option value="{{this.product.size_id}}">{{this.product.size}} ({{this.product.title}})</option>
                         </optgroup>
                         <optgroup label="Chọn kích thước mới:">
                             {{#sizes}}
-                            <option value="{{this.size_id}}">{{this.size}}-{{this.title}}</option>
+                            <option value="{{this.size_id}}">{{this.size}} ({{this.title}})</option>
                             {{/sizes}}
                         </optgroup>
                     </select>

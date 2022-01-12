@@ -23,19 +23,18 @@ module.exports = {
 
           case 2:
             user = _context.sent;
-            console.log("userr", user);
 
             if (!(!req.session.isAuthenticated && user != +req.params.username)) {
-              _context.next = 6;
+              _context.next = 5;
               break;
             }
 
             return _context.abrupt("return", res.redirect("/account/login?retUrl=".concat(req.originalUrl)));
 
-          case 6:
+          case 5:
             next();
 
-          case 7:
+          case 6:
           case "end":
             return _context.stop();
         }
@@ -67,42 +66,41 @@ module.exports = {
 
           case 2:
             user = _context2.sent;
-            console.log("useradmin", user);
 
             if (req.session.isAuthenticated) {
-              _context2.next = 6;
+              _context2.next = 5;
               break;
             }
 
             return _context2.abrupt("return", res.redirect("/admin/login?retUrl=".concat(req.originalUrl)));
 
-          case 6:
+          case 5:
             i = 0;
 
-          case 7:
+          case 6:
             if (!(i < user.length)) {
-              _context2.next = 14;
+              _context2.next = 13;
               break;
             }
 
             if (!(user[i].username === req.session.authUser.username)) {
-              _context2.next = 11;
+              _context2.next = 10;
               break;
             }
 
             next();
             return _context2.abrupt("return");
 
-          case 11:
+          case 10:
             i++;
-            _context2.next = 7;
+            _context2.next = 6;
             break;
 
-          case 14:
-            console.log("req.session", req.session.isAuthenticated);
+          case 13:
+            //console.log("req.session", req.session.isAuthenticated);
             res.redirect("/admin/login?retUrl=".concat(req.originalUrl));
 
-          case 16:
+          case 14:
           case "end":
             return _context2.stop();
         }

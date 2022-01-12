@@ -15,7 +15,7 @@ const router = express.Router();
 
 //login
 router.get("/", async function (req, res) {
-  res.render("vwadmin/login"/* , { layout: false } */); //tat layout trang chu
+  res.render("vwadmin/login" /* , { layout: false } */); //tat layout trang chu
 });
 router.post("/", async function (req, res) {
   const user = await Model.singleUserName(req.body.username);
@@ -68,43 +68,47 @@ router.get("/attribute/list", restrict.admin, async function (req, res) {
   const sizes = await Model.distinct_sizes();
   let arrlist = [];
   for (let i = 0; i < list.length; i++) {
-    const cls = [];//đỏ, xanh
+    const cls = []; //đỏ, xanh
     for (let j = 0; j < colors.length; j++) {
-      if (list[i].MaSP == colors[j].masp) {//nếu 2 màu
-        const sizesl =[];//nhiều size
-        for(let k = 0; k < sizes.length; k++) {
-          if(sizes[k].color_id==colors[j].color_id && sizes[k].masp==colors[j].masp){
+      if (list[i].MaSP == colors[j].masp) {
+        //nếu 2 màu
+        const sizesl = []; //nhiều size
+        for (let k = 0; k < sizes.length; k++) {
+          if (
+            sizes[k].color_id == colors[j].color_id &&
+            sizes[k].masp == colors[j].masp
+          ) {
             sizesl.push(sizes[k]);
           }
         }
-        const sl={
+        const sl = {
           code: colors[j],
-          items:sizesl,//1mau
-        }
-        console.log("sl",sl);
+          items: sizesl, //1mau
+        };
+        console.log("sl", sl);
         cls.push(sl);
       }
     }
-    const sp={
-      MaSP:list[i].MaSP,
-      TenSP:list[i].TenSP,
-      Anh:list[i].Anh,
-      SoLuongBan:list[i].SoLuongBan,
-      Gia:list[i].Gia,
-      MoTa:list[i].MoTa,
-      chatlieu:list[i].chatlieu,
-      TinhTrang:list[i].TinhTrang,
-      NgayNhap:list[i].NgayNhap,
-      thuoctinh:cls,//thuoctinh:đỏ[size,soluong] color, size, soluong
-    }
-    console.log("spmoi",sp);
+    const sp = {
+      MaSP: list[i].MaSP,
+      TenSP: list[i].TenSP,
+      Anh: list[i].Anh,
+      SoLuongBan: list[i].SoLuongBan,
+      Gia: list[i].Gia,
+      MoTa: list[i].MoTa,
+      chatlieu: list[i].chatlieu,
+      TinhTrang: list[i].TinhTrang,
+      NgayNhap: list[i].NgayNhap,
+      thuoctinh: cls, //thuoctinh:đỏ[size,soluong] color, size, soluong
+    };
+    console.log("spmoi", sp);
     arrlist.push(sp); // Thêm phần tử vào cuối mảng mới
   }
   console.log("arrlist", arrlist);
   res.render("vwadmin/products/attribute_list", {
     layout: "admin",
     sanpham: list,
-    arrlist:arrlist,
+    arrlist: arrlist,
     empty: list.length === 0,
   });
 });
@@ -118,29 +122,33 @@ router.get("/attribute/add", restrict.admin, async function (req, res) {
   const sizes = await Model.distinct_sizes();
   let arrlist = [];
   for (let i = 0; i < list.length; i++) {
-    const cls = [];//đỏ, xanh
+    const cls = []; //đỏ, xanh
     for (let j = 0; j < colors.length; j++) {
-      if (list[i].MaSP == colors[j].masp) {//nếu 2 màu
-        const sizesl =[];//nhiều size
-        for(let k = 0; k < sizes.length; k++) {
-          if(sizes[k].color_id==colors[j].color_id && sizes[k].masp==colors[j].masp){
+      if (list[i].MaSP == colors[j].masp) {
+        //nếu 2 màu
+        const sizesl = []; //nhiều size
+        for (let k = 0; k < sizes.length; k++) {
+          if (
+            sizes[k].color_id == colors[j].color_id &&
+            sizes[k].masp == colors[j].masp
+          ) {
             sizesl.push(sizes[k]);
           }
         }
-        const sl={
+        const sl = {
           code: colors[j],
-          items:sizesl,//1mau
-        }
+          items: sizesl, //1mau
+        };
         cls.push(sl);
       }
     }
-    const sp={
-      MaSP:list[i].MaSP,
-      TenSP:list[i].TenSP,
-      SoLuong:list[i].SoLuong,
+    const sp = {
+      MaSP: list[i].MaSP,
+      TenSP: list[i].TenSP,
+      SoLuong: list[i].SoLuong,
       //Gia:list[i].Gia,
-      thuoctinh:cls,//thuoctinh:đỏ[size,soluong] color, size, soluong
-    }
+      thuoctinh: cls, //thuoctinh:đỏ[size,soluong] color, size, soluong
+    };
     arrlist.push(sp); // Thêm phần tử vào cuối mảng mới
   }
   res.render("vwadmin/products/attribute_add", {
@@ -153,17 +161,17 @@ router.get("/attribute/add", restrict.admin, async function (req, res) {
   });
 });
 router.post("/attribute/add", restrict.admin, async function (req, res) {
-  const size_ids= req.body.size_id;
-  const sl=req.body.soluong;
+  const size_ids = req.body.size_id;
+  const sl = req.body.soluong;
   let entity = [];
   for (let i = 0; i < size_ids.length; i++) {
-    for(let j = 0; j < sl.length; j++) {
-      if(i==j){
-        const masp= req.body.MaSP;
-        const color_id= req.body.color_id;
-        const size_id= size_ids[i];
-        const soluong=sl[j];
-        let arr=[masp, color_id, size_id,soluong];
+    for (let j = 0; j < sl.length; j++) {
+      if (i == j) {
+        const masp = req.body.MaSP;
+        const color_id = req.body.color_id;
+        const size_id = size_ids[i];
+        const soluong = sl[j];
+        let arr = [masp, color_id, size_id, soluong];
         entity.push(arr);
       }
     }
@@ -199,9 +207,11 @@ router.get("/attr/edit/:id", restrict.admin, async function (req, res) {
   const sizes = await Model.sizes_list();
   if (rows.length === 0) res.send("lõi la lõi");
   const product = rows[0];
-    return res.render("vwadmin/products/attr_edit", { 
-      layout: "admin", product ,sizes:sizes
-    });
+  return res.render("vwadmin/products/attr_edit", {
+    layout: "admin",
+    product,
+    sizes: sizes,
+  });
 });
 //cap nhat attribute detail
 router.post("/attr/update", restrict.admin, async function (req, res) {
@@ -242,14 +252,62 @@ router.post("/products/update", restrict.admin, async function (req, res) {
 
 ////////////////category////////////////
 //list
-router.get("/category/list", restrict.admin, async function (req, res) {
-  const list = await Model.all_category();
-  res.render("vwadmin/categories/list", {
-    layout: "admin",
-    loaisp: list,
-    empty: list.length === 0,
-  });
-});
+router.get(
+  "/category/list",
+  /* restrict.admin, */ async function (req, res) {
+    const list = await Model.all_category();
+    res.render("vwadmin/categories/list", {
+      layout: "admin",
+      loaisp: list,
+      empty: list.length === 0,
+    });
+  }
+);
+//themn
+router.get(
+  "/category/add",
+  /* restrict.admin, */ async function (req, res) {
+    const list = await Model.all_dm();
+    res.render("vwadmin/categories/add", {
+      layout: "admin",
+      sanpham: list,
+    });
+  }
+);
+//them
+router.post(
+  "/category/add",
+  /* restrict.admin, */ async function (req, res) {
+    await Model.add_loai(req.body);
+    res.redirect("/admin/category/add");
+  }
+);
+//xoa
+router.get(
+  "/category/remove/:id",
+  /* restrict.admin, */ async function (req, res) {
+    await Model.remove_loai(req.params.id);
+    res.redirect("/admin/category/list");
+  }
+);
+//sua
+router.get(
+  "/category/edit/:id",
+  /* restrict.admin, */ async function (req, res) {
+    const id = req.params.id;
+    const rows = await Model.single_loai(id);
+    const loai = rows[0];
+    res.render("vwadmin/categories/edit", { loai: loai, layout: "admin" });
+  }
+);
+//cap nhat
+router.post(
+  "/category/update",
+  /* restrict.admin, */ async function (req, res) {
+    await Model.update_loai(req.body);
+    res.redirect("/admin/category/list");
+  }
+);
 ////////////////khách hàng////////////////
 //list kh
 router.get("/kh", restrict.admin_nhanvien, async function (req, res) {
@@ -270,93 +328,145 @@ router.get("/hoadon", restrict.admin_nhanvien, async function (req, res) {
   });
 });
 //hoadon chi tiet
-router.get("/hoadonct/:mahd", restrict.admin_nhanvien, async function (req, res) {
- const mahd=req.params.mahd
- console.log("mahdd:",mahd)
-  const list = await Model.all_hoadonct(mahd);
-  console.log("dsct:",list)
-  res.render("vwadmin/order/hoadonct", {
-    layout: "admin",
-    hoadonct: list,
-    empty: list.length === 0,
-  });
-});
+router.get(
+  "/hoadonct/:mahd",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const mahd = req.params.mahd;
+    console.log("mahdd:", mahd);
+    const list = await Model.all_hoadonct(mahd);
+    console.log("dsct:", list);
+    res.render("vwadmin/order/hoadonct", {
+      layout: "admin",
+      hoadonct: list,
+      empty: list.length === 0,
+    });
+  }
+);
 /////START XỬ LÝ TRẠNG THÁI HÓA ĐƠN////
+//sua hoadon
+router.get(
+  "/hoadon/edit/:id",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const id = req.params.id;
+    const rows = await Model.single_hd(id);
+    const hoadon = rows[0];
+    res.render("vwadmin/order/edit", { hoadon: hoadon, layout: "admin" });
+  }
+);
+//cap nhat hoadon
+router.post(
+  "/hoadon/update",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    await Model.update_hd(req.body);
+    res.redirect("/admin/hoadon/choxacnhan");
+  }
+);
 //hoadon cho_xac_nhan
-router.get("/hoadon/choxacnhan",restrict.admin_nhanvien, async function (req, res) {
-  const list = await Model.single_choxacnhan();
-  res.render("vwadmin/order/choxacnhan", {
-    layout: "admin",
-    hoadon: list,
-    empty: list.length === 0,
-  });
-});
+router.get(
+  "/hoadon/choxacnhan",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const list = await Model.single_choxacnhan();
+    res.render("vwadmin/order/choxacnhan", {
+      layout: "admin",
+      hoadon: list,
+      empty: list.length === 0,
+    });
+  }
+);
 //cap nhat hoadon cho_xac_nhan
-router.get("/hoadon/choxacnhan/:mahd",restrict.admin_nhanvien, async function (req, res) {
-  const mahd=req.params.mahd;
-  const entity={
-    mahd: mahd,
-    trangthai: "Đã xác nhận",
-  };
-  console.log("entity",entity)
-  await Model.update_hd(entity);
-  res.redirect("/admin/hoadon/choxacnhan");
- });
- //
- //hoadon da_xac_nhan
-router.get("/hoadon/daxacnhan",restrict.admin_nhanvien, async function (req, res) {
-  const list = await Model.single_daxacnhan();
-  res.render("vwadmin/order/daxacnhan", {
-    layout: "admin",
-    hoadon: list,
-    empty: list.length === 0,
-  });
-});
-//cap nhat hoadon  da_xac_nhan
-router.get("/hoadon/daxacnhan/:mahd",restrict.admin_nhanvien, async function (req, res) {
-  const mahd=req.params.mahd;
-  const entity={
-    mahd: mahd,
-    trangthai: "Đang giao",
-  };
-  console.log("entity",entity)
-  await Model.update_hd(entity);
-  res.redirect("/admin/hoadon/daxacnhan");
- });
- //
-//hoadon dang_giao
-router.get("/hoadon/danggiao",restrict.admin_nhanvien, async function (req, res) {
-  const list = await Model.single_danggiao();
-  res.render("vwadmin/order/danggiao", {
-    layout: "admin",
-    hoadon: list,
-    empty: list.length === 0,
-  });
-});
-//cap nhat hoadon  dang_giao
-router.get("/hoadon/danggiao/:mahd", restrict.admin_nhanvien, async function (req, res) {
-  const mahd=req.params.mahd;
-  const entity={
-    mahd: mahd,
-    trangthai: "Đã nhận hàng",
-  };
-  console.log("entity",entity)
-  await Model.update_hd(entity);
-  res.redirect("/admin/hoadon/danggiao");
- });
- //
- //hoadon da_nhan_hang
-router.get("/hoadon/danhan",restrict.admin_nhanvien, async function (req, res) {
-  const list = await Model.single_danhan();
-  res.render("vwadmin/order/danhan", {
-    layout: "admin",
-    hoadon: list,
-    empty: list.length === 0,
-  });
-});
+router.get(
+  "/hoadon/choxacnhan/:mahd",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const mahd = req.params.mahd;
+    const entity = {
+      mahd: mahd,
+      trangthai: "Đã xác nhận",
+    };
+    console.log("entity", entity);
+    await Model.update_hd(entity);
+    res.redirect("/admin/hoadon/choxacnhan");
+  }
+);
 //
- //hoadon da_huy
- router.get("/hoadon/dahuy",restrict.admin_nhanvien, async function (req, res) {
+//hoadon da_xac_nhan
+router.get(
+  "/hoadon/daxacnhan",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const list = await Model.single_daxacnhan();
+    res.render("vwadmin/order/daxacnhan", {
+      layout: "admin",
+      hoadon: list,
+      empty: list.length === 0,
+    });
+  }
+);
+//cap nhat hoadon  da_xac_nhan
+router.get(
+  "/hoadon/daxacnhan/:mahd",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const mahd = req.params.mahd;
+    const entity = {
+      mahd: mahd,
+      trangthai: "Đang giao",
+    };
+    console.log("entity", entity);
+    await Model.update_hd(entity);
+    res.redirect("/admin/hoadon/daxacnhan");
+  }
+);
+//
+//hoadon dang_giao
+router.get(
+  "/hoadon/danggiao",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const list = await Model.single_danggiao();
+    res.render("vwadmin/order/danggiao", {
+      layout: "admin",
+      hoadon: list,
+      empty: list.length === 0,
+    });
+  }
+);
+//cap nhat hoadon  dang_giao
+router.get(
+  "/hoadon/danggiao/:mahd",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const mahd = req.params.mahd;
+    const entity = {
+      mahd: mahd,
+      trangthai: "Đã nhận hàng",
+    };
+    console.log("entity", entity);
+    await Model.update_hd(entity);
+    res.redirect("/admin/hoadon/danggiao");
+  }
+);
+//
+//hoadon da_nhan_hang
+router.get(
+  "/hoadon/danhan",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const list = await Model.single_danhan();
+    res.render("vwadmin/order/danhan", {
+      layout: "admin",
+      hoadon: list,
+      empty: list.length === 0,
+    });
+  }
+);
+//
+//hoadon da_huy
+router.get("/hoadon/dahuy", restrict.admin_nhanvien, async function (req, res) {
   const list = await Model.single_dahuy();
   res.render("vwadmin/order/dahuy", {
     layout: "admin",
@@ -365,17 +475,21 @@ router.get("/hoadon/danhan",restrict.admin_nhanvien, async function (req, res) {
   });
 });
 //cap nhat hoadon  da_huy
-router.get("/hoadon/dahuy/:mahd",restrict.admin_nhanvien, async function (req, res) {
-  const mahd=req.params.mahd;
-  const entity={
-    mahd: mahd,
-    trangthai: "Đã hủy",
+router.get(
+  "/hoadon/dahuy/:mahd",
+  restrict.admin_nhanvien,
+  async function (req, res) {
+    const mahd = req.params.mahd;
+    const entity = {
+      mahd: mahd,
+      trangthai: "Đã hủy",
+    };
+    console.log("entity", entity);
+    await Model.update_hd(entity);
+    res.redirect("/admin/hoadon/dahuy");
   }
-  console.log("entity",entity)
-  await Model.update_hd(entity);
-  res.redirect("/admin/hoadon/dahuy");
- });
- /////END XỬ LÝ TRẠNG THÁI HÓA ĐƠN////
+);
+/////END XỬ LÝ TRẠNG THÁI HÓA ĐƠN////
 ////////////////End khách hàng////////////////
 
 ////////////////Start nhan vien ////////////////
@@ -389,15 +503,15 @@ router.get("/user", restrict.admin, async function (req, res) {
   });
 });
 //themn
-router.get("/user/add",restrict.admin, async function (req, res) {
-  const list= await Model.all_nv();
-  res.render("vwadmin/quantri/add",{
+router.get("/user/add", restrict.admin, async function (req, res) {
+  const list = await Model.all_nv();
+  res.render("vwadmin/quantri/add", {
     layout: "admin",
-    sanpham:list,
+    sanpham: list,
   });
 });
 //them
-router.post("/user/add",restrict.admin, async function (req, res) {
+router.post("/user/add", restrict.admin, async function (req, res) {
   const salt = bcrypt.genSaltSync(10);
   const password_hash = bcrypt.hashSync(req.body.password, salt);
   const entity = {
@@ -414,24 +528,52 @@ router.post("/user/add",restrict.admin, async function (req, res) {
   res.redirect("/admin/user/add");
 });
 //xoa
-router.get("/user/remove/:id",restrict.admin, async function (req, res) {
+router.get("/user/remove/:id", restrict.admin, async function (req, res) {
   await Model.remove_nv(req.params.id);
   res.redirect("/admin/user");
 });
 //sua
-router.get("/user/edit/:id",restrict.admin, async function (req, res) {
+router.get("/user/edit/:id", restrict.admin, async function (req, res) {
   const id = req.params.id;
   const rows = await Model.single_nv(id);
   const qt = rows[0];
   res.render("vwadmin/quantri/edit", {
-     quantri:qt, 
-     layout: "admin", 
-    });
+    quantri: qt,
+    layout: "admin",
+  });
 });
 //cap nhat
-router.post("/user/update",restrict.admin, async function (req, res) {
-  console.log("body",req.body)
-  await Model.update_nv(req.body);
+router.post("/user/update", restrict.admin, async function (req, res) {
+  if (req.body.password === null) {
+    const entity = {
+      manv: req.body.manv,
+      tennv: req.body.tennv,
+      gioitinh: req.body.gioitinh,
+      ngaysinh: req.body.ngaysinh,
+      email: req.body.email,
+      sdt: req.body.sdt,
+      username: req.body.username,
+      quyen: req.body.quyen,
+    };
+    console.log("body", req.body);
+    await Model.update_nv(entity);
+    res.redirect("/admin/user");
+  }
+  const salt = bcrypt.genSaltSync(10);
+  const password_hash = bcrypt.hashSync(req.body.password, salt);
+  const entity = {
+    manv: req.body.manv,
+    tennv: req.body.tennv,
+    gioitinh: req.body.gioitinh,
+    ngaysinh: req.body.ngaysinh,
+    email: req.body.email,
+    sdt: req.body.sdt,
+    username: req.body.username,
+    password: password_hash,
+    quyen: req.body.quyen,
+  };
+  console.log("body", req.body);
+  await Model.update_nv(entity);
   res.redirect("/admin/user");
 });
 ////////////////Giảm Giá////////////////
@@ -445,34 +587,50 @@ router.get("/giamgia", restrict.admin, async function (req, res) {
   });
 });
 //themn
-router.get("/giamgia/add",restrict.admin,async function (req, res) {
-  const list= await Model.all_sp_gg();
-  res.render("vwadmin/giamgia/add",{
+router.get("/giamgia/add", restrict.admin, async function (req, res) {
+  const list = await Model.all_sp_gg();
+  res.render("vwadmin/giamgia/add", {
     layout: "admin",
-    sanpham:list,
+    sanpham: list,
   });
 });
 //them
-router.post("/giamgia/add",restrict.admin, async function (req, res) {
+router.post("/giamgia/add", restrict.admin, async function (req, res) {
+  const id = req.body.makm;
+  const giakm = req.body.giakm;
+  const list = await Model.all_sp_gg();
+  const rows = await Model.id_sp_gg(id);
+  const giagoc = rows[0].Gia;
+  if (giakm > giagoc) {
+    return res.render("vwadmin/giamgia/add", {
+      err: "Giá khuyến mãi phải nhỏ hơn giá gốc.",
+      layout: "admin",
+      sanpham: list,
+    });
+  }
   await Model.add_gg(req.body);
   res.redirect("/admin/giamgia/add");
 });
 //xoa
-router.get("/giamgia/remove/:id",restrict.admin, async function (req, res) {
+router.get("/giamgia/remove/:id", restrict.admin, async function (req, res) {
   await Model.remove_gg(req.params.id);
   res.redirect("/admin/giamgia");
 });
 //sua
-router.get("/giamgia/edit/:id",restrict.admin, async function (req, res) {
+router.get("/giamgia/edit/:id", restrict.admin, async function (req, res) {
   const id = req.params.id;
   const rows = await Model.single_gg(id);
   const giamgia = rows[0];
-  console.log("giamgia",giamgia)
-  res.render("vwadmin/giamgia/edit", { giamgia:giamgia, layout: "admin", });
+  console.log("giamgia", giamgia);
+  res.render("vwadmin/giamgia/edit", { giamgia: giamgia, layout: "admin" });
 });
 //cap nhat
-router.post("/giamgia/update",restrict.admin, async function (req, res) {
-  await Model.update_gg(req.body);
+router.post("/giamgia/update", restrict.admin, async function (req, res) {
+  const entity = {
+    makm: req.body.makm,
+    giakm: req.body.giakm,
+  };
+  await Model.update_gg(entity);
   res.redirect("/admin/giamgia");
 });
 ////////////////End Giảm Giá////////////////

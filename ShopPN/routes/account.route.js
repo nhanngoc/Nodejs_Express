@@ -25,7 +25,7 @@ router.post("/login", async function (req, res) {
     });
   }
   const rs = bcrypt.compareSync(req.body.password, user.password);
-  console.log("matkhau",rs)
+  console.log("matkhau", rs);
   if (rs === false) {
     return res.render("vwaccount/login", {
       //layout: false,
@@ -95,24 +95,13 @@ router.get("/profile", restrict.user, async function (req, res) {
   const total5 = await orderModel.total_dahuy(makh);
 
   res.render("vwaccount/profile", {
-    user:user,
+    user: user,
     total1: total1,
     total2: total2,
     total3: total3,
     total4: total4,
     total5: total5,
   });
-  /* Order.all(console.log("aaaaaaaaaaa",{ user: req.session.authUser}), function (err, orders) {
-      if (err) {
-        return res.write("Error!");
-      } 
-      let cart;
-      orders.forEach(function (order) {
-        cart = new Cart(order.cart);
-        order.items = cart.getItems();
-      });
-      res.render("vwaccount/profile", { orders: orders });
-    }); */
 });
 /* router.get("/is-available", async function (req, res) {
  const user = await userModel.singleUserName(req.query.user);
@@ -214,7 +203,7 @@ router.get("/profile/edit", restrict.user, async function (req, res) {
   const makh = user.MaKH;
   const rows = await orderModel.single_kh(makh);
   const edit = rows[0];
-  console.log("edit",edit)
+  console.log("edit", edit);
   res.render("vwaccount/edit_account", { edit: edit });
 });
 //cập nhật thông tin tài khoản khách hàng

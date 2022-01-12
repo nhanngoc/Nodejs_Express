@@ -217,17 +217,6 @@ router.get("/profile", restrict.user, function _callee5(req, res) {
             total4: total4,
             total5: total5
           });
-          /* Order.all(console.log("aaaaaaaaaaa",{ user: req.session.authUser}), function (err, orders) {
-              if (err) {
-                return res.write("Error!");
-              } 
-              let cart;
-              orders.forEach(function (order) {
-                cart = new Cart(order.cart);
-                order.items = cart.getItems();
-              });
-              res.render("vwaccount/profile", { orders: orders });
-            }); */
 
         case 21:
         case "end":

@@ -1,3 +1,6 @@
+<head>
+    <script type="text/javascript" src="/public/detail/global_bx.js.download"></script>
+</head>
 <!-- Start container-fluid -->
 <div class="container-fluid">
 
@@ -13,76 +16,99 @@
 <!-- end row -->
 <div class="row">
     <div class="col-lg-12">
-        <form class="form-horizontal" method="POST" action="">
+        <form class="form-horizontal" name="myform" action="/admin/user/update" method="post" onsubmit="return validateform()">
         {{#quantri}}
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Mã:</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="manv" value="{{this.manv}}" readonly>
+                </div>
+            </div>
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">Họ Tên:</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" name="tennv" value="{{this.tennv}}">
+                    <input type="text" class="form-control" name="tennv" id="txtName" value="{{this.tennv}}"
+                    required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$" title="Tên đăng ký không hợp lệ!">
                 </div>
             </div>
-            <div class="form-group row"{{!-- style="display: none;" --}}>
+            <div class="form-group row"style="display: none;">
                 <label class="col-md-2 col-form-label"></label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="laygt" name="tennv" value="{{this.gioitinh}}">
+                    <input type="text" class="form-control" id="laygt" value="{{this.gioitinh}}">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">Giới tính:</label>
-                <div class="col-md-9">
-                    <input type="radio" id="nam" name="gioitinh" value="Nam" >
-                    <label for="nam">Nam</label>
-                    <input type="radio" id="nu" name="gioitinh" value="Nữ" >
-                    <label for="nu">Nữ</label>
+                <div class="col-md-9" id="gioitinh">
+                    
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-2 col-form-label" for="txtemail">Email:</label>
+                <label class="col-md-2 col-form-label" for="txtEmail">Email:</label>
                 <div class="col-md-9">
-                    <input type="email" id="txtemail" name="email" class="form-control" value="{{this.email}}" placeholder="Nhập Email">
+                    <input type="email" id="txtEmail" name="email" class="form-control" value="{{this.email}}" placeholder="Nhập Email"
+                    required spattern="^[a-z0-9]+@[a-z0-9.]{6,20}$"title="Email không hợp lệ!">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-2 col-form-label" for="txtsdt">Số điện thoại:</label>
                 <div class="col-md-9">
-                    <input type="number" id="txtsdt" name="sdt" class="form-control" value="{{this.sdt}}" placeholder="Nhập số điện thoại">
+                    <input type="text" id="txtsdt" name="sdt" class="form-control" value="{{this.sdt}}" placeholder="Nhập số điện thoại"
+                    required  pattern="^[0-9]{10}$" title="Số điện thoại không hợp lệ!">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-2 col-form-label" for="txtusername">Tên đăng nhập:</label>
                 <div class="col-md-9">
-                    <input type="text" id="txtusername" name="username" class="form-control" value="{{this.username}}">
+                    <input type="text" id="txtusername" name="username" class="form-control" value="{{this.username}}"
+                    required pattern="^[A-Za-z0-9@._-]{6,20}$"	title="Tên đăng nhập không hợp lệ!">
                 </div>
             </div>
+            
             {{!-- <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="inlineCheckbox3"></label>
+                <div class="col-md-9">
+                   <div class="checkbox checkbox-pink form-check-inline">
+                <input  id="idcheckbox" type="checkbox">
+                <label for="inlineCheckbox3"> Đổi mật khẩu</label>
+                </div>
+                </div>
+            </div> --}}
+            <div class="form-group row">
                 <label class="col-md-2 col-form-label" for="txtPassword">Mật khẩu:</label>
                 <div class="col-md-9">
-                    <input type="password" class="form-control" name="password" id="txtPassword" value="{{this.password}}">
+                    <input type="password" class="form-control" name="password" id="txtPassword" placeholder="Đổi mật khẩu" 
+                     {{!-- required pattern="^[A-Za-z0-9!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{8,}$" --}}
+                  title="Mật khẩu không hợp lệ!">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-2 col-form-label" for="txtConfirm">Nhập lại mật khẩu:</label>
                 <div class="col-md-9">
-                    <input type="password" class="form-control" id="txtConfirm" Confirm="confirm" value="{{this.password}}">
+                    <input type="password" class="form-control" name="confirm" id="txtConfirm" Confirm="confirm"
+                    >
                 </div>
-            </div> --}}
+            </div>
             
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">Ngày sinh:</label>
                 <div class="col-md-9">
-                    <input type="date" id="ngaysinh" name="ngaysinh" value="{{this.ngaysinh}}"/>
+                    <input type="date" id="txtngaysinh" name="ngaysinh" value="{{this.ngaysinh}}"/>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">Quyền:</label>
-                <div class="col-md-9">
-                    <input type="radio" id="admin" name="quyen" value="admin">
-                    <label for="admin">Admin</label>
-                    <input type="radio" id="nv" name="quyen" value="nhanvien">
-                    <label for="nv">Nhân viên</label>
+                <div class="col-md-9" id="quyen">
+                    
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" title="save" formaction="/admin/user/update">
+             <div class="form-group row"style="display: none;">
+                <label class="col-md-2 col-form-label"></label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="layquyen" value="{{this.quyen}}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" title="save" {{!-- formaction="/admin/user/update" --}}>
                 <i class="fa fa-check" aria-hidden="true"></i>
                 Cập nhật
             </button>
@@ -94,12 +120,84 @@
 <!-- end row -->
 <script language="javascript">
     var gt = document.getElementById("laygt").value
+    var quyen = document.getElementById("layquyen").value
+    console.log("gioitinh",gt)
+    console.log("quyen",quyen)
     var html = '';
     if (gt=="Nam"){
-    html += 'Giao hàng đến <b style="color:#F5447B">'+options[i].text+'</b> với phí';
+    html += '<input type="radio" id="nam" name="gioitinh" value="Nam" checked=""><label for="nam">Nam&ensp;</label> <input type="radio" id="nu" name="gioitinh" value="Nữ"><label for="nu">Nữ</label>';
     }else{
-        
+    html += '<input type="radio" id="nam" name="gioitinh" value="Nam"><label for="nam">Nam&ensp;</label> <input type="radio" id="nu" name="gioitinh" value="Nữ" checked=""><label for="nu">Nữ</label>';
     }
-    document.getElementById('gh').innerHTML = html;
+    document.getElementById('gioitinh').innerHTML = html;
 
+    var html2 ='';
+    if(quyen=="admin"){
+        html2 +='<input type="radio" id="admin" name="quyen" value="admin" checked=""><label for="admin">Admin&ensp;</label><input type="radio" id="nv" name="quyen" value="nhanvien"><label for="nv">Nhân viên</label>'
+    }else{
+         html2 +='<input type="radio" id="admin" name="quyen" value="admin"><label for="admin">Admin&ensp;</label><input type="radio" id="nv" name="quyen" value="nhanvien" checked=""><label for="nv">Nhân viên</label>'
+    }
+    document.getElementById('quyen').innerHTML = html2;
 </script>
+<script language="javascript">
+    function validateform() {
+        var tennv = document.myform.tennv.value;
+        var email = document.myform.email.value;
+        var sdt = document.myform.sdt.value;
+        var username = document.myform.username.value;
+        var password = document.myform.password.value;
+        var confirm = document.myform.confirm.value;
+        var ngaysinh = document.myform.ngaysinh.value;
+        // var name1 = '';
+        if(tennv == null || tennv == ""){
+            alert("Chưa nhập Họ Tên, mời bạn nhập lại!")
+            // name1 += '<label class="col-md-2 col-form-label">Ban chua nhap ten</label>'
+            return false
+        }//document.getElementById('nname').innerHTML = name1;
+        if(email==""){
+            alert('Chưa nhập Email, mời bạn nhập lại!')
+            return false
+        }
+        if(sdt==""){
+            alert('Chưa nhập Số điện thoại, mời bạn nhập lại!')
+            return false
+        }
+        if(sdt==""){
+            alert('Chưa nhập Số điện thoại, mời bạn nhập lại!')
+            return false
+        }
+        if(username==""){
+            alert("Chưa nhập Tên đăng nhập, mời bạn nhập lại!")
+            return false
+        }
+        
+        if(password!= confirm){
+            alert('Mật khẩu chưa khớp, mời bạn nhập lại!')
+            return false
+        }
+        if(ngaysinh==""){
+            alert('Chưa nhập ngày sinh, mời bạn nhập lại!')
+            return false
+        }
+        
+        alert('Cập nhật thành công!')
+        return true
+    }
+</script>
+{{!-- <script type="text/javascript">
+    $("#txtPassword").attr('disabled', true);
+    $("#txtConfirm").attr('disabled', true);
+    $("#idcheckbox[type='checkbox']").change(function () {
+        var value = $(this).val();
+        if ($(this).is(":checked")) {
+                //alert("thanhcong")
+                $("#txtPassword").attr('disabled', false);
+                $("#txtConfirm").attr('disabled', false);
+        }
+        else {
+                //alert("false"+value);
+                $("#txtPassword").attr('disabled', true);
+                $("#txtConfirm").attr('disabled', true);
+        }
+    });
+</script> --}}

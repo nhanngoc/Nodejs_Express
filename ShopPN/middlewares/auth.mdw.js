@@ -9,7 +9,7 @@ const Model = require("../models/admin_user.model");
 module.exports = {
   user: async function (req, res, next) {
     const user = await userModel.singleUserName(req.body.username);
-    console.log("userr",user)
+    //console.log("userr",user)
     if (!req.session.isAuthenticated && user != +req.params.username) {
       return res.redirect(`/account/login?retUrl=${req.originalUrl}`);
     }
@@ -31,7 +31,7 @@ module.exports = {
 
   admin: async function (req, res, next) {
     const user = await Model.singleUserName_ad(req.body.username);
-    console.log("useradmin", user);
+    //console.log("useradmin", user);
     if (!req.session.isAuthenticated) {
       return res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
     }
@@ -41,7 +41,7 @@ module.exports = {
         return;
       }
     }
-    console.log("req.session", req.session.isAuthenticated);
+    //console.log("req.session", req.session.isAuthenticated);
     res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
   },
   admin_nhanvien: async function (req, res, next) {

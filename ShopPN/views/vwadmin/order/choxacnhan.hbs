@@ -27,7 +27,8 @@
                         <th>Tổng tiền</th>
                         <th>Ghi chú</th>
                         <th>Trạng thái</th>
-                        <th>Chi tiết</th>
+                        <th>Xem thêm</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +39,7 @@
                         <td>{{sdt}}</td>
                         <td>{{diachi}}</td>
                         <td>{{soluong}}</td>
-                        <td>{{tongtien}}</td>
+                        <td>{{format_number tongtien}}đ</td>
                         <td>{{ghichu}}</td>
                         <td class="text-right">
                             <a name="" id="" class="btn btn-primary btn-sm" href="/admin/hoadon/choxacnhan/{{mahd}}" role="button" title="Xác nhận">
@@ -51,6 +52,12 @@
                         <td>
                             <a href="/admin/hoadonct/{{mahd}}" title="xem chi tiết hóa đơn">
                             {{mahd}}
+                            </a>
+                            
+                        </td>
+                        <td>
+                            <a href="/admin/hoadon/edit/{{mahd}}" title="Sửa đơn hàng">
+                            Sửa
                             </a>
                         </td>
                     </tr>

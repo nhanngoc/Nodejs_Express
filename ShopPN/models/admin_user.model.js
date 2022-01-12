@@ -3,7 +3,7 @@ const db = require("../utils/db");
 const tbl_sp = "sanpham";
 const tbl_gg ="giamgia";
 const tbl_spct = "sanphamct";
-const tbl_loai = "Loaisp";
+const tbl_loai = "loaisp";
 const tbl_khachhang = "khachhang";
 const tbl_hoadon = "hoadon";
 const tbl_quantri = "quantri";
@@ -133,9 +133,14 @@ module.exports = {
   },
   //all sản phẩm chưa khuyến mãi
   all_sp_gg: function () {
-    return db.load(`SELECT sp.*, gg.*
+    return db.load(`SELECT sp.*
     FROM sanpham sp LEFT JOIN giamgia gg ON gg.makm=sp.MaSP
-    WHERE gg.makm IS NULL`);
+    WHERE gg.makm IS NULL
+    order by sp.MaSP DESC`);
+  },
+  //all sản phẩm chưa khuyến mãi
+  id_sp_gg: function (id) {
+    return db.load(`SELECT * FROM sanpham WHERE MaSP=${id}`);
   },
   //Thêm mới giảm giá
   add_gg: function (entity) {
@@ -163,9 +168,32 @@ module.exports = {
   //// Start loại ////
   //lấy danh sách loại
   all_category: function () {
-    return db.load(`SELECT * FROM loaisp WHERE loaisp.MaDM IN(0,1)`);
+    return db.load(`SELECT * FROM ${tbl_loai} WHERE loaisp.MaDM IN(0,1)`);
   },
-
+  //lấy danh sách danh mục
+  all_dm: function () {
+    return db.load(`SELECT * FROM danhmuc WHERE MaDM IN(0,1)`);
+  },
+    //Thêm mới loại
+  add_loai: function (entity) {
+    return db.insert_loai(tbl_loai, entity);
+  },
+  //sua
+  single_loai: function (id) {
+    return db.load(`SELECT * FROM ${tbl_loai} WHERE MaLoai=${id}`);
+  },
+  //capnhat
+  update_loai: function (entity) {
+    const condition = {
+      MaLoai: entity.MaLoai,
+    };
+    delete entity.MaLoai;
+    return db.update_loai(tbl_loai, entity, condition);
+  },
+  //xoa
+  remove_loai: function (id) {
+    return db.load(`delete from ${tbl_loai} where MaLoai=${id}`);
+  },
   //// End loại ////
 
   //// Start khách hàng ////
@@ -181,6 +209,11 @@ module.exports = {
     FROM chitiethd ct INNER JOIN hoadon hd ON ct.mahd=hd.mahd
     WHERE hd.mahd=${mahd}`);
   },
+  //sua hoadon
+  single_hd: function (id) {
+    return db.load(`select * from hoadon where mahd=${id}`);
+  },
+
   //
   //sua trang thai hoa don
   single_choxacnhan: function () {
