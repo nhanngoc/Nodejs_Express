@@ -28,7 +28,7 @@ module.exports = {
     }
     res.redirect("/");
   },
-
+  //PHÂN QUYỀN
   admin: async function (req, res, next) {
     const user = await Model.singleUserName_ad(req.body.username);
     //console.log("useradmin", user);
@@ -44,6 +44,7 @@ module.exports = {
     //console.log("req.session", req.session.isAuthenticated);
     res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
   },
+  //PHÂN QUYỀN
   admin_nhanvien: async function (req, res, next) {
     const user = await Model.singleUserName_all(req.body.username);
     if (!req.session.isAuthenticated) {

@@ -156,7 +156,7 @@
                         </div>
                         <div class="user-info">
                             <a href="#">{{lcAuthUser.username}}</a>
-                            <p class="text-muted m-0">Người quản trị</p>
+                            <p class="text-muted m-0"></p>
                         </div>
                     </div>
             {{/if}}
@@ -189,11 +189,11 @@
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="/admin/hoadon/choxacnhan">Chờ xác nhận</a></li>
-                            <li><a href="/admin/hoadon/daxacnhan">Đã xác nhận</a></li>
-                            <li><a href="/admin/hoadon/danggiao">Đang giao</a></li>
-                            <li><a href="/admin/hoadon/danhan">Đã nhận hàng</a></li>
-                            <li><a href="/admin/hoadon/dahuy">Đã hủy</a></li>
+                            <li><a href="/admin/hoadon/choxacnhan">Chờ xác nhận {{!-- ({{choxacnhan}}) --}}</a></li>
+                            <li><a href="/admin/hoadon/daxacnhan">Đã xác nhận {{!-- ({{daxacnhan}}) --}}</a></li>
+                            <li><a href="/admin/hoadon/danggiao">Đang giao {{!-- ({{danggiao}}) --}}</a></li>
+                            <li><a href="/admin/hoadon/danhan">Đã nhận hàng {{!-- ({{danhan}}) --}}</a></li>
+                            <li><a href="/admin/hoadon/dahuy">Đã hủy {{!-- ({{dahuy}}) --}}</a></li>
                         </ul>
                     </li>
                      {{!-- Khách hàng --}}
@@ -282,7 +282,56 @@
                     <div class="container-fluid">
 
                         <!-- start  -->
-                       {{{body}}}
+                        {{#if array}}
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <h4 class="header-title mb-3">Thống kê</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <div class="card-box widget-inline">
+                                        <div class="row">
+                                            <div class="col-xl-3 col-sm-6 widget-inline-box">
+                                                <div class="text-center p-3">
+                                                    <h2 class="mt-2"><i class="text-primary mdi mdi-clipboard-text mr-2"></i> <b>{{array.total_donmoi}}</b></h2>
+                                                    <p class="text-muted mb-0">Đơn chờ duyệt</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-3 col-sm-6 widget-inline-box">
+                                                <div class="text-center p-3">
+                                                    <h2 class="mt-2"><i class="text-teal mdi mdi-clipboard-check mr-2"></i> <b>{{array.total_ban}}</b></h2>
+                                                    <p class="text-muted mb-0">Đã bán</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-3 col-sm-6 widget-inline-box">
+                                                <div class="text-center p-3">
+                                                    <h2 class="mt-2"><i class="text-info mdi mdi-account-circle mr-2"></i> <b>{{array.total_user}}</b></h2>
+                                                    <p class="text-muted mb-0">Tổng người dùng</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-3 col-sm-6">
+                                                <div class="text-center p-3">
+                                                    <h2 class="mt-2"><i class="text-danger mdi mdi-store mr-2"></i> <b>{{array.total_kho}}</b></h2>
+                                                    <p class="text-muted mb-0">Tổng kho</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            
+                        {{else}}
+                            {{{body}}}
+                        {{/if}}
                         <!-- end row -->
 
                     </div>

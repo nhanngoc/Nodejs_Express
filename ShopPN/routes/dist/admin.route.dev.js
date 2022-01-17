@@ -97,30 +97,68 @@ router.post("/logoutadmin", restrict.admin_nhanvien, function (req, res) {
 //home admin
 
 router.get("/home", restrict.admin_nhanvien, function _callee3(req, res) {
+  var user, kho, daban, donmoi, total_kho, i, total_ban, _i, total_donmoi, _i2, array;
+
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          console.log(req.session.authUser);
-          res.render("_layouts/admin", {
-            layout: false
-          }); //tat layout trang chu
+          _context3.next = 2;
+          return regeneratorRuntime.awrap(Model.total_user());
 
         case 2:
+          user = _context3.sent;
+          _context3.next = 5;
+          return regeneratorRuntime.awrap(Model.total_kho());
+
+        case 5:
+          kho = _context3.sent;
+          _context3.next = 8;
+          return regeneratorRuntime.awrap(Model.total_hoadon());
+
+        case 8:
+          daban = _context3.sent;
+          _context3.next = 11;
+          return regeneratorRuntime.awrap(Model.total_donmoi());
+
+        case 11:
+          donmoi = _context3.sent;
+          total_kho = 0;
+
+          for (i = 0; i < kho.length; i++) {
+            total_kho += kho[i].soluong;
+          }
+
+          total_ban = 0;
+
+          for (_i = 0; _i < daban.length; _i++) {
+            total_ban += daban[_i].soluong;
+          }
+
+          total_donmoi = 0;
+
+          for (_i2 = 0; _i2 < donmoi.length; _i2++) {
+            total_donmoi++;
+          }
+
+          array = {
+            total_user: user,
+            total_kho: total_kho,
+            total_ban: total_ban,
+            total_donmoi: total_donmoi
+          };
+          res.render("_layouts/admin", {
+            layout: false,
+            array: array
+          }); //tat layout trang chu
+
+        case 20:
         case "end":
           return _context3.stop();
       }
     }
   });
-});
-/* router.get("/is-available", async function (req, res) {
- const user = await Model.singleUserName(req.query.user);
-  if(!user){
-    return res.json(true);
-  }
-  res.json(false);
-}); */
-////////////////products////////////////
+}); ////////////////products////////////////
 //attribute_list san pham thuoc tinh
 
 router.get("/attribute/list", restrict.admin, function _callee4(req, res) {
@@ -547,9 +585,7 @@ router.post("/products/update", restrict.admin, function _callee15(req, res) {
 }); ////////////////category////////////////
 //list
 
-router.get("/category/list",
-/* restrict.admin, */
-function _callee16(req, res) {
+router.get("/category/list", restrict.admin, function _callee16(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee16$(_context16) {
     while (1) {
@@ -574,9 +610,7 @@ function _callee16(req, res) {
   });
 }); //themn
 
-router.get("/category/add",
-/* restrict.admin, */
-function _callee17(req, res) {
+router.get("/category/add", restrict.admin, function _callee17(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee17$(_context17) {
     while (1) {
@@ -600,9 +634,7 @@ function _callee17(req, res) {
   });
 }); //them
 
-router.post("/category/add",
-/* restrict.admin, */
-function _callee18(req, res) {
+router.post("/category/add", restrict.admin, function _callee18(req, res) {
   return regeneratorRuntime.async(function _callee18$(_context18) {
     while (1) {
       switch (_context18.prev = _context18.next) {
@@ -621,20 +653,56 @@ function _callee18(req, res) {
   });
 }); //xoa
 
-router.get("/category/remove/:id",
-/* restrict.admin, */
-function _callee19(req, res) {
+router.get("/category/remove/:id", restrict.admin, function _callee19(req, res) {
+  var id, distinct, list, i;
   return regeneratorRuntime.async(function _callee19$(_context19) {
     while (1) {
       switch (_context19.prev = _context19.next) {
         case 0:
-          _context19.next = 2;
-          return regeneratorRuntime.awrap(Model.remove_loai(req.params.id));
-
-        case 2:
-          res.redirect("/admin/category/list");
+          id = req.params.id;
+          _context19.next = 3;
+          return regeneratorRuntime.awrap(Model.distinct_category());
 
         case 3:
+          distinct = _context19.sent;
+          _context19.next = 6;
+          return regeneratorRuntime.awrap(Model.all_category());
+
+        case 6:
+          list = _context19.sent;
+          i = 0;
+
+        case 8:
+          if (!(i < distinct.length)) {
+            _context19.next = 14;
+            break;
+          }
+
+          if (!(distinct[i].MaLoai == id)) {
+            _context19.next = 11;
+            break;
+          }
+
+          return _context19.abrupt("return", res.render("vwadmin/categories/list", {
+            err: "Vì sự ràng buộc dữ liệu.",
+            layout: "admin",
+            loaisp: list,
+            empty: list.length === 0
+          }));
+
+        case 11:
+          i++;
+          _context19.next = 8;
+          break;
+
+        case 14:
+          _context19.next = 16;
+          return regeneratorRuntime.awrap(Model.remove_loai(id));
+
+        case 16:
+          res.redirect("/admin/category/list");
+
+        case 17:
         case "end":
           return _context19.stop();
       }
@@ -642,9 +710,7 @@ function _callee19(req, res) {
   });
 }); //sua
 
-router.get("/category/edit/:id",
-/* restrict.admin, */
-function _callee20(req, res) {
+router.get("/category/edit/:id", restrict.admin, function _callee20(req, res) {
   var id, rows, loai;
   return regeneratorRuntime.async(function _callee20$(_context20) {
     while (1) {
@@ -670,9 +736,7 @@ function _callee20(req, res) {
   });
 }); //cap nhat
 
-router.post("/category/update",
-/* restrict.admin, */
-function _callee21(req, res) {
+router.post("/category/update", restrict.admin, function _callee21(req, res) {
   return regeneratorRuntime.async(function _callee21$(_context21) {
     while (1) {
       switch (_context21.prev = _context21.next) {
@@ -715,16 +779,16 @@ router.get("/kh", restrict.admin_nhanvien, function _callee22(req, res) {
       }
     }
   });
-}); //hoadon
+}); //hoadon theo makh
 
-router.get("/hoadon", restrict.admin_nhanvien, function _callee23(req, res) {
+router.get("/kh/hoadon/:makh", restrict.admin_nhanvien, function _callee23(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee23$(_context23) {
     while (1) {
       switch (_context23.prev = _context23.next) {
         case 0:
           _context23.next = 2;
-          return regeneratorRuntime.awrap(Model.all_hoadon());
+          return regeneratorRuntime.awrap(Model.all_hoadonkh(req.params.makh));
 
         case 2:
           list = _context23.sent;
@@ -740,21 +804,46 @@ router.get("/hoadon", restrict.admin_nhanvien, function _callee23(req, res) {
       }
     }
   });
-}); //hoadon chi tiet
+}); //hoadon
 
-router.get("/hoadonct/:mahd", restrict.admin_nhanvien, function _callee24(req, res) {
-  var mahd, list;
+router.get("/hoadon", restrict.admin_nhanvien, function _callee24(req, res) {
+  var list;
   return regeneratorRuntime.async(function _callee24$(_context24) {
     while (1) {
       switch (_context24.prev = _context24.next) {
         case 0:
+          _context24.next = 2;
+          return regeneratorRuntime.awrap(Model.all_hoadon());
+
+        case 2:
+          list = _context24.sent;
+          res.render("vwadmin/order/hoadon", {
+            layout: "admin",
+            hoadon: list,
+            empty: list.length === 0
+          });
+
+        case 4:
+        case "end":
+          return _context24.stop();
+      }
+    }
+  });
+}); //hoadon chi tiet
+
+router.get("/hoadonct/:mahd", restrict.admin_nhanvien, function _callee25(req, res) {
+  var mahd, list;
+  return regeneratorRuntime.async(function _callee25$(_context25) {
+    while (1) {
+      switch (_context25.prev = _context25.next) {
+        case 0:
           mahd = req.params.mahd;
           console.log("mahdd:", mahd);
-          _context24.next = 4;
+          _context25.next = 4;
           return regeneratorRuntime.awrap(Model.all_hoadonct(mahd));
 
         case 4:
-          list = _context24.sent;
+          list = _context25.sent;
           console.log("dsct:", list);
           res.render("vwadmin/order/hoadonct", {
             layout: "admin",
@@ -764,25 +853,25 @@ router.get("/hoadonct/:mahd", restrict.admin_nhanvien, function _callee24(req, r
 
         case 7:
         case "end":
-          return _context24.stop();
+          return _context25.stop();
       }
     }
   });
 }); /////START XỬ LÝ TRẠNG THÁI HÓA ĐƠN////
 //sua hoadon
 
-router.get("/hoadon/edit/:id", restrict.admin_nhanvien, function _callee25(req, res) {
+router.get("/hoadon/edit/:id", restrict.admin_nhanvien, function _callee26(req, res) {
   var id, rows, hoadon;
-  return regeneratorRuntime.async(function _callee25$(_context25) {
+  return regeneratorRuntime.async(function _callee26$(_context26) {
     while (1) {
-      switch (_context25.prev = _context25.next) {
+      switch (_context26.prev = _context26.next) {
         case 0:
           id = req.params.id;
-          _context25.next = 3;
+          _context26.next = 3;
           return regeneratorRuntime.awrap(Model.single_hd(id));
 
         case 3:
-          rows = _context25.sent;
+          rows = _context26.sent;
           hoadon = rows[0];
           res.render("vwadmin/order/edit", {
             hoadon: hoadon,
@@ -791,18 +880,18 @@ router.get("/hoadon/edit/:id", restrict.admin_nhanvien, function _callee25(req, 
 
         case 6:
         case "end":
-          return _context25.stop();
+          return _context26.stop();
       }
     }
   });
 }); //cap nhat hoadon
 
-router.post("/hoadon/update", restrict.admin_nhanvien, function _callee26(req, res) {
-  return regeneratorRuntime.async(function _callee26$(_context26) {
+router.post("/hoadon/update", restrict.admin_nhanvien, function _callee27(req, res) {
+  return regeneratorRuntime.async(function _callee27$(_context27) {
     while (1) {
-      switch (_context26.prev = _context26.next) {
+      switch (_context27.prev = _context27.next) {
         case 0:
-          _context26.next = 2;
+          _context27.next = 2;
           return regeneratorRuntime.awrap(Model.update_hd(req.body));
 
         case 2:
@@ -810,23 +899,23 @@ router.post("/hoadon/update", restrict.admin_nhanvien, function _callee26(req, r
 
         case 3:
         case "end":
-          return _context26.stop();
+          return _context27.stop();
       }
     }
   });
 }); //hoadon cho_xac_nhan
 
-router.get("/hoadon/choxacnhan", restrict.admin_nhanvien, function _callee27(req, res) {
+router.get("/hoadon/choxacnhan", restrict.admin_nhanvien, function _callee28(req, res) {
   var list;
-  return regeneratorRuntime.async(function _callee27$(_context27) {
+  return regeneratorRuntime.async(function _callee28$(_context28) {
     while (1) {
-      switch (_context27.prev = _context27.next) {
+      switch (_context28.prev = _context28.next) {
         case 0:
-          _context27.next = 2;
+          _context28.next = 2;
           return regeneratorRuntime.awrap(Model.single_choxacnhan());
 
         case 2:
-          list = _context27.sent;
+          list = _context28.sent;
           res.render("vwadmin/order/choxacnhan", {
             layout: "admin",
             hoadon: list,
@@ -835,17 +924,17 @@ router.get("/hoadon/choxacnhan", restrict.admin_nhanvien, function _callee27(req
 
         case 4:
         case "end":
-          return _context27.stop();
+          return _context28.stop();
       }
     }
   });
 }); //cap nhat hoadon cho_xac_nhan
 
-router.get("/hoadon/choxacnhan/:mahd", restrict.admin_nhanvien, function _callee28(req, res) {
+router.get("/hoadon/choxacnhan/:mahd", restrict.admin_nhanvien, function _callee29(req, res) {
   var mahd, entity;
-  return regeneratorRuntime.async(function _callee28$(_context28) {
+  return regeneratorRuntime.async(function _callee29$(_context29) {
     while (1) {
-      switch (_context28.prev = _context28.next) {
+      switch (_context29.prev = _context29.next) {
         case 0:
           mahd = req.params.mahd;
           entity = {
@@ -853,7 +942,7 @@ router.get("/hoadon/choxacnhan/:mahd", restrict.admin_nhanvien, function _callee
             trangthai: "Đã xác nhận"
           };
           console.log("entity", entity);
-          _context28.next = 5;
+          _context29.next = 5;
           return regeneratorRuntime.awrap(Model.update_hd(entity));
 
         case 5:
@@ -861,24 +950,24 @@ router.get("/hoadon/choxacnhan/:mahd", restrict.admin_nhanvien, function _callee
 
         case 6:
         case "end":
-          return _context28.stop();
+          return _context29.stop();
       }
     }
   });
 }); //
 //hoadon da_xac_nhan
 
-router.get("/hoadon/daxacnhan", restrict.admin_nhanvien, function _callee29(req, res) {
+router.get("/hoadon/daxacnhan", restrict.admin_nhanvien, function _callee30(req, res) {
   var list;
-  return regeneratorRuntime.async(function _callee29$(_context29) {
+  return regeneratorRuntime.async(function _callee30$(_context30) {
     while (1) {
-      switch (_context29.prev = _context29.next) {
+      switch (_context30.prev = _context30.next) {
         case 0:
-          _context29.next = 2;
+          _context30.next = 2;
           return regeneratorRuntime.awrap(Model.single_daxacnhan());
 
         case 2:
-          list = _context29.sent;
+          list = _context30.sent;
           res.render("vwadmin/order/daxacnhan", {
             layout: "admin",
             hoadon: list,
@@ -887,17 +976,17 @@ router.get("/hoadon/daxacnhan", restrict.admin_nhanvien, function _callee29(req,
 
         case 4:
         case "end":
-          return _context29.stop();
+          return _context30.stop();
       }
     }
   });
 }); //cap nhat hoadon  da_xac_nhan
 
-router.get("/hoadon/daxacnhan/:mahd", restrict.admin_nhanvien, function _callee30(req, res) {
+router.get("/hoadon/daxacnhan/:mahd", restrict.admin_nhanvien, function _callee31(req, res) {
   var mahd, entity;
-  return regeneratorRuntime.async(function _callee30$(_context30) {
+  return regeneratorRuntime.async(function _callee31$(_context31) {
     while (1) {
-      switch (_context30.prev = _context30.next) {
+      switch (_context31.prev = _context31.next) {
         case 0:
           mahd = req.params.mahd;
           entity = {
@@ -905,7 +994,7 @@ router.get("/hoadon/daxacnhan/:mahd", restrict.admin_nhanvien, function _callee3
             trangthai: "Đang giao"
           };
           console.log("entity", entity);
-          _context30.next = 5;
+          _context31.next = 5;
           return regeneratorRuntime.awrap(Model.update_hd(entity));
 
         case 5:
@@ -913,24 +1002,24 @@ router.get("/hoadon/daxacnhan/:mahd", restrict.admin_nhanvien, function _callee3
 
         case 6:
         case "end":
-          return _context30.stop();
+          return _context31.stop();
       }
     }
   });
 }); //
 //hoadon dang_giao
 
-router.get("/hoadon/danggiao", restrict.admin_nhanvien, function _callee31(req, res) {
+router.get("/hoadon/danggiao", restrict.admin_nhanvien, function _callee32(req, res) {
   var list;
-  return regeneratorRuntime.async(function _callee31$(_context31) {
+  return regeneratorRuntime.async(function _callee32$(_context32) {
     while (1) {
-      switch (_context31.prev = _context31.next) {
+      switch (_context32.prev = _context32.next) {
         case 0:
-          _context31.next = 2;
+          _context32.next = 2;
           return regeneratorRuntime.awrap(Model.single_danggiao());
 
         case 2:
-          list = _context31.sent;
+          list = _context32.sent;
           res.render("vwadmin/order/danggiao", {
             layout: "admin",
             hoadon: list,
@@ -939,17 +1028,17 @@ router.get("/hoadon/danggiao", restrict.admin_nhanvien, function _callee31(req, 
 
         case 4:
         case "end":
-          return _context31.stop();
+          return _context32.stop();
       }
     }
   });
 }); //cap nhat hoadon  dang_giao
 
-router.get("/hoadon/danggiao/:mahd", restrict.admin_nhanvien, function _callee32(req, res) {
+router.get("/hoadon/danggiao/:mahd", restrict.admin_nhanvien, function _callee33(req, res) {
   var mahd, entity;
-  return regeneratorRuntime.async(function _callee32$(_context32) {
+  return regeneratorRuntime.async(function _callee33$(_context33) {
     while (1) {
-      switch (_context32.prev = _context32.next) {
+      switch (_context33.prev = _context33.next) {
         case 0:
           mahd = req.params.mahd;
           entity = {
@@ -957,7 +1046,7 @@ router.get("/hoadon/danggiao/:mahd", restrict.admin_nhanvien, function _callee32
             trangthai: "Đã nhận hàng"
           };
           console.log("entity", entity);
-          _context32.next = 5;
+          _context33.next = 5;
           return regeneratorRuntime.awrap(Model.update_hd(entity));
 
         case 5:
@@ -965,51 +1054,25 @@ router.get("/hoadon/danggiao/:mahd", restrict.admin_nhanvien, function _callee32
 
         case 6:
         case "end":
-          return _context32.stop();
+          return _context33.stop();
       }
     }
   });
 }); //
 //hoadon da_nhan_hang
 
-router.get("/hoadon/danhan", restrict.admin_nhanvien, function _callee33(req, res) {
-  var list;
-  return regeneratorRuntime.async(function _callee33$(_context33) {
-    while (1) {
-      switch (_context33.prev = _context33.next) {
-        case 0:
-          _context33.next = 2;
-          return regeneratorRuntime.awrap(Model.single_danhan());
-
-        case 2:
-          list = _context33.sent;
-          res.render("vwadmin/order/danhan", {
-            layout: "admin",
-            hoadon: list,
-            empty: list.length === 0
-          });
-
-        case 4:
-        case "end":
-          return _context33.stop();
-      }
-    }
-  });
-}); //
-//hoadon da_huy
-
-router.get("/hoadon/dahuy", restrict.admin_nhanvien, function _callee34(req, res) {
+router.get("/hoadon/danhan", restrict.admin_nhanvien, function _callee34(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee34$(_context34) {
     while (1) {
       switch (_context34.prev = _context34.next) {
         case 0:
           _context34.next = 2;
-          return regeneratorRuntime.awrap(Model.single_dahuy());
+          return regeneratorRuntime.awrap(Model.single_danhan());
 
         case 2:
           list = _context34.sent;
-          res.render("vwadmin/order/dahuy", {
+          res.render("vwadmin/order/danhan", {
             layout: "admin",
             hoadon: list,
             empty: list.length === 0
@@ -1021,29 +1084,104 @@ router.get("/hoadon/dahuy", restrict.admin_nhanvien, function _callee34(req, res
       }
     }
   });
-}); //cap nhat hoadon  da_huy
+}); //
+//hoadon da_huy
 
-router.get("/hoadon/dahuy/:mahd", restrict.admin_nhanvien, function _callee35(req, res) {
-  var mahd, entity;
+router.get("/hoadon/dahuy", restrict.admin_nhanvien, function _callee35(req, res) {
+  var list;
   return regeneratorRuntime.async(function _callee35$(_context35) {
     while (1) {
       switch (_context35.prev = _context35.next) {
+        case 0:
+          _context35.next = 2;
+          return regeneratorRuntime.awrap(Model.single_dahuy());
+
+        case 2:
+          list = _context35.sent;
+          res.render("vwadmin/order/dahuy", {
+            layout: "admin",
+            hoadon: list,
+            empty: list.length === 0
+          });
+
+        case 4:
+        case "end":
+          return _context35.stop();
+      }
+    }
+  });
+}); //cap nhat hoadon  da_huy
+
+router.get("/hoadon/dahuy/:mahd", restrict.admin_nhanvien, function _callee36(req, res) {
+  var mahd, entity, hd, spct, i, j, _entity;
+
+  return regeneratorRuntime.async(function _callee36$(_context36) {
+    while (1) {
+      switch (_context36.prev = _context36.next) {
         case 0:
           mahd = req.params.mahd;
           entity = {
             mahd: mahd,
             trangthai: "Đã hủy"
           };
-          console.log("entity", entity);
-          _context35.next = 5;
+          _context36.next = 4;
           return regeneratorRuntime.awrap(Model.update_hd(entity));
 
-        case 5:
-          res.redirect("/admin/hoadon/dahuy");
+        case 4:
+          _context36.next = 6;
+          return regeneratorRuntime.awrap(Model.hd_id(mahd));
 
         case 6:
+          hd = _context36.sent;
+          _context36.next = 9;
+          return regeneratorRuntime.awrap(Model.all_spct());
+
+        case 9:
+          spct = _context36.sent;
+          i = 0;
+
+        case 11:
+          if (!(i < hd.length)) {
+            _context36.next = 24;
+            break;
+          }
+
+          j = 0;
+
+        case 13:
+          if (!(j < spct.length)) {
+            _context36.next = 21;
+            break;
+          }
+
+          if (!(hd[i].ma_id == spct[j].sp_id)) {
+            _context36.next = 18;
+            break;
+          }
+
+          _entity = {
+            sp_id: hd[i].ma_id,
+            soluong: spct[j].soluong + hd[i].quantity
+          };
+          _context36.next = 18;
+          return regeneratorRuntime.awrap(Model.update_spct(_entity));
+
+        case 18:
+          j++;
+          _context36.next = 13;
+          break;
+
+        case 21:
+          i++;
+          _context36.next = 11;
+          break;
+
+        case 24:
+          res.redirect("/admin/hoadon/dahuy");
+
+        case 25:
         case "end":
-          return _context35.stop();
+          return _context36.stop();
       }
     }
   });
@@ -1052,32 +1190,7 @@ router.get("/hoadon/dahuy/:mahd", restrict.admin_nhanvien, function _callee35(re
 ////////////////Start nhan vien ////////////////
 //list nhan vien
 
-router.get("/user", restrict.admin, function _callee36(req, res) {
-  var list;
-  return regeneratorRuntime.async(function _callee36$(_context36) {
-    while (1) {
-      switch (_context36.prev = _context36.next) {
-        case 0:
-          _context36.next = 2;
-          return regeneratorRuntime.awrap(Model.all_nv());
-
-        case 2:
-          list = _context36.sent;
-          res.render("vwadmin/quantri/quantri", {
-            layout: "admin",
-            quantri: list,
-            empty: list.length === 0
-          });
-
-        case 4:
-        case "end":
-          return _context36.stop();
-      }
-    }
-  });
-}); //themn
-
-router.get("/user/add", restrict.admin, function _callee37(req, res) {
+router.get("/user", restrict.admin, function _callee37(req, res) {
   var list;
   return regeneratorRuntime.async(function _callee37$(_context37) {
     while (1) {
@@ -1088,9 +1201,10 @@ router.get("/user/add", restrict.admin, function _callee37(req, res) {
 
         case 2:
           list = _context37.sent;
-          res.render("vwadmin/quantri/add", {
+          res.render("vwadmin/quantri/quantri", {
             layout: "admin",
-            sanpham: list
+            quantri: list,
+            empty: list.length === 0
           });
 
         case 4:
@@ -1099,13 +1213,37 @@ router.get("/user/add", restrict.admin, function _callee37(req, res) {
       }
     }
   });
-}); //them
+}); //themn
 
-router.post("/user/add", restrict.admin, function _callee38(req, res) {
-  var salt, password_hash, entity;
+router.get("/user/add", restrict.admin, function _callee38(req, res) {
+  var list;
   return regeneratorRuntime.async(function _callee38$(_context38) {
     while (1) {
       switch (_context38.prev = _context38.next) {
+        case 0:
+          _context38.next = 2;
+          return regeneratorRuntime.awrap(Model.all_nv());
+
+        case 2:
+          list = _context38.sent;
+          res.render("vwadmin/quantri/add", {
+            layout: "admin",
+            sanpham: list
+          });
+
+        case 4:
+        case "end":
+          return _context38.stop();
+      }
+    }
+  });
+}); //them
+
+router.post("/user/add", restrict.admin, function _callee39(req, res) {
+  var salt, password_hash, entity;
+  return regeneratorRuntime.async(function _callee39$(_context39) {
+    while (1) {
+      switch (_context39.prev = _context39.next) {
         case 0:
           salt = bcrypt.genSaltSync(10);
           password_hash = bcrypt.hashSync(req.body.password, salt);
@@ -1119,7 +1257,7 @@ router.post("/user/add", restrict.admin, function _callee38(req, res) {
             password: password_hash,
             quyen: req.body.quyen
           };
-          _context38.next = 5;
+          _context39.next = 5;
           return regeneratorRuntime.awrap(Model.add_nv(entity));
 
         case 5:
@@ -1127,18 +1265,18 @@ router.post("/user/add", restrict.admin, function _callee38(req, res) {
 
         case 6:
         case "end":
-          return _context38.stop();
+          return _context39.stop();
       }
     }
   });
 }); //xoa
 
-router.get("/user/remove/:id", restrict.admin, function _callee39(req, res) {
-  return regeneratorRuntime.async(function _callee39$(_context39) {
+router.get("/user/remove/:id", restrict.admin, function _callee40(req, res) {
+  return regeneratorRuntime.async(function _callee40$(_context40) {
     while (1) {
-      switch (_context39.prev = _context39.next) {
+      switch (_context40.prev = _context40.next) {
         case 0:
-          _context39.next = 2;
+          _context40.next = 2;
           return regeneratorRuntime.awrap(Model.remove_nv(req.params.id));
 
         case 2:
@@ -1146,24 +1284,24 @@ router.get("/user/remove/:id", restrict.admin, function _callee39(req, res) {
 
         case 3:
         case "end":
-          return _context39.stop();
+          return _context40.stop();
       }
     }
   });
 }); //sua
 
-router.get("/user/edit/:id", restrict.admin, function _callee40(req, res) {
+router.get("/user/edit/:id", restrict.admin, function _callee41(req, res) {
   var id, rows, qt;
-  return regeneratorRuntime.async(function _callee40$(_context40) {
+  return regeneratorRuntime.async(function _callee41$(_context41) {
     while (1) {
-      switch (_context40.prev = _context40.next) {
+      switch (_context41.prev = _context41.next) {
         case 0:
           id = req.params.id;
-          _context40.next = 3;
+          _context41.next = 3;
           return regeneratorRuntime.awrap(Model.single_nv(id));
 
         case 3:
-          rows = _context40.sent;
+          rows = _context41.sent;
           qt = rows[0];
           res.render("vwadmin/quantri/edit", {
             quantri: qt,
@@ -1172,25 +1310,25 @@ router.get("/user/edit/:id", restrict.admin, function _callee40(req, res) {
 
         case 6:
         case "end":
-          return _context40.stop();
+          return _context41.stop();
       }
     }
   });
 }); //cap nhat
 
-router.post("/user/update", restrict.admin, function _callee41(req, res) {
-  var _entity, salt, password_hash, entity;
+router.post("/user/update", restrict.admin, function _callee42(req, res) {
+  var _entity2, salt, password_hash, entity;
 
-  return regeneratorRuntime.async(function _callee41$(_context41) {
+  return regeneratorRuntime.async(function _callee42$(_context42) {
     while (1) {
-      switch (_context41.prev = _context41.next) {
+      switch (_context42.prev = _context42.next) {
         case 0:
           if (!(req.body.password === null)) {
-            _context41.next = 6;
+            _context42.next = 6;
             break;
           }
 
-          _entity = {
+          _entity2 = {
             manv: req.body.manv,
             tennv: req.body.tennv,
             gioitinh: req.body.gioitinh,
@@ -1201,8 +1339,8 @@ router.post("/user/update", restrict.admin, function _callee41(req, res) {
             quyen: req.body.quyen
           };
           console.log("body", req.body);
-          _context41.next = 5;
-          return regeneratorRuntime.awrap(Model.update_nv(_entity));
+          _context42.next = 5;
+          return regeneratorRuntime.awrap(Model.update_nv(_entity2));
 
         case 5:
           res.redirect("/admin/user");
@@ -1222,7 +1360,7 @@ router.post("/user/update", restrict.admin, function _callee41(req, res) {
             quyen: req.body.quyen
           };
           console.log("body", req.body);
-          _context41.next = 12;
+          _context42.next = 12;
           return regeneratorRuntime.awrap(Model.update_nv(entity));
 
         case 12:
@@ -1230,24 +1368,24 @@ router.post("/user/update", restrict.admin, function _callee41(req, res) {
 
         case 13:
         case "end":
-          return _context41.stop();
+          return _context42.stop();
       }
     }
   });
 }); ////////////////Giảm Giá////////////////
 //list giảm giá
 
-router.get("/giamgia", restrict.admin, function _callee42(req, res) {
+router.get("/giamgia", restrict.admin, function _callee43(req, res) {
   var list;
-  return regeneratorRuntime.async(function _callee42$(_context42) {
+  return regeneratorRuntime.async(function _callee43$(_context43) {
     while (1) {
-      switch (_context42.prev = _context42.next) {
+      switch (_context43.prev = _context43.next) {
         case 0:
-          _context42.next = 2;
+          _context43.next = 2;
           return regeneratorRuntime.awrap(Model.all_gg());
 
         case 2:
-          list = _context42.sent;
+          list = _context43.sent;
           res.render("vwadmin/giamgia/giamgia", {
             layout: "admin",
             giamgia: list,
@@ -1256,23 +1394,23 @@ router.get("/giamgia", restrict.admin, function _callee42(req, res) {
 
         case 4:
         case "end":
-          return _context42.stop();
+          return _context43.stop();
       }
     }
   });
 }); //themn
 
-router.get("/giamgia/add", restrict.admin, function _callee43(req, res) {
+router.get("/giamgia/add", restrict.admin, function _callee44(req, res) {
   var list;
-  return regeneratorRuntime.async(function _callee43$(_context43) {
+  return regeneratorRuntime.async(function _callee44$(_context44) {
     while (1) {
-      switch (_context43.prev = _context43.next) {
+      switch (_context44.prev = _context44.next) {
         case 0:
-          _context43.next = 2;
+          _context44.next = 2;
           return regeneratorRuntime.awrap(Model.all_sp_gg());
 
         case 2:
-          list = _context43.sent;
+          list = _context44.sent;
           res.render("vwadmin/giamgia/add", {
             layout: "admin",
             sanpham: list
@@ -1280,45 +1418,45 @@ router.get("/giamgia/add", restrict.admin, function _callee43(req, res) {
 
         case 4:
         case "end":
-          return _context43.stop();
+          return _context44.stop();
       }
     }
   });
 }); //them
 
-router.post("/giamgia/add", restrict.admin, function _callee44(req, res) {
+router.post("/giamgia/add", restrict.admin, function _callee45(req, res) {
   var id, giakm, list, rows, giagoc;
-  return regeneratorRuntime.async(function _callee44$(_context44) {
+  return regeneratorRuntime.async(function _callee45$(_context45) {
     while (1) {
-      switch (_context44.prev = _context44.next) {
+      switch (_context45.prev = _context45.next) {
         case 0:
           id = req.body.makm;
           giakm = req.body.giakm;
-          _context44.next = 4;
+          _context45.next = 4;
           return regeneratorRuntime.awrap(Model.all_sp_gg());
 
         case 4:
-          list = _context44.sent;
-          _context44.next = 7;
+          list = _context45.sent;
+          _context45.next = 7;
           return regeneratorRuntime.awrap(Model.id_sp_gg(id));
 
         case 7:
-          rows = _context44.sent;
+          rows = _context45.sent;
           giagoc = rows[0].Gia;
 
           if (!(giakm > giagoc)) {
-            _context44.next = 11;
+            _context45.next = 11;
             break;
           }
 
-          return _context44.abrupt("return", res.render("vwadmin/giamgia/add", {
+          return _context45.abrupt("return", res.render("vwadmin/giamgia/add", {
             err: "Giá khuyến mãi phải nhỏ hơn giá gốc.",
             layout: "admin",
             sanpham: list
           }));
 
         case 11:
-          _context44.next = 13;
+          _context45.next = 13;
           return regeneratorRuntime.awrap(Model.add_gg(req.body));
 
         case 13:
@@ -1326,18 +1464,18 @@ router.post("/giamgia/add", restrict.admin, function _callee44(req, res) {
 
         case 14:
         case "end":
-          return _context44.stop();
+          return _context45.stop();
       }
     }
   });
 }); //xoa
 
-router.get("/giamgia/remove/:id", restrict.admin, function _callee45(req, res) {
-  return regeneratorRuntime.async(function _callee45$(_context45) {
+router.get("/giamgia/remove/:id", restrict.admin, function _callee46(req, res) {
+  return regeneratorRuntime.async(function _callee46$(_context46) {
     while (1) {
-      switch (_context45.prev = _context45.next) {
+      switch (_context46.prev = _context46.next) {
         case 0:
-          _context45.next = 2;
+          _context46.next = 2;
           return regeneratorRuntime.awrap(Model.remove_gg(req.params.id));
 
         case 2:
@@ -1345,24 +1483,24 @@ router.get("/giamgia/remove/:id", restrict.admin, function _callee45(req, res) {
 
         case 3:
         case "end":
-          return _context45.stop();
+          return _context46.stop();
       }
     }
   });
 }); //sua
 
-router.get("/giamgia/edit/:id", restrict.admin, function _callee46(req, res) {
+router.get("/giamgia/edit/:id", restrict.admin, function _callee47(req, res) {
   var id, rows, giamgia;
-  return regeneratorRuntime.async(function _callee46$(_context46) {
+  return regeneratorRuntime.async(function _callee47$(_context47) {
     while (1) {
-      switch (_context46.prev = _context46.next) {
+      switch (_context47.prev = _context47.next) {
         case 0:
           id = req.params.id;
-          _context46.next = 3;
+          _context47.next = 3;
           return regeneratorRuntime.awrap(Model.single_gg(id));
 
         case 3:
-          rows = _context46.sent;
+          rows = _context47.sent;
           giamgia = rows[0];
           console.log("giamgia", giamgia);
           res.render("vwadmin/giamgia/edit", {
@@ -1372,23 +1510,23 @@ router.get("/giamgia/edit/:id", restrict.admin, function _callee46(req, res) {
 
         case 7:
         case "end":
-          return _context46.stop();
+          return _context47.stop();
       }
     }
   });
 }); //cap nhat
 
-router.post("/giamgia/update", restrict.admin, function _callee47(req, res) {
+router.post("/giamgia/update", restrict.admin, function _callee48(req, res) {
   var entity;
-  return regeneratorRuntime.async(function _callee47$(_context47) {
+  return regeneratorRuntime.async(function _callee48$(_context48) {
     while (1) {
-      switch (_context47.prev = _context47.next) {
+      switch (_context48.prev = _context48.next) {
         case 0:
           entity = {
             makm: req.body.makm,
             giakm: req.body.giakm
           };
-          _context47.next = 3;
+          _context48.next = 3;
           return regeneratorRuntime.awrap(Model.update_gg(entity));
 
         case 3:
@@ -1396,7 +1534,7 @@ router.post("/giamgia/update", restrict.admin, function _callee47(req, res) {
 
         case 4:
         case "end":
-          return _context47.stop();
+          return _context48.stop();
       }
     }
   });

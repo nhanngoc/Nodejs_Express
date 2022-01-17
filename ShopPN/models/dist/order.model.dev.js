@@ -1,11 +1,16 @@
 "use strict";
 
+var _module$exports;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var db = require("../utils/db");
 
 var tbl_hoadon = "hoadon";
 var tbl_chitiethd = "chitiethd";
+var tbl_spct = "sanphamct";
 var tbl_kh = "khachhang";
-module.exports = {
+module.exports = (_module$exports = {
   all: function all() {
     return db.load("select *from ".concat(tbl_hoadon));
   },
@@ -165,6 +170,22 @@ module.exports = {
     delete entity.mahd;
     return db.update_hoadon(tbl_hoadon, entity, condition);
   },
+  //laasy danh sach sanphamct
+  all_spct: function all_spct() {
+    return db.load("select *from ".concat(tbl_spct));
+  },
+  //chitiethd where mahd
+  hd_id: function hd_id(id) {
+    return db.load("select *from ".concat(tbl_chitiethd, " where mahd=").concat(id));
+  },
+  //capnhat sanphamct
+  update_spct: function update_spct(entity) {
+    var condition = {
+      sp_id: entity.sp_id
+    };
+    delete entity.sp_id;
+    return db.patch_spct(tbl_spct, entity, condition);
+  },
   //thông tin chi tiết đơn hàng
   all_order_ct: function all_order_ct(mahd) {
     return db.load("SELECT ct.*, hd.*, sp.Anh,sp.TenSP,sp.Gia,sp.chatlieu\n    FROM ((chitiethd ct INNER JOIN hoadon hd ON ct.mahd=hd.mahd)\n        INNER JOIN sanpham sp ON ct.masp=sp.MaSP)\n    WHERE hd.mahd=".concat(mahd));
@@ -198,4 +219,12 @@ module.exports = {
       }
     });
   }
-};
+}, _defineProperty(_module$exports, "all_spct", function all_spct() {
+  return db.load("select *from ".concat(tbl_spct));
+}), _defineProperty(_module$exports, "update_spct", function update_spct(entity) {
+  var condition = {
+    sp_id: entity.sp_id
+  };
+  delete entity.sp_id;
+  return db.patch_spct(tbl_spct, entity, condition);
+}), _module$exports);

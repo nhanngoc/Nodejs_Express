@@ -7,6 +7,6 @@
     "connectionLimit": 50
   },
   "pagination": {
-    "limit": 8
+    "limit": 10
   }
 }

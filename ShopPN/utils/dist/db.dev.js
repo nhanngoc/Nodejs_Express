@@ -301,8 +301,21 @@ module.exports = {
   //them chitiethd 
   insert_chitiethd: function insert_chitiethd(entity) {
     return new Promise(function (resolve, reject) {
-      var sql = "insert into ".concat(tbl_chitiethd, "(mahd, masp, tensp, dongia, quantity, gia) VALUES ?");
+      var sql = "insert into ".concat(tbl_chitiethd, "(mahd, masp, tensp, dongia, quantity, gia, ma_id) VALUES ?");
       pool.query(sql, [entity], function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+
+        resolve(results);
+      });
+    });
+  },
+  //cap nhat sanphamct
+  patch_spct: function patch_spct(table, entity, condition) {
+    return new Promise(function (resolve, reject) {
+      var sql = "update sanphamct set ? where ?";
+      pool.query(sql, [entity, condition], function (error, results) {
         if (error) {
           return reject(error);
         }

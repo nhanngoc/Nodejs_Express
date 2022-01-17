@@ -126,40 +126,40 @@ router.get("/detail/:MaSP", function _callee2(req, res) {
           ggg = _context2.sent;
           data = ggg.filter(function (item) {
             return item.makm == id;
-          });
-          console.log("data:", data);
-          _context2.next = 11;
+          }); //console.log("data:",data)
+
+          _context2.next = 10;
           return regeneratorRuntime.awrap(productModel.detail(id));
 
-        case 11:
+        case 10:
           lists = _context2.sent;
-          _context2.next = 14;
+          _context2.next = 13;
           return regeneratorRuntime.awrap(productModel.distinct_color(id));
 
-        case 14:
+        case 13:
           color = _context2.sent;
-          _context2.next = 17;
+          _context2.next = 16;
           return regeneratorRuntime.awrap(productModel.detail_size(id));
 
-        case 17:
+        case 16:
           size = _context2.sent;
-          _context2.next = 20;
+          _context2.next = 19;
           return regeneratorRuntime.awrap(productModel.distinct_size(id));
 
-        case 20:
+        case 19:
           distinct_size = _context2.sent;
-          _context2.next = 23;
+          _context2.next = 22;
           return regeneratorRuntime.awrap(productModel.detail_anh(id));
 
-        case 23:
+        case 22:
           detail_anh = _context2.sent;
           tong = 0;
 
           for (i = 0; i < size.length; i++) {
             tong += size[i].soluong;
-          }
+          } //console.log("tong:",tong)
 
-          console.log("tong:", tong);
+
           page_items = [];
 
           for (_i = 0; _i < color.length; _i++) {
@@ -189,10 +189,11 @@ router.get("/detail/:MaSP", function _callee2(req, res) {
             giamgia: data,
             page_items: page_items,
             empty: lists.length === 0,
-            sizes: distinct_size
+            sizes: distinct_size,
+            tongkho: tong
           });
 
-        case 31:
+        case 29:
         case "end":
           return _context2.stop();
       }
@@ -299,9 +300,11 @@ router.get("/do-be-gai/:MaLoai", function _callee3(req, res) {
       }
     }
   }, null, null, [[6, 10, 14, 22], [15,, 17, 21]]);
-});
+}); //do-be-gai
+
 router.get("/do-be-gai", function _callee4(req, res) {
-  var page, offset, list, total, nPages, page_items, i, item;
+  var page, offset, list, total, count, i, nPages, page_items, _i2, item;
+
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
@@ -320,13 +323,19 @@ router.get("/do-be-gai", function _callee4(req, res) {
 
         case 8:
           total = _context4.sent;
-          nPages = Math.ceil(total / config.pagination.limit);
+          count = 0;
+
+          for (i = 0; i < total.length; i++) {
+            count++;
+          }
+
+          nPages = Math.ceil(count / config.pagination.limit);
           page_items = [];
 
-          for (i = 1; i <= nPages; i++) {
+          for (_i2 = 1; _i2 <= nPages; _i2++) {
             item = {
-              value: i,
-              isActive: i === page
+              value: _i2,
+              isActive: _i2 === page
             };
             page_items.push(item);
           }
@@ -340,7 +349,7 @@ router.get("/do-be-gai", function _callee4(req, res) {
             next_value: page + 1
           });
 
-        case 13:
+        case 15:
         case "end":
           return _context4.stop();
       }
@@ -349,7 +358,8 @@ router.get("/do-be-gai", function _callee4(req, res) {
 }); //All get san pham loai do-be-gai
 
 router.get("/category", function _callee5(req, res) {
-  var madm, dm, page, offset, list, total, nPages, page_items, i, item;
+  var madm, dm, page, offset, list, total, count, i, nPages, page_items, _i3, item;
+
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
@@ -374,16 +384,22 @@ router.get("/category", function _callee5(req, res) {
 
         case 12:
           total = _context5.sent;
-          nPages = Math.ceil(total / config.pagination.limit);
+          count = 0;
+
+          for (i = 0; i < total.length; i++) {
+            count++;
+          }
+
+          nPages = Math.ceil(count / config.pagination.limit);
           page_items = [];
 
-          for (i = 1; i <= nPages; i++) {
+          for (_i3 = 1; _i3 <= nPages; _i3++) {
             item = {
-              value: i,
+              value: _i3,
               cate_id: madm,
-              isActive: i === page
-            };
-            console.log("text:", item);
+              isActive: _i3 === page
+            }; //console.log("text:",item)
+
             page_items.push(item);
           }
 
@@ -405,7 +421,7 @@ router.get("/category", function _callee5(req, res) {
             });
           }
 
-        case 17:
+        case 19:
         case "end":
           return _context5.stop();
       }
@@ -515,7 +531,8 @@ router.get("/do-be-trai/:MaLoai", function _callee6(req, res) {
 }); //Get tất cả bé trai
 
 router.get("/do-be-trai", function _callee7(req, res) {
-  var page, offset, list, total, nPages, page_items, i, item;
+  var page, offset, list, total, count, i, nPages, page_items, _i4, item;
+
   return regeneratorRuntime.async(function _callee7$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
@@ -534,13 +551,19 @@ router.get("/do-be-trai", function _callee7(req, res) {
 
         case 8:
           total = _context7.sent;
-          nPages = Math.ceil(total / config.pagination.limit);
+          count = 0;
+
+          for (i = 0; i < total.length; i++) {
+            count++;
+          }
+
+          nPages = Math.ceil(count / config.pagination.limit);
           page_items = [];
 
-          for (i = 1; i <= nPages; i++) {
+          for (_i4 = 1; _i4 <= nPages; _i4++) {
             item = {
-              value: i,
-              isActive: i === page
+              value: _i4,
+              isActive: _i4 === page
             };
             page_items.push(item);
           }
@@ -554,7 +577,7 @@ router.get("/do-be-trai", function _callee7(req, res) {
             next_value: page + 1
           });
 
-        case 13:
+        case 15:
         case "end":
           return _context7.stop();
       }

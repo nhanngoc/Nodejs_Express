@@ -6,6 +6,8 @@ var khModel = require("../models/order.model");
 
 var Cart = require("../models/cart");
 
+var adminModel = require("../models/admin_user.model");
+
 module.exports = function (app) {
   //login
   app.use(function (req, res, next) {
@@ -129,6 +131,148 @@ module.exports = function (app) {
           case 5:
           case "end":
             return _context5.stop();
+        }
+      }
+    });
+  }); ////Start ADMIN ////
+  //lấy ra hóa đơn choxacnhan bên admin
+
+  app.use(function _callee6(req, res, next) {
+    var list, count, i;
+    return regeneratorRuntime.async(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.next = 2;
+            return regeneratorRuntime.awrap(adminModel.single_choxacnhan());
+
+          case 2:
+            list = _context6.sent;
+            count = 0;
+
+            for (i = 0; i < list.length; i++) {
+              count++;
+            }
+
+            res.locals.choxacnhan = count; //console.log("choxacnhan",res.locals.choxacnhan)
+
+            next();
+
+          case 7:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    });
+  }); //lấy ra hóa đơn daxacnhan bên admin
+
+  app.use(function _callee7(req, res, next) {
+    var list, count, i;
+    return regeneratorRuntime.async(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            _context7.next = 2;
+            return regeneratorRuntime.awrap(adminModel.single_daxacnhan());
+
+          case 2:
+            list = _context7.sent;
+            count = 0;
+
+            for (i = 0; i < list.length; i++) {
+              count++;
+            }
+
+            res.locals.daxacnhan = count;
+            next();
+
+          case 7:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    });
+  }); //lấy ra hóa đơn danggiao bên admin
+
+  app.use(function _callee8(req, res, next) {
+    var list, count, i;
+    return regeneratorRuntime.async(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            _context8.next = 2;
+            return regeneratorRuntime.awrap(adminModel.single_danggiao());
+
+          case 2:
+            list = _context8.sent;
+            count = 0;
+
+            for (i = 0; i < list.length; i++) {
+              count++;
+            }
+
+            res.locals.danggiao = count;
+            next();
+
+          case 7:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    });
+  }); //lấy ra hóa đơn danhan bên admin
+
+  app.use(function _callee9(req, res, next) {
+    var list, count, i;
+    return regeneratorRuntime.async(function _callee9$(_context9) {
+      while (1) {
+        switch (_context9.prev = _context9.next) {
+          case 0:
+            _context9.next = 2;
+            return regeneratorRuntime.awrap(adminModel.single_danhan());
+
+          case 2:
+            list = _context9.sent;
+            count = 0;
+
+            for (i = 0; i < list.length; i++) {
+              count++;
+            }
+
+            res.locals.danhan = count;
+            next();
+
+          case 7:
+          case "end":
+            return _context9.stop();
+        }
+      }
+    });
+  }); //lấy ra hóa đơn dahuy bên admin
+
+  app.use(function _callee10(req, res, next) {
+    var list, count, i;
+    return regeneratorRuntime.async(function _callee10$(_context10) {
+      while (1) {
+        switch (_context10.prev = _context10.next) {
+          case 0:
+            _context10.next = 2;
+            return regeneratorRuntime.awrap(adminModel.single_dahuy());
+
+          case 2:
+            list = _context10.sent;
+            count = 0;
+
+            for (i = 0; i < list.length; i++) {
+              count++;
+            }
+
+            res.locals.dahuy = count;
+            next();
+
+          case 7:
+          case "end":
+            return _context10.stop();
         }
       }
     });

@@ -361,7 +361,7 @@ router.get("/checkout", isLogIn, function (req, res, next) {
 }); //checkout
 
 router.post("/checkout", function _callee5(req, res, next) {
-  var cart, totalPrice, new_sp, i, user, diachi, phuong, quan, tinh, today, date, entity, idhd, arrlist, _i2, mahd, masp, tensp, dongia, gia, quantity, arr;
+  var cart, totalPrice, new_sp, i, user, diachi, phuong, quan, tinh, today, date, entity, idhd, arrlist, _i2, mahd, masp, tensp, dongia, gia, quantity, ma_id, arr, spct, _i3, j, _entity;
 
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
@@ -420,7 +420,8 @@ router.post("/checkout", function _callee5(req, res, next) {
             dongia = new_sp[_i2].dongia;
             gia = new_sp[_i2].gia;
             quantity = new_sp[_i2].quantity;
-            arr = [mahd, masp, tensp, dongia, quantity, gia];
+            ma_id = new_sp[_i2].sp_id;
+            arr = [mahd, masp, tensp, dongia, quantity, gia, ma_id];
             arrlist.push(arr);
           }
 
@@ -428,18 +429,55 @@ router.post("/checkout", function _callee5(req, res, next) {
           return regeneratorRuntime.awrap(db.insert_chitiethd(arrlist));
 
         case 23:
-          console.log("arrlist:", arrlist);
-          console.log("cart:", cart);
-          /* if (err) {
-            req.flash("error", err.message);
-            return res.redirect("/checkout");
-          }
-          req.flash("Thành công", "Sản phẩm đã mua thành công!");*/
+          _context5.next = 25;
+          return regeneratorRuntime.awrap(ModelOrder.all_spct());
 
+        case 25:
+          spct = _context5.sent;
+          _i3 = 0;
+
+        case 27:
+          if (!(_i3 < new_sp.length)) {
+            _context5.next = 40;
+            break;
+          }
+
+          j = 0;
+
+        case 29:
+          if (!(j < spct.length)) {
+            _context5.next = 37;
+            break;
+          }
+
+          if (!(new_sp[_i3].sp_id == spct[j].sp_id)) {
+            _context5.next = 34;
+            break;
+          }
+
+          _entity = {
+            sp_id: new_sp[_i3].sp_id,
+            soluong: spct[j].soluong - new_sp[_i3].quantity
+          };
+          _context5.next = 34;
+          return regeneratorRuntime.awrap(ModelOrder.update_spct(_entity));
+
+        case 34:
+          j++;
+          _context5.next = 29;
+          break;
+
+        case 37:
+          _i3++;
+          _context5.next = 27;
+          break;
+
+        case 40:
+          //console.log("new_sp:",new_sp)
           req.session.cart = null;
           res.redirect("/checkout/success");
 
-        case 27:
+        case 42:
         case "end":
           return _context5.stop();
       }

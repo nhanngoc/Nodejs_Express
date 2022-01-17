@@ -6,6 +6,7 @@ const tbl_spct = "sanphamct";
 const tbl_loai = "loaisp";
 const tbl_khachhang = "khachhang";
 const tbl_hoadon = "hoadon";
+const tbl_chitiethd ="chitiethd"
 const tbl_quantri = "quantri";
 const data = [];
 
@@ -45,6 +46,23 @@ module.exports = {
   //danh sách size
   attr_sizes: function(){
     return db.load(`select * from sizes`);
+  },
+
+  //laasy danh sach sanphamct
+  all_spct: function () {
+    return db.load(`select *from ${tbl_spct}`);
+  },
+  //chitiethd where mahd
+  hd_id: function (id) {
+    return db.load(`select *from ${tbl_chitiethd} where mahd=${id}`);
+  },
+  //capnhat sanphamct
+  update_spct: function (entity) {
+    const condition = {
+      sp_id: entity.sp_id,
+    };
+    delete entity.sp_id;
+    return db.patch_spct(tbl_spct, entity, condition);
   },
  
   //them products
@@ -167,9 +185,12 @@ module.exports = {
 
   //// Start loại ////
   //lấy danh sách loại
+  distinct_category: function () {
+    return db.load(`SELECT DISTINCT sanpham.MaLoai FROM sanpham`);
+  },
   all_category: function () {
     return db.load(`SELECT * FROM ${tbl_loai} WHERE loaisp.MaDM IN(0,1)`);
-  },
+  }, 
   //lấy danh sách danh mục
   all_dm: function () {
     return db.load(`SELECT * FROM danhmuc WHERE MaDM IN(0,1)`);
@@ -201,8 +222,11 @@ module.exports = {
   all_kh: function () {
     return db.load(`select *from ${tbl_khachhang}`);
   },
-  all_hoadon: function () {
+  all_hoadon: function (makh) {
     return db.load(`select *from hoadon`);
+  },
+  all_hoadonkh: function (makh) {
+    return db.load(`select *from hoadon where makh=${makh}`);
   },
   all_hoadonct: function (mahd) {
     return db.load(`SELECT ct.*,hd.*
@@ -309,6 +333,30 @@ module.exports = {
       `select * from ${tbl_quantri}`
     );
   },
-  
+  //tổng người dùng
+  total_user: async function () {
+    const rows = await db.load(
+      `select COUNT(*) total from khachhang`
+    );
+    return rows[0].total;
+  }, 
+  //tổng kho
+  total_kho: function () {
+    return db.load(
+      `SELECT * FROM sanphamct WHERE sanphamct.soluong >0`
+    );
+  },
+  //tổng số lượng bán
+  total_hoadon: function () {
+    return db.load(
+      `SELECT * FROM hoadon WHERE trangthai= "Đã nhận hàng"`
+    );
+  },
+  //tổng số lượng bán
+  total_donmoi: function () {
+    return db.load(
+      `SELECT * FROM hoadon WHERE trangthai= "Chờ xác nhận"`
+    );
+  },
   //// End Quản trị////
 };

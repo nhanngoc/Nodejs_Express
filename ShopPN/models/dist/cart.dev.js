@@ -17,6 +17,7 @@ module.exports = function Cart(cart) {
         masp: item.masp,
         tensp: item.color + "-" + item.size,
         dongia: item.gia,
+        sp_id: item.sp_id,
         quantity: 0,
         gia: 0
       };
@@ -38,6 +39,7 @@ module.exports = function Cart(cart) {
         masp: item.masp,
         tensp: item.color + "-" + item.size,
         dongia: item.gia,
+        sp_id: item.sp_id,
         quantity: 0,
         gia: 0
       };

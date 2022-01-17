@@ -54,11 +54,23 @@ router.get("/register", async function (req, res) {
 router.post("/register", async function (req, res, next) {
   const { error, value } = registerValidator(req.body);
   // validate
-  const user = await userModel.singleUserName(req.body.username);
-  if (user === +req.params.username) {
-    const ero = "Tên tài khoản đã tồn tại";
-    return res.redirect("/account/register", { ero });
-    /* throw new 'Username "'() + params.username + '" is already taken'; */
+  const user = await userModel.all();
+  for(var i = 0; i < user.length; i++){
+    if (user[i].username == req.body.username) {
+      return res.render("vwaccount/register", { 
+        err: "Tên tài khoản đã tồn tại!",
+        tenkh: req.body.tenkh,
+        email: req.body.email,
+        sdt: req.body.sdt,
+        password:req.body.password,
+        confirm:req.body.confirm,
+        diachi: req.body.diachi,
+        phuong_xa: req.body.phuong_xa,
+        quan_huyen: req.body.quan_huyen,
+        tinh: req.body.tinh,
+      });
+      
+    }
   }
   const salt = bcrypt.genSaltSync(10);
   const password_hash = bcrypt.hashSync(req.body.password, salt);
@@ -74,9 +86,13 @@ router.post("/register", async function (req, res, next) {
     diachi: req.body.diachi,
   };
   await userModel.add_kh(entity); // luu database
-  res.render("vwaccount/register");
+  res.redirect("/account/register/success");
 });
 
+//success
+router.get("/register/success", async function (req, res) {
+  res.render("vwaccount/success");
+});
 //login profile
 /* router.get("/profile", restrict.user, async function (req, res) {
   console.log(req.session.authUser);
@@ -149,8 +165,21 @@ router.get("/profile/dahuy/:mahd", restrict.user, async function (req, res) {
     mahd: mahd,
     trangthai: "Đã hủy",
   };
-  console.log("entity", entity);
+  //console.log("entity", entity);
   await orderModel.update_hd(entity);
+  const hd = await orderModel.hd_id(mahd);
+  const spct = await orderModel.all_spct();
+  for (let i = 0; i < hd.length; i++) {
+    for (let j = 0; j < spct.length; j++) {
+      if (hd[i].ma_id == spct[j].sp_id) {
+        const entity = {
+          sp_id: hd[i].ma_id,
+          soluong: spct[j].soluong + hd[i].quantity,
+        };
+        await orderModel.update_spct(entity);
+      }
+    }
+  }
   res.redirect("/account/profile/choxacnhan");
 });
 //2xem danh sách daxacnhan đơn đặt hàng

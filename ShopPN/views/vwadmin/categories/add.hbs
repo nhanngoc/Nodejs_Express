@@ -4,12 +4,12 @@
     </div>
 
     <div class="card-body">
-        <form method="POST" action="">
+        <form name="myform" method="POST" action="" onsubmit="return validateform()">
             <div class="form-group">
                 <label for="MaDM" class="col-md-3 control-label">Tên danh mục</label>
                 <div class="col-md-9">
                     <select class="custom-select mt-3"id="txtMaDM" name="MaDM">
-                        <option selected="">Chọn danh mục</option>
+                        <option value="">Chọn danh mục</option>
                         {{#each this.sanpham}}
                         <option value="{{MaDM}}">{{MaDM}}-{{TenDM}}</option>
                         {{/each}}
@@ -34,3 +34,21 @@
 
     </div>
 </div>
+<script language="javascript">
+    function validateform() {
+        var MaDM = document.myform.MaDM.value;
+        var TenLoai = document.myform.TenLoai.value;
+
+        if(MaDM==""){
+            alert('Chưa chọn danh mục, mời bạn chọn lại!')
+            return false
+        }
+        if(TenLoai==""){
+            alert('Chưa nhập Tên, mời bạn nhập lại!')
+            return false
+        }
+        
+        //alert('Thêm thành công!')
+        //return true
+    }
+</script>

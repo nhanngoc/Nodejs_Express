@@ -281,7 +281,7 @@ module.exports = {
   //them chitiethd 
   insert_chitiethd: function (entity) {
     return new Promise(function (resolve, reject) {
-      const sql = `insert into ${tbl_chitiethd}(mahd, masp, tensp, dongia, quantity, gia) VALUES ?`;
+      const sql = `insert into ${tbl_chitiethd}(mahd, masp, tensp, dongia, quantity, gia, ma_id) VALUES ?`;
       pool.query(sql, [entity], function (error, results) {
         if (error) {
           return reject(error);
@@ -290,4 +290,17 @@ module.exports = {
       });
     });
   },
+  //cap nhat sanphamct
+  patch_spct: function (table, entity, condition) {
+    return new Promise(function (resolve, reject) {
+      const sql = "update sanphamct set ? where ?";
+      pool.query(sql, [entity,condition], function (error, results) {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
+    });
+  },
+
 };

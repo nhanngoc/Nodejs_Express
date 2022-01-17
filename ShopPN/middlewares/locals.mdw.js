@@ -1,6 +1,7 @@
 const categoryModel = require("../models/category.model");
 const khModel = require("../models/order.model");
 const Cart = require("../models/cart");
+const adminModel = require("../models/admin_user.model");
 module.exports = function (app) {
   //login
   app.use(function (req, res, next) {
@@ -47,4 +48,58 @@ module.exports = function (app) {
    res.locals.sizes = rows;
    next();
  });
+ ////Start ADMIN ////
+ //lấy ra hóa đơn choxacnhan bên admin
+ app.use(async function (req, res, next) {
+   const list = await adminModel.single_choxacnhan();
+   var count = 0;
+   for (let i = 0; i < list.length; i++) {
+    count ++;
+   }
+   res.locals.choxacnhan = count;
+   //console.log("choxacnhan",res.locals.choxacnhan)
+   next();
+ });
+  //lấy ra hóa đơn daxacnhan bên admin
+  app.use(async function (req, res, next) {
+    const list = await adminModel.single_daxacnhan();
+    var count = 0;
+    for (let i = 0; i < list.length; i++) {
+     count ++;
+    }
+    res.locals.daxacnhan = count;
+    next();
+  });
+ //lấy ra hóa đơn danggiao bên admin
+ app.use(async function (req, res, next) {
+   const list = await adminModel.single_danggiao();
+   var count = 0;
+   for (let i = 0; i < list.length; i++) {
+    count ++;
+   }
+   res.locals.danggiao = count;
+   next();
+ });
+ //lấy ra hóa đơn danhan bên admin
+ app.use(async function (req, res, next) {
+   const list = await adminModel.single_danhan();
+   var count = 0;
+   for (let i = 0; i < list.length; i++) {
+    count ++;
+   }
+   res.locals.danhan = count;
+   next();
+ });
+ //lấy ra hóa đơn dahuy bên admin
+ app.use(async function (req, res, next) {
+   const list = await adminModel.single_dahuy();
+   var count = 0;
+   for (let i = 0; i < list.length; i++) {
+    count ++;
+   }
+   res.locals.dahuy = count;
+   next();
+ });
+
+ 
 };

@@ -55,6 +55,7 @@ module.exports = {
 
     res.redirect("/");
   },
+  //PHÂN QUYỀN
   admin: function admin(req, res, next) {
     var user, i;
     return regeneratorRuntime.async(function admin$(_context2) {
@@ -107,6 +108,7 @@ module.exports = {
       }
     });
   },
+  //PHÂN QUYỀN
   admin_nhanvien: function admin_nhanvien(req, res, next) {
     var user, i;
     return regeneratorRuntime.async(function admin_nhanvien$(_context3) {

@@ -27,6 +27,7 @@
                        
                         {{!-- <th>Địa chỉ</th> --}}
                         <th>Số điện thoại</th>
+                        <th>Đơn hàng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,11 @@
                       
                         {{!-- <td>{{diachi}}</td> --}}
                         <td>{{sdt}}</td>
+                        <td>
+                            <a href="/admin/kh/hoadon/{{MaKH}}" title="xem đơn đặt hàng">
+                            Xem đơn đặt hàng
+                            </a>
+                        </td>
                     </tr>
                     {{/each}}
                 </tbody>

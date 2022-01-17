@@ -47,7 +47,7 @@ router.get("/detail/:MaSP", async function (req, res) {
   const data = ggg.filter(function (item) {
     return item.makm==id;
   });
-  console.log("data:",data)
+  //console.log("data:",data)
   const lists = await productModel.detail(id);
   const color = await productModel.distinct_color(id);
   const size = await productModel.detail_size(id);
@@ -57,7 +57,7 @@ router.get("/detail/:MaSP", async function (req, res) {
   for (let i = 0; i < size.length; i++) {
       tong += size[i].soluong;
   }
-  console.log("tong:",tong)
+  //console.log("tong:",tong)
   let page_items = [];
   for (let i = 0; i < color.length; i++) {
     if (color[i].color_id >= 0) {
@@ -85,6 +85,7 @@ router.get("/detail/:MaSP", async function (req, res) {
     page_items,
     empty: lists.length === 0,
     sizes: distinct_size,
+    tongkho: tong,
   });
 });
 
@@ -124,8 +125,8 @@ router.get("/do-be-gai/:MaLoai", async function (req, res) {
     next_value: page + 1,
   });
 });
+//do-be-gai
 router.get("/do-be-gai", async function (req, res) {
-  
   //phan trang
   const page = +req.query.page || 1;
   if (page < 0) page = 1;
@@ -135,7 +136,11 @@ router.get("/do-be-gai", async function (req, res) {
     offset
   );
   const total = await productModel.countByLoai_gai();
-  const nPages = Math.ceil(total / config.pagination.limit);
+  var count = 0;
+  for(var i = 0; i < total.length; i++){
+      count ++;
+  }
+  const nPages = Math.ceil(count / config.pagination.limit);
   const page_items = [];
   for (let i = 1; i <= nPages; i++) {
     const item = {
@@ -153,6 +158,7 @@ router.get("/do-be-gai", async function (req, res) {
     next_value: page + 1,
   });
 });
+
 //All get san pham loai do-be-gai
 router.get("/category", async function (req, res) {
   const madm= req.query.category_id;
@@ -167,7 +173,11 @@ router.get("/category", async function (req, res) {
     offset
   );
   const total = await productModel.countByLoai0(madm);
-  const nPages = Math.ceil(total / config.pagination.limit);
+  var count = 0;
+  for(var i = 0; i < total.length; i++){
+      count ++;
+  }
+  const nPages = Math.ceil(count / config.pagination.limit);
   const page_items = [];
   for (let i = 1; i <= nPages; i++) {
     const item = {
@@ -175,7 +185,7 @@ router.get("/category", async function (req, res) {
       cate_id:madm,
       isActive: i === page,
     };
-    console.log("text:",item)
+    //console.log("text:",item)
     page_items.push(item);
   }
   if(madm==1){
@@ -196,6 +206,7 @@ router.get("/category", async function (req, res) {
     });
   }
 });
+
 //Get san pham loai
 router.get("/do-be-trai/:MaLoai", async function (req, res) {
   const ten_loai = await productModel.tenloai(req.params.MaLoai);
@@ -234,7 +245,6 @@ router.get("/do-be-trai/:MaLoai", async function (req, res) {
 });
 //Get tất cả bé trai
 router.get("/do-be-trai", async function (req, res) {
-  
   //phan trang
   const page = +req.query.page || 1;
   if (page < 0) page = 1;
@@ -244,7 +254,11 @@ router.get("/do-be-trai", async function (req, res) {
     offset
   );
   const total = await productModel.countByLoai_trai();
-  const nPages = Math.ceil(total / config.pagination.limit);
+  var count = 0;
+  for(var i = 0; i < total.length; i++){
+      count ++;
+  }
+  const nPages = Math.ceil(count / config.pagination.limit);
   const page_items = [];
   for (let i = 1; i <= nPages; i++) {
     const item = {

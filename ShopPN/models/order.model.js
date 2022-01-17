@@ -1,6 +1,7 @@
 const db = require("../utils/db");
 const tbl_hoadon = "hoadon";
 const tbl_chitiethd = "chitiethd";
+const tbl_spct ="sanphamct";
 const tbl_kh ="khachhang"
 
 module.exports = {
@@ -104,6 +105,22 @@ module.exports = {
     delete entity.mahd;
     return db.update_hoadon(tbl_hoadon, entity, condition);
   },
+  //laasy danh sach sanphamct
+  all_spct: function () {
+    return db.load(`select *from ${tbl_spct}`);
+  },
+  //chitiethd where mahd
+  hd_id: function (id) {
+    return db.load(`select *from ${tbl_chitiethd} where mahd=${id}`);
+  },
+  //capnhat sanphamct
+  update_spct: function (entity) {
+    const condition = {
+      sp_id: entity.sp_id,
+    };
+    delete entity.sp_id;
+    return db.patch_spct(tbl_spct, entity, condition);
+  },
   //thông tin chi tiết đơn hàng
   all_order_ct: function (mahd) {
     return db.load(`SELECT ct.*, hd.*, sp.Anh,sp.TenSP,sp.Gia,sp.chatlieu
@@ -126,5 +143,17 @@ module.exports = {
       `SELECT  mahd FROM ${tbl_hoadon} ORDER BY hoadon.mahd DESC LIMIT 1`
     );
     return rows[0].mahd;
+  },
+  //laasy danh sach sanphamct
+  all_spct: function () {
+    return db.load(`select *from ${tbl_spct}`);
+  },
+  //capnhat sanphamct
+  update_spct: function (entity) {
+    const condition = {
+      sp_id: entity.sp_id,
+    };
+    delete entity.sp_id;
+    return db.patch_spct(tbl_spct, entity, condition);
   },
 };

@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody name="myform">
                         {{#each this.loaisp}}
                     <tr>
                         <td>{{MaLoai}}</td>
@@ -43,13 +43,22 @@
                             <a name="" id="" class="btn btn-primary btn-sm" href="/admin/category/edit/{{MaLoai}}" role="button" title="sửa loại">
                                 <i class="mdi mdi-border-color" aria-hidden="true"></i>
                             </a>
-                            <a name="" id="" class="btn btn-danger btn-sm" href="/admin/category/remove/{{MaLoai}}" role="button" title="xóa loại">
+                            <a name="xoa" id="" class="btn btn-danger btn-sm" href="/admin/category/remove/{{MaLoai}}" role="button" title="xóa loại" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </td>
                     </tr>
                     {{/each}}
-                </tbody>
+
+                    {{#if err}}
+                    <div class="alert alert-danger text-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <strong>Bạn không thể xóa!</strong>{{err}}
+                    </div>
+                    {{/if}}
+            </tbody>
             </table>
             {{/if}}
         </div>

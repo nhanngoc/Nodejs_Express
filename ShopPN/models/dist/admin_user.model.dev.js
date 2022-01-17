@@ -9,6 +9,7 @@ var tbl_spct = "sanphamct";
 var tbl_loai = "loaisp";
 var tbl_khachhang = "khachhang";
 var tbl_hoadon = "hoadon";
+var tbl_chitiethd = "chitiethd";
 var tbl_quantri = "quantri";
 var data = [];
 module.exports = {
@@ -41,6 +42,22 @@ module.exports = {
   //danh sách size
   attr_sizes: function attr_sizes() {
     return db.load("select * from sizes");
+  },
+  //laasy danh sach sanphamct
+  all_spct: function all_spct() {
+    return db.load("select *from ".concat(tbl_spct));
+  },
+  //chitiethd where mahd
+  hd_id: function hd_id(id) {
+    return db.load("select *from ".concat(tbl_chitiethd, " where mahd=").concat(id));
+  },
+  //capnhat sanphamct
+  update_spct: function update_spct(entity) {
+    var condition = {
+      sp_id: entity.sp_id
+    };
+    delete entity.sp_id;
+    return db.patch_spct(tbl_spct, entity, condition);
   },
   //them products
   add_pro: function add_pro(entity) {
@@ -165,6 +182,9 @@ module.exports = {
   ////End sản phẩm////
   //// Start loại ////
   //lấy danh sách loại
+  distinct_category: function distinct_category() {
+    return db.load("SELECT DISTINCT sanpham.MaLoai FROM sanpham");
+  },
   all_category: function all_category() {
     return db.load("SELECT * FROM ".concat(tbl_loai, " WHERE loaisp.MaDM IN(0,1)"));
   },
@@ -198,8 +218,11 @@ module.exports = {
   all_kh: function all_kh() {
     return db.load("select *from ".concat(tbl_khachhang));
   },
-  all_hoadon: function all_hoadon() {
+  all_hoadon: function all_hoadon(makh) {
     return db.load("select *from hoadon");
+  },
+  all_hoadonkh: function all_hoadonkh(makh) {
+    return db.load("select *from hoadon where makh=".concat(makh));
   },
   all_hoadonct: function all_hoadonct(mahd) {
     return db.load("SELECT ct.*,hd.*\n    FROM chitiethd ct INNER JOIN hoadon hd ON ct.mahd=hd.mahd\n    WHERE hd.mahd=".concat(mahd));
@@ -314,6 +337,39 @@ module.exports = {
   },
   singleUserName_all: function singleUserName_all() {
     return db.load("select * from ".concat(tbl_quantri));
+  },
+  //tổng người dùng
+  total_user: function total_user() {
+    var rows;
+    return regeneratorRuntime.async(function total_user$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return regeneratorRuntime.awrap(db.load("select COUNT(*) total from khachhang"));
+
+          case 2:
+            rows = _context3.sent;
+            return _context3.abrupt("return", rows[0].total);
+
+          case 4:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    });
+  },
+  //tổng kho
+  total_kho: function total_kho() {
+    return db.load("SELECT * FROM sanphamct WHERE sanphamct.soluong >0");
+  },
+  //tổng số lượng bán
+  total_hoadon: function total_hoadon() {
+    return db.load("SELECT * FROM hoadon WHERE trangthai= \"\u0110\xE3 nh\u1EADn h\xE0ng\"");
+  },
+  //tổng số lượng bán
+  total_donmoi: function total_donmoi() {
+    return db.load("SELECT * FROM hoadon WHERE trangthai= \"Ch\u1EDD x\xE1c nh\u1EADn\"");
   } //// End Quản trị////
 
 };

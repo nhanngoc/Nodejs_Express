@@ -254,17 +254,27 @@ router.post("/checkout", async function (req, res, next) {
     const dongia = new_sp[i].dongia;
     const gia = new_sp[i].gia;
     const quantity = new_sp[i].quantity;
-    let arr = [mahd, masp, tensp, dongia, quantity, gia];
+    const ma_id = new_sp[i].sp_id;
+    let arr = [mahd, masp, tensp, dongia, quantity, gia, ma_id];
     arrlist.push(arr);
   }
   await db.insert_chitiethd(arrlist);
-  console.log("arrlist:", arrlist);
-  console.log("cart:", cart);
-  /* if (err) {
-    req.flash("error", err.message);
-    return res.redirect("/checkout");
+  //console.log("arrlist:", arrlist);
+  //console.log("cart:", cart);
+  //lay sp_id
+  const spct = await ModelOrder.all_spct();
+  for(let i = 0; i < new_sp.length; i++){
+    for(let j = 0; j < spct.length; j++){
+      if(new_sp[i].sp_id == spct[j].sp_id){
+        const entity ={
+          sp_id: new_sp[i].sp_id,
+          soluong: spct[j].soluong - new_sp[i].quantity,
+        }
+        await ModelOrder.update_spct(entity);
+      }
+    }
   }
-  req.flash("Thành công", "Sản phẩm đã mua thành công!");*/
+  //console.log("new_sp:",new_sp)
   req.session.cart = null;
   res.redirect("/checkout/success");
 });
