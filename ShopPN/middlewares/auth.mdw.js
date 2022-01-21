@@ -48,7 +48,10 @@ module.exports = {
   admin_nhanvien: async function (req, res, next) {
     const user = await Model.singleUserName_all(req.body.username);
     if (!req.session.isAuthenticated) {
-      return res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
+      return res.redirect(`/admin/login?retUrl=${req.originalUrl}`,
+      /* {
+        err:"Bạn không có quyền truy cập"
+      } */);
     }
     for (let i = 0; i < user.length; i++) {
       if (user[i].username === req.session.authUser.username) {
@@ -56,6 +59,9 @@ module.exports = {
         return;
       }
     }
-    res.redirect(`/admin/login?retUrl=${req.originalUrl}`);
+    res.redirect(`/admin/login?retUrl=${req.originalUrl}`,
+    /* {
+      err:"Bạn không có quyền truy cập"
+    } */);
   },
 };

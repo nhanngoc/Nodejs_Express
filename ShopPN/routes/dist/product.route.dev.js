@@ -8,6 +8,8 @@ var productModel = require("../models/product.model");
 
 var config = require("../config/default.json");
 
+var Cart = require("../models/cart");
+
 var router = express.Router(); //xuat danh sach san pham
 
 router.get("/list", function _callee(req, res) {
@@ -157,9 +159,9 @@ router.get("/detail/:MaSP", function _callee2(req, res) {
 
           for (i = 0; i < size.length; i++) {
             tong += size[i].soluong;
-          } //console.log("tong:",tong)
+          }
 
-
+          console.log("tong:", tong);
           page_items = [];
 
           for (_i = 0; _i < color.length; _i++) {
@@ -179,9 +181,9 @@ router.get("/detail/:MaSP", function _callee2(req, res) {
               console.log("itemi", itemi);
               page_items.push(itemi); // Thêm phần tử vào cuối mảng mới
             }
-          }
+          } //console.log("page_items",page_items)
 
-          console.log("page_items", page_items);
+
           res.render("vwproducts/detail", {
             //layout: false,
             detail_anh: detail_anh,

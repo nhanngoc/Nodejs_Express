@@ -44,12 +44,12 @@ router.get("/", function _callee(req, res) {
               giakm: giamgia[i].giakm,
               //giá mới 99 a
               phantram: ((giamgia[i].giakm - giamgia[i].Gia) / giamgia[i].Gia * 100).toPrecision(2)
-            };
-            console.log("GiamGia", item);
-            gg.push(item);
-          }
+            }; //console.log("GiamGia", item);
 
-          console.log("gg", gg);
+            gg.push(item);
+          } //console.log("gg", gg);
+
+
           res.render("home", {
             sanpham: list,
             giamgia: gg,
@@ -57,7 +57,7 @@ router.get("/", function _callee(req, res) {
             empty_gg: gg.length === 0
           });
 
-        case 10:
+        case 9:
         case "end":
           return _context.stop();
       }
@@ -139,7 +139,6 @@ router.get("/page", function _callee2(req, res) {
             count++;
           }
 
-          console.log("count", count);
           nPages = Math.ceil(count / config.pagination.limit);
           page_items = [];
 
@@ -159,7 +158,7 @@ router.get("/page", function _callee2(req, res) {
             next_value: page + 1
           });
 
-        case 35:
+        case 34:
         case "end":
           return _context2.stop();
       }
@@ -185,10 +184,9 @@ router.get("/search", function _callee3(req, res) {
           res.render("vwproducts/seach", {
             sanpham: data,
             empty: data.length === 0
-          });
-          console.log("aaaaaaaaaaaaaaaaaaaaaaaaa", data);
+          }); //console.log("aaaaaaaaaaaaaaaaaaaaaaaaa", data);
 
-        case 7:
+        case 6:
         case "end":
           return _context3.stop();
       }

@@ -113,6 +113,9 @@ h1{
                 <div class="register-form">
                     <form method="POST" name="form1" class="box" onsubmit="return checkStuff()">
                         <h1>Đăng nhập tài khoản</h1>
+                        {{#if err}}
+                        <span class="errorline colorfront">{{err}}</span>
+                        {{/if}}
                         <div class="input-box">
                             <input type="text" name="username" placeholder="Nhập tên tài khoản" id="usn" autocomplete="off">
                         </div>

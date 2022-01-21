@@ -23,10 +23,10 @@ router.get("/", async function (req, res) {
         100
       ).toPrecision(2),
     };
-    console.log("GiamGia", item);
+    //console.log("GiamGia", item);
     gg.push(item);
   }
-  console.log("gg", gg);
+  //console.log("gg", gg);
   res.render("home", {
     sanpham: list,
     giamgia: gg,
@@ -51,7 +51,6 @@ router.get("/page", async function (req, res) {
   for(var i = 0; i < total.length; i++){
       count ++;
   }
-  console.log("count",count);
   const nPages = Math.ceil(count / config.pagination.limit);
   const page_items = [];
   for (let i = 1; i <= nPages; i++) {
@@ -84,7 +83,7 @@ router.get("/search", async function (req, res) {
     sanpham: data,
     empty: data.length === 0,
   });
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaa", data);
+  //console.log("aaaaaaaaaaaaaaaaaaaaaaaaa", data);
 });
 
 //huong dan

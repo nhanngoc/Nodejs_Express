@@ -1,5 +1,5 @@
 <div id="container">
-<div class="success">Lỗi: E-Mail đã có người sử dụng!<i id="closeicon" onclick="$(this).parent().fadeOut('fast');" class="icon-remove padleft handpoint flright"></i></div>
+{{!-- <div class="success">Lỗi: E-Mail đã có người sử dụng!<i id="closeicon" onclick="$(this).parent().fadeOut('fast');" class="icon-remove padleft handpoint flright"></i></div> --}}
 
 <div id="content" class="container"><div class="doublepad">
   <div class="pagetitle marbot">Đăng Ký Tài Khoản</div>
@@ -66,7 +66,7 @@
           <td><span class="required">*</span> Địa chỉ:</td>
           <td>
               <input type="text" id="txtdiachi" name="diachi" value="{{#if diachi}}{{diachi}}{{/if}}" placeholder="VD: 180 Cao Lỗ" 
-                required pattern="^[^!@#$&()~%{}.,*+?^$|'<>/=+_[\]\\`-]{6,30}$"title="Địa chỉ không hợp lệ!">
+                required pattern="^[^!@#$&()~%{}.,*+?^$|'<>=+_[\]\\`-]{6,30}$"title="Địa chỉ không hợp lệ!">
             </td>
         </tr>
         <tr>
@@ -86,7 +86,10 @@
         <tr>
           <td><span class="required">*</span> Tỉnh / TP:</td>
           <td>
-                <select name="tinh" id="txtTinh" required>
+                <select name="tinh" id="txtTinh"  required>
+                  {{#if tinh}}
+                    <option value="{{tinh}}">{{tinh}}</option>
+                  {{/if}}
                     <option value=""> --- Chọn --- </option>
                     <option value="An Giang">An Giang</option>
                     <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu</option>

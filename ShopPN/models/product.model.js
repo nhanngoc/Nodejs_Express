@@ -62,7 +62,7 @@ module.exports = {
   },
   //size
   detail_size: function (id) {
-    return db.load(`SELECT sizes.*,ct.color_id,ct.soluong
+    return db.load(`SELECT sizes.*,ct.color_id,ct.soluong, ct.sp_id
     FROM ((sanphamct ct INNER JOIN sanpham sp ON ct.masp = sp.MaSP) 
     INNER JOIN sizes ON ct.size_id = sizes.size_id ) 
     WHERE sp.MaSP=${id} AND ct.soluong >0`);

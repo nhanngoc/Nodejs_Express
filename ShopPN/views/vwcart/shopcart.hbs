@@ -90,6 +90,7 @@
         <div class="container">
             <div class="doublepad">
                 <div class="cart-info">
+                    <br>
                     <div class="pagetitle_1" style="text-align: left;">GIỎ HÀNG</div>
                     <table class="table">
                         <thead>
@@ -117,21 +118,28 @@
                                 <div id="resultss">
                                 </div>
                             </td>
-                            <td class="model">{{this.item.masp}}-{{this.item.soluong}}</td>
+                            <td class="model">{{this.item.masp}}{{!-- -{{this.item.soluong}} --}}</td>
                             
                             <form method="POST" {{!-- action="/update/{{this.item.sp_id}}" --}}>
                                 <td class="quantity" >
-                                    <div id="results">
+                                    {{!-- <div id="results">
                                         <input type="text" class="smallinput" name="quantity" style="width: min-content;"
-                                        id="mes" {{!-- onkeyup="xemKetQua()" --}} value="{{this.quantity}}" min="1" max="{{this.item.soluong}}" size="1">
-                                    </div>
+                                        id="mes" onkeyup="xemKetQua()" value="{{this.quantity}}" min="1" max="{{this.item.soluong}}" size="1">
+                                    </div> --}}
+                                    
+                                        <input onclick="var result = document.getElementById('quantity{{item.sp_id}}'); var qty = result.value; if( !isNaN(qty) &amp; qty &gt; 1 ) result.value--;return false;" type="button" value="-">
+                                            <input class="smallinput{{item.sp_id}}" id="quantity{{item.sp_id}}" name="quantity" type="text" value="{{this.quantity}}" maxlength = "3"  max="{{this.item.soluong}}" 
+                                            onkeyup="var sl =Number($('input.smallinput{{item.sp_id}}').attr('max')); if (document.getElementById('quantity{{item.sp_id}}').value.match(/^[0-9]+$/) == null){ var str = document.getElementById('quantity{{item.sp_id}}').value; document.getElementById('quantity{{item.sp_id}}').value = str.substring(0, str.length - 1); return false;} if(parseInt(document.getElementById('quantity{{item.sp_id}}').value) >= sl){ document.getElementById('quantity{{item.sp_id}}').value = sl; return true;}" 
+                                            oninput="maxLengthCheck(this)" style="width: min-content;" size="1">
+                                        <input onclick="var result = document.getElementById('quantity{{item.sp_id}}'); var qty = result.value; var max =Number($('input.smallinput{{item.sp_id}}').attr('max')); if( !isNaN(qty) && qty < max) result.value++;return false;" type="button" value="+">
+                                    
                                     &nbsp;
                                     <span class="inline">
-                                        <button type="submit" formaction="/update/{{this.item.sp_id}}">
+                                        <button type="submit" formaction="/update/{{item.sp_id}}" title="Cập nhật số lượng">
                                         <i class="icon-refresh icon-large"></i>
                                         </button>
                                         &nbsp;
-                                        <a href="/remove/{{this.item.sp_id}}" title="Không mua sản phẩm này" alt="Không mua sản phẩm này"><i class="icon-trash icon-large"></i></a>
+                                        <a href="/remove/{{item.sp_id}}" title="Không mua sản phẩm này" alt="Không mua sản phẩm này"><i class="icon-trash icon-large"></i></a>
                                     </span>
                                 </td>
                             </form>
@@ -144,6 +152,7 @@
                     </div>
             <span class="prodwarning colorfront"></span>
             <div class="cart-total pull-right">
+                <br>
             <div class="pagetitle_1" style="text-align: left; ">ĐƠN HÀNG</div>
             <br>
                 <div class="total_ck">
@@ -194,8 +203,21 @@
                } 
                  result.innerHTML = html;
               }
-              
 </script>
+{{!-- XỬ LÝ SỐ LƯỢNG --}}
+<script type="text/javascript">//<![CDATA[
+  function isNumberKeyy(evt){// chỉ nhập số
+      var charCode = (evt.which) ? evt.which : evt.keyCode
+      if (charCode > 31 && (charCode < 49 || charCode > 57))
+          return false;
+      return true;
+  }
+
+  function maxLengthCheck(object){
+      if (object.value.length > object.maxLength)
+        object.value = object.value.slice(0, object.maxLength)
+  }
+//]]></script>
 
     <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1031; top: 0px; left: 0px; display: none;"></ul>
     <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; top: 0px; left: 0px; display: none;"></ul>

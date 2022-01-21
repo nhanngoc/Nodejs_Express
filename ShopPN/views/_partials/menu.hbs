@@ -140,9 +140,9 @@
                     <a href="/products/do-be-gai/{{MaLoai}}"
                         class="{{#if isActive}}active{{/if}}">
                         {{TenLoai}}
-                        {{#if num_of_products}}
+                        {{!-- {{#if num_of_products}}
                         <span class="badge badge-danger float-right">{{num_of_products}}</span>
-                        {{/if}}
+                        {{/if}} --}}
                     </a>
                     {{/each}} 
                    <a class="viewall" href="/products/do-be-gai">Xem tất cả &gt;</a>
@@ -157,9 +157,9 @@
                             <a href="/products/do-be-trai/{{MaLoai}}"
                                 class="{{#if isActive}}active{{/if}}">
                                 {{TenLoai}}
-                                {{#if num_of_products}}
+                                {{!-- {{#if num_of_products}}
                                 <span class="badge badge-danger float-right">{{num_of_products}}</span>
-                                {{/if}}
+                                {{/if}} --}}
                             </a>
                         {{/each}}   
                     <a class="viewall" href="/products/do-be-trai">Xem tất cả &gt;</a>
@@ -212,7 +212,7 @@
           </a>
       </div>
       <br>
-        <table class="m_cart_details">
+        <table class="m_cart_details">x
           <tbody>
             {{#each session.cart.items }}
             <tr>
@@ -220,7 +220,7 @@
                   <span class="m_cart_p_name">{{this.item.tensp}}</span>
                 - <small>{{this.item.color}}: {{this.item.size}}</small><br>
               </td>
-              <td class="mini-cart-quantity">x&nbsp;{{ this.quantity }}</td>
+              <td class="mini-cart-quantity">x&nbsp;{{ this.quantity}}-{{ this.sp_id}}</td>
               <td class="mini-cart-total">{{format_number this.item.gia}} đ</td>
               <td class="mini-cart-remove">
                 <a href="/remove/{{this.item.sp_id}}" title="Không mua sản phẩm này" alt="Không mua sản phẩm này">

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="vi" class=" js csstransitions"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html dir="ltr" lang="vi" class=" js csstransitions">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <link rel="alternate" href="https://www.bexinhshop.vn/ao-khoat-da-ca-love-is-red-de-thuong-cho-be-tu-2-9-tuoi-ktb196500.html" hreflang="vi">
 <title>{{#each this.sanpham}}{{TenSP}}{{/each}} | Quần áo bé trai</title>
@@ -11,12 +13,8 @@
 {{!--  --}}<link rel="stylesheet" type="text/css" href="/public/detail/global_bx.css">
 {{!--  --}}<link rel="stylesheet" type="text/css" href="/public/detail/font-awesome.css">
 {{!--  --}}<script src="/public/detail/sdk.js.download" async="" crossorigin="anonymous"></script>
-{{!--  --}}<script type="text/javascript" src="/public/detail/global_bx.js.download"></script>
-<!-- Google Font -->
 
    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    
 <style>
 
   .wisl_deatails{
@@ -350,14 +348,14 @@ input.form-search {
         <div class="description m_pdetails_description">
               <div class="prodinfo" style="margin-bottom:0px; ">
                   <div id="soluongs">
-                    <span>Kho:</span><br/>
+                    <span>Kho:</span>{{!-- {{tongkho}} --}}<br/>
                   </div>
                 <div class="p_detail_attri">	
                   <div class="p_detail_attri_menu">
                     <a href="javascript:void(0)" class="p_detail_attri_menu_icon"><i class="icon-close"></i></a>
                   </div>
                   <div class="p_detail_attri_size">
-                    <b style="font-size:12px;color: #000">CHỌN KÍCH CỠ{{session.cart.totalItems}}</b>
+                    <b style="font-size:12px;color: #000">CHỌN KÍCH CỠ{{!-- {{session.cart.totalItems}} --}}</b>
                   </div>
                 </div>
               </div>
@@ -370,7 +368,7 @@ input.form-search {
                         <select name="option[#]" rel="{{#code}}{{this.color}}{{/code}}">
                             <option value=""></option>
                             {{#items}}
-                            <option rel="{{this.size_id}}" value="{{this.size_id}}">{{soluong}}</option>
+                            <option rel="{{this.size_id}}" id="{{sp_id}}" value="{{this.size_id}}">{{soluong}}</option>
                             {{/items}}
                         </select>
                       {{/page_items}}
@@ -408,17 +406,17 @@ input.form-search {
               </div>
               <div class="wty_cart">
                 Số lượng:
-                <div class="buttons_added">
-                  <input class="minus is-form" type="button" value="-">
-                  <input aria-label="quantity" class="input-qty" onkeypress="return isNumberKey(event)" oninput="maxLengthCheck(this)"
-                    {{!-- max="6" --}} min="1" maxlength = "3" name="quantity" type="number" value="1" style="text-align: center;">
-                  <input class="plus is-form" type="button" value="+">
+
+                <div id="txtsoluong">
+                  <input onclick="giamm()" type="button" value="-">
+                  <input class="input-qty" required id="quantity" name="quantity" type="text" value="1" maxlength = "3" 
+                    onkeyup="isNumberKey(event)" 
+                    oninput="maxLengthCheck(this)" >
+                  <input onclick="tangg()" type="button" value="+">
                 </div>
               </div>
-             {{!--  <input onclick="var result = document.getElementById(&#39;quantity&#39;); var qty = result.value; if( !isNaN(qty) &amp; qty &gt; 1 ) result.value--;return false;" type="button" value="-">
-<input id="quantity" name="quantity" type="text" value="1">
-<input onclick="var result = document.getElementById(&#39;quantity&#39;); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type="button" value="+">
-             --}}
+              
+            
             <div class="prodcart m_pdetails_procart">
                 <div class="m_pdetails_price_bar">
                   <div class="price-new">{{#each this.sanpham}}{{format_number Gia}}{{/each}} đ</div>
@@ -441,17 +439,7 @@ input.form-search {
         <div>- Sẽ có mặt tại nhà bạn từ 1-5 ngày làm việc. </div> 
       </div>
         <br clear="all">
-          <script>
-              function trackCall(){
-                  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-                  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-                  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-                  document,'script','//connect.facebook.net/en_US/fbevents.js');
-                  fbq('init', '463231100481994');
-                  fbq('track', 'AddToWishlist');
-              } 
-          </script>
+         
           
       </div>
       </div>
@@ -474,7 +462,9 @@ input.form-search {
   <div class="success_add_cart"></div>
   <!-- Modal HTML embedded directly into document -->
   <div class="notification_add_cart" id="notification_cart">
-  	<div class="cart_success"><i class="icon-success"></i>Đã thêm vào Giỏ hàng<i class="icon-remove" style="float: right; font-size: 30px; cursor: pointer;"></i></div>
+  	<div class="cart_success"><i class="icon-success"></i>Đã thêm vào Giỏ hàng
+      {{!-- <i class="icon-remove" style="float: right; font-size: 30px; cursor: pointer;"></i> --}}
+    </div>
     <div class="cart_success_content">
       
         <img src="/public/images/{{#each this.sanpham}}{{Anh}}{{/each}}" style="width: 70px; height: 70px;float: right; margin-right: 5px;">
@@ -515,34 +505,48 @@ input.form-search {
     </div>
   </div>
 
- <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-50561768-1', 'bexinhshop.vn');
-    ga('require', 'displayfeatures');
-    ga('require', 'ecommerce', 'ecommerce.js');
-    ga('set','dimension1', 'KTB196500' ); 
-    ga('set','dimension2', 'Quần áo bé trai' ); 
-    ga('set','dimension3', '133.000 đ' ); 
-    ga('send', 'pageview');
-</script>
 
-{{!-- XỬ LÝ SỐ LƯỢNG --}}
+{{!-- XỬ LÝ INPUT SỐ LƯỢNG --}}
 <script type="text/javascript">//<![CDATA[
-
-function isNumberKey(evt){// chỉ nhập số
-    var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
+  function isNumberKey(evt){// chỉ nhập số
+    var sl= $('#option-240299 :selected').text();
+   // var result = document.getElementById('quantity'); 
+   // var qty = result.value; 
+    if (document.getElementById('quantity').value.match(/^[1-9]+$/) == null){
+      var str = document.getElementById('quantity').value
+      document.getElementById('quantity').value = str.substring(0, str.length - 1);
+      return false;
+    }
+    if (document.getElementById('quantity').value.match(/^[0-9]+$/) == null){
+      var str = document.getElementById('quantity').value
+      document.getElementById('quantity').value = str.substring(0, str.length - 1);
+      return false;
+    }
+    if(parseInt(document.getElementById('quantity').value) >= sl){
+      document.getElementById('quantity').value = sl;
+    }
     return true;
-}
-function maxLengthCheck(object){
+  }
+  function maxLengthCheck(object){
     if (object.value.length > object.maxLength)
       object.value = object.value.slice(0, object.maxLength)
-}
-
+  }
+  function giamm(){
+    var result = document.getElementById('quantity'); 
+    var qty = result.value; 
+    if( !isNaN(qty) && qty > 1) 
+      result.value--;
+    return false;
+  }
+  function tangg(){
+    var sl= $('#option-240299 :selected').text();
+    var result = document.getElementById('quantity'); 
+    var qty = result.value; 
+    var max =Number(sl); 
+    if( !isNaN(qty) && qty < max)
+      result.value++;
+    return false;
+  }
 //]]></script>
 
 {{!-- XỬ LÝ HÌNH ẢNH --}}
@@ -657,7 +661,6 @@ function maxLengthCheck(object){
 {{!-- XỬ LÝ KHI CLICK CHỌN MUA --}}
 <script type="text/javascript">
 
-   
   $('#button-cart').bind('click', function() {
     var ma_attr = $( ".title_attr" ).attr("id");
     var color = $( ".color.checked" ).text();
@@ -722,18 +725,16 @@ function maxLengthCheck(object){
   });
 </script>
 
-
-{{!-- xử lý size & color --}}
+{{!-- XỬ LÝ SIZE & COLOR --}}
 <script type="text/javascript">
   $(".input-qty[type='text']").attr('disabled', true);
   function bindSelectAttr(){
-    var cl = $( ".color.checked" ).attr("id");
-    var si = $( ".att_size.checked" ).attr("data");
-    var chonmau = '<input type="text" class="form-control" name="color" id="color" value="'+cl+'">';
-    $(".chonmau").html(chonmau);//hiện ra trên trang
-    var chonsize = '<input type="text" class="form-control" name="size" id="size" value="'+si+'">';
-    $(".chonsize").html(chonsize);//hiện ra trên trang
-
+    //var cl = $( ".color.checked" ).attr("id");
+    //var si = $( ".att_size.checked" ).attr("data");
+    //var chonmau = '<input type="text" class="form-control" name="color" id="color" value="'+cl+'">';
+    //$(".chonmau").html(chonmau);//hiện ra trên trang
+    //var chonsize = '<input type="text" class="form-control" name="size" id="size" value="'+si+'">';
+    //$(".chonsize").html(chonsize);//hiện ra trên trang
 
     var color = $( ".color.checked" ).text();
     var size = $( ".att_size.checked" ).attr("data");
@@ -747,47 +748,25 @@ function maxLengthCheck(object){
         if($(this).attr("rel") == color){
           $(this).find("option").each(function( index ) {
             if($(this).attr("rel") == size){
-                $(this).attr('selected','selected');
-                var sl= $('#option-240299 :selected').text();//xuất số lượng
-                var htmls = '<span>Kho: </span>'+sl+'<br/>';
-                $("#soluongs").html(htmls);//hiện ra trên trang
-                //XỬ LÝ RÀNG BUỘC NHẬP SỐ LƯỢNG
-                $(".input-qty[type='text']").attr('disabled', false);
-                $('input.input-qty').each(function() {
-                  var $this = $(this),
-                  qty = $this.parent().find('.is-form'),
-                  min = Number($this.attr('min')),
-                  max = Number(sl)//Number($this.attr('max'))
-                  console.log("max1:",max);
-                  if (min == 0) {
-                    var d = 0
-                  } else d = min
-                  console.log("DDDDD0:",d);
-                  console.log("Min:",min);
-                  $(qty).on('click', function() {
-                    if ($(this).hasClass('minus')) {//min
-                      if (d > min) 
-                        d += -1
-                      console.log("DDDDD1:",d);
-                    } else if ($(this).hasClass('plus')) {//max
-                      var x = Number($this.val()) + 1
-                      if (x <= max) d += 1
-                      console.log("max2:",max);
-                      console.log("DDDDD2:",d);
-                    }
-                    $this.attr('value', d).val(d)
-                    console.log("DDDDD3:",d);
-              
-                  })
-                  console.log("max3:",max);
-                })
+              $(this).attr('selected','selected');
+              var sl= $('#option-240299 :selected').text();//lấy số lượng
+              var htmls = '<span>Kho: </span>'+sl+'<br/>';//{{tongkho}}/
+              $("#soluongs").html(htmls);//xuất số lượng kho
+              var sp_id = $(this).attr("id");
+              console.log("spid:",sp_id)
+              $(".input-qty[type='text']").attr('disabled', false);
+              var htmlinput = `<input onclick="giamm()" type="button" value="-">
+                  <input required id="quantity" name="quantity" type="text" value="1" maxlength = "3" 
+                  onkeyup="isNumberKey(event)" oninput="maxLengthCheck(this)">
+                  <input onclick="tangg()" type="button" value="+">`;
+              $("#txtsoluong").html(htmlinput);
             }
           });
         }
       });
     }
   }
-  //console.log("slllll:"+bindSelectAttr().cc);
+
   function att_color_choose(){
     $(".color").click(function(){
       $(".color").removeClass("checked");

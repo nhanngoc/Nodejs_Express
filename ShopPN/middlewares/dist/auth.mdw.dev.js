@@ -126,7 +126,11 @@ module.exports = {
               break;
             }
 
-            return _context3.abrupt("return", res.redirect("/admin/login?retUrl=".concat(req.originalUrl)));
+            return _context3.abrupt("return", res.redirect("/admin/login?retUrl=".concat(req.originalUrl)
+            /* {
+              err:"Bạn không có quyền truy cập"
+            } */
+            ));
 
           case 5:
             i = 0;
@@ -151,7 +155,11 @@ module.exports = {
             break;
 
           case 13:
-            res.redirect("/admin/login?retUrl=".concat(req.originalUrl));
+            res.redirect("/admin/login?retUrl=".concat(req.originalUrl)
+            /* {
+              err:"Bạn không có quyền truy cập"
+            } */
+            );
 
           case 14:
           case "end":

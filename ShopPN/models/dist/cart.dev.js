@@ -15,6 +15,7 @@ module.exports = function Cart(cart) {
       cartItem = this.items[id] = {
         item: item,
         masp: item.masp,
+        tensps: item.TenSP,
         tensp: item.color + "-" + item.size,
         dongia: item.gia,
         sp_id: item.sp_id,

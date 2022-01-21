@@ -39,7 +39,7 @@ module.exports = {
   },
   //size
   detail_size: function detail_size(id) {
-    return db.load("SELECT sizes.*,ct.color_id,ct.soluong\n    FROM ((sanphamct ct INNER JOIN sanpham sp ON ct.masp = sp.MaSP) \n    INNER JOIN sizes ON ct.size_id = sizes.size_id ) \n    WHERE sp.MaSP=".concat(id, " AND ct.soluong >0"));
+    return db.load("SELECT sizes.*,ct.color_id,ct.soluong, ct.sp_id\n    FROM ((sanphamct ct INNER JOIN sanpham sp ON ct.masp = sp.MaSP) \n    INNER JOIN sizes ON ct.size_id = sizes.size_id ) \n    WHERE sp.MaSP=".concat(id, " AND ct.soluong >0"));
   },
   detail: function detail(id) {
     return db.load("select *from ".concat(tbl_products, " where MaSP =").concat(id));

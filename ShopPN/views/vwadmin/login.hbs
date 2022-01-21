@@ -110,17 +110,13 @@ h1{
 
         <main>
             <div class="container">
-              {{#if err}}
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span class="error animated tada" id="msg"></span>
-                      </button>
-                      {{err}}
-                  </div>
-              {{/if}}
+              
                 <div class="register-form">
                     <form method="POST" name="form1" class="box" onsubmit="return checkStuff()">
                         <h1>Đăng nhập Admin</h1>
+                        {{#if err}}
+                        <span class="errorline colorfront">{{err}}</span>
+                        {{/if}}
                         <div class="input-box">
                             <input type="text" name="username" placeholder="Nhập tên tài khoản" id="usn" autocomplete="off">
                         </div>

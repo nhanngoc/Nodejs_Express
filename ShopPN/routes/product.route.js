@@ -1,6 +1,7 @@
 const express = require("express");
 const productModel = require("../models/product.model");
 const config = require("../config/default.json");
+const Cart = require("../models/cart");
 const router = express.Router();
 
 //xuat danh sach san pham
@@ -57,7 +58,8 @@ router.get("/detail/:MaSP", async function (req, res) {
   for (let i = 0; i < size.length; i++) {
       tong += size[i].soluong;
   }
-  //console.log("tong:",tong)
+  console.log("tong:",tong)
+  
   let page_items = [];
   for (let i = 0; i < color.length; i++) {
     if (color[i].color_id >= 0) {
@@ -76,7 +78,7 @@ router.get("/detail/:MaSP", async function (req, res) {
        // Thêm phần tử vào cuối mảng mới
     }
   }
-  console.log("page_items",page_items)
+  //console.log("page_items",page_items)
   res.render("vwproducts/detail", {
     //layout: false,
     detail_anh: detail_anh,

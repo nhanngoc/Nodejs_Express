@@ -7,245 +7,188 @@
 <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
 <meta name="apple-mobile-web-app-title" content="CodePen">
 
-<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+<!-- App favicon -->
+<link rel="shortcut icon" href="/public/favicon.ico">
 
 <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
 
 
-  <title>ShopPN</title>
+  <title>BeXinhShop | Error</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
  {{!-- css login --}}
-<link rel="stylesheet" href="/public/stylesheets/style.login.css">
-  
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-  
+
 
   <style>
-      
-.agile-info h2 {
-    font-size: 8em;
-    color: black;
-    line-height: 1;
-    font-weight: 100;
-    letter-spacing: 20px;
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
+.error-container {
+  text-align: center;
+  font-size: 106px;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 800;
+  margin: 70px 15px;
 }
- p, h1, h2, h3, h4, h5, h6 {
-    font-family: 'Open Sans', sans-serif;
+.error-container > span {
+  display: inline-block;
+  position: relative;
 }
-h2 {
-    display: block;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px; 
+.error-container > span.four {
+  width: 136px;
+  height: 43px;
+  border-radius: 999px;
+  background:
+    linear-gradient(140deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 43%, transparent 44%, transparent 100%),
+    linear-gradient(105deg, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.06) 41%, rgba(0, 0, 0, 0.07) 76%, transparent 77%, transparent 100%),
+    linear-gradient(to right, #d89ca4, #e27b7e);
 }
-.agile-info h3 {
-    font-size: 38px;
-    text-transform: uppercase;
-    color: white;
-    line-height: 1.5;
-    font-weight: 100;
-    letter-spacing: 2px;
-    margin-top: 12px;
+.error-container > span.four:before,
+.error-container > span.four:after {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 999px;
+}
+.error-container > span.four:before {
+  width: 43px;
+  height: 156px;
+  left: 60px;
+  bottom: -43px;
+  background:
+    linear-gradient(128deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 40%, transparent 41%, transparent 100%),
+    linear-gradient(116deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 50%, transparent 51%, transparent 100%),
+    linear-gradient(to top, #D7969E, #E0787F, #f5447b, #b91d4e, #b40039);
+}
+.error-container > span.four:after {
+  width: 137px;
+  height: 43px;
+  transform: rotate(-49.5deg);
+  left: -18px;
+  bottom: 36px;
+  background: linear-gradient(to top, #D7969E, #E0787F, #f5447b, #b91d4e, #b40039);
 }
 
-h3 {
-    display: block;
-    font-size: 1.17em;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
+.error-container > span.zero {
+  vertical-align: text-top;
+  width: 156px;
+  height: 156px;
+  border-radius: 999px;
+  background: linear-gradient(-45deg, transparent 0%, rgba(0, 0, 0, 0.06) 50%,  transparent 51%, transparent 100%),
+    linear-gradient(to top right, #D7969E, #D7969E, #E0787F, #f5447b, #b91d4e, #b40039, #b40039);
+  overflow: hidden;
+  animation: bgshadow 5s infinite;
 }
-.agile-info p {
-    font-size: 18px;
-    color: rgba(0, 0, 0, 0.71);
-    text-transform: capitalize;
-    letter-spacing: 6px;
-    margin-bottom: 46px;
+.error-container > span.zero:before {
+  content: '';
+  display: block;
+  position: absolute;
+  transform: rotate(45deg);
+  width: 90px;
+  height: 90px;
+  background-color: transparent;
+  left: 0px;
+  bottom: 0px;
+  background:
+    linear-gradient(95deg, transparent 0%, transparent 8%, rgba(0, 0, 0, 0.07) 9%, transparent 50%, transparent 100%),
+    linear-gradient(85deg, transparent 0%, transparent 19%, rgba(0, 0, 0, 0.05) 20%, rgba(0, 0, 0, 0.07) 91%, transparent 92%, transparent 100%);
 }
-p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+.error-container > span.zero:after {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 999px;
+  width: 70px;
+  height: 70px;
+  left: 43px;
+  bottom: 43px;
+  background: #FDFAF5;
+  box-shadow: -2px 2px 2px 0px rgba(0, 0, 0, 0.1);
 }
-.agile-info a:hover {
-    background: #1f3c7b;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -ms-transition: 0.5s all;
+
+.screen-reader-text {
+    position: absolute;
+    top: -9999em;
+    left: -9999em;
 }
-.agile-info a {
-    font-size: 15px;
-    text-transform: uppercase;
-    color: white;
-    border: 1px
- solid #3b5998;
-    padding: 10px 40px;
-    border-radius: 20px;
-    letter-spacing: 1px;
+    
+@keyframes bgshadow {
+  0% {
+    box-shadow: inset -160px 160px 0px 5px rgba(0, 0, 0, 0.4);
+  }
+  45% {
+    box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
+  }
+  55% {
+    box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: inset 160px -160px 0px 5px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* demo stuff */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+  background-color: #FDFAF5;
+  margin-bottom: 50px;
+}
+html, button, input, select, textarea {
+    font-family: 'Montserrat', Helvetica, sans-serif;
+    color: #bbb;
+}
+h1 {
+  text-align: center;
+  margin: 30px 15px;
+}
+.zoom-area { 
+  max-width: 490px;
+  margin: 30px auto 30px;
+  font-size: 19px;
+  text-align: center;
+}
+.link-container {
+  text-align: center;
+}
+a.more-link {
+  text-transform: uppercase;
+  font-size: 13px;
+    background-color: #f5447b;
+    padding: 10px 15px;
+    border-radius: 0;
+    color: #fff;
     display: inline-block;
-    margin-top: 8px;
-    background: #3b5998;
-    font-family: 'Open Sans', sans-serif;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-}
-a {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    line-height: 1.5;
     text-decoration: none;
+  margin-top: 50px;
+  letter-spacing: 1px;
 }
   </style>
 </head>
-<body translate="no" id="particles-js">
+<body>
   
-<div class="animated bounceInDown">
-  <div class="container">
+{{!-- <h1>404 Error Page #2</h1> --}}
 
-        <div class="agile-info">
-            <h2>404</h2>
-            <p>Xin lỗi, không tìm thấy trang.</p>
-		</div>
-			<span class="analytics-click-tracker"><a href="/" class="cta large secondary cta-button" tabindex="0" target="_self">
-            <span style="visibility:hidden !important"></span>Start Building</a></span>
-	</div>
-  </div> 
-    <div class="footer">
-      <span>Made with <i class="fa fa-heart pulse"></i> <a href="https://www.google.de/maps/place/Augsburger+Puppenkiste/@48.360357,10.903245,17z/data=!3m1!4b1!4m2!3m1!1s0x479e98006610a511:0x73ac6b9f80c4048f"></a><a href="https://codepen.io/lordgamer2354">By Anees Khan</a></span>
-    </div>
+<section class="error-container">
+  <span class="four"><span class="screen-reader-text">4</span></span>
+  <span class="zero"><span class="screen-reader-text">0</span></span>
+  <span class="four"><span class="screen-reader-text">4</span></span>
+</section>
+<div class="link-container">
+  {{#if err}}
+      <p class="zoom-area"><b>Xin lỗi!</b> {{err}}</p>
+      <a {{!-- target="_blank" --}} href="/" class="more-link">Quay lại</a>
+  {{else}}
+  <p class="zoom-area"><b>Xin lỗi!</b> Không tìm thấy trang.</p>
+  <a class="more-link" onclick="history.back();">Quay lại</a>
+  <a {{!-- target="_blank" --}} href="/" class="more-link">Trang chủ</a>
+  {{/if}}
+</div>
 
-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
-
-  <script src="https://cldup.com/S6Ptkwu_qA.js"></script>
-      <script id="rendered-js">
-
-
-// ParticlesJS
-
-// ParticlesJS Config.
-particlesJS("particles-js", {
-  "particles": {
-    "number": {
-      "value": 60,
-      "density": {
-        "enable": true,
-        "value_area": 800 } },
-
-
-    "color": {
-      "value": "#ffffff" },
-
-    "shape": {
-      "type": "circle",
-      "stroke": {
-        "width": 0,
-        "color": "#000000" },
-
-      "polygon": {
-        "nb_sides": 5 },
-
-      "image": {
-        "src": "img/github.svg",
-        "width": 100,
-        "height": 100 } },
-
-
-    "opacity": {
-      "value": 0.1,
-      "random": false,
-      "anim": {
-        "enable": false,
-        "speed": 1,
-        "opacity_min": 0.1,
-        "sync": false } },
-
-
-    "size": {
-      "value": 6,
-      "random": false,
-      "anim": {
-        "enable": false,
-        "speed": 40,
-        "size_min": 0.1,
-        "sync": false } },
-
-
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#ffffff",
-      "opacity": 0.1,
-      "width": 2 },
-
-    "move": {
-      "enable": true,
-      "speed": 1.5,
-      "direction": "top",
-      "random": false,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false,
-      "attract": {
-        "enable": false,
-        "rotateX": 600,
-        "rotateY": 1200 } } },
-
-
-
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": {
-      "onhover": {
-        "enable": false,
-        "mode": "repulse" },
-
-      "onclick": {
-        "enable": false,
-        "mode": "push" },
-
-      "resize": true },
-
-    "modes": {
-      "grab": {
-        "distance": 400,
-        "line_linked": {
-          "opacity": 1 } },
-
-
-      "bubble": {
-        "distance": 400,
-        "size": 40,
-        "duration": 2,
-        "opacity": 8,
-        "speed": 3 },
-
-      "repulse": {
-        "distance": 200,
-        "duration": 0.4 },
-
-      "push": {
-        "particles_nb": 4 },
-
-      "remove": {
-        "particles_nb": 2 } } },
-
-
-
-  "retina_detect": true });
-//# sourceURL=pen.js
-    </script>
-    <canvas class="particles-js-canvas-el" width="1432" height="990" style="width: 100%; height: 100%;">
-        
-    </canvas>
 
  
 </body>
